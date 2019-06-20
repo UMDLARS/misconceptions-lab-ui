@@ -11,7 +11,7 @@ export class AppComponent {
   menuItems: NbMenuItem[] = [
     {
       title: 'Home',
-      icon: 'nb-home',
+      icon: 'home-outline',
       link: '/',
       home: true,
     },
@@ -21,7 +21,6 @@ export class AppComponent {
     },
     {
       title: 'EnCRAPter',
-      icon: 'nb-locked',
       children: [
         {
           title: 'Login',
@@ -42,7 +41,5 @@ export class AppComponent {
       ],
     },
   ];
-;
-  cyphers = ['rot13', 'Josiecrypt', 'One Time Pad'];
-  selectedCypher: any;
+
 }

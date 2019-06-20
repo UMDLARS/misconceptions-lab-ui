@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FreqGraphComponent} from './freq-graph/freq-graph.component';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {
@@ -16,13 +15,11 @@ import {
   NbThemeModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NbMenuInternalService} from '@nebular/theme/components/menu/menu.service';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FreqGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +35,7 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
     NbEvaIconsModule,
     BrowserAnimationsModule,
   ],
-  providers: [NbMenuService, NbMenuInternalService],
+  providers: [NbMenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
