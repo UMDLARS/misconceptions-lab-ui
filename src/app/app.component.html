@@ -1,20 +1,113 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!--<div class="container-fluid">-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">-->
 
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">-->
+<!--          <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <h1>En<span class="text-primary">crap</span>ter</h1>-->
+<!--        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+<!--          <ul class="navbar-nav">-->
+<!--          </ul>-->
+<!--          <ul class="navbar-nav ml-md-auto">-->
+<!--            <li class="nav-item active">-->
+<!--              <a class="nav-link" href="#">Link <span class="sr-only">(current)</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item dropdown">-->
+<!--              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"-->
+<!--                 data-toggle="dropdown">Dropdown link</a>-->
+<!--              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">-->
+<!--                <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a-->
+<!--                class="dropdown-item" href="#">Something else here</a>-->
+<!--                <div class="dropdown-divider">-->
+<!--                </div>-->
+<!--                <a class="dropdown-item" href="#">Separated link</a>-->
+<!--              </div>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </nav>-->
+<!--      <div class="row">-->
+<!--        <div class="col-md-6">-->
+<!--          <div class="form-group">-->
+<!--            <textarea class="form-control text-monospace" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-6">-->
+<!--          <p id="cyphertext">-->
+<!--            Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien.-->
+<!--            Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit.-->
+<!--            Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi-->
+<!--            commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus,-->
+<!--            id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus.-->
+<!--            <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat-->
+<!--              ipsum consequat eu.-->
+<!--            </small>-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="col">-->
+<!--          <div class="input-group">-->
+<!--            <div ngbDropdown class="d-inline-block">-->
+<!--              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>-->
+<!--              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">-->
+<!--                <button ngbDropdownItem>Action - 1</button>-->
+<!--                <button ngbDropdownItem>Another Action</button>-->
+<!--                <button ngbDropdownItem>Something else is here</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="btn-group-toggle mr-3">-->
+<!--              <label class="btn btn-outline-primary" ngbButtonLabel>-->
+<!--                Show Frequency Analysis-->
+<!--                <input type="checkbox" [(ngModel)]="showGraph"-->
+<!--                       [attr.aria-expanded]="!showGraph" aria-controls="collapseExample" ngbButton>-->
+<!--              </label>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div [ngbCollapse]="!showGraph" id="frequency-analysis">-->
+<!--        <app-freq-graph></app-freq-graph>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<nb-layout>
+  <nb-layout-header fixed><h1>Miscolabs</h1></nb-layout-header>
+  <nb-sidebar>
+    <nb-menu [items]="menuItems"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column>
+    <div class="row">
+      <div class="col-6">
+        <nb-card>
+          <nb-card-header>Message Text</nb-card-header>
+          <nb-card-body>
+            <textarea></textarea>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-6">
+        <nb-card>
+          <nb-card-header>Ciphertext</nb-card-header>
+          <nb-card-body>Page Content</nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <nb-accordion>
+          <nb-accordion-item>
+            <nb-accordion-item-header>Letter Frequency Analysis</nb-accordion-item-header>
+            <nb-accordion-item-body>
+              Item Content
+            </nb-accordion-item-body>
+          </nb-accordion-item>
+        </nb-accordion>
+      </div>
+    </div>
+  </nb-layout-column>
+  <nb-layout-footer>Brandon Geraci was here</nb-layout-footer>
+</nb-layout>
