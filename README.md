@@ -1,5 +1,8 @@
 # BrandonsFolly
 ## Instructions
+One time setup on a system:
+
+```npm install -g @angular/cli```
 
 First you do `npm install`. Then you do `ng serve`. Easy as 🥧!
 
