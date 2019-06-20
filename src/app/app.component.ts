@@ -12,7 +12,7 @@ export class AppComponent {
     {
       title: 'Home',
       icon: 'home-outline',
-      link: '/',
+      link: 'home',
       home: true,
     },
     {
@@ -21,24 +21,7 @@ export class AppComponent {
     },
     {
       title: 'EnCRAPter',
-      children: [
-        {
-          title: 'Login',
-          link: '/auth/login',
-        },
-        {
-          title: 'Register',
-          link: '/auth/register',
-        },
-        {
-          title: 'Request Password',
-          link: '/auth/request-password',
-        },
-        {
-          title: 'Reset Password',
-          link: '/auth/reset-password',
-        },
-      ],
+      link: 'encrapter',
     },
   ];
 

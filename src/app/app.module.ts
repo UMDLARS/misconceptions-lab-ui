@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {
   NbAccordionModule,
   NbButtonModule,
@@ -16,19 +16,33 @@ import {
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
+import {EncrapterComponent} from './encrapter/encrapter.component';
+import { HomeComponent } from './home/home.component';
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {path: 'home', component: HomeComponent},
+  {path: 'encrapter', component: EncrapterComponent},
+];
 
 @NgModule({
   declarations: [
     AppComponent,
+    EncrapterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([], {useHash: true}),
+    RouterModule.forRoot(appRoutes),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
-    NbThemeModule.forRoot(),
+    NbThemeModule.forRoot({name: 'corporate'}),
     NbCardModule,
     NbAccordionModule,
     NbMenuModule.forRoot(),
@@ -38,5 +52,6 @@ import {NbEvaIconsModule} from '@nebular/eva-icons';
   providers: [NbMenuService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }
