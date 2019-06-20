@@ -3,6 +3,10 @@
 
 First you do `npm install`. Then you do `ng serve`. Easy as 🥧!
 
+## Links
+### Components 
+https://akveo.github.io/nebular/docs/components/components-overview
+
 ## Auto-Generated Stuff
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
