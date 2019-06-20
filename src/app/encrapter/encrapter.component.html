@@ -3,14 +3,20 @@
     <nb-card>
       <nb-card-header>Message Text</nb-card-header>
       <nb-card-body>
-        <textarea></textarea>
+        <label>
+          <textarea [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"></textarea>
+        </label>
       </nb-card-body>
     </nb-card>
   </div>
   <div class="col-6">
     <nb-card>
       <nb-card-header>Ciphertext</nb-card-header>
-      <nb-card-body>Page Content</nb-card-body>
+      <nb-card-body>
+        <p>
+          {{ciphertext}}
+        </p>
+      </nb-card-body>
     </nb-card>
   </div>
 </div>
