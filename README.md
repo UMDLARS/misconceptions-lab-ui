@@ -14,8 +14,11 @@ Install docker on your system first:
 * [linux] 
 
 Once installed then use the following commands in the terminal/cmd:
-```docker build -t umdlars/webtemplate .```
-```docker run -p 44477:4200 umdlars/webtemplate```
+
+~~~~
+docker build -t umdlars/webtemplate .
+docker run -p 44477:4200 umdlars/webtemplate
+~~~~
 
 Now you can open your webbrowser of choice and go to `http://localhost:44477' 
 
