@@ -55,6 +55,7 @@ const appRoutes: Routes = [
   {path: 'securityinmind', component: SecurityinmindComponent},
   {path: 'secruityproduct', component: SecurityproductComponent},
   {path: 'trustusers', component: TrustUsersComponent},
+  {path: 'usersarenotmalicious', component: UsersAreNotMaliciousComponent},
 ];
 
 @NgModule({

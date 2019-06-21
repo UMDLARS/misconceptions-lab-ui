@@ -20,63 +20,67 @@ export class AppComponent {
       group: true,
     },
     {
-      title: 'EnCRAPter',
+      title: '01-Encryption',
       link: 'encrapter',
     },
     {
-      title: 'Anonymized-data',
-      link: 'anonymized',
-    },
-    {
-      title: 'CompletelyAnonymous',
-      link: 'completelyanonymous',
-    },
-    {
-      title: 'defenseindepth',
-      link: 'defenseindepth',
-    },
-    {
-      title: 'encryptionautointegrity',
-      link: 'encryptionautointegrity',
-    },
-    {
-      title: 'goodpasswords',
-      link: 'goodpasswords',
-    },
-    {
-      title: 'humansarerational',
-      link: 'humansarerational',
-    },
-    {
-      title: 'notatarget',
-      link: 'notatarget',
-    },
-    {
-      title: 'physicalsecruity',
+      title: '02-Physical Secruity',
       link: 'ephysicalsecruity',
     },
     {
-      title: 'privacynotimportant',
-      link: 'privacynotimportant',
+      title: '03-Not a target',
+      link: 'notatarget',
     },
     {
-      title: 'securitybyobscurity',
-      link: 'securitybyobscurity',
+      title: '04-Good Passwords',
+      link: 'goodpasswords',
     },
     {
-      title: 'securityinmind',
+      title: '06-Completely Anonymous',
+      link: 'completelyanonymous',
+    },
+    {
+      title: '07- Developing with Security in Mind',
       link: 'securityinmind',
     },
     {
-      title: 'secruityproduct',
+      title: '08-Secruity Product',
       link: 'secruityproduct',
     },
     {
-      title: 'trustusers',
+      title: '09-Humans are Rational',
+      link: 'humansarerational',
+    },
+    {
+      title: '10-Trust Users',
       link: 'trustusers',
     },
     {
-      title: 'twofa',
+      title: '11-Anonymized Data',
+      link: 'anonymized',
+    },
+    {
+      title: '12-Security by Obscurity',
+      link: 'securitybyobscurity',
+    },
+    {
+      title: '13-Defense in Depth',
+      link: 'defenseindepth',
+    },
+    {
+      title: '14-Users are not Malicious',
+      link: 'usersarenotmalicious',
+    },
+    {
+      title: '15-Privacy not Important',
+      link: 'privacynotimportant',
+    },
+    {
+      title: '16-Encryption Auto Integrity',
+      link: 'encryptionautointegrity',
+    },
+    {
+      title: '17-2FA',
       link: 'twofa',
     },
   ];
