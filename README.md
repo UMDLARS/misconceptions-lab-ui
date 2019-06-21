@@ -1,10 +1,27 @@
 # BrandonsFolly
 ## Instructions
+### Install Method 1 (NPM)
 One time setup on a system:
 
 ```npm install -g @angular/cli```
 
 First you do `npm install`. Then you do `ng serve`. Easy as 🥧!
+
+### Install Method 2 (Docker) :whale:
+Install docker on your system first: 
+* [mac] 
+* [windows] 
+* [linux] 
+
+Once installed then use the following commands in the terminal/cmd:
+
+~~~~
+docker build -t umdlars/webtemplate .
+docker run -p 44477:4200 umdlars/webtemplate
+~~~~
+
+Now you can open your webbrowser of choice and go to `http://localhost:44477' 
+
 
 ## Links
 ### Components 
@@ -37,3 +54,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+[mac]: https://docs.docker.com/v17.12/docker-for-mac/install/
+[windows]: https://docs.docker.com/docker-for-windows/install/
+[linux]: https://docs.docker.com/install/linux/docker-ce/ubuntu/
