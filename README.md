@@ -1,4 +1,4 @@
-# BrandonsFolly
+# The Return of the Julian
 ## Instructions
 ### Install Method 1 (NPM)
 One time setup on a system:
