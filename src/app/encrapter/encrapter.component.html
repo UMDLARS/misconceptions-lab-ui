@@ -1,34 +1,65 @@
 <div class="row">
-  <div class="col-6">
-    <nb-card>
-      <nb-card-header>Message Text</nb-card-header>
-      <nb-card-body>
-        <label>
-          <textarea [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"></textarea>
-        </label>
-      </nb-card-body>
-    </nb-card>
-  </div>
-  <div class="col-6">
-    <nb-card>
-      <nb-card-header>Ciphertext</nb-card-header>
-      <nb-card-body>
-        <p>
-          {{ciphertext}}
-        </p>
-      </nb-card-body>
-    </nb-card>
-  </div>
+	<div class="col-6">
+		<nb-card>
+			<nb-card-header>Message Text</nb-card-header>
+			<nb-card-body>
+				<label>
+					<textarea [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"></textarea>
+				</label>
+			</nb-card-body>
+		</nb-card>
+	</div>
+	<div class="col-6">
+		<nb-card>
+			<nb-card-header>Ciphertext</nb-card-header> <nb-card-body>
+				<select class="selectpicker" id="etype" (change)="changeEncryptionType($event.target.value);">
+					<option value="rot13">rot13</option>
+					<option value="rever">idkname</option>
+					<option value="onetp">one time pad</option>
+				</select>
+				<p>
+				{{ciphertext}}
+				</p>
+			</nb-card-body>
+		</nb-card>
+	</div>
 </div>
 <div class="row">
-  <div class="col-12">
-    <nb-accordion>
-      <nb-accordion-item>
-        <nb-accordion-item-header>Letter Frequency Analysis</nb-accordion-item-header>
-        <nb-accordion-item-body>
-          Item Content
-        </nb-accordion-item-body>
-      </nb-accordion-item>
-    </nb-accordion>
-  </div>
+	<div class="col-12">
+		<nb-accordion>
+			<nb-accordion-item>
+				<nb-accordion-item-header>Letter Frequency Analysis</nb-accordion-item-header>
+				<nb-accordion-item-body>
+					<div class="row">
+						<div class="col-6">
+							<nb-card>
+								<nb-card-header>Message Text</nb-card-header>
+								<nb-card-body>
+
+									<table>
+										<tr ng-repeat="(key, value) in plaintable">
+											<td>
+												{{key}}
+											</td>
+											<td>
+												{{value}}
+											</td>
+										</tr>
+									</table>
+								</nb-card-body>
+							</nb-card>
+						</div>
+						<div class="col-6">
+							<nb-card>
+								<nb-card-header>Cipher Text</nb-card-header>
+								<nb-card-body>
+								</nb-card-body>
+							</nb-card>
+						</div>
+
+					</div>
+				</nb-accordion-item-body>
+			</nb-accordion-item>
+		</nb-accordion>
+	</div>
 </div>
