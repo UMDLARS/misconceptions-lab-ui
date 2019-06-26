@@ -8,13 +8,11 @@ import {Component, OnInit} from '@angular/core';
 export class EncrapterComponent implements OnInit {
   plaintext: string;
   ciphertext = '';
-  plainTable: Map<string, number>;
-  cipherTable: Map<string, number>;
+  plainTable: Array<[string, number]>;
+  cipherTable: Array<[string, number]>;
   selectedCipher = 'rot13';
 
   constructor() {
-    this.plainTable = new Map();
-    this.cipherTable = new Map();
   }
 
   ngOnInit() {
@@ -42,12 +40,6 @@ export class EncrapterComponent implements OnInit {
     return 'onetp';
   }
 
-  changeEncryptionType(inarg) {
-    this.selectedCipher = inarg;
-    this.updateCiphertext();
-  }
-
-
   updateCiphertext() {
     switch (this.selectedCipher) {
       case 'rot13':
@@ -65,22 +57,24 @@ export class EncrapterComponent implements OnInit {
 
   updateTables() {
     // Clear old tables, like if the user copy/pastes
-    this.plainTable = new Map();
-    this.cipherTable = new Map();
-    for (const c of this.plaintext.toLowerCase().replace(' ', '').split('')) {
-      if (this.plainTable.has(c)) {
-        this.plainTable.set(c, this.plainTable.get(c) + 1);
+    const plainTable = new Map();
+    const cipherTable = new Map();
+
+    for (const c of this.plaintext.toLowerCase().split('')) {
+      if (plainTable.has(c)) {
+        plainTable.set(c, plainTable.get(c) + 1);
       } else {
-        this.plainTable.set(c, 1);
+        plainTable.set(c, 1);
       }
     }
-    for (const c of this.ciphertext.toLowerCase().replace(' ', '').split('')) {
-      if (this.cipherTable.has(c)) {
-        this.cipherTable.set(c, this.cipherTable.get(c) + 1);
+    for (const c of this.ciphertext.toLowerCase().split('')) {
+      if (cipherTable.has(c)) {
+        cipherTable.set(c, cipherTable.get(c) + 1);
       } else {
-        this.cipherTable.set(c, 1);
+        cipherTable.set(c, 1);
       }
     }
-    console.log(this.plainTable, this.cipherTable);
+    this.plainTable = Array.from(plainTable).sort(((a: [string, number], b: [string, number]) => b[1] - a[1]));
+    this.cipherTable = Array.from(cipherTable).sort(((a: [string, number], b: [string, number]) => b[1] - a[1]));
   }
 }

@@ -46,9 +46,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let char of plainTable | keyvalue">
-                      <td scope="row">{{char.key}}</td>
-                      <td>{{char.value}}</td>
+                    <tr *ngFor="let char of plainTable">
+                      <td scope="row">{{char[0]}}</td>
+                      <td>{{char[1]}}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -67,9 +67,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let char of cipherTable | keyvalue">
-                      <td scope="row">{{char.key}}</td>
-                      <td>{{char.value}}</td>
+                    <tr *ngFor="let char of cipherTable">
+                      <td scope="row">{{char[0]}}</td>
+                      <td>{{char[1]}}</td>
                     </tr>
                     </tbody>
                   </table>
