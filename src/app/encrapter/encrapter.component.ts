@@ -10,7 +10,8 @@ export class EncrapterComponent implements OnInit {
   ciphertext = '';
   plainTable: Array<[string, number]>;
   cipherTable: Array<[string, number]>;
-  selectedCipher = 'rot13';
+  ciphers = ['ROT13', 'Rever', 'One Time Pad'];
+  selectedCipher = 'ROT13';
 
   constructor() {
   }
@@ -18,7 +19,7 @@ export class EncrapterComponent implements OnInit {
   ngOnInit() {
   }
 
-  rot13(inString) {
+  ROT13(inString) {
     const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
     const index = x => input.indexOf(x);
@@ -37,18 +38,18 @@ export class EncrapterComponent implements OnInit {
   }
 
   onetp(inString) {
-    return 'onetp';
+    return 'One Time Pad';
   }
 
   updateCiphertext() {
     switch (this.selectedCipher) {
-      case 'rot13':
-        this.ciphertext = this.rot13(this.plaintext);
+      case 'ROT13':
+        this.ciphertext = this.ROT13(this.plaintext);
         break;
-      case 'rever':
+      case 'Rever':
         this.ciphertext = this.rever(this.plaintext);
         break;
-      case 'onetp':
+      case 'One Time Pad':
         this.ciphertext = this.onetp(this.plaintext);
         break;
     }

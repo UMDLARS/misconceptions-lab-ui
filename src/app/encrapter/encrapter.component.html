@@ -3,9 +3,8 @@
     <nb-card>
       <nb-card-header>Message Text</nb-card-header>
       <nb-card-body>
-        <label>
-          <textarea [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"></textarea>
-        </label>
+        <textarea class="text-monospace" nbInput fullWidth [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"
+                  style="resize: none;"></textarea>
       </nb-card-body>
     </nb-card>
   </div>
@@ -15,14 +14,11 @@
       <nb-card-body>
         <label>
           <select class="select-button" [(ngModel)]="selectedCipher" (ngModelChange)="updateCiphertext()">
-            <option value="rot13">rot13</option>
-            <option value="rever">idkname</option>
-            <option value="onetp">one time pad</option>
+            <option *ngFor="let cipher of ciphers">{{cipher}}</option>
           </select>
         </label>
-        <p>
-          {{ciphertext}}
-        </p>
+        <textarea disabled class="text-monospace" nbInput fullWidth [(ngModel)]="ciphertext"
+                  style="resize: none;"></textarea>
       </nb-card-body>
     </nb-card>
   </div>
