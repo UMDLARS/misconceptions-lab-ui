@@ -11,28 +11,31 @@ import {
   NbLayoutModule,
   NbMenuModule,
   NbMenuService,
-  NbSidebarModule, NbStepperModule, NbTabsetModule,
+  NbSidebarModule,
+  NbStepperModule,
+  NbTabsetModule,
+  NbTreeGridModule,
   NbThemeModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {EncrapterComponent} from './encrapter/encrapter.component';
-import { HomeComponent } from './home/home.component';
-import { PhysicalsecurityComponent } from './physicalsecurity/physicalsecurity.component';
-import { NotatargetComponent } from './notatarget/notatarget.component';
-import { GoodpasswordsComponent } from './goodpasswords/goodpasswords.component';
-import { CompletelyanonymousComponent } from './completelyanonymous/completelyanonymous.component';
-import { SecurityinmindComponent } from './securityinmind/securityinmind.component';
-import { SecurityproductComponent } from './securityproduct/securityproduct.component';
-import { HumansarerationalComponent } from './humansarerational/humansarerational.component';
-import { TrustUsersComponent } from './trust-users/trust-users.component';
-import { AnonymizedDataComponent } from './anonymized-data/anonymized-data.component';
-import { SecurityByObscurityComponent } from './security-by-obscurity/security-by-obscurity.component';
-import { DefenseInDepthComponent } from './defense-in-depth/defense-in-depth.component';
-import { UsersAreNotMaliciousComponent } from './users-are-not-malicious/users-are-not-malicious.component';
-import { PrivacyNotImportantComponent } from './privacy-not-important/privacy-not-important.component';
-import { EncryptionAutoIntegrityComponent } from './encryption-auto-integrity/encryption-auto-integrity.component';
-import { TwoFAComponent } from './two-fa/two-fa.component';
+import {HomeComponent} from './home/home.component';
+import {PhysicalsecurityComponent} from './physicalsecurity/physicalsecurity.component';
+import {NotatargetComponent} from './notatarget/notatarget.component';
+import {GoodpasswordsComponent} from './goodpasswords/goodpasswords.component';
+import {CompletelyanonymousComponent} from './completelyanonymous/completelyanonymous.component';
+import {SecurityinmindComponent} from './securityinmind/securityinmind.component';
+import {SecurityproductComponent} from './securityproduct/securityproduct.component';
+import {HumansarerationalComponent} from './humansarerational/humansarerational.component';
+import {TrustUsersComponent} from './trust-users/trust-users.component';
+import {AnonymizedDataComponent} from './anonymized-data/anonymized-data.component';
+import {SecurityByObscurityComponent} from './security-by-obscurity/security-by-obscurity.component';
+import {DefenseInDepthComponent} from './defense-in-depth/defense-in-depth.component';
+import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are-not-malicious.component';
+import {PrivacyNotImportantComponent} from './privacy-not-important/privacy-not-important.component';
+import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity/encryption-auto-integrity.component';
+import {TwoFAComponent} from './two-fa/two-fa.component';
 
 const appRoutes: Routes = [
   {
@@ -90,6 +93,7 @@ const appRoutes: Routes = [
     NbCardModule,
     NbAccordionModule,
     NbMenuModule.forRoot(),
+    NbTreeGridModule,
     NbEvaIconsModule,
     BrowserAnimationsModule,
     NbTabsetModule,

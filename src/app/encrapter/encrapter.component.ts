@@ -8,74 +8,79 @@ import {Component, OnInit} from '@angular/core';
 export class EncrapterComponent implements OnInit {
   plaintext: string;
   ciphertext = '';
-  plaintable = {}
-  ciphertable = {}
-  esel: string;
+  plainTable: Map<string, number>;
+  cipherTable: Map<string, number>;
   selectedCipher = 'rot13';
 
   constructor() {
+    this.plainTable = new Map();
+    this.cipherTable = new Map();
   }
 
   ngOnInit() {
   }
-  rot13(instring){
+
+  rot13(inString) {
     const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
     const index = x => input.indexOf(x);
     const translate = x => index(x) > -1 ? output[index(x)] : x;
-    return instring.split('').map(translate).join('');
+    return inString.split('').map(translate).join('');
   }
 
-  rever(instring){
-    for(var i = 0; i < instring.length; i++){
-      var c = instring.charCodeAt(i);
+  rever(inString) {
+    for (let i = 0; i < inString.length; i++) {
+      let c = inString.charCodeAt(i);
+      // tslint:disable-next-line:no-bitwise
       c = String.fromCharCode(c ^ 64);
-      instring = instring.substr(0,i) + c + instring.substr(i+1);
+      inString = inString.substr(0, i) + c + inString.substr(i + 1);
     }
-    return instring.split("").reverse().join("");
+    return inString.split('').reverse().join('');
   }
 
-  onetp(instring){
-    return "onetp";
+  onetp(inString) {
+    return 'onetp';
   }
 
-  changeEncryptionType(inarg){
+  changeEncryptionType(inarg) {
     this.selectedCipher = inarg;
     this.updateCiphertext();
   }
 
 
   updateCiphertext() {
-    var instring = this.plaintext;
-    var out = ""
-    console.log(this.selectedCipher);
-    switch (this.selectedCipher){
-      case "rot13":
-	console.log("rot13");
-	out = this.rot13(instring);
-	break;
-      case "rever":
-	console.log("2")
-	out = this.rever(instring);
-	break;
-      case "onetp":
-	console.log("3");
-	out = this.onetp(instring);
-	break;
+    switch (this.selectedCipher) {
+      case 'rot13':
+        this.ciphertext = this.rot13(this.plaintext);
+        break;
+      case 'rever':
+        this.ciphertext = this.rever(this.plaintext);
+        break;
+      case 'onetp':
+        this.ciphertext = this.onetp(this.plaintext);
+        break;
     }
-    this.ciphertext = out;
-    this.plaintable = this.dictgen(instring);
-    console.log(this.plaintable['a']);
+    this.updateTables();
   }
 
-  dictgen(instring){
-    var dict = {};
-      for(var i = 0; i < instring.length; i++){
-        if(!dict[instring.charAt(i)]){
-          dict[instring.charAt(i)] = 0;
-        }
-      dict[instring.charAt(i)] += 1;
+  updateTables() {
+    // Clear old tables, like if the user copy/pastes
+    this.plainTable = new Map();
+    this.cipherTable = new Map();
+    for (const c of this.plaintext.toLowerCase().replace(' ', '').split('')) {
+      if (this.plainTable.has(c)) {
+        this.plainTable.set(c, this.plainTable.get(c) + 1);
+      } else {
+        this.plainTable.set(c, 1);
       }
-    return(dict)
     }
+    for (const c of this.ciphertext.toLowerCase().replace(' ', '').split('')) {
+      if (this.cipherTable.has(c)) {
+        this.cipherTable.set(c, this.cipherTable.get(c) + 1);
+      } else {
+        this.cipherTable.set(c, 1);
+      }
+    }
+    console.log(this.plainTable, this.cipherTable);
   }
+}
