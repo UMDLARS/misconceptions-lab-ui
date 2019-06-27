@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "BrandonsFolly": {
+    "returnOfTheJulian": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/BrandonsFolly",
+            "outputPath": "dist/returnOfTheJulian",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "BrandonsFolly:build"
+            "browserTarget": "returnOfTheJulian:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "BrandonsFolly:build:production"
+              "browserTarget": "returnOfTheJulian:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "BrandonsFolly:build"
+            "browserTarget": "returnOfTheJulian:build"
           }
         },
         "test": {
@@ -108,7 +108,7 @@
         }
       }
     },
-    "BrandonsFolly-e2e": {
+    "returnOfTheJulian-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -117,11 +117,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "BrandonsFolly:serve"
+            "devServerTarget": "returnOfTheJulian:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "BrandonsFolly:serve:production"
+              "devServerTarget": "returnOfTheJulian:serve:production"
             }
           }
         },
@@ -137,5 +137,5 @@
       }
     }
   },
-  "defaultProject": "BrandonsFolly"
+  "defaultProject": "returnOfTheJulian"
 }
