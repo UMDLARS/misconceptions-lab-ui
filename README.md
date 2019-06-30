@@ -1,6 +1,12 @@
 # The Return of the Julian
 ## Instructions
 ### Install Method 1 (NPM)
+Download the latest nodejs
+```
+# Using Ubuntu
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
 One time setup on a system:
 
 ```npm install -g @angular/cli```
