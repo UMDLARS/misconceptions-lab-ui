@@ -2,7 +2,7 @@
   <nb-card-body >
 
     <h1>
-      Physical security isn't as important as non-physical / technical security.
+      Encryption automatically provides integrity and/or authenticity.
     </h1>
 
 
@@ -11,16 +11,9 @@
 
     <div class="row">
       <div class="col" style="background-color:white;">
-        <h4>Column 1</h4>
+        <h4>Overview</h4>
         <div>
-          People often view security as a software problem with software solutions. Physical security issues cannot be
-          entirely solved by software -- they commonly require physical solutions (e.g., armed guards, locks, and tamper-resistant hardware).
-          People who hold this misconception view physical security as less important than its software counterparts. As a result of this belief,
-          they also believe that physical security breaches are less severe than software-based ones, but this is also untrue. Many software-based
-          security solutions depend at least partially on physical security and can in many cases be bypassed with physical access. For example, password
-          protections can often be circumvented by taking the hard drive out of computer and mounting it under a different OS, communication media can be
-          compromised by installing a keylogger or network sniffer, and keys and passwords can be acquired from individuals through threats or physical force.
-        </div>
+          People who hold this misconception believe that encryption automatically provides integrity or authenticity along with confidentiality, while this is not always the case. Symmetric encryption algorithms used for confidentiality, such as AES, do provide integrity or authenticity in their most basic modes of operation. Authenticity is not provided because anyone with the AES key (which must be shared by its very nature) can send an encrypted message, and you cannot verify who sent it. Integrity is not provided because a message’s ciphertext can be modified in transit; decrypting itt will result in data being produced which is not the plaintext, but no mechanism will identify this change. Instead, people needing authenticity and/or integrity should use cryptography designed for this purpose.         </div>
       </div>
       <div class="col">
         <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
