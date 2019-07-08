@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NbMenuItem} from '@nebular/theme';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -17,6 +18,16 @@ export class AppComponent {
     {
       title: '02-Physical Secruity',
       link: 'physicalsecruity',
+      children: [
+        {
+          title: 'Section 1',
+          link: 'section1',
+        },
+        {
+          title: 'Section 2',
+          link: 'section2',
+        }
+      ],
     },
     {
       title: '03-Not a target',
@@ -76,4 +87,6 @@ export class AppComponent {
     },
   ];
 
+  constructor(private activatedRoute: ActivatedRoute) {
+  }
 }
