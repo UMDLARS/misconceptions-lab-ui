@@ -65,7 +65,10 @@ import {ROUTES} from './routes';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES),
+    RouterModule.forRoot(ROUTES, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled'
+    }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
