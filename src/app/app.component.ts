@@ -11,16 +11,6 @@ import {NbMenuItem} from '@nebular/theme';
 export class AppComponent {
   menuItems: NbMenuItem[] = [
     {
-      title: 'Home',
-      icon: 'home-outline',
-      link: 'home',
-      home: true,
-    },
-    {
-      title: 'LABS',
-      group: true,
-    },
-    {
       title: '01-Encryption',
       link: 'encrapter',
     },

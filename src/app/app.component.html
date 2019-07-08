@@ -1,5 +1,10 @@
 <nb-layout>
-  <nb-layout-header fixed><a class="h1" routerLink="home">Miscolabs</a></nb-layout-header>
+  <nb-layout-header fixed>
+    <nb-actions size="medium">
+      <nb-action routerLink="home"><nb-icon icon="home-outline"></nb-icon></nb-action>
+      <nb-action style="font-size: 2rem;">Miscolabs</nb-action>
+    </nb-actions>
+  </nb-layout-header>
   <nb-sidebar>
     <nb-menu [items]="menuItems"></nb-menu>
   </nb-sidebar>

@@ -15,7 +15,7 @@ import {
   NbStepperModule,
   NbTabsetModule,
   NbTreeGridModule,
-  NbThemeModule, NbInputModule,
+  NbThemeModule, NbInputModule, NbActionsModule, NbIconModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -100,6 +100,8 @@ const appRoutes: Routes = [
     NbStepperModule,
     ReactiveFormsModule,
     NbInputModule,
+    NbActionsModule,
+    NbIconModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
