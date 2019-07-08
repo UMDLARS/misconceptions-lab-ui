@@ -5,7 +5,8 @@ import {NbMenuItem} from '@nebular/theme';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+
 })
 export class AppComponent {
   menuItems: NbMenuItem[] = [
@@ -25,7 +26,7 @@ export class AppComponent {
     },
     {
       title: '02-Physical Secruity',
-      link: 'ephysicalsecruity',
+      link: 'physicalsecruity',
     },
     {
       title: '03-Not a target',
