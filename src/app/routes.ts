@@ -22,7 +22,10 @@ export const ROUTES: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {path: 'home', component: HomeComponent},
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
   {path: 'encrapter', component: EncrapterComponent},
   {path: 'anonymized', component: AnonymizedDataComponent},
   {path: 'completlyanonymous', component: CompletelyanonymousComponent},
