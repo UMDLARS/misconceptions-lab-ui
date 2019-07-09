@@ -80,7 +80,7 @@ export class AppComponent {
     },
     {
       title: '17-2FA',
-      link: '/twofa',
+      link: '/twofactor',
     },
   ];
 }

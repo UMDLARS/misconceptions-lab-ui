@@ -15,6 +15,7 @@ import {SecurityinmindComponent} from './securityinmind/securityinmind.component
 import {SecurityproductComponent} from './securityproduct/securityproduct.component';
 import {TrustUsersComponent} from './trust-users/trust-users.component';
 import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are-not-malicious.component';
+import {TwoFAComponent} from './two-fa/two-fa.component';
 
 export const ROUTES: Routes = [
   {
@@ -40,5 +41,6 @@ export const ROUTES: Routes = [
   {path: 'securityinmind', component: SecurityinmindComponent},
   {path: 'secruityproduct', component: SecurityproductComponent},
   {path: 'trustusers', component: TrustUsersComponent},
-  {path: 'usersarenotmalicious', component: UsersAreNotMaliciousComponent}
+  {path: 'usersarenotmalicious', component: UsersAreNotMaliciousComponent},
+  {path: 'twofactor', component: TwoFAComponent}
 ];
