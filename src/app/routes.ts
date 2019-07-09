@@ -28,7 +28,7 @@ export const ROUTES: Routes = [
   },
   {path: 'encrapter', component: EncrapterComponent},
   {path: 'anonymized', component: AnonymizedDataComponent},
-  {path: 'completlyanonymous', component: CompletelyanonymousComponent},
+  {path: 'completelyanonymous', component: CompletelyanonymousComponent},
   {path: 'defenseindepth', component: DefenseInDepthComponent},
   {path: 'encryptionautointegrity', component: EncryptionAutoIntegrityComponent},
   {path: 'goodpasswords', component: GoodpasswordsComponent},
