@@ -42,7 +42,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let char of plainTable">
+		    <tr *ngFor="let char of plainTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
                       <td scope="row">{{char[0]}}</td>
                       <td>{{char[1]}}</td>
                     </tr>
@@ -63,7 +63,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let char of cipherTable">
+			    <tr *ngFor="let char of cipherTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
                       <td scope="row">{{char[0]}}</td>
                       <td>{{char[1]}}</td>
                     </tr>
