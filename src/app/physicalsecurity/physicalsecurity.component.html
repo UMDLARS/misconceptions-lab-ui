@@ -38,170 +38,257 @@
 
 
 
-<nb-card href="#lab">
+<nb-card>
   <nb-card-body>
-    <nb-stepper #stepper>
-      <nb-step [stepControl]="firstForm" label="First step">
-        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
-          <p class="lorem">
-            You are a hacker that is trying to hack into someones bank account to transfer all their money.
+    <h3>Installing VirtualBox</h3>
+    <nb-stepper orientation="horizontal">
+      <nb-step [label]="labelOne">
+        <ng-template #labelOne>Download</ng-template>
 
-            You know the user name of a rich guy.
-            Username: igotmoney99</p>
-          <p> Try and find his password. </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter his password to continue" class="form-control" formControlName="firstCtrl"
-                   [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
-          </div>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="secondForm" label="Second step">
-        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
-          <p class="lorem">
-            Pellentesque we gonna chung tortor.
-            Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
-            Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
-          </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
-                   [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
-          </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" label="Third step">
-        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-          <p class="lorem">
-            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
-          </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
-                   [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
-          </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>Confirm</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
-        <div class="step-container">
-          <h3>Wizard completed!</h3>
-          <button nbButton (click)="stepper.reset()">Try again</button>
+        <div>
+          <h4>Download VirtualBox on your machine.</h4>
+          <ul>
+            <li><h6>Windows</h6></li>
+            <ul>
+              <li>
+                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads"> here </a> to download. </p>
+              </li>
+            </ul>
+            <li>
+              <h6>Linux (Ubuntu/Debian)</h6>
+            </li>
+            <ul>
+              <li>Open up a terminal in linux and copy and paste the following commands.</li>
+              <ul>
+                <li>
+                  <code>sudo add-apt-repository multiverse && sudo apt-get update</code>
+                </li>
+                <li>
+                  <code>sudo apt install virtualbox</code>
+                </li>
+              </ul>
+            </ul>
+            <li>
+              <h6>Mac</h6>
+            </li>
+            <ul>
+              <li>
+                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads"> here </a> to download. </p>
+              </li>
+              <ul>
+                <li> Mount the DMG</li>
+                <li> Run the VirtualBox Installer</li>
+              </ul>
+            </ul>
+          </ul>
+
         </div>
+
+        <button nbButton disabled nbStepperNext>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Download VM">
+
+        <ul>
+          <li>
+            <h4>Download OVA file (VM appliance)</h4>
+          </li>
+          <ul>
+            <li>
+              <a href="http://10.1.1.243/vm.ova">VM Image</a>
+            </li>
+          </ul>
+          <li>
+            <h4>Download LiveCD Linux</h4>
+            Note: LiveCD is a image of an operating system that can run without installation.
+          </li>
+          <ul>
+            <li>
+              <a href="https://ubuntu.com/download/desktop" rel="noopener noreferrer" target="_blank">Ubuntu 18.04.2 LTS</a>
+            </li>
+          </ul>
+
+        </ul>
+
+
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Start VM">
+        <h4>Start the VM</h4>
+
+
+       <div>
+
+         <img id="example1" src="../../assets/images/virtualbox1.gif" />
+
+       </div>
+
+        <br>
+        <br>
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+
+      <nb-step [label]="labelFour">
+        <ng-template #labelFour>Done</ng-template>
+        <h4>Finished setting up VirtualBox!</h4>
+        <p class="lorem">
+            Now you have a virtual machine that you do not know the password to.
+        </p>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton disabled nbStepperNext>next</button>
       </nb-step>
     </nb-stepper>
   </nb-card-body>
 </nb-card>
 
-<nb-card href="#lab">
+<nb-card>
   <nb-card-body>
-    <nb-stepper #stepper>
-      <nb-step [stepControl]="firstForm" label="First step">
-        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
-          <p class="lorem">
-            You are a hacker that is trying to hack into someones bank account to transfer all their money.
+    <h3 style="position: center">The Lab</h3>
 
-            You know the user name of a rich guy.
-            Username: igotmoney99</p>
-          <p> Try and find his password. </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter his password to continue" class="form-control" formControlName="firstCtrl"
-                   [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+    <nb-stepper orientation="vertical">
+      <nb-step [label]="labelOne">
+        <ng-template #labelOne>Insert the LiveCD/USB</ng-template>
+
+
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/01-insertCD.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/01-insertCD.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
           </div>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="secondForm" label="Second step">
-        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
-          <p class="lorem">
-            Pellentesque we gonna chung tortor.
-            Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
-            Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
-          </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
-                   [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Click Devices->Choose disk image...</p>
+            <p>Select live cd from downloads</p>
+            <p>Click Machine->Reset</p>
+            <p>Select Try Ubuntu</p>
           </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" label="Third step">
-        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-          <p class="lorem">
-            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
-          </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
-                   [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
-          </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>Confirm</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
-        <div class="step-container">
-          <h3>Wizard completed!</h3>
-          <button nbButton (click)="stepper.reset()">Try again</button>
         </div>
+
+        <button nbButton disabled nbStepperNext>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+      <nb-step label="Mount the disk">
+
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/02-mount.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/02-mount.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Click Activites</p>
+            <p>Search terminal</p>
+            <p>Type following commands into the terminal:</p>
+            <code>sudo su</code>
+            <br>
+            <code>fdisk -l</code>
+            <br>
+            <code>mkdir /mnt/temp</code>
+            <br>
+            <code>mount /dev/sda1 /mnt/temp</code>
+            <br>
+            <code>chroot /mnt/temp</code>
+          </div>
+        </div>
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Reset password">
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/03-password.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/03-password.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Type following commands into the terminal:</p>
+            <p>For this lab we are using root. You can change root to whatever username is on the system.</p>
+            <code>passwd root</code>
+          </div>
+        </div>
+
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Unmount the disk">
+
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/04-unmount.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/04-unmount.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Type following commands into the terminal:</p>
+            <code>exit</code>
+            <br>
+            <code>umount /mnt/temp</code>
+            <br>
+            <code>exit</code>
+          </div>
+        </div>
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Reboot">
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/05-reboot.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/05-reboot.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Type following commands into the terminal:</p>
+            <code>reboot -n</code>
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+
+      <nb-step [label]="labelFour">
+        <ng-template #labelFour>Done</ng-template>
+        <h4>Finished setting up VirtualBox!</h4>
+        <p class="lorem">
+          Now you have a virtual machine that you do not know the password to.
+        </p>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton disabled nbStepperNext>next</button>
       </nb-step>
     </nb-stepper>
   </nb-card-body>
 </nb-card>
 
-<nb-card id="section2">
-  <nb-card-body>
-    <nb-stepper #stepper>
-      <nb-step [stepControl]="firstForm" label="First step">
-        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
-          <p class="lorem">
-            You are a hacker that is trying to hack into someones bank account to transfer all their money.
 
-            You know the user name of a rich guy.
-            Username: igotmoney99</p>
-          <p> Try and find his password. </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter his password to continue" class="form-control" formControlName="firstCtrl"
-                   [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
-          </div>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="secondForm" label="Second step">
-        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
-          <p class="lorem">
-            Pellentesque we gonna chung tortor.
-            Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle, mah home g-dizzle tempus tempor.
-            Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
-          </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter favorite movie" class="form-control" formControlName="secondCtrl"
-                   [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}">
-          </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" label="Third step">
-        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-          <p class="lorem">
-            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
-          </p>
-          <div class="input-group">
-            <input nbInput type="text" placeholder="Enter something" class="form-control" formControlName="thirdCtrl"
-                   [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
-          </div>
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>Confirm</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
-        <div class="step-container">
-          <h3>Wizard completed!</h3>
-          <button nbButton (click)="stepper.reset()">Try again</button>
-        </div>
-      </nb-step>
-    </nb-stepper>
-  </nb-card-body>
-</nb-card>
