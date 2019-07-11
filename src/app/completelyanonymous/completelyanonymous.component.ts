@@ -8,6 +8,7 @@ declare function test(): any;
 declare function Log_Node1(): any;
 declare function Log_Node2(): any;
 declare function init(): any;
+declare function nodecheck(): any;
 
 @Component({
   selector: 'app-completelyanonymous',

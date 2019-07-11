@@ -41,25 +41,27 @@
 
           <button onclick="generate_circuits()" style="width: 200px">Generate TOR Circuits</button>
           <br>
-          <button onclick="start_sim()" style="width: 200px">Start Simulation</button>
+          <button id="start" onclick="start_sim()" style="width: 200px" disabled="true">Start Simulation</button>
           <br>
-          <button onclick="stop_sim()" style="width: 200px">Stop Simulation</button>
+          <button id="stop" onclick="stop_sim()" style="width: 200px" disabled="true">Stop Simulation</button>
           <br>
-          <button onclick="show_hints()" style="width: 200px">Hints?</button>
+          <button onclick="show_hints()" style="width: 200px" >Hints?</button>
           <br>
           <button onclick="test()" style="width: 200px">TEST</button>
           <br>
-
+          <br>
           <p>Choose Difficulty Level</p>
           <select id="Diff">
             <option selected value="PlainText">PlainText</option>
             <option value="Encrypted">Encrypted</option>
           </select>
+          <br>
+          <br>
 
           <p>Node 1</p>
-          <select id="Node1" onchange="Log_Node1()">
+          <select  id="Node1" onchange="Log_Node1(this)">
             <option selected disabled> -- select an option -- </option>
-            <option value="1">1</option>
+            <option onchange="nodecheck()" value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -75,9 +77,10 @@
             <option value="Y">Y</option>
             <option value="Z">Z</option>
           </select>
-
+          <br>
+          <br>
           <p>Node 2</p>
-          <select id="Node2" onchange="Log_Node2()">
+          <select id="Node2" onchange="Log_Node2(this)">
             <option selected disabled> -- select an option -- </option>
             <option value="1">1</option>
             <option value="2">2</option>

@@ -8,6 +8,9 @@ var message_number_C1 = 0
 var message_number_C2 = 0
 var message_number_C3 = 0
 var original_cooldown = []
+var node1selected = false
+var node2selected = false
+var isRunning = false
 
 // Class definition for a Node. In Javascript, this is how we define blueprints of objects (class), as functions!
 function Node(node_id) {
@@ -105,40 +108,10 @@ var Y
 var Z
 
 
-
-
-var Node1_timeout
-var list1
-var prev_state_N1
-var curr_state_N1
-/*
-var pA = document.getElementById('A').message
-var pB = document.getElementById('B').message
-var pC = document.getElementById('C').message
-var cA
-var cB
-var cC*/
-function Log_Node1(){
-  curr_state_N1 = list1.options[list1.selectedIndex].value
-  if (curr_state_N1 != prev_state_N1){
-    document.getElementById('TA1').innerHTML = ""
-    clearTimeout(Node1_timeout)
-    prev_state_N1 = curr_state_N1
-  }
-  if (document.getElementById(curr_state_N1).message == '')
-    document.getElementById('TA1').innerHTML += '...' + '\n'
-  else
-    document.getElementById('TA1').innerHTML += document.getElementById(curr_state_N1).message + '\n'
-
-  Node1_timeout = setTimeout(Log_Node1,2000)
-}
-
-var Node2_timeout
-var list2
-var prev_state_N2
-var curr_state_N2
-
 function init(){
+  this.node1selected = false;
+  this.node2selected = false;
+  this.isRunning = false;
   this.one = new Node('1')
   this.two = new Node('2')
   this.three = new Node('3')
@@ -168,7 +141,42 @@ function init(){
   document.getElementById('Z').cooldown = getRndInteger(5,1)
 }
 
-function Log_Node2(){
+var Node1_timeout
+var list1
+var prev_state_N1
+var curr_state_N1
+/*
+var pA = document.getElementById('A').message
+var pB = document.getElementById('B').message
+var pC = document.getElementById('C').message
+var cA
+var cB
+var cC*/
+function Log_Node1(sel){
+  nodecheck1(sel)
+  curr_state_N1 = list1.options[list1.selectedIndex].value
+  if (curr_state_N1 != prev_state_N1){
+    document.getElementById('TA1').innerHTML = ""
+    clearTimeout(Node1_timeout)
+    prev_state_N1 = curr_state_N1
+  }
+  if (document.getElementById(curr_state_N1).message == '')
+    document.getElementById('TA1').innerHTML += '...' + '\n'
+  else
+    document.getElementById('TA1').innerHTML += document.getElementById(curr_state_N1).message + '\n'
+
+  Node1_timeout = setTimeout(Log_Node1,2000)
+}
+
+var Node2_timeout
+var list2
+var prev_state_N2
+var curr_state_N2
+
+
+
+function Log_Node2(sel){
+  nodecheck2(sel)
   curr_state_N2 = list2.options[list2.selectedIndex].value
   if (curr_state_N2 != prev_state_N2){
     document.getElementById('TA2').innerHTML = ""
@@ -303,6 +311,9 @@ var level
 
 
 function start_sim() {
+  this.isRunning = true;
+  document.getElementById('stop').disabled = false;
+  document.getElementById('start').disabled = true;
   if (level == undefined) {
     alert("ERROR")
   }
@@ -425,6 +436,9 @@ function start_sim() {
 }
 
 function stop_sim() {
+  this.isRunning = false;
+  document.getElementById('start').disabled = false;
+  document.getElementById('stop').disabled = true;
   clearTimeout(simulation_timer)
   clearTimeout(Node1_timeout)
   clearTimeout(Node2_timeout)
@@ -445,3 +459,21 @@ function test() {
   console.log(C2)
   console.log(C3)
 }
+
+
+
+function nodecheck1(sel) {
+  this.node1selected = true;
+  if(this.node2selected == true && isRunning == false){
+    document.getElementById('start').disabled = false;
+  }
+}
+
+function nodecheck2(sel) {
+  this.node2selected = true;
+  if(this.node1selected == true && isRunning == false){
+    document.getElementById('start').disabled = false;
+  }
+}
+
+
