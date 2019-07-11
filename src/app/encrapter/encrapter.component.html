@@ -1,3 +1,85 @@
+
+<div class="row">
+  <div class="col-6">
+    <nb-card>
+      <nb-card-header>Message Text</nb-card-header>
+      <nb-card-body>
+        <textarea class="text-monospace" nbInput fullWidth [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"
+                  style="resize: none;"></textarea>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-6">
+    <nb-card>
+      <nb-card-header>Ciphertext</nb-card-header>
+      <nb-card-body>
+        <label>
+          <select class="select-button" [(ngModel)]="selectedCipher" (ngModelChange)="updateCiphertext()">
+            <option *ngFor="let cipher of ciphers">{{cipher}}</option>
+          </select>
+        </label>
+        <textarea disabled class="text-monospace" nbInput fullWidth [(ngModel)]="ciphertext"
+                  style="resize: none;"></textarea>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <nb-accordion>
+      <nb-accordion-item>
+        <nb-accordion-item-header>Letter Frequency Analysis</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <div class="row">
+            <div class="col-6">
+              <nb-card>
+                <nb-card-header>Message Text</nb-card-header>
+                <nb-card-body>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Letter</th>
+                      <th scope="col">Frequency</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+		    <tr *ngFor="let char of plainTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
+                      <td scope="row">{{char[0]}}</td>
+                      <td>{{char[1]}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <div class="col-6">
+              <nb-card>
+                <nb-card-header>Cipher Text</nb-card-header>
+                <nb-card-body>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Letter</th>
+                      <th scope="col">Frequency</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+			    <tr *ngFor="let char of cipherTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
+                      <td scope="row">{{char[0]}}</td>
+                      <td>{{char[1]}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </nb-card-body>
+              </nb-card>
+            </div>
+
+          </div>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+
 <div class="sticky">
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar-nav">
@@ -16,6 +98,7 @@
     </ul>
 
   </nav>
+
 </div>
 
 
