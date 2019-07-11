@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EncryptionAutoIntegrityComponent implements OnInit {
 
+  message = 'Encryption automatically provides integrity and/or authenticity.';
+
   constructor() { }
 
   ngOnInit() {

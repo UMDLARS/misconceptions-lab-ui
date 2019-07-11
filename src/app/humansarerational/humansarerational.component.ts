@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HumansarerationalComponent implements OnInit {
 
+  message = 'Humans are rational agents who understand security and can’t be tricked.';
+
   constructor() { }
 
   ngOnInit() {

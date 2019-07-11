@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./securityproduct.component.css']
 })
 export class SecurityproductComponent implements OnInit {
-
+  message = 'Having security product X makes me secure.';
   constructor() { }
 
   ngOnInit() {

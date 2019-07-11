@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./defense-in-depth.component.css']
 })
 export class DefenseInDepthComponent implements OnInit {
-
+  message = 'Defense in depth is not necessary.';
   constructor() { }
 
   ngOnInit() {

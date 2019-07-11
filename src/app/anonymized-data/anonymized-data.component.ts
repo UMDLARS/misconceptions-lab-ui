@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnonymizedDataComponent implements OnInit {
 
+  message = 'Anonymized data can’t leak sensitive information.';
+
   constructor() { }
 
   ngOnInit() {

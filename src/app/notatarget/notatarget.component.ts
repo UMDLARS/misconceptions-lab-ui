@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notatarget.component.css']
 })
 export class NotatargetComponent implements OnInit {
-
+  message = 'I am not a target of cyber attacks.';
   constructor() { }
 
   ngOnInit() {

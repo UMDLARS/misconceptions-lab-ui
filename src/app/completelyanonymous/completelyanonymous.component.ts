@@ -17,6 +17,8 @@ declare function nodecheck(): any;
 })
 export class CompletelyanonymousComponent implements OnInit {
 
+  message = 'You can be completely anonymous on the internet by using privacy software and practices.';
+
   constructor() { }
 
   ngOnInit() {

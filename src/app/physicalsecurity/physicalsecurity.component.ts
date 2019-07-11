@@ -11,6 +11,7 @@ export class PhysicalsecurityComponent implements OnInit {
   firstForm: FormGroup;
   secondForm: FormGroup;
   thirdForm: FormGroup;
+  message = 'Physical security isn\'t as important as non-physical / technical security.';
 
   constructor(private fb: FormBuilder) { }
 

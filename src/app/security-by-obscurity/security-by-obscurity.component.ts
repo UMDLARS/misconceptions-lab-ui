@@ -14,6 +14,7 @@ export class SecurityByObscurityComponent implements OnInit {
   cipherTable: Array<[string, number]>;
   ciphers = ['ROT13', 'Rever', 'One Time Pad'];
   selectedCipher = 'ROT13';
+  message = 'Keeping a processes secret is vital to its security.';
   constructor() { }
 
   ngOnInit() {
