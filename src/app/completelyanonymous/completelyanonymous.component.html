@@ -28,6 +28,64 @@
   </nb-card-body>
 </nb-card>
 
-<p>
-  completelyanonymous works!
-</p>
+<nb-card style="height: auto;">
+  <nb-card-body>
+    <div>
+      <textarea id="TA1" placeholder="Communication on Node 1" rows="20"></textarea>
+      <textarea id="TA2" placeholder="Communication on Node 2" rows="20"></textarea>
+
+      <button onclick="generate_circuits()">Generate TOR Circuits</button>
+      <button onclick="start_sim()">Start Simulation</button>
+      <button onclick="stop_sim()">Stop Simulation</button>
+      <button onclick="show_hints()">Hints?</button>
+      <button onclick="test()">TEST</button>
+
+      <p>Choose Difficulty Level</p>
+      <select id="Diff">
+        <option selected value="PlainText">PlainText</option>
+        <option value="Encrypted">Encrypted</option>
+      </select>
+
+      <p>Node 1</p>
+      <select id="Node1" onchange="Log_Node1()">
+        <option selected disabled> -- select an option -- </option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="X">X</option>
+        <option value="Y">Y</option>
+        <option value="Z">Z</option>
+      </select>
+
+      <p>Node 2</p>
+      <select id="Node2" onchange="Log_Node2()">
+        <option selected disabled> -- select an option -- </option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="X">X</option>
+        <option value="Y">Y</option>
+        <option value="Z">Z</option>
+      </select>
+    </div>
+    <div id="buttonnodes"></div>
+  </nb-card-body>
+</nb-card>
