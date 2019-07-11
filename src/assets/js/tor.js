@@ -19,7 +19,11 @@ function Node(node_id) {
 
   node.appendChild(node_text)
 
-  document.body.appendChild(node)
+  var buttons = document.getElementById('buttonnodes')
+
+  buttons.appendChild(node)
+
+  // document.body.appendChild(node)
 
   node.message = '' // default message.
 
@@ -84,21 +88,21 @@ function receive(node,received_message) {
 }
 
 // This is how a new object is instantiated.
-var one = new Node('1')
-var two = new Node('2')
-var three = new Node('3')
-var four = new Node('4')
-var five = new Node('5')
-var six = new Node('6')
-var seven = new Node('7')
-var eight = new Node('8')
-var nine = new Node('9')
-var A = new Node('A')
-var B = new Node('B')
-var C = new Node('C')
-var X = new Node('X')
-var Y = new Node('Y')
-var Z = new Node('Z')
+var one
+var two
+var three
+var four
+var five
+var six
+var seven
+var eight
+var nine
+var A
+var B
+var C
+var X
+var Y
+var Z
 
 
 
@@ -135,6 +139,23 @@ var prev_state_N2
 var curr_state_N2
 
 function init(){
+  this.one = new Node('1')
+  this.two = new Node('2')
+  this.three = new Node('3')
+  this.four = new Node('4')
+  this.five = new Node('5')
+  this.six = new Node('6')
+  this.seven = new Node('7')
+  this.eight = new Node('8')
+  this.nine = new Node('9')
+  this.A = new Node('A')
+  this.B = new Node('B')
+  this.C = new Node('C')
+  this.X = new Node('X')
+  this.Y = new Node('Y')
+  this.Z = new Node('Z')
+
+
   level = document.getElementById('Diff');
   list1 = document.getElementById('Node1')
   prev_state_N1 = list1.options[list1.selectedIndex].value
