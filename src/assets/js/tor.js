@@ -11,6 +11,7 @@ var original_cooldown = []
 var node1selected = false
 var node2selected = false
 var isRunning = false
+var circuits = false
 
 // Class definition for a Node. In Javascript, this is how we define blueprints of objects (class), as functions!
 function Node(node_id) {
@@ -111,6 +112,8 @@ var Z
 function init(){
   this.node1selected = false;
   this.node2selected = false;
+  this.circuits = false;
+  document.getElementById('circuits').disabled=false;
   this.isRunning = false;
   this.one = new Node('1')
   this.two = new Node('2')
@@ -202,7 +205,8 @@ function genRndString() {
 }
 
 function generate_circuits() {
-
+  this.circuits = true;
+  document.getElementById('circuits').disabled = true;
   // Generating the circuit for client A.
   C1[0] = 'A'
   C1[1] = String(getRndInteger(3,1))
@@ -465,14 +469,19 @@ function test() {
 function nodecheck1(sel) {
   this.node1selected = true;
   if(this.node2selected == true && isRunning == false){
-    document.getElementById('start').disabled = false;
+    if(this.circuits){
+      document.getElementById('start').disabled = false;
+    }
+
   }
 }
 
 function nodecheck2(sel) {
   this.node2selected = true;
   if(this.node1selected == true && isRunning == false){
-    document.getElementById('start').disabled = false;
+    if(this.circuits){
+      document.getElementById('start').disabled = false;
+    }
   }
 }
 
