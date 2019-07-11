@@ -1,3 +1,306 @@
-<p>
-  physicalsecurity works!
-</p>
+
+
+
+<nb-card style="height: auto">
+  <nb-card-body >
+
+        <h1>
+          Physical security isn't as important as non-physical / technical security.
+        </h1>
+
+
+
+
+
+    <div class="row">
+      <div class="col" style="background-color:white;">
+        <h4>Overview</h4>
+        <div>
+          People often view security as a software problem with software solutions. Physical security issues cannot be
+          entirely solved by software -- they commonly require physical solutions (e.g., armed guards, locks, and tamper-resistant hardware).
+          People who hold this misconception view physical security as less important than its software counterparts. As a result of this belief,
+          they also believe that physical security breaches are less severe than software-based ones, but this is also untrue. Many software-based
+          security solutions depend at least partially on physical security and can in many cases be bypassed with physical access. For example, password
+          protections can often be circumvented by taking the hard drive out of computer and mounting it under a different OS, communication media can be
+          compromised by installing a keylogger or network sniffer, and keys and passwords can be acquired from individuals through threats or physical force.
+        </div>
+      </div>
+      <div class="col">
+        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
+      </div>
+    </div>
+
+
+  </nb-card-body>
+</nb-card>
+
+
+
+
+
+<nb-card>
+  <nb-card-body>
+    <h3>Installing VirtualBox</h3>
+    <nb-stepper orientation="horizontal">
+      <nb-step label="How to">
+        <ng-template #labelOne>Download</ng-template>
+
+        <div>
+          <h4>Download VirtualBox on your machine.</h4>
+          <ul>
+            <li><h6>Windows</h6></li>
+            <ul>
+              <li>
+                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads"> here </a> to download. </p>
+              </li>
+            </ul>
+            <li>
+              <h6>Linux (Ubuntu/Debian)</h6>
+            </li>
+            <ul>
+              <li>Open up a terminal in linux and copy and paste the following commands.</li>
+              <ul>
+                <li>
+                  <code>sudo add-apt-repository multiverse && sudo apt-get update</code>
+                </li>
+                <li>
+                  <code>sudo apt install virtualbox</code>
+                </li>
+              </ul>
+            </ul>
+            <li>
+              <h6>Mac</h6>
+            </li>
+            <ul>
+              <li>
+                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads"> here </a> to download. </p>
+              </li>
+              <ul>
+                <li> Mount the DMG</li>
+                <li> Run the VirtualBox Installer</li>
+              </ul>
+            </ul>
+          </ul>
+
+        </div>
+
+        <button nbButton disabled nbStepperNext>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Download VM">
+
+
+
+
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+
+
+      <nb-step [label]="labelFour">
+        <ng-template #labelFour>Done</ng-template>
+        <h4>Finished setting up VirtualBox!</h4>
+        <p class="lorem">
+            Now you have a virtual machine that you do not know the password to.
+        </p>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton disabled nbStepperNext>next</button>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-body>
+    <h3 style="position: center">The Lab</h3>
+
+    <nb-stepper orientation="vertical">
+
+
+      <nb-step label="Start VM">
+        <h4>Start the VM</h4>
+
+        <div class="row">
+          <div class="col">
+          <video width="700" controls >
+            <source src="../../assets/videos/physicalsecurity/001-startvm.mp4" type="video/mp4">
+            <source src="../../assets/videos/physicalsecurity/001-startvm.mp4" type="video/ogg">
+            Your browser does not support HTML5 video.
+          </video>
+
+        </div>
+          <div class="col">
+
+            <ul>
+              <li>
+                <h4>Download OVA file (VM appliance)</h4>
+              </li>
+              <ul>
+                <li>
+                  <a href="http://10.1.1.243/vm.ova">VM Image</a>
+                </li>
+              </ul>
+              <li>
+                <h4>Download LiveCD Linux</h4>
+                Note: LiveCD is a image of an operating system that can run without installation.
+              </li>
+              <ul>
+                <li>
+                  <a href="https://ubuntu.com/download/desktop" rel="noopener noreferrer" target="_blank">Ubuntu 18.04.2 LTS</a>
+                </li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+
+
+        <br>
+        <br>
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+      <nb-step [label]="labelOne">
+        <ng-template #labelOne>Insert the LiveCD/USB</ng-template>
+
+
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/01-insertCD.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/01-insertCD.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Click Devices->Choose disk image...</p>
+            <p>Select live cd from downloads</p>
+            <p>Click Machine->Reset</p>
+            <p>Select Try Ubuntu</p>
+          </div>
+        </div>
+
+        <button nbButton disabled nbStepperNext>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+      <nb-step label="Mount the disk">
+
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/02-mount.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/02-mount.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Click Activites</p>
+            <p>Search terminal</p>
+            <p>Type following commands into the terminal:</p>
+            <code>sudo su</code>
+            <br>
+            <code>fdisk -l</code>
+            <br>
+            <code>mkdir /mnt/temp</code>
+            <br>
+            <code>mount /dev/sda1 /mnt/temp</code>
+            <br>
+            <code>chroot /mnt/temp</code>
+          </div>
+        </div>
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Reset password">
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/03-password.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/03-password.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Type following commands into the terminal:</p>
+            <p>For this lab we are using root. You can change root to whatever username is on the system.</p>
+            <code>passwd root</code>
+          </div>
+        </div>
+
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Unmount the disk">
+
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/04-unmount.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/04-unmount.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Type following commands into the terminal:</p>
+            <code>exit</code>
+            <br>
+            <code>umount /mnt/temp</code>
+            <br>
+            <code>exit</code>
+          </div>
+        </div>
+
+        <br><br>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+      <nb-step label="Reboot">
+        <div class="row">
+          <div class="col">
+            <video width="700" controls >
+              <source src="../../assets/videos/physicalsecurity/05-reboot.mp4" type="video/mp4">
+              <source src="../../assets/videos/physicalsecurity/05-reboot.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="col">
+            <h5>Instructions</h5>
+            <p>Type following commands into the terminal:</p>
+            <code>reboot -n</code>
+          </div>
+        </div>
+        <br>
+        <br>
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+
+      <nb-step [label]="labelFour">
+        <ng-template #labelFour>Done</ng-template>
+        <h4>Finished setting up VirtualBox!</h4>
+        <p class="lorem">
+          Now you have a virtual machine that you do not know the password to.
+        </p>
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton disabled nbStepperNext>next</button>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>
+
+

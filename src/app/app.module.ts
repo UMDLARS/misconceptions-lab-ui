@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {
   NbAccordionModule,
   NbButtonModule,
@@ -15,7 +15,10 @@ import {
   NbStepperModule,
   NbTabsetModule,
   NbTreeGridModule,
-  NbThemeModule, NbInputModule,
+  NbThemeModule,
+  NbInputModule,
+  NbActionsModule,
+  NbIconModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -36,30 +39,7 @@ import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are
 import {PrivacyNotImportantComponent} from './privacy-not-important/privacy-not-important.component';
 import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity/encryption-auto-integrity.component';
 import {TwoFAComponent} from './two-fa/two-fa.component';
-
-const appRoutes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {path: 'home', component: HomeComponent},
-  {path: 'encrapter', component: EncrapterComponent},
-  {path: 'anonymized', component: AnonymizedDataComponent},
-  {path: 'completlyanonymous', component: CompletelyanonymousComponent},
-  {path: 'defenseindepth', component: DefenseInDepthComponent},
-  {path: 'encryptionautointegrity', component: EncryptionAutoIntegrityComponent},
-  {path: 'goodpasswords', component: GoodpasswordsComponent},
-  {path: 'humansarerational', component: HumansarerationalComponent},
-  {path: 'notatarget', component: NotatargetComponent},
-  {path: 'physicalsecruity', component: PhysicalsecurityComponent},
-  {path: 'privacynotimportant', component: PrivacyNotImportantComponent},
-  {path: 'securitybyobscurity', component: SecurityByObscurityComponent},
-  {path: 'securityinmind', component: SecurityinmindComponent},
-  {path: 'secruityproduct', component: SecurityproductComponent},
-  {path: 'trustusers', component: TrustUsersComponent},
-  {path: 'usersarenotmalicious', component: UsersAreNotMaliciousComponent},
-];
+import {ROUTES} from './routes';
 
 @NgModule({
   declarations: [
@@ -85,7 +65,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(ROUTES, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled'
+    }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
@@ -100,6 +83,8 @@ const appRoutes: Routes = [
     NbStepperModule,
     ReactiveFormsModule,
     NbInputModule,
+    NbActionsModule,
+    NbIconModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]

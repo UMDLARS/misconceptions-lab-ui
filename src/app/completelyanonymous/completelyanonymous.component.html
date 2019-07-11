@@ -1,3 +1,107 @@
-<p>
-  completelyanonymous works!
-</p>
+<nb-card style="height: auto">
+  <nb-card-body >
+
+    <h1>
+      You can be completely anonymous on the internet by using privacy software and practices.
+    </h1>
+
+
+
+
+
+    <div class="row">
+      <div class="col" style="background-color:white;">
+        <h4>Overview</h4>
+        <div>
+          People holding this misconception put too much faith in the ability of privacy tools, and often do not understand their fundamental limitations. In reality, while these tools can increase your level of privacy, there is no way to be certain that you are anonymous on the internet.
+        </div>
+      </div>
+      <figure class="figure">
+        <img src="../../assets/images/Tor-logo-2011-flat.svg.png" style="max-height: 300px" class="img-fluid">
+        <figcaption class="figure-caption">
+
+        </figcaption>
+      </figure>
+    </div>
+
+
+  </nb-card-body>
+</nb-card>
+
+<nb-card style="height: auto;">
+  <nb-card-body>
+    <div>
+      <div class="row">
+        <div class="col">
+          <textarea id="TA1" placeholder="Communication on Node 1" rows="20"></textarea>
+          <textarea id="TA2" placeholder="Communication on Node 2" rows="20"></textarea>
+
+        </div>
+        <div class="col">
+
+          <button id="circuits" onclick="generate_circuits()" style="width: 200px" disabled="false">Generate TOR Circuits</button>
+          <br>
+          <button id="start" onclick="start_sim()" style="width: 200px" disabled="true">Start Simulation</button>
+          <br>
+          <button id="stop" onclick="stop_sim()" style="width: 200px" disabled="true">Stop Simulation</button>
+          <br>
+          <button onclick="show_hints()" style="width: 200px" >Hints?</button>
+          <br>
+          <button onclick="test()" style="width: 200px">TEST</button>
+          <br>
+          <br>
+          <p>Choose Difficulty Level</p>
+          <select id="Diff">
+            <option selected value="PlainText">PlainText</option>
+            <option value="Encrypted">Encrypted</option>
+          </select>
+          <br>
+          <br>
+
+          <p>Node 1</p>
+          <select  id="Node1" onchange="Log_Node1(this)">
+            <option selected disabled> -- select an option -- </option>
+            <option onchange="nodecheck()" value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+          </select>
+          <br>
+          <br>
+          <p>Node 2</p>
+          <select id="Node2" onchange="Log_Node2(this)">
+            <option selected disabled> -- select an option -- </option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <div id="buttonnodes"></div>
+  </nb-card-body>
+</nb-card>

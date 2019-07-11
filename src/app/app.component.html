@@ -1,10 +1,26 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./libgif.js"></script>
+<script type="text/javascript" src="./rubbable.js"></script>
+
 <nb-layout>
-  <nb-layout-header fixed><a class="h1" routerLink="home">Miscolabs</a></nb-layout-header>
+  <nb-layout-header fixed>
+    <nb-actions size="medium">
+      <nb-action routerLink="/">
+        <nb-icon icon="home-outline"></nb-icon>
+      </nb-action>
+      <nb-action style="font-size: 2rem;">Miscolabs</nb-action>
+    </nb-actions>
+  </nb-layout-header>
   <nb-sidebar>
-    <nb-menu [items]="menuItems"></nb-menu>
+    <nb-menu [items]="menuItems" autoCollapse="true"></nb-menu>
   </nb-sidebar>
   <nb-layout-column>
     <router-outlet></router-outlet>
   </nb-layout-column>
-  <nb-layout-footer>Brandon Geraci was here</nb-layout-footer>
+  <nb-layout-footer>Let's make the world a more secure place, one misconception at a time.</nb-layout-footer>
 </nb-layout>
+
+

@@ -1,3 +1,107 @@
-<p>
-  security-by-obscurity works!
-</p>
+<nb-card style="height: auto">
+  <nb-card-body >
+
+    <h1>
+      Keeping a processes secret is vital to its security.
+    </h1>
+
+
+
+
+
+    <div class="row">
+      <div class="col" style="background-color:white;">
+        <h4>Overview</h4>
+        <div>
+          Victims of this misconception believe security by obscurity is a valid strategy. It is better to use a public process that’s robust against attacks. This doesn’t mean there can’t be any secrets in the process. Rather, it means that the secrets are separated from the process, so someone observing the process won’t be able to get the secrets. For example, writing a “secret” encryption algorithm and using that along with keys is not as secure a process as using a public and robust algorithm and keeping the keys separate.          </div>
+      </div>
+      <div class="col">
+        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
+      </div>
+    </div>
+
+
+  </nb-card-body>
+</nb-card>
+
+<div class="row">
+  <div class="col-6">
+    <nb-card>
+      <nb-card-header>Message Text</nb-card-header>
+      <nb-card-body>
+        <textarea class="text-monospace" nbInput fullWidth [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"
+                  style="resize: none;"></textarea>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-6">
+    <nb-card>
+      <nb-card-header>Ciphertext</nb-card-header>
+      <nb-card-body>
+        <label>
+          <select class="select-button" [(ngModel)]="selectedCipher" (ngModelChange)="updateCiphertext()">
+            <option *ngFor="let cipher of ciphers">{{cipher}}</option>
+          </select>
+        </label>
+        <textarea disabled class="text-monospace" nbInput fullWidth [(ngModel)]="ciphertext"
+                  style="resize: none;"></textarea>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <nb-accordion>
+      <nb-accordion-item>
+        <nb-accordion-item-header>Letter Frequency Analysis</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <div class="row">
+            <div class="col-6">
+              <nb-card>
+                <nb-card-header>Message Text</nb-card-header>
+                <nb-card-body>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Letter</th>
+                      <th scope="col">Frequency</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+		    <tr *ngFor="let char of plainTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
+                      <td scope="row">{{char[0]}}</td>
+                      <td>{{char[1]}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <div class="col-6">
+              <nb-card>
+                <nb-card-header>Cipher Text</nb-card-header>
+                <nb-card-body>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Letter</th>
+                      <th scope="col">Frequency</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+			    <tr *ngFor="let char of cipherTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
+                      <td scope="row">{{char[0]}}</td>
+                      <td>{{char[1]}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </nb-card-body>
+              </nb-card>
+            </div>
+
+          </div>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+</div>

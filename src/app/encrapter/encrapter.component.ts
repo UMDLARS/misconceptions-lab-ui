@@ -15,6 +15,7 @@ export class EncrapterComponent implements OnInit {
   ciphers = ['ROT13', 'Rever', 'One Time Pad'];
   selectedCipher = 'ROT13';
 
+
   constructor() {
   }
 
