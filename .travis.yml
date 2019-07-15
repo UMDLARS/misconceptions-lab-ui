@@ -18,4 +18,4 @@ deploy:
   keep_history: true
   on:
     branch: master
-  local_dir: dist/BrandonsFolly
+  local_dir: dist/returnOfTheJulian
