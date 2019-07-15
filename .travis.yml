@@ -10,7 +10,7 @@ cache:
 install:
   - npm ci
 script:
-  - ng build --prod
+  - ng build --prod --base-href=/misconceptions-lab-ui/
 deploy:
   provider: pages
   skip_cleanup: true
