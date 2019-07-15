@@ -32,23 +32,46 @@
   </nb-card-body>
 </nb-card>
 
-<p>
-  notatarget works!
-</p>
 
-<nb-flip-card>
-  <nb-card-front>
-    <nb-card>
-      <nb-card-body>
-        Front
-      </nb-card-body>
-    </nb-card>
-  </nb-card-front>
-  <nb-card-back>
-    <nb-card>
-      <nb-card-body>
-        Back
-      </nb-card-body>
-    </nb-card>
-  </nb-card-back>
-</nb-flip-card>
+
+
+<nb-card>
+  <nb-card-body>
+    <nb-stepper #stepper>
+      <nb-step [stepControl]="firstForm" label="First step">
+        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+
+          <button nbButton nbStepperNext>next</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="secondForm" label="Second step">
+        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="thirdForm" label="Third step">
+        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext>Confirm</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+        <div class="step-container">
+          <h3>Wizard completed!</h3>
+          <button nbButton (click)="stepper.reset()">Try again</button>
+        </div>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-body>
+    <iframe src="http://10.1.1.136:5000/"  height="1000px" width="100%" style="border:none;">
+      <p>Your browser does not support iframes.</p>
+    </iframe>
+  </nb-card-body>
+</nb-card>
