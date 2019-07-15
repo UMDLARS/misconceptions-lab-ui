@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/UMDLARS/misconceptions-lab-ui.svg?branch=master)](https://travis-ci.com/UMDLARS/misconceptions-lab-ui)
 # The Return of the Julian
 ## Instructions
 ### Install Method 1 (NPM)
