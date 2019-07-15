@@ -10,7 +10,7 @@ cache:
 install:
   - npm ci
 script:
-  - ng build --prod --base-href=/northernpike/
+  - ng build --prod
 deploy:
   provider: pages
   skip_cleanup: true
