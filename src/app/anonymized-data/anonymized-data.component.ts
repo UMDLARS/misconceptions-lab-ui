@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './anonymized-data.component.html',
   styleUrls: ['./anonymized-data.component.css']
 })
+
 export class AnonymizedDataComponent implements OnInit {
 
   message = 'Anonymized data can’t leak sensitive information.';
@@ -13,5 +14,4 @@ export class AnonymizedDataComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
