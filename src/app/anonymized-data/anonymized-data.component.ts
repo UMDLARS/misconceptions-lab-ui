@@ -13,5 +13,6 @@ export class AnonymizedDataComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 }

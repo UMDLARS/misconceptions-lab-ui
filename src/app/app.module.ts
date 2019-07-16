@@ -19,6 +19,7 @@ import {
   NbInputModule,
   NbActionsModule,
   NbIconModule,
+  NbSelectModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -85,6 +86,7 @@ import {ROUTES} from './routes';
     NbInputModule,
     NbActionsModule,
     NbIconModule,
+    NbSelectModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
