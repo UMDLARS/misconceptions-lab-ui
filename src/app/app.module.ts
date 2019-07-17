@@ -33,7 +33,7 @@ import {SecurityinmindComponent} from './securityinmind/securityinmind.component
 import {SecurityproductComponent} from './securityproduct/securityproduct.component';
 import {HumansarerationalComponent} from './humansarerational/humansarerational.component';
 import {TrustUsersComponent} from './trust-users/trust-users.component';
-import {AnonymizedDataComponent} from './anonymized-data/anonymized-data.component';
+import {AnonymizedDataComponent, FsIconComponent} from './anonymized-data/anonymized-data.component';
 import {SecurityByObscurityComponent} from './security-by-obscurity/security-by-obscurity.component';
 import {DefenseInDepthComponent} from './defense-in-depth/defense-in-depth.component';
 import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are-not-malicious.component';
@@ -62,6 +62,7 @@ import {ROUTES} from './routes';
     PrivacyNotImportantComponent,
     EncryptionAutoIntegrityComponent,
     TwoFAComponent,
+    FsIconComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +88,7 @@ import {ROUTES} from './routes';
     NbActionsModule,
     NbIconModule,
     NbSelectModule,
+    NbTreeGridModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
