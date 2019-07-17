@@ -1,0 +1,101 @@
+id,occupation,location,gender,age,marital status,family size
+1,Food/Service worker,Dallas,male,"41,50",married,1
+2,Customer Service,San Antonio,female,18-24,,4
+3,Office Clerk,Austin,male,"41,50",divorced,3
+4,retail salesperson,New York,,25-30,divorced,1
+5,Stock Clerk,New York,,31-40,married,4
+6,Laborer,San Diego,female,31-40,,2
+7,,Chicago,male,,divorced,3
+8,Cashier,,male,,divorced,4
+9,Waiter/Waitress,New York,,"41,50",single,
+10,Cashier,Chicago,,25-30,divorced,3
+11,Waiter/Waitress,Los Angeles,male,18-24,divorced,
+12,Customer Service,Los Angeles,male,31-40,,3
+13,Nurse,Los Angeles,male,,,4
+14,Janitor,Austin,male,25-30,single,1
+15,Office Clerk,Chicago,,25-30,divorced,3
+16,Waiter/Waitress,San Diego,male,,,3
+17,Food/Service worker,Dallas,female,"41,50",divorced,3
+18,,Chicago,female,,married,
+19,Waiter/Waitress,San Jose,female,18-24,single,1
+20,Cashier,Houston,,"41,50",single,3
+21,Laborer,Jacksonville,female,,divorced,
+22,Stock Clerk,Los Angeles,,,divorced,1
+23,Customer Service,San Antonio,male,,married,
+24,Nurse,Dallas,male,"41,50",divorced,4
+25,Stock Clerk,,male,"41,50",,3
+26,retail salesperson,New York,female,,divorced,3
+27,Food/Service worker,San Antonio,female,25-30,married,3
+28,Stock Clerk,San Antonio,,25-30,single,3
+29,Laborer,Austin,female,,divorced,1
+30,,Dallas,female,"41,50",single,3
+31,Stock Clerk,San Diego,female,31-40,single,2
+32,Cashier,San Jose,,"41,50",divorced,
+33,Stock Clerk,Jacksonville,male,,,1
+34,,Austin,,18-24,married,3
+35,Customer Service,,female,,single,1
+36,Cashier,Houston,,18-24,,2
+37,Office Clerk,Austin,male,25-30,divorced,4
+38,Food/Service worker,Philadelphia,,25-30,divorced,4
+39,Food/Service worker,San Diego,female,,,4
+40,Nurse,Dallas,male,31-40,,4
+41,Laborer,Los Angeles,male,"41,50",,
+42,Waiter/Waitress,Phoenix,female,31-40,,1
+43,retail salesperson,Philadelphia,,,divorced,
+44,,San Antonio,male,,,4
+45,Cashier,Jacksonville,female,25-30,divorced,1
+46,,Dallas,,18-24,,2
+47,Stock Clerk,Phoenix,female,25-30,married,3
+48,Customer Service,Houston,male,,,3
+49,retail salesperson,Chicago,,"41,50",divorced,3
+50,Office Clerk,Dallas,,,,2
+51,Stock Clerk,Los Angeles,,25-30,married,
+52,,Phoenix,,31-40,divorced,1
+53,Nurse,Dallas,,31-40,divorced,4
+54,Cashier,Chicago,male,31-40,divorced,2
+55,Laborer,San Diego,female,31-40,single,2
+56,Waiter/Waitress,,male,18-24,,2
+57,Customer Service,Austin,male,"41,50",,4
+58,Office Clerk,San Jose,,31-40,single,3
+59,,New York,male,18-24,,
+60,Food/Service worker,New York,male,"41,50",divorced,1
+61,Customer Service,Philadelphia,female,31-40,married,4
+62,,,female,"41,50",,2
+63,Stock Clerk,Dallas,male,25-30,single,1
+64,Waiter/Waitress,,male,,divorced,1
+65,Stock Clerk,San Diego,,,single,3
+66,Janitor,San Jose,female,"41,50",single,4
+67,Customer Service,Philadelphia,female,18-24,married,
+68,Stock Clerk,Phoenix,male,18-24,,3
+69,Waiter/Waitress,Houston,,"41,50",divorced,2
+70,Waiter/Waitress,San Antonio,female,25-30,married,
+71,Customer Service,San Diego,male,,single,4
+72,Stock Clerk,Los Angeles,male,18-24,,3
+73,Nurse,Los Angeles,female,18-24,divorced,4
+74,Customer Service,Chicago,female,18-24,divorced,3
+75,Food/Service worker,Chicago,male,31-40,,4
+76,,Philadelphia,,31-40,married,1
+77,Stock Clerk,Los Angeles,,"41,50",,2
+78,Cashier,San Diego,male,,single,1
+79,Laborer,Dallas,female,25-30,,4
+80,Cashier,Jacksonville,female,25-30,,1
+81,Food/Service worker,Houston,male,31-40,married,
+82,Stock Clerk,San Diego,,18-24,single,2
+83,Laborer,Houston,male,18-24,married,3
+84,Janitor,Dallas,male,31-40,divorced,1
+85,,Austin,,31-40,divorced,
+86,Nurse,Austin,male,25-30,,3
+87,Laborer,New York,,"41,50",married,4
+88,,San Antonio,male,"41,50",,
+89,Waiter/Waitress,Jacksonville,male,31-40,divorced,3
+90,,San Diego,,31-40,divorced,
+91,Office Clerk,Jacksonville,,25-30,single,3
+92,Office Clerk,San Diego,male,25-30,married,1
+93,Nurse,New York,female,"41,50",married,4
+94,Laborer,,female,25-30,single,2
+95,Stock Clerk,Phoenix,male,18-24,married,4
+96,Food/Service worker,Jacksonville,,,married,3
+97,Nurse,Houston,,18-24,married,
+98,retail salesperson,Philadelphia,,18-24,single,4
+99,Cashier,Dallas,female,"41,50",single,4
+100,,Chicago,male,"41,50",married,3
