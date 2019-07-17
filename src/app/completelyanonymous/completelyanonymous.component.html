@@ -61,13 +61,13 @@
           </p>
 
           <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>Confirm</button>
+          <button nbButton nbStepperNext>next</button>
         </form>
       </nb-step>
       <nb-step  label="Third step">
         <div class="step-container">
           <h3>Wizard completed!</h3>
-          <button nbButton (click)="stepper.reset()">Try again</button>
+          <button nbButton nbStepperPrevious>prev</button>
         </div>
       </nb-step>
     </nb-stepper>
