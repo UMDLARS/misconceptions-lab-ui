@@ -1,7 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-
 
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -89,7 +87,6 @@ import {ROUTES} from './routes';
     NbActionsModule,
     NbIconModule,
     NbSelectModule,
-    HttpClientModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]

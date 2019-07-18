@@ -5,25 +5,30 @@
 </nb-card>
 
 <nb-card style="height: auto">
-  <nb-card-body >
+  <nb-card-body>
 
     <div class="row">
       <div class="col" style="background-color:white;">
         <h4>Overview</h4>
         <div>
-          People who hold this misconception believe that anonymized data can’t leak any sensitive information. However, data can be aggregated to reveal patterns or cross-referenced with other sources of information to de-anonymize individual records or reveal data about a population. For example, Netflix released a dataset for development of a better video recommendation algorithm. While the data was anonymized, it contained user reviews which cross-referenced with public movie review databases to de-anonymize those users.         </div>
+          People who hold this misconception believe that anonymized data can’t leak any sensitive information. However,
+          data can be aggregated to reveal patterns or cross-referenced with other sources of information to
+          de-anonymize individual records or reveal data about a population. For example, Netflix released a dataset for
+          development of a better video recommendation algorithm. While the data was anonymized, it contained user
+          reviews which cross-referenced with public movie review databases to de-anonymize those users.
+        </div>
       </div>
       <div class="col">
         <figure class="figure">
-          <img src="../../assets/images/20130326163535-0_0.jpg" class="img-fluid">
+          <img src="assets/images/20130326163535-0_0.jpg" class="img-fluid">
           <figcaption class="figure-caption">
 
-            <p><a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data">Photo: Christine Daniloff/MIT</a></p>
+            <p><a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data">Photo: Christine
+              Daniloff/MIT</a></p>
           </figcaption>
         </figure>
       </div>
     </div>
-
 
 
   </nb-card-body>
@@ -40,7 +45,7 @@
     <h4>Section 1</h4>
 
     <p> Here are some tweets from various users:</p>
-    <nb-select placeholder="Select Showcase" >
+    <nb-select placeholder="Select Showcase">
       <nb-option value="">Option empty</nb-option>
       <nb-option value="John">John</nb-option>
       <nb-option value="Sally">Sally</nb-option>
@@ -57,8 +62,9 @@
       <nb-option value="Tom">Tom</nb-option>
       <nb-option value="Kim">Kim</nb-option>
     </nb-select>
-    <i>@JoanOfArc099: "The view from atop zenith bridge is simply breathtaking! Would definitely go there again!"</i><br>
-    <nb-select placeholder="Select Showcase" >
+    <i>@JoanOfArc099: "The view from atop zenith bridge is simply breathtaking! Would definitely go there
+      again!"</i><br>
+    <nb-select placeholder="Select Showcase">
       <nb-option value="">Option empty</nb-option>
       <nb-option value="John">John</nb-option>
       <nb-option value="Sally">Sally</nb-option>
@@ -67,7 +73,7 @@
       <nb-option value="Kim">Kim</nb-option>
     </nb-select>
     <i>@monster101: "Tell me why I should watch Friends again? Is it because of the story or lack thereof?"</i><br>
-    <nb-select placeholder="Select Showcase" >
+    <nb-select placeholder="Select Showcase">
       <nb-option value="">Option empty</nb-option>
       <nb-option value="John">John</nb-option>
       <nb-option value="Sally">Sally</nb-option>
@@ -76,7 +82,7 @@
       <nb-option value="Kim">Kim</nb-option>
     </nb-select>
     <i>@cooler2: "The new Final Fantasy came out!! Can't wait to get my hands on it!!"</i><br>
-    <nb-select placeholder="Select Showcase" >
+    <nb-select placeholder="Select Showcase">
       <nb-option value="">Option empty</nb-option>
       <nb-option value="John">John</nb-option>
       <nb-option value="Sally">Sally</nb-option>
@@ -89,20 +95,20 @@
     <p>Can you guess who is which user by trying to connect what you know about them with their tweet?</p>
 
     <nb-flip-card>
-    <nb-card-front>
-      <nb-card accent="danger">
-        <nb-card-body>
-          John
-        </nb-card-body>
-      </nb-card>
-    </nb-card-front>
-    <nb-card-back>
-      <nb-card>
-        <nb-card-body>
-          Hiking, Travelling, Photography
-        </nb-card-body>
-      </nb-card>
-    </nb-card-back>
+      <nb-card-front>
+        <nb-card accent="danger">
+          <nb-card-body>
+            John
+          </nb-card-body>
+        </nb-card>
+      </nb-card-front>
+      <nb-card-back>
+        <nb-card>
+          <nb-card-body>
+            Hiking, Travelling, Photography
+          </nb-card-body>
+        </nb-card>
+      </nb-card-back>
     </nb-flip-card>
 
     <nb-flip-card>
@@ -168,19 +174,21 @@
       <nb-card-back>
         <nb-card>
           <nb-card-body>
-            Restauranter, Chef
+            Restaurateur, Chef
           </nb-card-body>
         </nb-card>
       </nb-card-back>
     </nb-flip-card>
 
 
-
   </nb-card-body>
 </nb-card>
 
 <nb-card>
-  <nb-card-body>
+  <nb-card-header>
     <h4>Section 2</h4>
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="tableSettings" [source]="dataSource"></ng2-smart-table>
   </nb-card-body>
 </nb-card>

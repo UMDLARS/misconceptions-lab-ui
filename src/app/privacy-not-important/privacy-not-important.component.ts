@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privacy-not-important.component.css']
 })
 export class PrivacyNotImportantComponent implements OnInit {
-  message= 'I have nothing to hide, so privacy isn’t important to me.';
+  message = 'I have nothing to hide, so privacy isn’t important to me.';
   constructor() { }
 
   ngOnInit() {

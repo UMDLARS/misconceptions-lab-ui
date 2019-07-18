@@ -1,37 +1,52 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
+<div class="row">
+  <div class="col-9">
+    <nb-card>
+      <nb-card-header>
+        <h1>{{labTitle}}</h1>
+      </nb-card-header>
+    </nb-card>
 
-<nb-card style="height: auto">
-  <nb-card-body >
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
+    <nb-card>
+      <nb-card-header>
         <h4>Overview</h4>
-        <div>
-          People who hold this misconception think that a single defense is sufficient. However, relying on a single perimeter (or other) defense makes that defense a single point of failure. Since nothing is completely secure, it’s possible that defense will fail, in which case there will be no other security mechanisms. In contrast, defense in depth means having multiple overlapping layers of security. By having defense in depth,  a single layer defense failing doesn’t mean the whole system is compromised -- hopefully an additional defense will still provide protection.          </div>
-      </div>
-      <div class="col">
-        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
-      </div>
-    </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col">
+            People who hold this misconception think that a single defense is sufficient. However, relying on a single
+            perimeter (or other) defense makes that defense a single point of failure. Since nothing is completely
+            secure,
+            it’s possible that defense will fail, in which case there will be no other security mechanisms. In contrast,
+            defense in depth means having multiple overlapping layers of security. By having defense in depth, a single
+            layer defense failing doesn’t mean the whole system is compromised -- hopefully an additional defense will
+            still provide protection.
+          </div>
+          <div class="col">
+            <img src="assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
 
-
-  </nb-card-body>
-</nb-card>
-
-<nb-card>
-  <nb-card-body>
-    <h2>Why is it important? </h2>
-  </nb-card-body>
-</nb-card>
-<nb-card>
-  <nb-card-body>
-    <h2>Example: </h2>
-    Bank analogy 
-    <h2>Realworld: </h2>
-    <p>On blah blah blah some one did blah</p>
-  </nb-card-body>
-</nb-card>
+    <nb-card>
+      <nb-card-body>
+        <h2>Why is it important? </h2>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-body>
+        <h2>Example: </h2>
+        Bank analogy
+        <h2>Realworld: </h2>
+        <p>On blah blah blah some one did blah</p>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-3">
+    <nb-card class="h-auto">
+      <nb-card-header>
+        Contents
+      </nb-card-header>
+    </nb-card>
+  </div>
+</div>
