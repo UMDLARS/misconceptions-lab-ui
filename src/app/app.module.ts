@@ -41,6 +41,7 @@ import {PrivacyNotImportantComponent} from './privacy-not-important/privacy-not-
 import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity/encryption-auto-integrity.component';
 import {TwoFAComponent} from './two-fa/two-fa.component';
 import {ROUTES} from './routes';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import {ROUTES} from './routes';
     NbActionsModule,
     NbIconModule,
     NbSelectModule,
+    Ng2SmartTableModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
