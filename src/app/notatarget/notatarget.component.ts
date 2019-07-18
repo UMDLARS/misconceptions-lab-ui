@@ -1,67 +1,20 @@
-import {Injectable, Component, OnInit, OnDestroy} from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import 'rxjs-compat/add/operator/map';
-
-interface Docker {
-  url: string;
-  container: string;
-}
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-notatarget',
   templateUrl: './notatarget.component.html',
   styleUrls: ['./notatarget.component.css']
 })
-export class NotatargetComponent implements OnInit, OnDestroy {
+export class NotatargetComponent implements OnInit {
   message = 'I am not a target of cyber attacks.';
-  thisdocker: Docker;
-  thisurl: string;
   thirdForm: any;
   secondForm: any;
   firstForm: any;
-  ifrm: any;
-  thiscontainer: any;
 
-  constructor(private  http: HttpClient) {
-    const url = 'http://10.1.1.12:5000';
-    this.http.get(url).subscribe(
-      data => this.doSomething(data)
-    );
+  constructor() {
   }
-
 
   ngOnInit() {
-
-  }
-
-  ngOnDestroy(): void {
-    console.log('AAAAAAHHHHH');
-    this.http.post('http://10.1.1.12:5000/destroy',
-      {
-        container:  this.thiscontainer
-      })
-      .subscribe(
-        data  => {
-          console.log('POST Request is successful ', data);
-        },
-        error  => {
-
-          console.log('Error', error);
-
-        }
-
-      );
-  }
-
-  doSomething(data) {
-    this.thisdocker = data;
-    this.thisurl = data.url;
-    this.ifrm = document.createElement('iframe');
-    this.ifrm.setAttribute('id', 'ifrm');
-    this.ifrm.setAttribute('src', this.thisurl);
-    let el = document.getElementById('vm');
-    el.parentNode.append(this.ifrm);
-    this.thiscontainer = data.container;
   }
 
   onThirdSubmit() {
