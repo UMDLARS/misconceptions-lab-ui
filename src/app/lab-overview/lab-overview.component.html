@@ -1,0 +1,24 @@
+<nb-card>
+  <nb-card-header>
+    <h1>
+      <ng-content select="[title]"></ng-content>
+    </h1>
+  </nb-card-header>
+</nb-card>
+
+<div class="d-flex flex-row">
+  <nb-card class="flex-column mr-4 col-7">
+    <nb-card-header>
+      <h4>Overview</h4>
+    </nb-card-header>
+    <nb-card-body>
+      <ng-content select="[intro]"></ng-content>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card class="flex-column col">
+    <nb-card-body>
+      <ng-content select="[headerImage]"></ng-content>
+    </nb-card-body>
+  </nb-card>
+</div>

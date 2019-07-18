@@ -1,38 +1,21 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
-
-<nb-card style="height: auto">
-  <nb-card-body>
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          People who hold this misconception believe that anonymized data can’t leak any sensitive information. However,
-          data can be aggregated to reveal patterns or cross-referenced with other sources of information to
-          de-anonymize individual records or reveal data about a population. For example, Netflix released a dataset for
-          development of a better video recommendation algorithm. While the data was anonymized, it contained user
-          reviews which cross-referenced with public movie review databases to de-anonymize those users.
-        </div>
-      </div>
-      <div class="col">
-        <figure class="figure">
-          <img class="img-fluid" src="assets/images/20130326163535-0_0.jpg">
-          <figcaption class="figure-caption">
-
-            <p><a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data">Photo: Christine
-              Daniloff/MIT</a></p>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
+<app-lab-overview>
+  <span title>Anonymized data can’t leak sensitive information</span>
+  <div intro>
+    People who hold this misconception believe that anonymized data can’t leak any sensitive information.
+    However, data can be aggregated to reveal patterns or cross-referenced with other sources of information to
+    de-anonymize individual records or reveal data about a population. For example, Netflix released a dataset for
+    development of a better video recommendation algorithm. While the data was anonymized, it contained user
+    reviews which cross-referenced with public movie review databases to de-anonymize those users.
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
+    <figcaption>
+      <a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data" target="_blank">
+        Photo: Christine Daniloff/MIT
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <nb-card>
   <nb-card-body>

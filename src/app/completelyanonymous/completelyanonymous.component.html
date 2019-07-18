@@ -1,39 +1,28 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
+<app-lab-overview headerImage="Tor-logo-2011-flat.svg.png">
+  <span title>I can be completely anonymous by following privacy best practices</span>
+  <div intro>
+    People holding this misconception put too much faith in the ability of privacy tools, and often do not understand
+    their fundamental limitations. In reality, while these tools can increase your level of privacy, there is no way to
+    be certain that you are anonymous on the internet.
+  </div>
+  <figure headerImage>
+    <img src="assets/images/Tor-logo-2011-flat.svg.png">
+    <figcaption>
 
-<nb-card style="height: auto">
-  <nb-card-body >
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          People holding this misconception put too much faith in the ability of privacy tools, and often do not understand their fundamental limitations. In reality, while these tools can increase your level of privacy, there is no way to be certain that you are anonymous on the internet.
-        </div>
-      </div>
-      <figure class="figure">
-        <img src="../../assets/images/Tor-logo-2011-flat.svg.png" style="max-height: 300px" class="img-fluid">
-        <figcaption class="figure-caption">
-
-        </figcaption>
-      </figure>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
-
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <nb-card>
   <nb-card-body>
     <h4>Lab Instructions</h4><br>
     <nb-stepper #stepper>
       <nb-step label="First step">
-        <form  class="step-container">
-          <p class="lorem">The idea of this exercise is for you to determine the complete path of a message starting from the client (either <i>A</i>, <i>B</i> or <i>C</i>) and ending at a server (either <i>X</i>, <i>Y</i> or <i>Z</i>). In essence, what you are doing is figuring out TOR circuits and in turn, deanonymizing a clients identity.</p>
+        <form class="step-container">
+          <p class="lorem">The idea of this exercise is for you to determine the complete path of a message starting
+            from the client (either <i>A</i>, <i>B</i> or <i>C</i>) and ending at a server (either <i>X</i>, <i>Y</i> or
+            <i>Z</i>). In essence, what you are doing is figuring out TOR circuits and in turn, deanonymizing a clients
+            identity.</p>
           <p>Click on the <b>Generate TOR Circuits</b> button.</p>
           <button nbButton nbStepperNext>next</button>
         </form>
@@ -41,16 +30,19 @@
       <nb-step label="Second step">
         <form class="step-container">
           <p class="lorem">
-            Choose the difficulty level you want; In <b>Plaintext</b> version, the messages will not be encrypted while in the <b>Encrypted</b> version, the messages wiil be encrypted and you need to determine the circuits on the basis of the time it takes for the messages to appear on the nodes.
+            Choose the difficulty level you want; In <b>Plaintext</b> version, the messages will not be encrypted while
+            in the <b>Encrypted</b> version, the messages wiil be encrypted and you need to determine the circuits on
+            the basis of the time it takes for the messages to appear on the nodes.
           </p>
           <button nbButton nbStepperPrevious>prev</button>
           <button nbButton nbStepperNext>next</button>
         </form>
       </nb-step>
-      <nb-step  label="Third step">
+      <nb-step label="Third step">
         <form class="step-container">
           <p class="lorem">
-            Select the pair of nodes you wish to observe traffic on and click on the <b>Start Simulation</b> button. If you wish to end simulation, click on the <b>Stop Simulation</b> button.
+            Select the pair of nodes you wish to observe traffic on and click on the <b>Start Simulation</b> button. If
+            you wish to end simulation, click on the <b>Stop Simulation</b> button.
           </p>
 
           <button nbButton nbStepperPrevious>prev</button>
@@ -77,7 +69,7 @@
           <br>
           <button disabled id="stop" onclick="stop_sim()" style="width: 200px">Stop Simulation</button>
           <br>
-          <button onclick="show_hints()" style="width: 200px" >Hints?</button>
+          <button onclick="show_hints()" style="width: 200px">Hints?</button>
           <br>
           <button onclick="test()" style="width: 200px">TEST</button>
           <br>
@@ -91,8 +83,8 @@
           <br>
 
           <p>Node 1</p>
-          <select  id="Node1" onchange="Log_Node1(this)">
-            <option selected disabled> -- select an option -- </option>
+          <select id="Node1" onchange="Log_Node1(this)">
+            <option disabled selected> -- select an option --</option>
             <option onchange="nodecheck()" value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -113,7 +105,7 @@
           <br>
           <p>Node 2</p>
           <select id="Node2" onchange="Log_Node2(this)">
-            <option selected disabled> -- select an option -- </option>
+            <option disabled selected> -- select an option --</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

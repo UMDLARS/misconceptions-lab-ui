@@ -42,6 +42,7 @@ import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity/encr
 import {TwoFAComponent} from './two-fa/two-fa.component';
 import {ROUTES} from './routes';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {LabOverviewComponent} from './lab-overview/lab-overview.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     PrivacyNotImportantComponent,
     EncryptionAutoIntegrityComponent,
     TwoFAComponent,
+    LabOverviewComponent,
   ],
   imports: [
     BrowserModule,

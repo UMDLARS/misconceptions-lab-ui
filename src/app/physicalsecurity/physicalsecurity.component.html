@@ -1,38 +1,26 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
-
-
-<nb-card style="height: auto">
-  <nb-card-body >
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          People often view security as a software problem with software solutions. Physical security issues cannot be
-          entirely solved by software -- they commonly require physical solutions (e.g., armed guards, locks, and tamper-resistant hardware).
-          People who hold this misconception view physical security as less important than its software counterparts. As a result of this belief,
-          they also believe that physical security breaches are less severe than software-based ones, but this is also untrue. Many software-based
-          security solutions depend at least partially on physical security and can in many cases be bypassed with physical access. For example, password
-          protections can often be circumvented by taking the hard drive out of computer and mounting it under a different OS, communication media can be
-          compromised by installing a keylogger or network sniffer, and keys and passwords can be acquired from individuals through threats or physical force.
-        </div>
-      </div>
-      <div class="col">
-        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
-      </div>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
-
-
-
-
+<app-lab-overview>
+  <span title></span>
+  <div intro>
+    People often view security as a software problem with software solutions. Physical security issues cannot be
+    entirely solved by software -- they commonly require physical solutions (e.g., armed guards, locks, and
+    tamper-resistant
+    hardware). People who hold this misconception view physical security as less important than its software
+    counterparts. As a result of this belief, they also believe that physical security breaches are less severe than
+    software-based
+    ones, but this is also untrue. Many software-based security solutions depend at least partially on physical security
+    and can in many cases be bypassed with physical access. For example, password protections can often be circumvented
+    by taking the hard drive out of computer and mounting it under a different OS, communication media can be
+    compromised
+    by installing a keylogger or network sniffer, and keys and passwords can be acquired from individuals through
+    threats
+    or physical force.
+  </div>
+  <figure headerImage>
+    <img src="assets/images/Strong physical security_Blog.png">
+    <figcaption>
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <nb-card>
   <nb-card-body>
@@ -47,7 +35,8 @@
             <li><h6>Windows</h6></li>
             <ul>
               <li>
-                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads"> here </a> to download. </p>
+                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank"> here </a> to
+                  download. </p>
               </li>
             </ul>
             <li>
@@ -69,7 +58,8 @@
             </li>
             <ul>
               <li>
-                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads"> here </a> to download. </p>
+                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank"> here </a> to
+                  download. </p>
               </li>
               <ul>
                 <li> Mount the DMG</li>
@@ -86,21 +76,17 @@
       <nb-step label="Download VM">
 
 
-
-
-
         <br><br>
         <button nbButton nbStepperPrevious>prev</button>
         <button nbButton nbStepperNext>next</button>
       </nb-step>
 
 
-
       <nb-step [label]="labelFour">
         <ng-template #labelFour>Done</ng-template>
         <h4>Finished setting up VirtualBox!</h4>
         <p class="lorem">
-            Now you have a virtual machine that you do not know the password to.
+          Now you have a virtual machine that you do not know the password to.
         </p>
         <button nbButton nbStepperPrevious>prev</button>
         <button nbButton disabled nbStepperNext>next</button>
@@ -121,13 +107,13 @@
 
         <div class="row">
           <div class="col">
-          <video width="700" controls >
-            <source src="../../assets/videos/physicalsecurity/001-startvm.mp4" type="video/mp4">
-            <source src="../../assets/videos/physicalsecurity/001-startvm.mp4" type="video/ogg">
-            Your browser does not support HTML5 video.
-          </video>
+            <video controls width="700">
+              <source src="assets/videos/physicalsecurity/001-startvm.mp4" type="video/mp4">
+              <source src="assets/videos/physicalsecurity/001-startvm.mp4" type="video/ogg">
+              Your browser does not support HTML5 video.
+            </video>
 
-        </div>
+          </div>
           <div class="col">
 
             <ul>
@@ -145,7 +131,8 @@
               </li>
               <ul>
                 <li>
-                  <a href="https://ubuntu.com/download/desktop" rel="noopener noreferrer" target="_blank">Ubuntu 18.04.2 LTS</a>
+                  <a href="https://ubuntu.com/download/desktop" rel="noopener noreferrer" target="_blank">Ubuntu 18.04.2
+                    LTS</a>
                 </li>
               </ul>
             </ul>
@@ -166,9 +153,9 @@
 
         <div class="row">
           <div class="col">
-            <video width="700" controls >
-              <source src="../../assets/videos/physicalsecurity/01-insertCD.mp4" type="video/mp4">
-              <source src="../../assets/videos/physicalsecurity/01-insertCD.mp4" type="video/ogg">
+            <video controls width="700">
+              <source src="assets/videos/physicalsecurity/01-insertCD.mp4" type="video/mp4">
+              <source src="assets/videos/physicalsecurity/01-insertCD.mp4" type="video/ogg">
               Your browser does not support HTML5 video.
             </video>
           </div>
@@ -189,9 +176,9 @@
 
         <div class="row">
           <div class="col">
-            <video width="700" controls >
-              <source src="../../assets/videos/physicalsecurity/02-mount.mp4" type="video/mp4">
-              <source src="../../assets/videos/physicalsecurity/02-mount.mp4" type="video/ogg">
+            <video controls width="700">
+              <source src="assets/videos/physicalsecurity/02-mount.mp4" type="video/mp4">
+              <source src="assets/videos/physicalsecurity/02-mount.mp4" type="video/ogg">
               Your browser does not support HTML5 video.
             </video>
           </div>
@@ -219,9 +206,9 @@
       <nb-step label="Reset password">
         <div class="row">
           <div class="col">
-            <video width="700" controls >
-              <source src="../../assets/videos/physicalsecurity/03-password.mp4" type="video/mp4">
-              <source src="../../assets/videos/physicalsecurity/03-password.mp4" type="video/ogg">
+            <video controls width="700">
+              <source src="assets/videos/physicalsecurity/03-password.mp4" type="video/mp4">
+              <source src="assets/videos/physicalsecurity/03-password.mp4" type="video/ogg">
               Your browser does not support HTML5 video.
             </video>
           </div>
@@ -242,9 +229,9 @@
 
         <div class="row">
           <div class="col">
-            <video width="700" controls >
-              <source src="../../assets/videos/physicalsecurity/04-unmount.mp4" type="video/mp4">
-              <source src="../../assets/videos/physicalsecurity/04-unmount.mp4" type="video/ogg">
+            <video controls width="700">
+              <source src="assets/videos/physicalsecurity/04-unmount.mp4" type="video/mp4">
+              <source src="assets/videos/physicalsecurity/04-unmount.mp4" type="video/ogg">
               Your browser does not support HTML5 video.
             </video>
           </div>
@@ -266,9 +253,9 @@
       <nb-step label="Reboot">
         <div class="row">
           <div class="col">
-            <video width="700" controls >
-              <source src="../../assets/videos/physicalsecurity/05-reboot.mp4" type="video/mp4">
-              <source src="../../assets/videos/physicalsecurity/05-reboot.mp4" type="video/ogg">
+            <video controls width="700">
+              <source src="assets/videos/physicalsecurity/05-reboot.mp4" type="video/mp4">
+              <source src="assets/videos/physicalsecurity/05-reboot.mp4" type="video/ogg">
               Your browser does not support HTML5 video.
             </video>
           </div>

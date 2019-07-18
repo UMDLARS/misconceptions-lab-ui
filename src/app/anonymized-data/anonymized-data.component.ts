@@ -43,7 +43,6 @@ export class AnonymizedDataComponent implements OnInit {
 
   constructor() {
   }
-  message = 'Anonymized data can’t leak sensitive information.';
 
   ngOnInit(): void {
     this.dataSource = new LocalDataSource(jsonData);
