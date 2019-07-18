@@ -15,9 +15,7 @@ export class SecurityByObscurityComponent implements OnInit {
   ciphers = ['ROT13', 'Rever', 'One Time Pad'];
   selectedCipher = 'ROT13';
   message = 'Keeping a processes secret is vital to its security.';
-
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -59,22 +57,23 @@ export class SecurityByObscurityComponent implements OnInit {
     this.updateTables();
   }
 
-  getColor(n, m) {
-    if (m === 1) {
-      return '#00ff00';
+  getColor(n, m){
+    if(m == 1){
+        return "#00ff00";
     }
-    const i = Math.floor(255 * ((n - 1) / (m - 1)));
-    let c1 = i.toString(16);
-    let c2 = (255 - i).toString(16);
-    if (c1.length < 2) {
-      c1 = '0' + c1;
+    var i = Math.floor(255 * ((n-1) / (m-1)))
+    var c1 = i.toString(16);
+    var c2 = (255 - i).toString(16)
+    if(c1.length < 2){
+	c1 = "0" + c1;
     }
-    if (c2.length < 2) {
-      c2 = '0' + c2;
+    if(c2.length < 2){
+	c2 = "0" + c2;
     }
-    return '#' + c2 + c1;
+    var str = "#" + c2 + c1;
+    return str;
   }
-
+    
 
   updateTables() {
     // Clear old tables, like if the user copy/pastes
@@ -89,7 +88,7 @@ export class SecurityByObscurityComponent implements OnInit {
       } else {
         plainTable.set(c, 1);
       }
-      if (plainTable.get(c) > this.maxplain) {
+      if (plainTable.get(c) > this.maxplain){
         this.maxplain += 1;
       }
     }
@@ -99,7 +98,7 @@ export class SecurityByObscurityComponent implements OnInit {
       } else {
         cipherTable.set(c, 1);
       }
-      if (cipherTable.get(c) > this.maxcipher) {
+      if (cipherTable.get(c) > this.maxcipher){
         this.maxcipher += 1;
       }
     }

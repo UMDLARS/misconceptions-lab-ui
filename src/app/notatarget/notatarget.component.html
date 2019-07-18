@@ -58,7 +58,7 @@
           <button nbButton nbStepperNext>Confirm</button>
         </form>
       </nb-step>
-      <nb-step [hidden] [stepControl]="thirdForm" label="Third step">
+      <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
         <div class="step-container">
           <h3>Wizard completed!</h3>
           <button nbButton (click)="stepper.reset()">Try again</button>

@@ -27,7 +27,7 @@ docker build -t umdlars/webtemplate .
 docker run -p 44477:4200 umdlars/webtemplate
 ~~~~
 
-Now you can open your web browser of choice and go to `http://localhost:44477' 
+Now you can open your webbrowser of choice and go to `http://localhost:44477' 
 
 
 ## Links
