@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-two-fa',
@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./two-fa.component.css']
 })
 export class TwoFAComponent implements OnInit {
-  message = 'The inconvenience of Two Factor Authentication outweighs its security benefits.';
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

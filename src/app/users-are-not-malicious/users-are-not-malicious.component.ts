@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-users-are-not-malicious',
@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersAreNotMaliciousComponent implements OnInit {
 
-  message = 'I can trust my users to not be malicious.';
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

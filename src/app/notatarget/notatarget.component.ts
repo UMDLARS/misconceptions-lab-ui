@@ -12,7 +12,6 @@ interface Docker {
   styleUrls: ['./notatarget.component.css']
 })
 export class NotatargetComponent implements OnInit, OnDestroy {
-  message = 'I am not a target of cyber attacks.';
   thisdocker: Docker;
   thisurl: string;
   thirdForm: any;

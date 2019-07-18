@@ -1,26 +1,24 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
-
-<nb-card style="height: auto">
-  <nb-card-body >
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          People who hold this misconception believe that encryption automatically provides integrity or authenticity along with confidentiality, while this is not always the case. Symmetric encryption algorithms used for confidentiality, such as AES, do provide integrity or authenticity in their most basic modes of operation. Authenticity is not provided because anyone with the AES key (which must be shared by its very nature) can send an encrypted message, and you cannot verify who sent it. Integrity is not provided because a message’s ciphertext can be modified in transit; decrypting itt will result in data being produced which is not the plaintext, but no mechanism will identify this change. Instead, people needing authenticity and/or integrity should use cryptography designed for this purpose.         </div>
-      </div>
-      <div class="col">
-        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
-      </div>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
+<app-lab-overview>
+  <span title>Encryption automatically provides integrity and/or authenticity</span>
+  <div intro>
+    People who hold this misconception believe that encryption automatically provides integrity or authenticity along
+    with confidentiality, while this is not always the case. Symmetric encryption algorithms used for confidentiality,
+    such as AES, do provide integrity or authenticity in their most basic modes of operation. Authenticity is not
+    provided because anyone with the AES key (which must be shared by its very nature) can send an encrypted message,
+    and you cannot verify who sent it. Integrity is not provided because a message’s ciphertext can be modified in
+    transit; decrypting itt will result in data being produced which is not the plaintext, but no mechanism will
+    identify this change. Instead, people needing authenticity and/or integrity should use cryptography designed for
+    this purpose.
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
+    <figcaption>
+      <a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data" target="_blank">
+        Photo: Christine Daniloff/MIT
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <p>
   encryption-auto-integrity works!

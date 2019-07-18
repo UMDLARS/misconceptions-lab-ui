@@ -1,33 +1,23 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
-
-
-<nb-card style="height: auto" id="test1">
-  <nb-card-body >
-
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          This misconception is the belief that data is secure as long as encryption is being used. However, it fails to consider the limitations of encryption. For instance, data may be encrypted in transit but not while “at rest” (on storage media). It might not be clear to individuals how encryption schemes can be circumvented - for example, assuming that https is always secure, or that traffic is always secure when connected to a VPN. People who hold this misconception may also believe that cryptography does things it simply doesn’t, like guarantee data integrity or authenticity. They might also fail to recognize that while encryption may hide the content of messages, in many cases it does not hide metadata about the communication or other externally-visible properties, such as the length of the message, the time between messages, and so on.
-        </div>
-      </div>
-      <figure class="figure">
-        <img src="../../assets/images/cyber-security-1515836154wzI.jpg"  style="max-height: 300px" class="img-fluid">
-        <figcaption class="figure-caption">
-
-          <p><a href="https://www.publicdomainpictures.net/en/view-image.php?image=240425&picture=cyber-security">via publicdomainpictures.net (copyright-free)</a></p>
-        </figcaption>
-      </figure>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
+<app-lab-overview>
+  <span title>As long as I'm using encryption, my data is secure</span>
+  <div intro>
+    This misconception is the belief that data is secure as long as encryption is being used. However, it fails to
+    consider the limitations of encryption. For instance, data may be encrypted in transit but not while “at rest” (on
+    storage media). It might not be clear to individuals how encryption schemes can be circumvented - for example,
+    assuming that https is always secure, or that traffic is always secure when connected to a VPN. People who hold this
+    misconception may also believe that cryptography does things it simply doesn’t, like guarantee data integrity or
+    authenticity. They might also fail to recognize that while encryption may hide the content of messages, in many
+    cases it does not hide metadata about the communication or other externally-visible properties, such as the length
+    of the message, the time between messages, and so on.
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/cyber-security-1515836154wzI.jpg">
+    <figcaption>
+      <a href="https://www.publicdomainpictures.net/en/view-image.php?image=240425&picture=cyber-security">via
+        publicdomainpictures.net (copyright-free)</a>
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <nb-card>
   <nb-card-body>

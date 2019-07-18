@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./securityinmind.component.css']
 })
 export class SecurityinmindComponent implements OnInit {
-  message = 'The software I use is secure, since the developers designed it with security in mind.';
+
   constructor() { }
 
   ngOnInit() {

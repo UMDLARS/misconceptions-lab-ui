@@ -1,30 +1,25 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
-
-<nb-card style="height: auto">
-  <nb-card-body >
-
-
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          People who believe this misconception think that trust in users (e.g., local people in an organization and/or remote users of a program or system) is a valid replacement for robust security controls. However, this idea breaks down whenever any person takes an action that violates this assumption, either intentionally (they are a bad actor) or unintentionally (they make a mistake). In essence, this misconception is not following the principle of least privilege, which says that people should get no more than the minimum permissions necessary to accomplish their tasks. Taking away any additional permission should break the system. A good way of building policies like this is to start from no permission (“deny by default”) and then add only necessary permissions (privileges, features, etc.) until the system works as required. Following this principle can avoid both malicious unauthorized access and accidents.
-        </div>
-      </div>
-      <div class="col">
-        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
-      </div>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
-
+<app-lab-overview>
+  <span title>I don’t have to assign separate privilege levels because I can trust users to only do what they’re supposed to</span>
+  <div intro>
+    People who believe this misconception think that trust in users (e.g., local people in an organization and/or remote
+    users of a program or system) is a valid replacement for robust security controls. However, this idea breaks down
+    whenever any person takes an action that violates this assumption, either intentionally (they are a bad actor) or
+    unintentionally (they make a mistake). In essence, this misconception is not following the principle of least
+    privilege, which says that people should get no more than the minimum permissions necessary to accomplish their
+    tasks. Taking away any additional permission should break the system. A good way of building policies like this is
+    to start from no permission (“deny by default”) and then add only necessary permissions (privileges, features, etc.)
+    until the system works as required. Following this principle can avoid both malicious unauthorized access and
+    accidents.
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
+    <figcaption>
+      <a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data" target="_blank">
+        Photo: Christine Daniloff/MIT
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <p>
   trust-users works!

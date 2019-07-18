@@ -11,7 +11,6 @@ export class GoodpasswordsComponent implements OnInit {
   firstForm: FormGroup;
   secondForm: FormGroup;
   thirdForm: FormGroup;
-  message = 'Following good password practices is not important.';
 
   constructor(private fb: FormBuilder) { }
 

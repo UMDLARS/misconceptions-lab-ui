@@ -1,32 +1,27 @@
-<nb-card>
-  <nb-card-body>
-    <h1>{{message}}</h1>
-  </nb-card-body>
-</nb-card>
-
-<nb-card style="height: auto">
-  <nb-card-body >
-
-    <div class="row">
-      <div class="col" style="background-color:white;">
-        <h4>Overview</h4>
-        <div>
-          Victims of this misconception believe security by obscurity is a valid strategy. It is better to use a public process that’s robust against attacks. This doesn’t mean there can’t be any secrets in the process. Rather, it means that the secrets are separated from the process, so someone observing the process won’t be able to get the secrets. For example, writing a “secret” encryption algorithm and using that along with keys is not as secure a process as using a public and robust algorithm and keeping the keys separate.          </div>
-      </div>
-      <div class="col">
-        <img src="../../assets/images/Strong%20physical%20security_Blog.png" class="img-fluid">
-      </div>
-    </div>
-
-
-  </nb-card-body>
-</nb-card>
+<app-lab-overview>
+  <span title>Keeping a processes secret is vital to its security</span>
+  <div intro>
+    Victims of this misconception believe security by obscurity is a valid strategy. It is better to use a public
+    process that’s robust against attacks. This doesn’t mean there can’t be any secrets in the process. Rather, it means
+    that the secrets are separated from the process, so someone observing the process won’t be able to get the secrets.
+    For example, writing a “secret” encryption algorithm and using that along with keys is not as secure a process as
+    using a public and robust algorithm and keeping the keys separate.
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
+    <figcaption>
+      <a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data" target="_blank">
+        Photo: Christine Daniloff/MIT
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-overview>
 
 <nb-card>
   <nb-card-body>
     <nb-stepper #stepper>
       <nb-step label="First step">
-        <form  class="step-container">
+        <form class="step-container">
           <p class="lorem">
             You are a hacker that is trying to hack into someones bank account to transfer all their money.
 
@@ -49,7 +44,7 @@
           <button nbButton nbStepperNext>next</button>
         </form>
       </nb-step>
-      <nb-step  label="Third step">
+      <nb-step label="Third step">
         <form class="step-container">
           <p class="lorem">
             Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
@@ -59,7 +54,7 @@
           <button nbButton nbStepperNext>Confirm</button>
         </form>
       </nb-step>
-      <nb-step  label="Third step">
+      <nb-step label="Third step">
         <div class="step-container">
           <h3>Wizard completed!</h3>
           <button nbButton (click)="stepper.reset()">Try again</button>
@@ -68,7 +63,6 @@
     </nb-stepper>
   </nb-card-body>
 </nb-card>
-
 
 
 <div class="row">
@@ -115,7 +109,7 @@
                     </tr>
                     </thead>
                     <tbody>
-		    <tr *ngFor="let char of plainTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
+                    <tr *ngFor="let char of plainTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
                       <td scope="row">{{char[0]}}</td>
                       <td>{{char[1]}}</td>
                     </tr>
@@ -136,7 +130,7 @@
                     </tr>
                     </thead>
                     <tbody>
-			    <tr *ngFor="let char of cipherTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
+                    <tr *ngFor="let char of cipherTable" [attr.bgcolor]="getColor(char[1], maxcipher)">
                       <td scope="row">{{char[0]}}</td>
                       <td>{{char[1]}}</td>
                     </tr>

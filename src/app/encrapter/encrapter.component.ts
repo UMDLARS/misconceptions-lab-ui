@@ -14,7 +14,6 @@ export class EncrapterComponent implements OnInit {
   cipherTable: Array<[string, number]>;
   ciphers = ['ROT13', 'Rever', 'One Time Pad'];
   selectedCipher = 'ROT13';
-  message = 'As long as I\'m using encryption, my data is secure';
 
 
   constructor() {
