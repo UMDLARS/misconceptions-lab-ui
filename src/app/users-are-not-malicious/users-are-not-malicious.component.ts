@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersAreNotMaliciousComponent implements OnInit {
 
-  message='I can trust my users to not be malicious.';
+  message = 'I can trust my users to not be malicious.';
 
   constructor() { }
 
