@@ -58,13 +58,15 @@ export class NotatargetComponent implements OnInit, OnDestroy {
     this.ifrm = document.createElement('iframe');
     this.ifrm.setAttribute('id', 'ifrm');
     this.ifrm.setAttribute('src', this.thisurl);
+    this.ifrm.setAttribute('height', '1000px');
+    this.ifrm.setAttribute('width', '100%');
+    this.ifrm.setAttribute('style', 'border:none;');
     let el = document.getElementById('vm');
     el.parentNode.append(this.ifrm);
     this.thiscontainer = data.container;
   }
 
   onThirdSubmit() {
-
   }
 
   onSecondSubmit() {
