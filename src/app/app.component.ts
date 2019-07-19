@@ -14,8 +14,8 @@ export class AppComponent {
     {
       title: 'Home',
       link: '/home',
+      icon: 'home',
       home: true,
-      hidden: true, // Without this things stay selected on clicking the Home button
     },
     {
       title: 'Encryption',
