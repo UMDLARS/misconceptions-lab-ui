@@ -5,15 +5,10 @@
 
 <nb-layout>
   <nb-layout-header fixed>
-    <nb-actions size="medium">
-      <nb-action style="outline: none;" routerLink="/">
-        <nb-icon id="homeButton" icon="home-outline"></nb-icon>
-      </nb-action>
-      <nb-action style="font-size: 2rem;">Miscolabs</nb-action>
-    </nb-actions>
+    <app-header></app-header>
   </nb-layout-header>
-  <nb-sidebar>
-    <nb-menu [items]="menuItems" autoCollapse="true"></nb-menu>
+  <nb-sidebar state="compacted">
+    <nb-menu [items]="menuItems"></nb-menu>
   </nb-sidebar>
   <nb-layout-column>
     <router-outlet></router-outlet>

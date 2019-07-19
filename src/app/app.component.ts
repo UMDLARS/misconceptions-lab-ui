@@ -83,4 +83,8 @@ export class AppComponent {
       link: '/twofactor',
     },
   ];
+
+  constructor() {
+  }
+
 }

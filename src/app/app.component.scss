@@ -1,13 +1,1 @@
 @import '../themes';
-
-#homeButton {
-  transition: transform .3s;
-}
-
-#homeButton:hover {
-  transform: scale(1.5);
-}
-
-#homeButton:active {
-  color: nb-theme(color-primary-active);
-}
