@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {NbMenuItem} from '@nebular/theme';
+import {NbIconLibraries, NbMenuItem} from '@nebular/theme';
 
 
 @Component({
@@ -13,78 +13,97 @@ export class AppComponent {
   menuItems: NbMenuItem[] = [
     {
       title: 'Home',
-      icon: 'home-outline',
       link: '/home',
       home: true,
       hidden: true, // Without this things stay selected on clicking the Home button
     },
     {
-      title: '01-Encryption',
+      title: 'Encryption',
       link: '/encrapter',
+      icon: 'shield-alt',
+
     },
     {
-      title: '02-Physical Secruity',
+      title: 'Physical Secruity',
       link: '/physicalsecruity',
+      icon: 'lock',
     },
     {
-      title: '03-Not a target',
+      title: 'Not a target',
       link: '/notatarget',
+      icon: 'bullseye',
     },
     {
-      title: '04-Good Passwords',
+      title: 'Good Passwords',
       link: '/goodpasswords',
+      icon: 'key',
     },
     {
-      title: '06-Completely Anonymous',
+      title: 'Completely Anonymous',
       link: '/completelyanonymous',
+      icon: 'mask'
     },
     {
-      title: '07- Developing with Security in Mind',
+      title: 'Security in Mind',
       link: '/securityinmind',
+      icon: 'brain',
     },
     {
-      title: '08-Secruity Product',
+      title: 'Secruity Product',
       link: '/secruityproduct',
+      icon: 'magic',
     },
     {
-      title: '09-Humans are Rational',
+      title: 'Humans are Rational',
       link: '/humansarerational',
+      icon: 'meh-rolling-eyes',
     },
     {
-      title: '10-Trust Users',
+      title: 'Trust Users',
       link: '/trustusers',
+      icon: 'user-lock',
     },
     {
-      title: '11-Anonymized Data',
+      title: 'Anonymized Data',
       link: '/anonymized',
+      icon: 'database',
     },
     {
-      title: '12-Security by Obscurity',
+      title: 'Security by Obscurity',
       link: '/securitybyobscurity',
+      icon: 'low-vision',
     },
     {
-      title: '13-Defense in Depth',
+      title: 'Defense in Depth',
       link: '/defenseindepth',
+      icon: 'chess-rook',
     },
     {
-      title: '14-Users are not Malicious',
+      title: 'Users are not Malicious',
       link: '/usersarenotmalicious',
+      icon: 'user-secret',
     },
     {
-      title: '15-Privacy not Important',
+      title: 'Privacy not Important',
       link: '/privacynotimportant',
+      icon: 'id-card',
     },
     {
-      title: '16-Encryption Auto Integrity',
+      title: 'Encryption Auto Integrity',
       link: '/encryptionautointegrity',
+      icon: 'file-contract',
     },
     {
-      title: '17-2FA',
+      title: '2FA',
       link: '/twofactor',
+      icon: 'mobile-alt',
     },
   ];
 
-  constructor() {
+  constructor(private iconLibraries: NbIconLibraries) {
+    this.iconLibraries.registerFontPack('font-awesome', {packClass: 'fas', iconClassPrefix: 'fa'});
+    this.iconLibraries.registerFontPack('font-awesome-brands', {packClass: 'fab', iconClassPrefix: 'fa'});
+    this.iconLibraries.setDefaultPack('font-awesome');
   }
 
 }

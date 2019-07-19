@@ -1,1 +1,5 @@
 @import '../themes';
+
+::ng-deep .menu-icon {
+  width: 2em !important;
+}
