@@ -78,7 +78,7 @@ import { HeaderComponent } from './layout/header/header.component';
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
-    NbThemeModule.forRoot({name: 'corporate'}),
+    NbThemeModule.forRoot({name: 'customized'}),
     NbCardModule,
     NbAccordionModule,
     NbMenuModule.forRoot(),

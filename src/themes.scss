@@ -1,2 +1,8 @@
 @import '~@nebular/theme/styles/theming';
 @import '~@nebular/theme/styles/themes/corporate';
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
+
+$nb-themes: nb-register-theme((
+  font-family-primary: (Open Sans, sans-serif),
+  font-family-secondary: (Lato, sans-serif),
+), customized, corporate);
