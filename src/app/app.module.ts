@@ -44,6 +44,7 @@ import {ROUTES} from './routes';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {LabOverviewComponent} from './layout/lab-overview/lab-overview.component';
 import { HeaderComponent } from './layout/header/header.component';
+import {FooterComponent} from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { HeaderComponent } from './layout/header/header.component';
     TwoFAComponent,
     LabOverviewComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
