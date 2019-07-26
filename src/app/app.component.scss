@@ -3,3 +3,8 @@
 ::ng-deep .menu-icon {
   width: 2em !important;
 }
+
+::ng-deep .nb-theme-customized nb-sidebar .scrollable {
+  // Remove padding at the top of the icon list
+  padding-top: 0;
+}

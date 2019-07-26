@@ -16,6 +16,7 @@ import {SecurityproductComponent} from './securityproduct/securityproduct.compon
 import {TrustUsersComponent} from './trust-users/trust-users.component';
 import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are-not-malicious.component';
 import {TwoFAComponent} from './two-fa/two-fa.component';
+import {ConfigurationsComponent} from './configurations/configurations.component';
 
 export const ROUTES: Routes = [
   {
@@ -33,6 +34,7 @@ export const ROUTES: Routes = [
   {path: 'defenseindepth', component: DefenseInDepthComponent},
   {path: 'encryptionautointegrity', component: EncryptionAutoIntegrityComponent},
   {path: 'goodpasswords', component: GoodpasswordsComponent},
+  {path: 'configurations', component: ConfigurationsComponent},
   {path: 'humansarerational', component: HumansarerationalComponent},
   {path: 'notatarget', component: NotatargetComponent},
   {path: 'physicalsecruity', component: PhysicalsecurityComponent},

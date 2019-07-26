@@ -45,6 +45,7 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {LabOverviewComponent} from './layout/lab-overview/lab-overview.component';
 import { HeaderComponent } from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
+import {ConfigurationsComponent} from './configurations/configurations.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {FooterComponent} from './layout/footer/footer.component';
     LabOverviewComponent,
     HeaderComponent,
     FooterComponent,
+    ConfigurationsComponent,
   ],
   imports: [
     BrowserModule,

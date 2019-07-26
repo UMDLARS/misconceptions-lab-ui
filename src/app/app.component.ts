@@ -44,6 +44,11 @@ export class AppComponent {
       icon: 'mask'
     },
     {
+      title: 'Secure Configurations',
+      link: '/configurations',
+      icon: 'sliders-h'
+    },
+    {
       title: 'Security in Mind',
       link: '/securityinmind',
       icon: 'brain',
@@ -84,12 +89,12 @@ export class AppComponent {
       icon: 'user-secret',
     },
     {
-      title: 'Privacy not Important',
+      title: 'Privacy isn\'t Important',
       link: '/privacynotimportant',
       icon: 'id-card',
     },
     {
-      title: 'Encryption Auto Integrity',
+      title: 'Encryption Integrity',
       link: '/encryptionautointegrity',
       icon: 'file-contract',
     },
