@@ -25,6 +25,10 @@ export const ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
+    path: '**',
+    redirectTo: 'home'
+  },
+  {
     path: 'home',
     component: HomeComponent,
   },
