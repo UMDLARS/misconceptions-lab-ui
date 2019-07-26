@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EncrapterComponent } from './encrapter.component';
+import {EncryptionIsEnoughComponent} from './encryption-is-enough.component';
 
-describe('EncrapterComponent', () => {
-  let component: EncrapterComponent;
-  let fixture: ComponentFixture<EncrapterComponent>;
+describe('EncryptionIsEnoughComponent', () => {
+  let component: EncryptionIsEnoughComponent;
+  let fixture: ComponentFixture<EncryptionIsEnoughComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EncrapterComponent ]
+      declarations: [EncryptionIsEnoughComponent]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EncrapterComponent);
+    fixture = TestBed.createComponent(EncryptionIsEnoughComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

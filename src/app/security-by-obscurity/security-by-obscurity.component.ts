@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import * as colormap from 'colormap';
 
 @Component({
   selector: 'app-security-by-obscurity',
@@ -14,6 +15,7 @@ export class SecurityByObscurityComponent implements OnInit {
   cipherTable: Array<[string, number]>;
   ciphers = ['ROT13', 'Rever', 'One Time Pad'];
   selectedCipher = 'ROT13';
+  colormap = colormap({colormap: 'bathymetry', nshades: 100, format: 'hex', alpha: 1}).reverse();
 
   constructor() {
   }
@@ -59,19 +61,7 @@ export class SecurityByObscurityComponent implements OnInit {
   }
 
   getColor(n, m) {
-    if (m === 1) {
-      return '#00ff00';
-    }
-    const i = Math.floor(255 * ((n - 1) / (m - 1)));
-    let c1 = i.toString(16);
-    let c2 = (255 - i).toString(16);
-    if (c1.length < 2) {
-      c1 = '0' + c1;
-    }
-    if (c2.length < 2) {
-      c2 = '0' + c2;
-    }
-    return '#' + c2 + c1;
+    return this.colormap[Math.floor(60 * (n / m) - 1)];
   }
 
 

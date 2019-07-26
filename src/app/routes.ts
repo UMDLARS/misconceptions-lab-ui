@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {EncrapterComponent} from './encrapter/encrapter.component';
+import {EncryptionIsEnoughComponent} from './encryption-is-enough/encryption-is-enough.component';
 import {AnonymizedDataComponent} from './anonymized-data/anonymized-data.component';
 import {CompletelyanonymousComponent} from './completelyanonymous/completelyanonymous.component';
 import {DefenseInDepthComponent} from './defense-in-depth/defense-in-depth.component';
@@ -28,7 +28,7 @@ export const ROUTES: Routes = [
     path: 'home',
     component: HomeComponent,
   },
-  {path: 'encrapter', component: EncrapterComponent},
+  {path: 'encryptionisenough', component: EncryptionIsEnoughComponent},
   {path: 'anonymized', component: AnonymizedDataComponent},
   {path: 'completelyanonymous', component: CompletelyanonymousComponent},
   {path: 'defenseindepth', component: DefenseInDepthComponent},

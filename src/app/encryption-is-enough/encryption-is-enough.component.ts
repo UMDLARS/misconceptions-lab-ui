@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-encrapter',
-  templateUrl: './encrapter.component.html',
-  styleUrls: ['./encrapter.component.css']
+  templateUrl: './encryption-is-enough.component.html',
+  styleUrls: ['./encryption-is-enough.component.css']
 })
-export class EncrapterComponent implements OnInit {
+export class EncryptionIsEnoughComponent implements OnInit {
   plaintext: string;
   ciphertext = '';
   maxplain: number;

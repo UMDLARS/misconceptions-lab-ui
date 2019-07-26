@@ -19,7 +19,7 @@ export class AppComponent {
     },
     {
       title: 'Encryption',
-      link: '/encrapter',
+      link: '/encryptionisenough',
       icon: 'shield-alt',
 
     },

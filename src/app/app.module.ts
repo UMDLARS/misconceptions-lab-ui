@@ -23,7 +23,7 @@ import {
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
-import {EncrapterComponent} from './encrapter/encrapter.component';
+import {EncryptionIsEnoughComponent} from './encryption-is-enough/encryption-is-enough.component';
 import {HomeComponent} from './home/home.component';
 import {PhysicalsecurityComponent} from './physicalsecurity/physicalsecurity.component';
 import {NotatargetComponent} from './notatarget/notatarget.component';
@@ -50,7 +50,7 @@ import {ConfigurationsComponent} from './configurations/configurations.component
 @NgModule({
   declarations: [
     AppComponent,
-    EncrapterComponent,
+    EncryptionIsEnoughComponent,
     HomeComponent,
     PhysicalsecurityComponent,
     NotatargetComponent,
