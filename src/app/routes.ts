@@ -25,10 +25,6 @@ export const ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '**',
-    redirectTo: 'home'
-  },
-  {
     path: 'home',
     component: HomeComponent,
   },
@@ -48,5 +44,9 @@ export const ROUTES: Routes = [
   {path: 'secruityproduct', component: SecurityproductComponent},
   {path: 'trustusers', component: TrustUsersComponent},
   {path: 'usersarenotmalicious', component: UsersAreNotMaliciousComponent},
-  {path: 'twofactor', component: TwoFAComponent}
+  {path: 'twofactor', component: TwoFAComponent},
+  {
+    path: '**',
+    redirectTo: 'home'
+  },
 ];
