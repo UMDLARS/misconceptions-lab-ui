@@ -70,8 +70,11 @@
     <nb-card>
       <nb-card-header>Message Text</nb-card-header>
       <nb-card-body>
-        <textarea class="text-monospace" nbInput fullWidth [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"
-                  style="resize: none;"></textarea>
+        <label> Plain text
+          <textarea (ngModelChange)="updateCiphertext()" [(ngModel)]="plaintext" class="text-monospace" fullWidth
+                    nbInput style="resize: none;">
+          </textarea>
+        </label>
       </nb-card-body>
     </nb-card>
   </div>
@@ -79,13 +82,16 @@
     <nb-card>
       <nb-card-header>Ciphertext</nb-card-header>
       <nb-card-body>
-        <label>
+        <label> Chosen cipher
           <select class="select-button" [(ngModel)]="selectedCipher" (ngModelChange)="updateCiphertext()">
             <option *ngFor="let cipher of ciphers">{{cipher}}</option>
           </select>
         </label>
-        <textarea disabled class="text-monospace" nbInput fullWidth [(ngModel)]="ciphertext"
-                  style="resize: none;"></textarea>
+        <label> Cipher text
+          <textarea [(ngModel)]="ciphertext" class="text-monospace" disabled fullWidth nbInput
+                    style="resize: none;">
+          </textarea>
+        </label>
       </nb-card-body>
     </nb-card>
   </div>

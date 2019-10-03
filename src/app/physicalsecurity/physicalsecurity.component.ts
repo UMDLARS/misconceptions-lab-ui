@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-physicalsecurity',
   templateUrl: './physicalsecurity.component.html',
-  styleUrls: ['./physicalsecurity.component.css']
+  styleUrls: ['./physicalsecurity.component.css'],
 })
 export class PhysicalsecurityComponent implements OnInit {
 
   firstForm: FormGroup;
   secondForm: FormGroup;
   thirdForm: FormGroup;
-  message = 'Physical security isn\'t as important as non-physical / technical security.';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private domSanitizer: DomSanitizer) {
+  }
 
   ngOnInit() {
     this.firstForm = this.fb.group({

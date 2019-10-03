@@ -6,20 +6,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {
   NbAccordionModule,
+  NbActionsModule,
   NbButtonModule,
   NbCardModule,
+  NbIconModule,
+  NbInputModule,
   NbLayoutModule,
   NbMenuModule,
   NbMenuService,
+  NbSelectModule,
   NbSidebarModule,
   NbStepperModule,
   NbTabsetModule,
-  NbTreeGridModule,
   NbThemeModule,
-  NbInputModule,
-  NbActionsModule,
-  NbIconModule,
-  NbSelectModule,
+  NbTreeGridModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -43,7 +43,7 @@ import {TwoFAComponent} from './two-fa/two-fa.component';
 import {ROUTES} from './routes';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {LabOverviewComponent} from './layout/lab-overview/lab-overview.component';
-import { HeaderComponent } from './layout/header/header.component';
+import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {ConfigurationsComponent} from './configurations/configurations.component';
 

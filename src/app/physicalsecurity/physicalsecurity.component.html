@@ -23,57 +23,47 @@
 </app-lab-overview>
 
 <nb-card>
+  <nb-card-header>
+    <h2>Lab Preparation</h2>
+  </nb-card-header>
   <nb-card-body>
-    <h3>Installing VirtualBox</h3>
     <nb-stepper orientation="horizontal">
-      <nb-step label="How to">
-        <ng-template #labelOne>Download</ng-template>
+      <nb-step label="VirtualBox">
 
-        <div>
-          <h4>Download VirtualBox on your machine.</h4>
-          <ul>
-            <li><h6>Windows</h6></li>
-            <ul>
-              <li>
-                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank"> here </a> to
-                  download. </p>
-              </li>
-            </ul>
-            <li>
-              <h6>Linux (Ubuntu/Debian)</h6>
-            </li>
-            <ul>
-              <li>Open up a terminal in linux and copy and paste the following commands.</li>
-              <ul>
-                <li>
-                  <code>sudo add-apt-repository multiverse && sudo apt-get update</code>
-                </li>
-                <li>
-                  <code>sudo apt install virtualbox</code>
-                </li>
-              </ul>
-            </ul>
-            <li>
-              <h6>Mac</h6>
-            </li>
-            <ul>
-              <li>
-                <p> Use the link <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank"> here </a> to
-                  download. </p>
-              </li>
-              <ul>
-                <li> Mount the DMG</li>
-                <li> Run the VirtualBox Installer</li>
-              </ul>
-            </ul>
-          </ul>
+        <h3>What is VirtualBox?</h3>
+        <p>VirtualBox is a free and open source virtualization program. In a nutshell, VirtualBox allows you to run a
+          "guest" operating system at the same time as your normal (or "host") operating system.</p>
+        <nb-tabset>
+          <nb-tab tabTitle="Windows">
+            <h4>Download and Install</h4>
+            <p>Visit the VirtualBox project <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">downloads
+              page</a> to download. </p>
+          </nb-tab>
+          <nb-tab tabTitle="macOS">
+            <h4>Download and Install</h4>
+            <p>Visit the VirtualBox project <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">downloads
+              page</a> to download. </p>
+          </nb-tab>
+          <nb-tab tabTitle="Linux">
+            <h4>Download and Install</h4>
+            <p>Most Linux distributions will be able to install VirtualBox from their package manager.</p>
 
-        </div>
+            <h5>Ubuntu</h5>
+            <p>VirtualBox is included in the <code>multiverse</code> non-free repository which is not enabled by
+              default. To enable it, run <code>sudo add-apt-repository multiverse && sudo apt-get update</code>.
+              Once enabled, you will be able to install VirtualBox using <code>sudo apt install virtualbox</code>
+            </p>
+            <h5>Other distributions</h5>
+            <p>Install using your distro's package manager, or follow the directions listed on the <a
+              href="https://www.virtualbox.org/wiki/Linux_Downloads" target="_blank">VirtualBox project
+              site</a>.</p>
+          </nb-tab>
+        </nb-tabset>
 
         <button nbButton disabled nbStepperNext>prev</button>
         <button nbButton nbStepperNext>next</button>
       </nb-step>
-      <nb-step label="Download VM">
+      <nb-step label="Download Image">
 
 
         <br><br>
