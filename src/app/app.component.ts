@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NbIconLibraries, NbMenuItem} from '@nebular/theme';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -109,6 +110,9 @@ export class AppComponent {
     this.iconLibraries.registerFontPack('font-awesome', {packClass: 'fas', iconClassPrefix: 'fa'});
     this.iconLibraries.registerFontPack('font-awesome-brands', {packClass: 'fab', iconClassPrefix: 'fa'});
     this.iconLibraries.setDefaultPack('font-awesome');
+    // tslint:disable-next-line:triple-equals
   }
-
 }
+
+// tslint:disable-next-line:triple-equals
+$('h1').contents().filter(function() { return this.nodeType != 1; }).remove();

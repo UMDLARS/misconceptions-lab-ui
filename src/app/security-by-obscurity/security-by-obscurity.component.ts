@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as colormap from 'colormap';
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-security-by-obscurity',
@@ -21,6 +22,8 @@ export class SecurityByObscurityComponent implements OnInit {
   }
 
   ngOnInit() {
+    // tslint:disable-next-line:triple-equals
+    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
   ROT13(inString) {

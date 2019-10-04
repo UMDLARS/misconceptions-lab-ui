@@ -1,5 +1,6 @@
 import {Injectable, Component, OnInit, OnDestroy} from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import * as $ from "jquery";
 
 interface Docker {
   url: string;
@@ -29,7 +30,8 @@ export class NotatargetComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    // tslint:disable-next-line:triple-equals
+    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
   ngOnDestroy(): void {
