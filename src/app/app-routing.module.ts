@@ -1,4 +1,5 @@
-import {Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {EncryptionIsEnoughComponent} from './encryption-is-enough/encryption-is-enough.component';
 import {AnonymizedDataComponent} from './anonymized-data/anonymized-data.component';
@@ -6,6 +7,7 @@ import {CompletelyanonymousComponent} from './completelyanonymous/completelyanon
 import {DefenseInDepthComponent} from './defense-in-depth/defense-in-depth.component';
 import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity/encryption-auto-integrity.component';
 import {GoodpasswordsComponent} from './goodpasswords/goodpasswords.component';
+import {ConfigurationsComponent} from './configurations/configurations.component';
 import {HumansarerationalComponent} from './humansarerational/humansarerational.component';
 import {NotatargetComponent} from './notatarget/notatarget.component';
 import {PhysicalsecurityComponent} from './physicalsecurity/physicalsecurity.component';
@@ -16,9 +18,8 @@ import {SecurityproductComponent} from './securityproduct/securityproduct.compon
 import {TrustUsersComponent} from './trust-users/trust-users.component';
 import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are-not-malicious.component';
 import {TwoFAComponent} from './two-fa/two-fa.component';
-import {ConfigurationsComponent} from './configurations/configurations.component';
 
-export const ROUTES: Routes = [
+const ROUTES: Routes = [
   {
     path: '',
     redirectTo: 'home',
@@ -50,3 +51,14 @@ export const ROUTES: Routes = [
     redirectTo: 'home'
   },
 ];
+
+
+@NgModule({
+  imports: [RouterModule.forRoot(ROUTES, {
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled'
+  })],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {
+}

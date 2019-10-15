@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
 import {
   NbAccordionModule,
   NbActionsModule,
@@ -40,12 +39,13 @@ import {UsersAreNotMaliciousComponent} from './users-are-not-malicious/users-are
 import {PrivacyNotImportantComponent} from './privacy-not-important/privacy-not-important.component';
 import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity/encryption-auto-integrity.component';
 import {TwoFAComponent} from './two-fa/two-fa.component';
-import {ROUTES} from './routes';
+import {AppRoutingModule} from './app-routing.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {LabOverviewComponent} from './layout/lab-overview/lab-overview.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {ConfigurationsComponent} from './configurations/configurations.component';
+import {TestComponent} from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -71,14 +71,12 @@ import {ConfigurationsComponent} from './configurations/configurations.component
     HeaderComponent,
     FooterComponent,
     ConfigurationsComponent,
+    TestComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES, {
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled'
-    }),
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
