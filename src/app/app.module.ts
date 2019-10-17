@@ -45,7 +45,6 @@ import {LabOverviewComponent} from './layout/lab-overview/lab-overview.component
 import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {ConfigurationsComponent} from './configurations/configurations.component';
-import {TestComponent} from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +70,6 @@ import {TestComponent} from './test/test.component';
     HeaderComponent,
     FooterComponent,
     ConfigurationsComponent,
-    TestComponent,
   ],
   imports: [
     AppRoutingModule,
