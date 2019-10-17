@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TwoFAComponent } from './two-fa.component';
+import {TwoFAComponent} from './two-fa.component';
 
 describe('TwoFAComponent', () => {
   let component: TwoFAComponent;

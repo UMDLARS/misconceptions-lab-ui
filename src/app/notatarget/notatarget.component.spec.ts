@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NotatargetComponent } from './notatarget.component';
+import {NotatargetComponent} from './notatarget.component';
 
 describe('NotatargetComponent', () => {
   let component: NotatargetComponent;

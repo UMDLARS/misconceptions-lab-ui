@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TrustUsersComponent } from './trust-users.component';
+import {TrustUsersComponent} from './trust-users.component';
 
 describe('TrustUsersComponent', () => {
   let component: TrustUsersComponent;

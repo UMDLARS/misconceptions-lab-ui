@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PhysicalsecurityComponent } from './physicalsecurity.component';
+import {PhysicalsecurityComponent} from './physicalsecurity.component';
 
 describe('PhysicalsecurityComponent', () => {
   let component: PhysicalsecurityComponent;

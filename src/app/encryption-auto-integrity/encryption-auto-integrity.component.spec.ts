@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EncryptionAutoIntegrityComponent } from './encryption-auto-integrity.component';
+import {EncryptionAutoIntegrityComponent} from './encryption-auto-integrity.component';
 
 describe('EncryptionAutoIntegrityComponent', () => {
   let component: EncryptionAutoIntegrityComponent;

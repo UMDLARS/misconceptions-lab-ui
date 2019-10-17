@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {EncryptionIsEnoughComponent} from './encryption-is-enough/encryption-is-enough.component';
 import {AnonymizedDataComponent} from './anonymized-data/anonymized-data.component';
