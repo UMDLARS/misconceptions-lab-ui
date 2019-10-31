@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CompletelyanonymousComponent } from './completelyanonymous.component';
+import {CompletelyanonymousComponent} from './completelyanonymous.component';
 
 describe('CompletelyanonymousComponent', () => {
   let component: CompletelyanonymousComponent;

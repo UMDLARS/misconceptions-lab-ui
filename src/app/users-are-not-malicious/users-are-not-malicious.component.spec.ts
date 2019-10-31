@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UsersAreNotMaliciousComponent } from './users-are-not-malicious.component';
+import {UsersAreNotMaliciousComponent} from './users-are-not-malicious.component';
 
 describe('UsersAreNotMaliciousComponent', () => {
   let component: UsersAreNotMaliciousComponent;

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PrivacyNotImportantComponent } from './privacy-not-important.component';
+import {PrivacyNotImportantComponent} from './privacy-not-important.component';
 
 describe('PrivacyNotImportantComponent', () => {
   let component: PrivacyNotImportantComponent;

@@ -1,6 +1,6 @@
-import {Injectable, Component, OnInit, OnDestroy} from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import * as $ from "jquery";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import * as $ from 'jquery';
 
 interface Docker {
   url: string;

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {jsonData} from '../../assets/anonymized-data';
-import * as $ from "jquery";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-anonymized-data',

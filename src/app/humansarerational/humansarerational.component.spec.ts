@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HumansarerationalComponent } from './humansarerational.component';
+import {HumansarerationalComponent} from './humansarerational.component';
 
 describe('HumansarerationalComponent', () => {
   let component: HumansarerationalComponent;

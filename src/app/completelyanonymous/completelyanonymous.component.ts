@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from "jquery";
+import {Component, OnInit} from '@angular/core';
+import * as $ from 'jquery';
 
 declare function generate_circuits(): any;
 declare function start_sim(): any;

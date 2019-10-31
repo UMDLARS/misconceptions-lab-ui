@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as colormap from 'colormap';
-import * as $ from "jquery";
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-security-by-obscurity',

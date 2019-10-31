@@ -13,8 +13,7 @@ export class SecurityproductComponent implements OnInit {
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
+
   }
 
 }

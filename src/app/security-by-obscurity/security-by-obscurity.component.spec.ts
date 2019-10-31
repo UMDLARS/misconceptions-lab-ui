@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SecurityByObscurityComponent } from './security-by-obscurity.component';
+import {SecurityByObscurityComponent} from './security-by-obscurity.component';
 
 describe('SecurityByObscurityComponent', () => {
   let component: SecurityByObscurityComponent;

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AnonymizedDataComponent } from './anonymized-data.component';
+import {AnonymizedDataComponent} from './anonymized-data.component';
 
 describe('AnonymizedDataComponent', () => {
   let component: AnonymizedDataComponent;
