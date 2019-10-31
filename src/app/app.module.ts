@@ -51,6 +51,7 @@ import {ConfigurationsComponent} from './configurations/configurations.component
 import { TestLayoutComponent } from './test-layout/test-layout.component';
 import {LabRelevanceComponent} from './layout/lab-relevance/lab-relevance.component';
 import {LabCheckComponent} from './layout/lab-check/lab-check.component';
+import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {LabCheckComponent} from './layout/lab-check/lab-check.component';
     LabRelevanceComponent,
     LabIndustryComponent,
     LabCheckComponent,
+    LabQuizComponent
   ],
   imports: [
     BrowserModule,
