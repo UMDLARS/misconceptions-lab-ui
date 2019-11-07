@@ -1,0 +1,35 @@
+<form>
+  <div class="question">
+    <p><strong>Q1</strong>: How can you ensure your computer is safe?</p>
+    <p><label>
+      <input type="radio" name="one" value="a">I can freely pirate movies as long as I use Kaspersky Free.</label></p>
+    <p><label>
+      <input type="radio" name="one" value="b">Security requires more than an anti malware.</label></p>
+    <p><label>
+      <input type="radio" name="one" value="c">You can do anything on a VPN.</label></p>
+  </div>
+  <div class="question">
+    <p><strong>Q2</strong>: What can anti malware protect you from?</p>
+    <p><label>
+      <input type="radio" name="one" value="a">Common viruses and attacks.</label></p>
+    <p><label>
+      <input type="radio" name="one" value="b">Everything.</label></p>
+    <p><label>
+      <input type="radio" name="one" value="c">Everything, as long as you go into incognito mode.</label></p>
+  </div>
+  <input type="submit"/>
+</form>
+
+<form [formGroup]="quizGroup">
+  <div>
+    <div *ngFor="let question of questions; let j = index">
+      <p>{{question.prompt}}</p>
+      <div *ngFor="let option of question.options; let i = index">
+        <label>{{option}}
+          <input value="{{i}}" [formControlName]="question.prompt" type="radio">
+        </label>
+      </div>
+    </div>
+    <input type="button" (click)="grade()"/>
+  </div>
+</form>

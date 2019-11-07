@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-securityproduct',
@@ -8,12 +8,12 @@ import * as $ from 'jquery';
 })
 export class SecurityproductComponent implements OnInit {
 
+  public questions: Array<{ text: string, answer: number, choices: Array<{choiceId: number, choiceText: string}> }>
   constructor() {
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
+
   }
 
 }

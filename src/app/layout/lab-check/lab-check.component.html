@@ -1,0 +1,22 @@
+<div class="d-flex flex-row">
+  <nb-card class="flex-column mr-4  col">
+    <nb-card-body>
+      <ng-content select="[headerImage]"></ng-content>
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card class="flex-column col-7">
+    <nb-card-header>
+      <h2>Check Understanding</h2>
+    </nb-card-header>
+    <nb-card-body>
+      <ng-content select="[check]"></ng-content>
+
+      <app-quiz>
+        <div quiz>
+        </div>
+      </app-quiz>
+
+    </nb-card-body>
+  </nb-card>
+</div>

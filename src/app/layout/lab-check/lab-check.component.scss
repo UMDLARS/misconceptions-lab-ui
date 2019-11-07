@@ -1,0 +1,15 @@
+@import '../../../../node_modules/bootstrap/scss/bootstrap';
+
+::ng-deep figure {
+  @extend .figure;
+}
+
+::ng-deep figure > img {
+  @extend .img-fluid;
+  @extend .figure-img;
+  align-self: center;
+}
+
+::ng-deep figcaption {
+  @extend .figure-caption;
+}

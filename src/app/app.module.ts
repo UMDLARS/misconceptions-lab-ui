@@ -42,9 +42,14 @@ import {TwoFAComponent} from './two-fa/two-fa.component';
 import {AppRoutingModule} from './app-routing.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {LabOverviewComponent} from './layout/lab-overview/lab-overview.component';
+import {LabActivityComponent} from './layout/lab-activity/lab-activity.component';
+import {LabIndustryComponent} from './layout/lab-industry/lab-industry.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {FooterComponent} from './layout/footer/footer.component';
 import {ConfigurationsComponent} from './configurations/configurations.component';
+import {LabRelevanceComponent} from './layout/lab-relevance/lab-relevance.component';
+import {LabCheckComponent} from './layout/lab-check/lab-check.component';
+import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +75,11 @@ import {ConfigurationsComponent} from './configurations/configurations.component
     HeaderComponent,
     FooterComponent,
     ConfigurationsComponent,
+    LabActivityComponent,
+    LabRelevanceComponent,
+    LabIndustryComponent,
+    LabCheckComponent,
+    LabQuizComponent
   ],
   imports: [
     AppRoutingModule,
