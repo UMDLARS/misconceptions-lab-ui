@@ -17,5 +17,19 @@
     <p><label>
       <input type="radio" name="one" value="c">Everything, as long as you go into incognito mode.</label></p>
   </div>
-  <input type="submit" />
+  <input type="submit"/>
+</form>
+
+<form [formGroup]="quizGroup">
+  <div>
+    <div *ngFor="let question of questions; let j = index">
+      <p>{{question.prompt}}</p>
+      <div *ngFor="let option of question.options; let i = index">
+        <label>{{option}}
+          <input value="{{i}}" [formControlName]="question.prompt" type="radio">
+        </label>
+      </div>
+    </div>
+    <input type="button" (click)="grade()"/>
+  </div>
 </form>
