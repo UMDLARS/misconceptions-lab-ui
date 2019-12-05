@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -8,32 +8,31 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class LabQuizComponent implements OnInit {
   quizGroup: FormGroup;
-  questions: LabQuizQuestion[];
-
+  @Input() questions; /*: LabQuizQuestion[];*/
 
   constructor() {
+    console.log(this.questions);
     this.quizGroup = new FormGroup({});
-    this.questions = [{prompt: 'aaaaaa', options: ['111', '221', '331'], answer: 1}, {
-      prompt: 'bbbbb',
-      options: ['112', '222', '332'],
-      answer: 0
-    }];
+    // this.questions = [
+    //   {prompt: 'First Q', options: ['a', 'b', 'c'], answer: '0', result: ' '},
+    //   {prompt: 'Second Q', options: ['d', 'e', 'f'], answer: '1', result: ' '}
+    // ];
+  }
 
+  ngOnInit() {
     for (const question of this.questions) {
       this.quizGroup.addControl(question.prompt, new FormControl());
     }
   }
 
-  ngOnInit() {
-  }
-
   grade() {
     console.log(this.quizGroup.value);
     for (const question of this.questions) {
+      console.log(this.quizGroup.value[question.prompt]);
       if (this.quizGroup.value[question.prompt] === question.answer) {
-        alert('Correct');
+        question.result = 'Correct';
       } else {
-        alert('Try Again');
+        question.result = 'Try Again';
       }
     }
   }
@@ -43,5 +42,6 @@ export class LabQuizComponent implements OnInit {
 export class LabQuizQuestion {
   prompt: string;
   options: string[];
-  answer: number;
+  answer: string;
+  result: string;
 }

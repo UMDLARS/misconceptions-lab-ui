@@ -12,8 +12,8 @@
     <nb-card-body>
       <ng-content select="[check]"></ng-content>
 
-      <app-quiz>
-        <div quiz>
+      <app-quiz [questions]="questions">
+        <div quiz >
         </div>
       </app-quiz>
 
