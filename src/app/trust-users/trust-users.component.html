@@ -1,26 +1,72 @@
 <app-lab-overview>
   <span title>I can trust people to only do what they’re supposed to</span>
   <div intro>
-    People who believe this misconception think that trust in users (e.g., local people in an organization and/or remote
+    <p>People who believe this misconception think that trust in users (e.g., local people in an organization and/or remote
     users of a program or system) is a valid replacement for robust security controls. However, this idea breaks down
     whenever any person takes an action that violates this assumption, either intentionally (they are a bad actor) or
-    unintentionally (they make a mistake). In essence, this misconception is not following the principle of least
-    privilege, which says that people should get no more than the minimum permissions necessary to accomplish their
-    tasks. Taking away any additional permission should break the system. A good way of building policies like this is
+      unintentionally (they make a mistake).</p>
+
+    <p> In essence, this misconception is not following the principle of least
+      privilege - people should get no more than the minimum permissions necessary to accomplish their
+      tasks.Taking away any additional permission should break the system. A good way of building policies like this is
     to start from no permission (“deny by default”) and then add only necessary permissions (privileges, features, etc.)
     until the system works as required. Following this principle can avoid both malicious unauthorized access and
-    accidents.
+      accidents.</p>
+
   </div>
   <figure headerImage>
-    <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
+    <img alt="Trust users header image" src="assets\images\nathan-dumlao-Abtvf184NZ0-unsplash.jpg">
     <figcaption>
-      <a href="http://news.mit.edu/2013/how-hard-it-de-anonymize-cellphone-data" target="_blank">
-        Photo: Christine Daniloff/MIT
+      <a href="https://unsplash.com/@nate_dumlao" target="_blank">
+        Photo by Nathan Dumlao on Unsplash
       </a>
     </figcaption>
   </figure>
 </app-lab-overview>
 
-<p>
-  trust-users works!
-</p>
+<app-lab-industry>
+  <div industry>
+    <p>
+     Example of trusting users too much in industry.
+    </p>
+  </div>
+</app-lab-industry>
+
+<app-lab-activity>
+  <div activity>
+    <p>1) Look up news stories relating to the follies of trusting users.</p>
+    <p>2) Research additional tips you can implement to implement principle of least privilege and sanitize inputs.</p>
+  </div>
+</app-lab-activity>
+
+<app-lab-relevance>
+  <div relevance>
+
+    <p>
+      <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
+    </p>
+
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/jon-moore-bBavss4ZQcA-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@thejmoore" target="_blank">
+        Photo: Jon Moore on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-relevance>
+
+
+<app-lab-check [questions]="questions">
+  <div check customize=SecurityproductQuestion[]>
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/zhen-hu-Fhz5QhZmn_M-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@zhenhu2424" target="_blank">
+        Photo: Zhen Hu on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-check>

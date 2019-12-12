@@ -1,16 +1,19 @@
 <app-lab-overview>
   <span title>Two factor authentication is a hassle I can do without</span>
   <div intro>
-    People who hold this misconception see Two Factor Authentication (2FA) as not being worthwhile, possibly because
+    <p>People who hold this misconception see Two Factor Authentication (2FA) as not being worthwhile, possibly because
     they do not understand how, and the extent to which, it makes attacks against authentication harder. They also might
     underestimate the value of their data or their likelihood of being a target, which may make the hassle of 2FA seem
-    unnecessary and wasteful. Two factor authentication may be inconvenient, but it provides a much stronger form of
+    unnecessary and wasteful.<p>
+    <p>Two factor authentication may be inconvenient, but it provides a much stronger form of
     authentication by requiring both something the user knows (usually their login credentials of username and password)
     and something the user has (usually a cell phone or device). While it may be easy to steal one of the two factors,
     it’s simply much harder to steal both. It’s also impractical to steal both factors on a large scale (you might be
     able to steal a database with millions of passwords, but it’s not possible to also steal all those users’ phones).
+  </p>
+    <p>
     If we recognize that 2FA makes authentication attacks meaningfully harder, and we recognize the value of our data
-    and access, then 2FA is a strategy worth considering very carefully.
+      and access, then 2FA is a strategy worth considering very carefully. </p>
   </div>
   <figure headerImage>
     <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
@@ -22,6 +25,48 @@
   </figure>
 </app-lab-overview>
 
-<p>
-  two-fa works!
-</p>
+<app-lab-industry>
+  <div industry>
+    <p>
+      Examples of this misconception in the wild.
+    </p>
+  </div>
+</app-lab-industry>
+
+<app-lab-activity>
+  <div activity>
+    Look up news stories related to two factor authentication.
+  </div>
+</app-lab-activity>
+
+<app-lab-relevance>
+  <div relevance>
+
+    <p>
+      <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
+    </p>
+
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/jon-moore-bBavss4ZQcA-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@thejmoore" target="_blank">
+        Photo: Jon Moore on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-relevance>
+
+
+<app-lab-check [questions]="questions">
+  <div check customize=SecurityproductQuestion[]>
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/zhen-hu-Fhz5QhZmn_M-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@zhenhu2424" target="_blank">
+        Photo: Zhen Hu on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-check>

@@ -44,11 +44,11 @@ export class AppComponent {
       link: '/completelyanonymous',
       icon: 'mask'
     },
-    {
+    /*{
       title: 'Secure Configurations',
       link: '/configurations',
       icon: 'sliders-h'
-    },
+    },*/
     {
       title: 'Security in Mind',
       link: '/securityinmind',

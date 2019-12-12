@@ -11,7 +11,6 @@ export class LabQuizComponent implements OnInit {
   @Input() questions; /*: LabQuizQuestion[];*/
 
   constructor() {
-    console.log(this.questions);
     this.quizGroup = new FormGroup({});
     // this.questions = [
     //   {prompt: 'First Q', options: ['a', 'b', 'c'], answer: '0', result: ' '},
@@ -26,7 +25,6 @@ export class LabQuizComponent implements OnInit {
   }
 
   grade() {
-    console.log(this.quizGroup.value);
     for (const question of this.questions) {
       console.log(this.quizGroup.value[question.prompt]);
       if (this.quizGroup.value[question.prompt] === question.answer) {

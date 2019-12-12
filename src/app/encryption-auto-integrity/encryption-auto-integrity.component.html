@@ -20,6 +20,49 @@
   </figure>
 </app-lab-overview>
 
-<p>
-  encryption-auto-integrity works!
-</p>
+<app-lab-industry>
+  <div industry>
+    <p>
+      Example of the consequences of not pairing encryption with other kinds of security.
+    </p>
+  </div>
+</app-lab-industry>
+
+<app-lab-activity>
+  <div activity>
+    <p>1) Look up news stories relating to the follies of over-trusting encryption.</p>
+    <p>2) Research additional tips you can implement encryption along with other forms of defense.</p>
+  </div>
+</app-lab-activity>
+
+<app-lab-relevance>
+  <div relevance>
+
+    <p>
+      <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
+    </p>
+
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/jon-moore-bBavss4ZQcA-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@thejmoore" target="_blank">
+        Photo: Jon Moore on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-relevance>
+
+
+<app-lab-check [questions]="questions">
+  <div check customize=SecurityproductQuestion[]>
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/zhen-hu-Fhz5QhZmn_M-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@zhenhu2424" target="_blank">
+        Photo: Zhen Hu on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-check>

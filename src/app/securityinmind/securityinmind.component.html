@@ -1,14 +1,15 @@
 <app-lab-overview>
   <span title>The software I use is secure since it was designed with security in mind</span>
   <div intro>
-    People who hold this misconception put too much faith in software producers, assuming that those producers thought
+    <p>People who hold this misconception put too much faith in software producers, assuming that those producers thought
     about security and did a good job building it into their product. Unfortunately, software is not always designed
     with security in mind, due to developers’ lack of security awareness, ability, economic constraints, or other
-    reasons. Additionally, developers might have carefully considered security, but simply made mistakes in the design
+    reasons. </p>
+    <p>Additionally, developers might have carefully considered security, but simply made mistakes in the design
     or implementation phase. Or, they might have done a good job, but other conditions change resulting in security
     vulnerabilities (e.g., Meltdown). Novice software developers might even have this misconception about their own
     software, because they tried to create it to be secure. Whatever the reason, it is always a mistake to assume that
-    software is secure.
+    software is secure.</p>
   </div>
   <figure headerImage>
     <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
@@ -20,7 +21,49 @@
   </figure>
 </app-lab-overview>
 
+<app-lab-industry>
+  <div industry>
+    <p>
+      Example of how to bake security into your product.
+    </p>
+  </div>
+</app-lab-industry>
 
-<p>
-  securityinmind works!
-</p>
+<app-lab-activity>
+  <div activity>
+    <p>1) Look up news stories relating to baking security into your product.</p>
+    <p>2) Research additional tips you can implement to implement principle of designing security as you design.</p>
+  </div>
+</app-lab-activity>
+
+<app-lab-relevance>
+  <div relevance>
+
+    <p>
+      <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
+    </p>
+
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/jon-moore-bBavss4ZQcA-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@thejmoore" target="_blank">
+        Photo: Jon Moore on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-relevance>
+
+
+<app-lab-check [questions]="questions">
+  <div check customize=SecurityproductQuestion[]>
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/zhen-hu-Fhz5QhZmn_M-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@zhenhu2424" target="_blank">
+        Photo: Zhen Hu on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-check>

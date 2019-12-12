@@ -20,8 +20,31 @@ export class NotatargetComponent implements OnInit, OnDestroy {
   firstForm: any;
   ifrm: any;
   thiscontainer: any;
+  public questions;
 
   constructor(private  http: HttpClient) {
+      this.questions =[
+
+        {prompt: '1) Question one?',
+          options: [
+            'Answer 0.',
+            'Answer 1.',
+            'Answer 2.',
+            'Answer 3.'
+          ],
+          answer: '3',
+          result: ' '},
+        {prompt: '2) Question two?',
+          options: [
+            'Answer 0.',
+            'Answer 1.',
+            'Answer 2.',
+            'Answer 3.'
+          ],
+          answer: '0',
+          result: ' '}
+      ];
+
     // const url = 'http://10.1.1.12:5000';
     // this.http.get(url).subscribe(
     //   data => this.doSomething(data)

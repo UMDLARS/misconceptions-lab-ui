@@ -1,12 +1,17 @@
 <app-lab-overview>
   <span title>I can trust people to keep my security interests in mind</span>
   <div intro>
-    People who hold this misconception trust that users or other “upstream” data sources will only provide harmless
+    <p>People who hold this misconception trust that users or other “upstream” data sources will only provide harmless
     input. Users - either purposely or just through chance - may provide input that breaks the expected flow of the
     program. However, instead of trusting input, if input is treated as malicious “until proven innocent” by validating
     and sanitizing it before use, dangerous input cannot cause bad outcomes. Additionally, because of this process,
     normal users with unusual input are likely to get a better experience, as the program will always perform as
-    expected.
+      expected.</p>
+
+    <p>Users may use a system in a certain way and break it as a result. User input is a form of user interaction
+      that creates vulnerabilities. A user may unintentionally or maliciously break a system exploiting vulnerabilities
+      like for example a <a href="https://medium.com/@amannagpal4/buffer-overflow-attack-and-its-evolution-519db3c396ad"
+                            target="_blank"> buffer overflow</a>.</p>
   </div>
   <figure headerImage>
     <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
@@ -18,6 +23,57 @@
   </figure>
 </app-lab-overview>
 
-<p>
-  users-are-not-malicious works!
-</p>
+<app-lab-industry>
+  <div industry>
+    <p>
+      Examples of this misconception in the wild.
+    </p>
+
+    <p>
+      With code insertion, a user can inject malicious code into a system by submitting code into a user inout field
+      as opposed to what the developer expects. This <a
+      href="https://xkcd.com/327/" target="_blank"> XKCD comic </a> explores how user input can destroy a database.
+      For further reading here is an <a
+      href="https://www.explainxkcd.com/wiki/index.php/Little_Bobby_Tables" target="_blank"> explanation</a> of the
+      XKCD comic.
+    </p>
+  </div>
+</app-lab-industry>
+
+<app-lab-activity>
+  <div activity>
+    Look up news stories related to two factor authentication.
+  </div>
+</app-lab-activity>
+
+<app-lab-relevance>
+  <div relevance>
+
+    <p>
+      <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
+    </p>
+
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/jon-moore-bBavss4ZQcA-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@thejmoore" target="_blank">
+        Photo: Jon Moore on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-relevance>
+
+
+<app-lab-check [questions]="questions">
+  <div check customize=SecurityproductQuestion[]>
+  </div>
+  <figure headerImage>
+    <img alt="Anonymized data header image" src="assets/images/zhen-hu-Fhz5QhZmn_M-unsplash.jpg">
+    <figcaption>
+      <a href="https://unsplash.com/@zhenhu2424" target="_blank">
+        Photo: Zhen Hu on Unsplash
+      </a>
+    </figcaption>
+  </figure>
+</app-lab-check>
