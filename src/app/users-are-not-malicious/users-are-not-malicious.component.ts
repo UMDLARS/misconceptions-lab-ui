@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-users-are-not-malicious',
@@ -8,8 +8,12 @@ import {Component, OnInit} from '@angular/core';
 export class UsersAreNotMaliciousComponent implements OnInit {
 
   public questions;
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+  recipeInput: HTMLTextAreaElement;
+
   constructor() {
-    this.questions =[
+    this.questions = [
 
       {prompt: '1) Question one?',
         options: [
@@ -31,9 +35,44 @@ export class UsersAreNotMaliciousComponent implements OnInit {
         result: ' '}
     ];
 
+    // this.canvas = document.getElementById('robot') as HTMLCanvasElement;
+    // this.context = this.canvas.getContext('2d');
+    // this.canvas.width = this.width * this.cellWidth;
+    // this.canvas.height = this.height * this.cellHeight;
+
+    // this.context.fillStyle = 'blue';
+    // this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // const kitchen = new Image();
+    // kitchen.src = 'img/kitchen.png';
+
+    // kitchen.onload = () => {
+    //   this.context.drawImage(kitchen, 0, 0);
+    // };
+
+  }
+  /* Defining recipe strings here */
+  addIngredientsBase = 'ADD Flour 2 cups;\nADD Water 1 cups;\nADD Sugar 0.5 cups;';
+  bakeBase = 'BAKE oven AT 350 DEGREES FOR 60 MINUTES';
+
+  insertCakeRecipe() {
+    this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
+    // console.log('Entered cake recipe function');
+    this.recipeInput.setRangeText('text');
   }
 
-  ngOnInit() {
+insertBreadRecipe() {
+    this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
+    console.log('Entered bread recipe function');
+  }
+
+insertBiscuitRecipe() {
+    this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
+    console.log('Entered biscuit recipe function');
+  }
+
+
+ngOnInit() {
   }
 
 }

@@ -42,7 +42,25 @@
 
 <app-lab-activity>
   <div activity>
-    Look up news stories related to two factor authentication.
+    <p>
+      Help the robot bake a cake!  This robot needs to bake its humans a cake, but it doesn't know how!
+      There are some sample recipes you can follow, but feel free to surprise the humans with a new recipe!
+    </p>
+    <nb-card-body class="example-items-rows">
+      <div>
+        <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>
+        <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
+        <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
+      </div>
+
+      <nb-select-label>
+        <label>
+        <!-- Recipe algorithm will be added in this spot -->
+          <textarea nbInput fullWidth placeholder="Enter recipe here" id="recipe_input"></textarea>
+        </label>
+      </nb-select-label>
+    </nb-card-body>
+    <canvas id="robot" width="600" height="400"></canvas>
   </div>
 </app-lab-activity>
 
