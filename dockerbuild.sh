@@ -1,7 +1,7 @@
 #! /bin/bash
-
+#.
 # Cleaning up shop here
-# We are removing all docker containers here. 
+# We are removing all docker containers here.
 docker kill $(docker ps -q)
 docker rm $(docker ps -a -q)
 docker network rm $(docker ps -a -q)
