@@ -47,20 +47,35 @@
       There are some sample recipes you can follow, but feel free to surprise the humans with a new recipe!
     </p>
     <nb-card-body class="example-items-rows">
+      <canvas id="robot" width="600" height="400"></canvas>
       <div>
         <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>
         <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
         <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
       </div>
-
-      <nb-select-label>
-        <label>
-        <!-- Recipe algorithm will be added in this spot -->
-          <textarea nbInput fullWidth placeholder="Enter recipe here" id="recipe_input"></textarea>
-        </label>
-      </nb-select-label>
+      <div class="row">
+        <div class = "column">
+          <!-- Recipe algorithm will be added in this spot -->
+          <textarea nbInput fullWidth
+                    rows="15"
+                    placeholder="Enter recipe here"
+                    id="recipe_input"></textarea>
+      </div>
+        <div class="column" id="constraints">
+          <!-- Constraints here -->
+<!--          <div id="upperBoundTime"></div>-->
+<!--          <div id="lowerBoundTime"></div>-->
+<!--          <div id="upperBoundTemp"></div>-->
+<!--          <div id="lowerBoundTemp"></div>-->
+<!--          <div id="upperBoundIngredient"></div>-->
+<!--          <div id="lowerBoundIngredient"></div>-->
+<!--          <div id="upperBoundWater"></div>-->
+<!--          <div id="lowerBoundWater"></div>-->
+        </div>
+      </div>
     </nb-card-body>
-    <canvas id="robot" width="600" height="400"></canvas>
+
+    <button nbButton (click)="parseInput()">Bake it!</button>
   </div>
 </app-lab-activity>
 
