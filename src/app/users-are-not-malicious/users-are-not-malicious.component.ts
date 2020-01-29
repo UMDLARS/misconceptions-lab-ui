@@ -14,23 +14,26 @@ export class UsersAreNotMaliciousComponent implements OnInit {
   // private context: CanvasRenderingContext2D;
   recipeInput: HTMLTextAreaElement;
 
-  // user-defined constraint values
-  maxWater: number;
-  minWater: number;
-  minIngredient: number;
-  minTime: number;
-  maxTime: number;
-  minTemp: number;
-  maxTemp: number;
-
   // toggles whether constraints are valid
-  hasMaxWaterConstraint: boolean;
-  hasMinWaterConstraint: boolean;
-  hasMaxTimeConstraint: boolean;
-  hasMinTimeConstraint: boolean;
-  hasMaxTempConstraint: boolean;
-  hasMinTempConstraint: boolean;
-  hasMinIngredientConstraint: boolean;
+  public Constraint = new class {
+    hasMaxWaterConstraint: boolean;
+    hasMinWaterConstraint: boolean;
+    hasMaxTimeConstraint: boolean;
+    hasMinTimeConstraint: boolean;
+    hasMaxTempConstraint: boolean;
+    hasMinTempConstraint: boolean;
+    hasMinIngredientConstraint: boolean;
+    hasPoisonConstraint: boolean;
+
+    // user-defined constraint values
+    maxWater: number;
+    minWater: number;
+    minIngredient: number;
+    minTime: number;
+    maxTime: number;
+    minTemp: number;
+    maxTemp: number;
+  }();
 
   // holds result, used to determine how game ends
   result: string;
@@ -68,9 +71,9 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
   }
   /* Defining recipe strings here */
-  cakeIngredients = 'ADD Flour 2 cups\nADD Water 1 cups\nADD Sugar 0.5 cups\n';
-  breadIngredients = 'ADD Flour 3 cups\nADD Water 1 cups\nADD Sugar 0.25 cups\n';
-  biscuitIngredients = 'ADD Flour 2 cups\nADD Water 1 cups\nADD Sugar 0.5 cups\n';
+  cakeIngredients = 'ADD 2 Flour\nADD 1 Water\nADD 0.5 Sugar\n';
+  breadIngredients = 'ADD 3 Flour\nADD 1 Water\nADD 0.25 Sugar\n';
+  biscuitIngredients = 'ADD 2 Flour\nADD 1 Water\nADD 0.5 Sugar\n';
   bakeBase = 'BAKE AT 350 DEGREES FOR 60 MINUTES';
   validIngredients = [
     'flour',
@@ -90,73 +93,60 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     this.recipeInput.value += this.bakeBase;
   }
 
-insertBreadRecipe() {
+  insertBreadRecipe() {
     this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
-    console.log('Entered bread recipe function');
+    // console.log('Entered bread recipe function');
     this.recipeInput.value = this.breadIngredients;
     this.recipeInput.value += this.bakeBase;
   }
 
-insertBiscuitRecipe() {
+  insertBiscuitRecipe() {
     this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
-    console.log('Entered biscuit recipe function');
+    // console.log('Entered biscuit recipe function');
     this.recipeInput.value = this.biscuitIngredients;
     this.recipeInput.value += this.bakeBase;
   }
 
   drawEnding(ending: string) {
+    const i = new Image();
     switch (ending) {
       case 'success':
-        const s = new Image();
-        s.src = 'img/success.png';
-        // this.context.drawImage(s, 0, 0);
+        i.src = 'img/success.png';
         alert('Congrats! You made a food!');
         break;
       case 'poison':
-        const p = new Image();
-        p.src = 'img/poison.png';
+        i.src = 'img/poison.png';
         alert('Oh no! Your humans are dead!');
-        // this.context.drawImage(p, 0, 0);
         break;
       case 'flood':
-        const flood = new Image();
-        flood.src = 'img/flood.png';
+        i.src = 'img/flood.png';
         alert('You flooded the kitchen!');
-        // this.context.drawImage(flood, 0, 0);
         break;
       case 'spacetime':
-        const spacetime = new Image();
-        spacetime.src = 'img/spacetime.png';
+        i.src = 'img/spacetime.png';
         alert('Oh no! You created a spacetime paradox!');
-        // this.context.drawImage(spacetime, 0, 0);
         break;
       case 'apocalypse':
-        const a = new Image();
-        a.src = 'img/apocalypse.png';
+        i.src = 'img/apocalypse.png';
         alert('Oh no! The food was in the oven so long that civilization has collapsed!');
-        // this.context.drawImage(a, 0, 0);
         break;
       case 'fire':
-        const fire = new Image();
-        fire.src = 'img/fire.png';
+        i.src = 'img/fire.png';
         alert('You caused a fire!');
-        // this.context.drawImage(a, 0, 0);
         break;
       case 'dinosaurs':
-        const d = new Image();
-        d.src = 'img/dinosaurs.png';
+        i.src = 'img/dinosaurs.png';
         alert('Oh no! You sent the robot into the past!');
-        // this.context.drawImage(d, 0, 0);
         break;
       case 'frozen':
-        const f = new Image();
-        f.src = 'img/frozen.png';
+        i.src = 'img/frozen.png';
         alert('The kitchen froze!');
-        // this.context.drawImage(f, 0, 0);
         break;
       default:
         console.log('not a valid ending string');
+        i.src = 'img/kitchen.png';
     }
+    // this.context.drawImage(i, 0, 0);
   }
 
   parseInput() {
@@ -170,62 +160,106 @@ insertBiscuitRecipe() {
     let fire = false;
 
     const input = (document.getElementById('recipe_input') as HTMLTextAreaElement).value.toLowerCase();
-    poison = input.includes('knife') || input.includes('sponge') || input.includes('bleach');
     const lines = input.split('\n'); // get string array of lines
-    for (const s of lines ) {
 
-    }
-    // const regex = new RegExp('^[AaDd]* (\d*[.]?\d*)');
-    const re = /^([A-Za-z]+) (\d*[.]?\d*) ([A-Z a-z])$/;
-    // get actions of each line
-    const action = lines[3].match(/^[A-Za-z]+/); // extracts BAKE
-    const quantity = input.match(/\d*[.]?\d*/);
-    const ingredient = input.replace(re, '$3');
-    const temp = lines[lines.length - 1].match(/bake[ at]* ([\d]*)/);
-    if (temp[0] === '') {
+    // checks that there is a valid baking line before parsing input
+    const action = (lines[lines.length - 1].match(/^[A-Za-z]+/))[0]; // extracts 'bake'
+    const temp = (lines[lines.length - 1].match(/bake[ at]* (\d*)/))[1];
+    console.log(lines[lines.length - 1].match(/bake at (\d*)/));
+    const time = (lines[lines.length - 1].match(/(\d*[.]?\d*) minutes$/))[0];
+    if (temp === null || action !== 'bake' || time === null) {
       // person didn't enter BAKE line
       alert('You need to BAKE it!');
       return;
     }
+    // checks for emergency conditions
+    if (+temp < 0) {
+      freeze = true;
+    } else if (+temp > 500) { fire = true; }
+
+    if (+time < 0) { dinosaurs = true; }
+    if (this.parseTime(lines[lines.length - 1], +time) > 1000000) { apocalypse = true; }
+
+    // a couple regexes and variable declarations for parsing ingredients
+    const getIngredient = /([a-z]*)$/;
+    const getQuantity = /add (\d*[.]?\d*)/;
+    let ingredient: string;
+    let quantity: number;
+    for (let i = 0; i < lines.length - 1; i++) {
+      ingredient = (lines[i].match(getIngredient))[0];
+      quantity = +(lines[i].match(getQuantity)[0]);
+
+      if (quantity < 0) { spacetimeParadox = true; }
+      if (this.toxicIngredients.some(v => ingredient[0].includes(v))) {
+        // ingredient is one of the defined toxic ingredients
+        poison = true;
+      }
+      if (ingredient === 'water' && quantity > 10) { flood = true; }
+    }
+    const re = /^([A-Za-z]+) (\d*[.]?\d*) ([A-Z a-z])$/;
+    // check that there is a baking line
+
     // const getNumber = new RegExp('s/^[AaDd]* (\d*[.]?\d*)/\1');
     console.log(temp[1]);
 
     // choose the ending
     if (spacetimeParadox) {
       this.drawEnding('spacetime');
+      this.Constraint.hasMinIngredientConstraint = true;
     } else if (flood) {
       this.drawEnding('flood');
+      this.Constraint.hasMaxWaterConstraint = true;
     } else if (fire) {
       this.drawEnding('fire');
+      this.Constraint.hasMaxTempConstraint = true;
     } else if (freeze) {
       this.drawEnding('frozen');
+      this.Constraint.hasMinTempConstraint = true;
     } else if (apocalypse) {
       this.drawEnding('apocalypse');
+      this.Constraint.hasMaxTimeConstraint = true;
     } else if (dinosaurs) {
       this.drawEnding('dinosaurs');
+      this.Constraint.hasMaxTimeConstraint = true;
     } else if (poison) {
       this.drawEnding('poison');
+      this.Constraint.hasPoisonConstraint = true;
     } else {
       this.drawEnding('success');
     }
     // console.log((document.getElementById('recipe_input') as HTMLTextAreaElement).value);
   }
 
-  parseLine(s: string) {
-    const getIngredient = /([a-z]*)$/;
-    const ingredient = s.match(getIngredient);
-    const getQuantity = /add (\d[.]?\d)/;
-    const quantity = s.match(getQuantity);
-    if (this.minIngredient) {
+  /**
+   * Returns a time value based on 'minutes', 'days', 'years', etc.
+   * @param s String containing the time unit.
+   * @param n Number associated with the time unit.
+   */
+  parseTime(s: string, n: number): number {
+    const inYears = new RegExp('year[s]?$');
+    if (inYears.test(s)) {
+      // user specified years
+      return 2147483647;
     }
-    console.log(ingredient[0]);
+
+    const inDays = new RegExp('day[s]?$');
+    if (inDays.test(s)) { return 1000000; }
+
+    const inHours = new RegExp('hour[s]?$');
+    if (inHours.test(s)) { return n * 60; }
+
+    const inMinutes = new RegExp('minute[s]?$');
+    if (inMinutes.test(s)) { return n; }
+
   }
 
 
   ngOnInit() {
 
     const upperBoundTime = document.createElement('div');
-    upperBoundTime.textContent = 'time bounds';
+    upperBoundTime.textContent = 'Time must be less than:';
+    const upperTimeInput = document.createElement('input');
+    upperBoundTime.appendChild(document.createElement('input'));
     // const lowerBoundTime = new HTMLDivElement();
     // const upperBoundTemp = new HTMLDivElement();
     // const lowerBoundTemp = new HTMLDivElement();
