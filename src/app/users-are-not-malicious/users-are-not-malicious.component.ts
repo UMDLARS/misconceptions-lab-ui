@@ -163,11 +163,14 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     const lines = input.split('\n'); // get string array of lines
 
     // checks that there is a valid baking line before parsing input
-    const action = (lines[lines.length - 1].match(/^[A-Za-z]+/))[0]; // extracts 'bake'
-    const temp = (lines[lines.length - 1].match(/bake[ at]* (\d*)/))[1];
-    console.log(lines[lines.length - 1].match(/bake at (\d*)/));
-    const time = (lines[lines.length - 1].match(/(\d*[.]?\d*) minutes$/))[0];
-    if (temp === null || action !== 'bake' || time === null) {
+    const hasBakeLine = new RegExp(/bake /).test(lines[lines.length - 1]);
+    let temp = '';
+    let time = '';
+    if (hasBakeLine) {
+      temp = (lines[lines.length - 1].match(/bake[ at]* (\d*)/))[1];
+      console.log(lines[lines.length - 1].match(/bake at (\d*)/));
+      time = (lines[lines.length - 1].match(/(\d*[.]?\d*) minutes$/))[0];
+    }  else { // (!hasBakeLine) {
       // person didn't enter BAKE line
       alert('You need to BAKE it!');
       return;
@@ -259,16 +262,45 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     const upperBoundTime = document.createElement('div');
     upperBoundTime.textContent = 'Time must be less than:';
     const upperTimeInput = document.createElement('input');
-    upperBoundTime.appendChild(document.createElement('input'));
-    // const lowerBoundTime = new HTMLDivElement();
-    // const upperBoundTemp = new HTMLDivElement();
-    // const lowerBoundTemp = new HTMLDivElement();
-    // const upperBoundIngredient = new HTMLDivElement();
-    // const lowerBoundIngredient = new HTMLDivElement();
-    // const upperBoundWater = new HTMLDivElement();
+    upperBoundTime.appendChild(upperTimeInput);
+
+    const lowerBoundTime = document.createElement('div');
+    lowerBoundTime.textContent = 'Time must be more than: ';
+    const lowerTimeInput = document.createElement('input');
+    lowerBoundTime.appendChild(lowerTimeInput);
+
+    const upperBoundTemp = document.createElement('div');
+    upperBoundTemp.textContent = 'Temperature must be less than: ';
+    const upperTempInput = document.createElement('input');
+    upperBoundTemp.appendChild(upperTempInput);
+
+    const lowerBoundTemp = document.createElement('div');
+    lowerBoundTemp.textContent = 'Temperature must be more than: ';
+    const lowerTempInput = document.createElement('input');
+    lowerBoundTemp.appendChild(lowerTempInput);
+
+    const upperBoundIngredient = document.createElement('div');
+    upperBoundIngredient.textContent = 'Ingredients must be less than: ';
+    const upperIngredientInput = document.createElement('input');
+    upperBoundIngredient.appendChild(upperIngredientInput);
+
+    const lowerBoundIngredient = document.createElement('div');
+    lowerBoundIngredient.textContent = 'Ingredients must be more than: ';
+    const lowerIngredientInput = document.createElement('input');
+    lowerBoundIngredient.appendChild(lowerIngredientInput);
+
+    const upperBoundWater = document.createElement('div');
+    upperBoundWater.textContent = 'Water must be less than: ';
+    const upperWaterInput = document.createElement('input');
+    upperBoundWater.appendChild(upperWaterInput);
     // const lowerBoundWater = new HTMLDivElement();
     document.getElementById('constraints').appendChild(upperBoundTime);
-
+    document.getElementById('constraints').appendChild(lowerBoundTime);
+    document.getElementById('constraints').appendChild(upperBoundTemp);
+    document.getElementById('constraints').appendChild(lowerBoundTemp);
+    document.getElementById('constraints').appendChild(upperBoundIngredient);
+    document.getElementById('constraints').appendChild(lowerBoundIngredient);
+    document.getElementById('constraints').appendChild(upperBoundWater);
     // this.context = this.canvas.nativeElement.getContext('2d');
 
     // const kitchen = new Image();
