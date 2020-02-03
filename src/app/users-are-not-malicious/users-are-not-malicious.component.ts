@@ -94,14 +94,12 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
   insertBreadRecipe() {
     this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
-    // console.log('Entered bread recipe function');
     this.recipeInput.value = this.breadIngredients;
     this.recipeInput.value += this.bakeBase;
   }
 
   insertBiscuitRecipe() {
     this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
-    // console.log('Entered biscuit recipe function');
     this.recipeInput.value = this.biscuitIngredients;
     this.recipeInput.value += this.bakeBase;
   }
@@ -109,6 +107,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
   drawEnding(ending: string) {
     const i = new Image();
     i.src = 'assets/images/robot/kitchen.jpg';
+
     switch (ending) {
       case 'success':
         i.src = 'assets/images/robot/success.jpg';
@@ -144,10 +143,10 @@ export class UsersAreNotMaliciousComponent implements OnInit {
         break;
       default:
         console.log('not a valid ending string');
-        // i.src = 'assets/images/kitchen.png';
     }
+
     i.onload = () => {
-      this.context.drawImage(i, 0, 0);
+      this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
     };
   }
   parseInput() {
@@ -227,7 +226,6 @@ export class UsersAreNotMaliciousComponent implements OnInit {
       }
       if (quantity < 0) { spacetimeParadox = true; }
     }
-    // const re = /^([A-Za-z]+) (\d*[.]?\d*) ([A-Z a-z])$/;
 
     // choose the ending
     if (spacetimeParadox) {

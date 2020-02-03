@@ -1,5 +1,5 @@
 textarea {
-  width: 300px;
+  width: 280px;
   height: 150px;
   background-color: white;
   font-size: 2em;
@@ -9,7 +9,8 @@ textarea {
 }
 
 button {
-  margin: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 div.row{
   width: max-content;
