@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-users-are-not-malicious',
@@ -30,21 +30,20 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     hasMinTimeConstraint: boolean;
     hasMaxTempConstraint: boolean;
     hasMinTempConstraint: boolean;
+    hasMaxIngredientConstraint: boolean;
     hasMinIngredientConstraint: boolean;
     hasPoisonConstraint: boolean;
 
     // user-defined constraint values
     maxWater: number;
     minWater: number;
+    maxIngredient: number;
     minIngredient: number;
     minTime: number;
     maxTime: number;
     minTemp: number;
     maxTemp: number;
   }();
-
-  // holds result, used to determine how game ends
-  result: string;
 
   constructor() {
     this.questions = [
@@ -109,46 +108,48 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
   drawEnding(ending: string) {
     const i = new Image();
+    i.src = 'assets/images/robot/kitchen.jpg';
     switch (ending) {
       case 'success':
-        i.src = 'img/success.png';
-        alert('Congrats! You made a food!');
+        i.src = 'assets/images/robot/success.jpg';
+        // alert('Congrats! You made a food!');
         break;
       case 'poison':
-        i.src = 'img/poison.png';
+        i.src = 'assets/images/robot/poison.jpg';
         alert('Oh no! Your humans are dead!');
         break;
       case 'flood':
-        i.src = 'img/flood.png';
-        alert('You flooded the kitchen!');
+        i.src = 'assets/images/robot/flooded.jpg';
+        // alert('You flooded the kitchen!');
         break;
       case 'spacetime':
-        i.src = 'img/spacetime.png';
-        alert('Oh no! You created a spacetime paradox!');
+        i.src = 'assets/images/robot/spacetime.jpg';
+        // alert('Oh no! You created a spacetime paradox!');
         break;
       case 'apocalypse':
-        i.src = 'img/apocalypse.png';
-        alert('Oh no! The food was in the oven so long that civilization has collapsed!');
+        i.src = 'assets/images/robot/apocalypse.jpg';
+        // alert('Oh no! The food was in the oven so long that civilization has collapsed!');
         break;
       case 'fire':
-        i.src = 'img/fire.png';
-        alert('You caused a fire!');
+        i.src = 'assets/images/robot/fire.jpg';
+        // alert('You caused a fire!');
         break;
       case 'dinosaurs':
-        i.src = 'img/dinosaurs.png';
-        alert('Oh no! You sent the robot into the past!');
+        i.src = 'assets/images/robot/dino.jpg';
+        // alert('Oh no! You sent the robot into the past!');
         break;
       case 'frozen':
-        i.src = 'img/frozen.png';
-        alert('The kitchen froze!');
+        i.src = 'assets/images/robot/cold.jpg';
+        // alert('The kitchen froze!');
         break;
       default:
         console.log('not a valid ending string');
-        i.src = 'img/kitchen.png';
+        // i.src = 'assets/images/kitchen.png';
     }
-    // this.context.drawImage(i, 0, 0);
+    i.onload = () => {
+      this.context.drawImage(i, 0, 0);
+    };
   }
-
   parseInput() {
 
     let apocalypse = false;
@@ -190,7 +191,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
     if (time < 0) {
       dinosaurs = true;
-    } else if (time > 1000000) {
+    } else if (time > 100000) {
       apocalypse = true;
     }
 
@@ -212,13 +213,17 @@ export class UsersAreNotMaliciousComponent implements OnInit {
       }
 
       if (this.validIngredients.some(v => ingredient.includes(v))) {
-        if (ingredient === 'water' && quantity > 10) { flood = true; }
+        if (ingredient === 'water' && quantity > 10) {
+          if (this.Constraint.hasMaxWaterConstraint) {}
+          flood = true;
+        }
       } else if (this.toxicIngredients.some(v => ingredient.includes(v))) {
         // ingredient is one of the defined toxic ingredients
         poison = true;
       } else { // ingredient doesn't exist
         invalidIngredient = true;
         alert (ingredient + ' is not a valid ingredient :(');
+        return;
       }
       if (quantity < 0) { spacetimeParadox = true; }
     }
@@ -279,7 +284,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
       // console.log('time thinks it is: ' + s.match(time));
     } else {
       alert('Invalid time input');
-      return 0;
+      return NaN;
     }
 
     if (inYears.test(s)) {
@@ -298,12 +303,39 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
   }
 
+  getConstraints() {
+    if (this.Constraint.hasMaxTimeConstraint) {
+      this.Constraint.maxTime = parseFloat(this.upperBoundTime.firstElementChild.textContent);
+    }
+    if (this.Constraint.hasMinTimeConstraint) {
+
+    }
+    if (this.Constraint.hasMaxTempConstraint) {
+
+    }
+    if (this.Constraint.hasMinTempConstraint) {
+
+    }
+    if (this.Constraint.hasMaxWaterConstraint) {
+
+    }
+    if (this.Constraint.hasMinIngredientConstraint) {
+
+    }
+    if (this.Constraint.hasPoisonConstraint) {
+
+    }
+  }
+
 
   ngOnInit() {
 
     this.upperBoundTime = document.createElement('div');
     this.upperBoundTime.textContent = 'Time must be less than:';
     const upperTimeInput = document.createElement('input');
+    upperTimeInput.setAttribute('type', 'number');
+    // finish the below later
+    // upperTimeInput.addEventListener()
     this.upperBoundTime.appendChild(upperTimeInput);
 
     this.lowerBoundTime = document.createElement('div');
@@ -335,31 +367,19 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     this.upperBoundWater.textContent = 'Water must be less than: ';
     const upperWaterInput = document.createElement('input');
     this.upperBoundWater.appendChild(upperWaterInput);
-    // const lowerBoundWater = new HTMLDivElement();
 
-    // document.getElementById('constraints').appendChild(upperBoundTime);
-    // document.getElementById('constraints').appendChild(lowerBoundTime);
-    // document.getElementById('constraints').appendChild(upperBoundTemp);
-    // document.getElementById('constraints').appendChild(lowerBoundTemp);
-    // document.getElementById('constraints').appendChild(upperBoundIngredient);
-    // document.getElementById('constraints').appendChild(lowerBoundIngredient);
-    // document.getElementById('constraints').appendChild(upperBoundWater);
+    this.canvas = document.getElementById('robot') as HTMLCanvasElement;
+    this.context = this.canvas.getContext('2d');
 
-    const canvas = document.getElementById('robot') as HTMLCanvasElement;
-    const context = canvas.getContext('2d');
-
-    this.canvas = canvas;
-    this.context = context;
-
-    this.context.fillStyle = 'blue';
-    this.context.fillRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    // this.context.fillStyle = 'blue';
+    // this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     const kitchen = new Image();
-    kitchen.src = 'assets/images/kitchen.png';
+    kitchen.src = 'assets/images/robot/kitchen.jpg';
 
     kitchen.onload = () => {
       // console.log('Drawing kitchen');
-      this.context.drawImage(kitchen, 0, 0);
+      this.context.drawImage(kitchen, 0, 0, this.canvas.width, this.canvas.height);
     };
   }
 }
