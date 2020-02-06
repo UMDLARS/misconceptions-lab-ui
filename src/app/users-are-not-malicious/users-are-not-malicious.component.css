@@ -21,7 +21,9 @@ div.column{
 }
 
 div.constraint{
-  padding: 1em;
+  padding: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
   width: max-content;
   visibility: hidden;
 }

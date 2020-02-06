@@ -43,6 +43,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     maxTime: number;
     minTemp: number;
     maxTemp: number;
+    illegalIngredients: string;
   }();
 
   constructor() {
@@ -115,7 +116,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
         break;
       case 'poison':
         i.src = 'assets/images/robot/poison.jpg';
-        alert('Oh no! Your humans are dead!');
+        // alert('Oh no! Your humans are dead!');
         break;
       case 'flood':
         i.src = 'assets/images/robot/flooded.jpg';
@@ -141,6 +142,9 @@ export class UsersAreNotMaliciousComponent implements OnInit {
         i.src = 'assets/images/robot/cold.jpg';
         // alert('The kitchen froze!');
         break;
+      case 'tooMuchIngredient':
+        i.src = 'assets/images/robot/sad.jpg';
+        break;
       default:
         console.log('not a valid ending string');
     }
@@ -161,6 +165,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     let dinosaurs = false;
     let fire = false;
     let invalidIngredient = false;
+    let tooMuchIngredient = false;
 
     const input = (document.getElementById('recipe_input') as HTMLTextAreaElement).value.toLowerCase();
     const lines = input.split('\n'); // get string array of lines
@@ -198,7 +203,6 @@ export class UsersAreNotMaliciousComponent implements OnInit {
       freeze = true;
     } else if (+temp > 500) { fire = true; }
 
-    console.log('Min ingredient: ' + +this.Constraint.minIngredient);
     if (this.Constraint.hasMinTimeConstraint && time < this.Constraint.minTime) {
       alert('You need to bake it longer than that!');
       return;
@@ -223,7 +227,6 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     for (let i = 0; i < lines.length - 1; i++) {
       ingredient = (lines[i].match(getIngredient))[0];
       quantity = parseFloat((lines[i].match(getQuantity))[1]);
-      console.log('quantity is: ' + lines[i].match(getQuantity)[1]);
 
       if (isNaN(quantity)) {
         alert('How much ' + ingredient + ' did you want?');
@@ -231,6 +234,21 @@ export class UsersAreNotMaliciousComponent implements OnInit {
       }
 
       if (this.validIngredients.some(v => ingredient.includes(v))) {
+        if (quantity > 20) {
+          if (ingredient === 'water') {
+            if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
+              alert('That\'s too much water!');
+              return;
+            }
+            flood = true;
+          } else {
+            if (this.Constraint.hasMaxIngredientConstraint && quantity > this.Constraint.maxIngredient) {
+              alert('That\'s too much ' + ingredient + '!');
+              return;
+            }
+            tooMuchIngredient = true;
+          }
+        }
         if (ingredient === 'water' && quantity > 10) {
           if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
             alert('That\'s too much water!');
@@ -240,6 +258,12 @@ export class UsersAreNotMaliciousComponent implements OnInit {
         }
       } else if (this.toxicIngredients.some(v => ingredient.includes(v))) {
         // ingredient is one of the defined toxic ingredients
+        if (this.Constraint.hasPoisonConstraint) {
+          if (this.Constraint.illegalIngredients.match(ingredient)) {
+            alert(ingredient + ' is not allowed!');
+            return;
+          }
+        }
         poison = true;
       } else { // ingredient doesn't exist
         invalidIngredient = true;
@@ -281,6 +305,11 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     } else if (poison) {
       this.drawEnding('poison');
       this.Constraint.hasPoisonConstraint = true;
+      document.getElementById('illegalIngredient').style.visibility = 'visible';
+    } else if (tooMuchIngredient) {
+      this.drawEnding('tooMuchIngredient');
+      this.Constraint.hasMaxIngredientConstraint = true;
+      document.getElementById('maxIngredient').style.visibility = 'visible';
     } else if (!invalidIngredient) {
       this.drawEnding('success');
     }
@@ -344,11 +373,13 @@ export class UsersAreNotMaliciousComponent implements OnInit {
       this.Constraint.maxWater = parseFloat((document.getElementById('maxWaterInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMinIngredientConstraint) {
-      // console.log((document.getElementById('minIngredientInput') as HTMLInputElement).value);
       this.Constraint.minIngredient = parseFloat((document.getElementById('minIngredientInput') as HTMLInputElement).value);
     }
+    if (this.Constraint.hasMaxIngredientConstraint) {
+      this.Constraint.maxIngredient = parseFloat((document.getElementById('maxIngredientInput') as HTMLInputElement).value);
+    }
     if (this.Constraint.hasPoisonConstraint) {
-      // okay something good needs to go here
+      this.Constraint.illegalIngredients = (document.getElementById('illegalIngredientInput') as HTMLInputElement).value;
     }
   }
 
@@ -366,37 +397,56 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     // // upperTimeInput.addEventListener('input', updateMaxTime);
     // this.upperBoundTime.appendChild(upperTimeInput);
 
-    this.lowerBoundTime = document.createElement('div');
-    this.lowerBoundTime.textContent = 'Time must be more than: ';
-    const lowerTimeInput = document.createElement('input');
-    this.lowerBoundTime.appendChild(lowerTimeInput);
+    // this.lowerBoundTime = document.createElement('div');
+    // this.lowerBoundTime.textContent = 'Time must be more than: ';
+    // const lowerTimeInput = document.createElement('input');
+    // this.lowerBoundTime.appendChild(lowerTimeInput);
+    //
+    // this.upperBoundTemp = document.createElement('div');
+    // this.upperBoundTemp.textContent = 'Temperature must be less than: ';
+    // const upperTempInput = document.createElement('input');
+    // this.upperBoundTemp.appendChild(upperTempInput);
+    //
+    // this.lowerBoundTemp = document.createElement('div');
+    // this.lowerBoundTemp.textContent = 'Temperature must be more than: ';
+    // const lowerTempInput = document.createElement('input');
+    // this.lowerBoundTemp.appendChild(lowerTempInput);
+    //
+    // this.upperBoundIngredient = document.createElement('div');
+    // this.upperBoundIngredient.textContent = 'Ingredients must be less than: ';
+    // const upperIngredientInput = document.createElement('input');
+    // this.upperBoundIngredient.appendChild(upperIngredientInput);
+    //
+    // this.lowerBoundIngredient = document.createElement('div');
+    // this.lowerBoundIngredient.textContent = 'Ingredients must be more than: ';
+    // const lowerIngredientInput = document.createElement('input');
+    // lowerIngredientInput.setAttribute('id', 'minIngredientInput');
+    // this.lowerBoundIngredient.appendChild(lowerIngredientInput);
+    //
+    // this.upperBoundWater = document.createElement('div');
+    // this.upperBoundWater.textContent = 'Water must be less than: ';
+    // const upperWaterInput = document.createElement('input');
+    // this.upperBoundWater.appendChild(upperWaterInput);
 
-    this.upperBoundTemp = document.createElement('div');
-    this.upperBoundTemp.textContent = 'Temperature must be less than: ';
-    const upperTempInput = document.createElement('input');
-    this.upperBoundTemp.appendChild(upperTempInput);
-
-    this.lowerBoundTemp = document.createElement('div');
-    this.lowerBoundTemp.textContent = 'Temperature must be more than: ';
-    const lowerTempInput = document.createElement('input');
-    this.lowerBoundTemp.appendChild(lowerTempInput);
-
-    this.upperBoundIngredient = document.createElement('div');
-    this.upperBoundIngredient.textContent = 'Ingredients must be less than: ';
-    const upperIngredientInput = document.createElement('input');
-    this.upperBoundIngredient.appendChild(upperIngredientInput);
-
-    this.lowerBoundIngredient = document.createElement('div');
-    this.lowerBoundIngredient.textContent = 'Ingredients must be more than: ';
-    const lowerIngredientInput = document.createElement('input');
-    lowerIngredientInput.setAttribute('id', 'minIngredientInput');
-    this.lowerBoundIngredient.appendChild(lowerIngredientInput);
-
-    this.upperBoundWater = document.createElement('div');
-    this.upperBoundWater.textContent = 'Water must be less than: ';
-    const upperWaterInput = document.createElement('input');
-    this.upperBoundWater.appendChild(upperWaterInput);
-
+    // Listener time
+    // document.getElementById('maxTime').addEventListener('oninput', () => {
+    //   this.Constraint.maxTime = parseFloat((document.getElementById('maxTime') as HTMLInputElement).value);
+    // });
+    // document.getElementById('minTime').addEventListener('oninput', () => {
+    //   this.Constraint.minTime = +(document.getElementById('minTime') as HTMLInputElement).value;
+    // });
+    // document.getElementById('maxTemp').addEventListener('keyup', () => {
+    //   this.Constraint.maxTemp = +(document.getElementById('maxTemp') as HTMLInputElement).value;
+    // });
+    // document.getElementById('minTemp').addEventListener('keyup', () => {
+    //   this.Constraint.minTemp = +(document.getElementById('minTemp') as HTMLInputElement).value;
+    // });
+    // document.getElementById('maxWater').addEventListener('keyup', () => {
+    //   this.Constraint.maxWater = +(document.getElementById('maxWater') as HTMLInputElement).value;
+    // });
+    // document.getElementById('minIngredient').addEventListener('keyup', () => {
+    //   this.Constraint.minIngredient = +(document.getElementById('minIngredient') as HTMLInputElement).value;
+    // });
     this.canvas = document.getElementById('robot') as HTMLCanvasElement;
     this.context = this.canvas.getContext('2d');
 
