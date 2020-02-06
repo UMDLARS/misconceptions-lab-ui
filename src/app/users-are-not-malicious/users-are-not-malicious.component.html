@@ -63,14 +63,34 @@
       </div>
         <div class="column" id="constraints">
           <!-- Constraints here -->
-<!--          <div id="upperBoundTime"></div>-->
-<!--          <div id="lowerBoundTime"></div>-->
-<!--          <div id="upperBoundTemp"></div>-->
-<!--          <div id="lowerBoundTemp"></div>-->
-<!--          <div id="upperBoundIngredient"></div>-->
-<!--          <div id="lowerBoundIngredient"></div>-->
-<!--          <div id="upperBoundWater"></div>-->
-<!--          <div id="lowerBoundWater"></div>-->
+          <div class="constraint" id="maxTime">
+            <label for="maxTimeInput">Enter maximum baking time:</label>
+            <input nbInput type=number placeholder="Maximum Time" id="maxTimeInput">
+          </div>
+          <div class="constraint" id="minTime">
+            <label for="minTimeInput">Enter minimum baking time:</label>
+            <input nbInput type=number placeholder="Minimum Time" id="minTimeInput">
+          </div>
+          <div class="constraint" id="maxTemp">
+            <label for="maxTempInput">Enter maximum temperature:</label>
+            <input nbInput type=number placeholder="Maximum Temp" id="maxTempInput">
+          </div>
+          <div class="constraint" id="minTemp">
+            <label for="minTempInput">Enter minimum temperature:</label>
+            <input nbInput type=number placeholder="Minimum temp" id="minTempInput">
+          </div>
+          <div class="constraint" id="maxIngredient">
+            <label for="maxIngredientInput">Enter max amount of ingredient:</label>
+            <input nbInput type=number placeholder="Max Ingredient" id="maxIngredientInput">
+          </div>
+          <div class="constraint" id="minIngredient">
+            <label for="minIngredientInput">Enter min amount of ingredient:</label>
+            <input nbInput type=number placeholder="Min Ingredient" id="minIngredientInput">
+          </div>
+          <div class="constraint" id="maxWater">
+            <label for="maxWaterInput">Enter max amount of water:</label>
+            <input nbInput type=number placeholder="Max Water" id="maxWaterInput">
+          </div> <!-- end constraint div -->
         </div>
       </div>
     </nb-card-body>

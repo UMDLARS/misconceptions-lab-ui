@@ -19,3 +19,9 @@ div.row{
 div.column{
   width: 800px;
 }
+
+div.constraint{
+  padding: 1em;
+  width: max-content;
+  visibility: hidden;
+}

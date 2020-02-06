@@ -151,6 +151,8 @@ export class UsersAreNotMaliciousComponent implements OnInit {
   }
   parseInput() {
 
+    this.getConstraints();
+
     let apocalypse = false;
     let flood = false;
     let poison = false;
@@ -184,10 +186,27 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     }
 
     // checks for emergency conditions in baking line
+    if (this.Constraint.hasMinTempConstraint && +temp < this.Constraint.minTemp) {
+      alert('The oven can\'t be that cold!');
+      return;
+    }
+    if (this.Constraint.hasMaxTempConstraint && +temp > this.Constraint.maxTemp) {
+      alert('That\'s too hot!');
+      return;
+    }
     if (+temp < 0) {
       freeze = true;
     } else if (+temp > 500) { fire = true; }
 
+    console.log('Min ingredient: ' + +this.Constraint.minIngredient);
+    if (this.Constraint.hasMinTimeConstraint && time < this.Constraint.minTime) {
+      alert('You need to bake it longer than that!');
+      return;
+    }
+    if (this.Constraint.hasMaxTimeConstraint && time > this.Constraint.maxTime) {
+      alert('You can\'t bake it that long!');
+      return;
+    }
     if (time < 0) {
       dinosaurs = true;
     } else if (time > 100000) {
@@ -204,7 +223,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     for (let i = 0; i < lines.length - 1; i++) {
       ingredient = (lines[i].match(getIngredient))[0];
       quantity = parseFloat((lines[i].match(getQuantity))[1]);
-      // console.log('quantity is: ' + lines[i].match(getQuantity)[1]);
+      console.log('quantity is: ' + lines[i].match(getQuantity)[1]);
 
       if (isNaN(quantity)) {
         alert('How much ' + ingredient + ' did you want?');
@@ -213,7 +232,10 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
       if (this.validIngredients.some(v => ingredient.includes(v))) {
         if (ingredient === 'water' && quantity > 10) {
-          if (this.Constraint.hasMaxWaterConstraint) {}
+          if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
+            alert('That\'s too much water!');
+            return;
+          }
           flood = true;
         }
       } else if (this.toxicIngredients.some(v => ingredient.includes(v))) {
@@ -224,6 +246,10 @@ export class UsersAreNotMaliciousComponent implements OnInit {
         alert (ingredient + ' is not a valid ingredient :(');
         return;
       }
+      if (this.Constraint.hasMinIngredientConstraint && quantity < this.Constraint.minIngredient) {
+        alert('You need to add more ' + ingredient + '!');
+        return;
+      }
       if (quantity < 0) { spacetimeParadox = true; }
     }
 
@@ -231,27 +257,27 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     if (spacetimeParadox) {
       this.drawEnding('spacetime');
       this.Constraint.hasMinIngredientConstraint = true;
-      document.getElementById('constraints').appendChild(this.lowerBoundIngredient);
+      document.getElementById('minIngredient').style.visibility = 'visible';
     } else if (flood) {
       this.drawEnding('flood');
       this.Constraint.hasMaxWaterConstraint = true;
-      document.getElementById('constraints').appendChild(this.upperBoundWater);
+      document.getElementById('maxWater').style.visibility = 'visible';
     } else if (fire) {
       this.drawEnding('fire');
       this.Constraint.hasMaxTempConstraint = true;
-      document.getElementById('constraints').appendChild(this.upperBoundTemp);
+      document.getElementById('maxTemp').style.visibility = 'visible';
     } else if (freeze) {
       this.drawEnding('frozen');
       this.Constraint.hasMinTempConstraint = true;
-      document.getElementById('constraints').appendChild(this.lowerBoundTemp);
+      document.getElementById('minTemp').style.visibility = 'visible';
     } else if (apocalypse) {
       this.drawEnding('apocalypse');
       this.Constraint.hasMaxTimeConstraint = true;
-      document.getElementById('constraints').appendChild(this.upperBoundTime);
+      document.getElementById('maxTime').style.visibility = 'visible';
     } else if (dinosaurs) {
       this.drawEnding('dinosaurs');
       this.Constraint.hasMinTimeConstraint = true;
-      document.getElementById('constraints').appendChild(this.lowerBoundTime);
+      document.getElementById('minTime').style.visibility = 'visible';
     } else if (poison) {
       this.drawEnding('poison');
       this.Constraint.hasPoisonConstraint = true;
@@ -303,38 +329,42 @@ export class UsersAreNotMaliciousComponent implements OnInit {
 
   getConstraints() {
     if (this.Constraint.hasMaxTimeConstraint) {
-      this.Constraint.maxTime = parseFloat(this.upperBoundTime.firstElementChild.textContent);
+      this.Constraint.maxTime = parseFloat((document.getElementById('maxTimeInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMinTimeConstraint) {
-
+      this.Constraint.minTime = parseFloat((document.getElementById('minTimeInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMaxTempConstraint) {
-
+      this.Constraint.maxTemp = parseFloat((document.getElementById('maxTempInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMinTempConstraint) {
-
+      this.Constraint.minTemp = parseFloat((document.getElementById('minTempInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMaxWaterConstraint) {
-
+      this.Constraint.maxWater = parseFloat((document.getElementById('maxWaterInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMinIngredientConstraint) {
-
+      // console.log((document.getElementById('minIngredientInput') as HTMLInputElement).value);
+      this.Constraint.minIngredient = parseFloat((document.getElementById('minIngredientInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasPoisonConstraint) {
-
+      // okay something good needs to go here
     }
   }
 
+  updateMaxTime(e) {
+    this.Constraint.maxTime = e.target.value;
+  }
 
   ngOnInit() {
 
-    this.upperBoundTime = document.createElement('div');
-    this.upperBoundTime.textContent = 'Time must be less than:';
-    const upperTimeInput = document.createElement('input');
-    upperTimeInput.setAttribute('type', 'number');
-    // finish the below later
-    // upperTimeInput.addEventListener()
-    this.upperBoundTime.appendChild(upperTimeInput);
+    // this.upperBoundTime = document.createElement('div');
+    // this.upperBoundTime.textContent = 'Time must be less than:';
+    // const upperTimeInput = document.createElement('input');
+    // upperTimeInput.setAttribute('type', 'number');
+    // // finish the below later
+    // // upperTimeInput.addEventListener('input', updateMaxTime);
+    // this.upperBoundTime.appendChild(upperTimeInput);
 
     this.lowerBoundTime = document.createElement('div');
     this.lowerBoundTime.textContent = 'Time must be more than: ';
@@ -359,6 +389,7 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     this.lowerBoundIngredient = document.createElement('div');
     this.lowerBoundIngredient.textContent = 'Ingredients must be more than: ';
     const lowerIngredientInput = document.createElement('input');
+    lowerIngredientInput.setAttribute('id', 'minIngredientInput');
     this.lowerBoundIngredient.appendChild(lowerIngredientInput);
 
     this.upperBoundWater = document.createElement('div');
