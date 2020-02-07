@@ -16,12 +16,20 @@ div.row{
   width: max-content;
   padding: 1em;
 }
-div.column{
-  width: 800px;
+div.constraintColumn{
+  width: 25%;
+  margin-top: 1em;
+}
+div.canvasColumn {
+  width: 75%;
+}
+canvas{
+  width: 100%;
+  height: 80%;
 }
 
 div.constraint{
-  padding: 1px;
+  padding: 2px;
   margin-left: 1px;
   margin-right: 1px;
   width: max-content;

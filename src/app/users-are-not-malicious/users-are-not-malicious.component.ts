@@ -383,75 +383,17 @@ export class UsersAreNotMaliciousComponent implements OnInit {
     }
   }
 
-  updateMaxTime(e) {
-    this.Constraint.maxTime = e.target.value;
+  fitToContainer(canvas) {
+    canvas.style.width = '100%';
+    canvas.style.height = '80%';
   }
 
   ngOnInit() {
 
-    // this.upperBoundTime = document.createElement('div');
-    // this.upperBoundTime.textContent = 'Time must be less than:';
-    // const upperTimeInput = document.createElement('input');
-    // upperTimeInput.setAttribute('type', 'number');
-    // // finish the below later
-    // // upperTimeInput.addEventListener('input', updateMaxTime);
-    // this.upperBoundTime.appendChild(upperTimeInput);
-
-    // this.lowerBoundTime = document.createElement('div');
-    // this.lowerBoundTime.textContent = 'Time must be more than: ';
-    // const lowerTimeInput = document.createElement('input');
-    // this.lowerBoundTime.appendChild(lowerTimeInput);
-    //
-    // this.upperBoundTemp = document.createElement('div');
-    // this.upperBoundTemp.textContent = 'Temperature must be less than: ';
-    // const upperTempInput = document.createElement('input');
-    // this.upperBoundTemp.appendChild(upperTempInput);
-    //
-    // this.lowerBoundTemp = document.createElement('div');
-    // this.lowerBoundTemp.textContent = 'Temperature must be more than: ';
-    // const lowerTempInput = document.createElement('input');
-    // this.lowerBoundTemp.appendChild(lowerTempInput);
-    //
-    // this.upperBoundIngredient = document.createElement('div');
-    // this.upperBoundIngredient.textContent = 'Ingredients must be less than: ';
-    // const upperIngredientInput = document.createElement('input');
-    // this.upperBoundIngredient.appendChild(upperIngredientInput);
-    //
-    // this.lowerBoundIngredient = document.createElement('div');
-    // this.lowerBoundIngredient.textContent = 'Ingredients must be more than: ';
-    // const lowerIngredientInput = document.createElement('input');
-    // lowerIngredientInput.setAttribute('id', 'minIngredientInput');
-    // this.lowerBoundIngredient.appendChild(lowerIngredientInput);
-    //
-    // this.upperBoundWater = document.createElement('div');
-    // this.upperBoundWater.textContent = 'Water must be less than: ';
-    // const upperWaterInput = document.createElement('input');
-    // this.upperBoundWater.appendChild(upperWaterInput);
-
-    // Listener time
-    // document.getElementById('maxTime').addEventListener('oninput', () => {
-    //   this.Constraint.maxTime = parseFloat((document.getElementById('maxTime') as HTMLInputElement).value);
-    // });
-    // document.getElementById('minTime').addEventListener('oninput', () => {
-    //   this.Constraint.minTime = +(document.getElementById('minTime') as HTMLInputElement).value;
-    // });
-    // document.getElementById('maxTemp').addEventListener('keyup', () => {
-    //   this.Constraint.maxTemp = +(document.getElementById('maxTemp') as HTMLInputElement).value;
-    // });
-    // document.getElementById('minTemp').addEventListener('keyup', () => {
-    //   this.Constraint.minTemp = +(document.getElementById('minTemp') as HTMLInputElement).value;
-    // });
-    // document.getElementById('maxWater').addEventListener('keyup', () => {
-    //   this.Constraint.maxWater = +(document.getElementById('maxWater') as HTMLInputElement).value;
-    // });
-    // document.getElementById('minIngredient').addEventListener('keyup', () => {
-    //   this.Constraint.minIngredient = +(document.getElementById('minIngredient') as HTMLInputElement).value;
-    // });
     this.canvas = document.getElementById('robot') as HTMLCanvasElement;
     this.context = this.canvas.getContext('2d');
 
-    // this.context.fillStyle = 'blue';
-    // this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    // this.fitToContainer(this.canvas);
 
     const kitchen = new Image();
     kitchen.src = 'assets/images/robot/kitchen.jpg';

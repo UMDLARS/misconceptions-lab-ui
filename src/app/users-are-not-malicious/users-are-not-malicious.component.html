@@ -46,60 +46,64 @@
       Help the robot bake a cake!  This robot needs to bake its humans a cake, but it doesn't know how!
       There are some sample recipes you can follow, but feel free to surprise the humans with a new recipe!
     </p>
-    <nb-card-body class="example-items-rows">
-      <canvas id="robot" width="600" height="400"></canvas>
+    <div class="row">
+
+      <div class="canvasColumn">
+      <canvas id="robot"></canvas>
       <div>
         <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>
         <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
         <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
-      </div>
-      <div class="row">
-        <div class = "column">
+      </div> <!-- recipe button div -->
+<!--      <div class="row">-->
+<!--        <div class = "column">-->
           <!-- Recipe algorithm will be added in this spot -->
           <textarea nbInput fullWidth
                     rows="20"
                     placeholder="Enter recipe here"
                     id="recipe_input"></textarea>
-      </div>
-        <div class="column" id="constraints">
-          <!-- Constraints here -->
-          <div class="constraint" id="maxTime">
-            <label for="maxTimeInput">Enter maximum baking time:</label>
-            <input nbInput type=number placeholder="Maximum Time" id="maxTimeInput">
-          </div>
-          <div class="constraint" id="minTime">
-            <label for="minTimeInput">Enter minimum baking time:</label>
-            <input nbInput type=number placeholder="Minimum Time" id="minTimeInput">
-          </div>
-          <div class="constraint" id="maxTemp">
-            <label for="maxTempInput">Enter maximum temperature:</label>
-            <input nbInput type=number placeholder="Maximum Temp" id="maxTempInput">
-          </div>
-          <div class="constraint" id="minTemp">
-            <label for="minTempInput">Enter minimum temperature:</label>
-            <input nbInput type=number placeholder="Minimum temp" id="minTempInput">
-          </div>
-          <div class="constraint" id="maxIngredient">
-            <label for="maxIngredientInput">Enter max amount of ingredient:</label>
-            <input nbInput type=number placeholder="Max Ingredient" id="maxIngredientInput">
-          </div>
-          <div class="constraint" id="minIngredient">
-            <label for="minIngredientInput">Enter min amount of ingredient:</label>
-            <input nbInput type=number placeholder="Min Ingredient" id="minIngredientInput">
-          </div>
-          <div class="constraint" id="maxWater">
-            <label for="maxWaterInput">Enter max amount of water:</label>
-            <input nbInput type=number placeholder="Max Water" id="maxWaterInput">
-          </div>
-          <div class="constraint" id="illegalIngredient">
-            <label for="illegalIngredientInput">Enter list of banned ingredients:</label>
-            <input nbInput type=text placeholder="Illegal ingredients" id="illegalIngredientInput">
-          </div>
-        </div><!-- end constraint div -->
-      </div>
-    </nb-card-body>
+<!--        </div>-->
+<!--      </div>-->
 
-    <button nbButton (click)="parseInput()">Bake it!</button>
+        <button nbButton (click)="parseInput()">Bake it!</button>
+      </div>
+      <div class="constraintColumn" id="constraints">
+        <!-- Constraints here -->
+        <div class="constraint" id="maxTime">
+          <label for="maxTimeInput">Enter maximum baking time:</label>
+          <input nbInput type=number placeholder="Maximum Time" id="maxTimeInput">
+        </div>
+        <div class="constraint" id="minTime">
+          <label for="minTimeInput">Enter minimum baking time:</label>
+          <input nbInput type=number placeholder="Minimum Time" id="minTimeInput">
+        </div>
+        <div class="constraint" id="maxTemp">
+          <label for="maxTempInput">Enter maximum temperature:</label>
+          <input nbInput type=number placeholder="Maximum Temp" id="maxTempInput">
+        </div>
+        <div class="constraint" id="minTemp">
+          <label for="minTempInput">Enter minimum temperature:</label>
+          <input nbInput type=number placeholder="Minimum temp" id="minTempInput">
+        </div>
+        <div class="constraint" id="maxIngredient">
+          <label for="maxIngredientInput">Enter max amount of ingredient:</label>
+          <input nbInput type=number placeholder="Max Ingredient" id="maxIngredientInput">
+        </div>
+        <div class="constraint" id="minIngredient">
+          <label for="minIngredientInput">Enter min amount of ingredient:</label>
+          <input nbInput type=number placeholder="Min Ingredient" id="minIngredientInput">
+        </div>
+        <div class="constraint" id="maxWater">
+          <label for="maxWaterInput">Enter max amount of water:</label>
+          <input nbInput type=number placeholder="Max Water" id="maxWaterInput">
+        </div>
+        <div class="constraint" id="illegalIngredient">
+          <label for="illegalIngredientInput">Enter list of banned ingredients:</label>
+          <input nbInput type=text placeholder="Illegal ingredients" id="illegalIngredientInput">
+        </div>
+      </div><!-- end constraint div -->
+
+  </div>
   </div>
 </app-lab-activity>
 
