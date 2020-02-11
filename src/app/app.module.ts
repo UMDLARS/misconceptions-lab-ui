@@ -4,21 +4,21 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
-  NbAccordionModule,
-  NbActionsModule,
-  NbButtonModule,
-  NbCardModule,
-  NbIconModule,
-  NbInputModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbMenuService,
-  NbSelectModule,
-  NbSidebarModule,
-  NbStepperModule,
-  NbTabsetModule,
-  NbThemeModule,
-  NbTreeGridModule,
+    NbAccordionModule,
+    NbActionsModule, NbAlertModule,
+    NbButtonModule,
+    NbCardModule,
+    NbIconModule,
+    NbInputModule,
+    NbLayoutModule,
+    NbMenuModule,
+    NbMenuService,
+    NbSelectModule,
+    NbSidebarModule,
+    NbStepperModule,
+    NbTabsetModule,
+    NbThemeModule,
+    NbTreeGridModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -50,6 +50,7 @@ import {ConfigurationsComponent} from './configurations/configurations.component
 import {LabRelevanceComponent} from './layout/lab-relevance/lab-relevance.component';
 import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
+import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
 
 @NgModule({
   declarations: [
@@ -79,32 +80,34 @@ import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
     LabRelevanceComponent,
     LabIndustryComponent,
     LabCheckComponent,
-    LabQuizComponent
+    LabQuizComponent,
+    BakebotComponent
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
-    NbButtonModule,
-    NbThemeModule.forRoot({name: 'customized'}),
-    NbCardModule,
-    NbAccordionModule,
-    NbMenuModule.forRoot(),
-    NbTreeGridModule,
-    NbEvaIconsModule,
-    BrowserAnimationsModule,
-    NbTabsetModule,
-    NbStepperModule,
-    ReactiveFormsModule,
-    NbInputModule,
-    NbActionsModule,
-    NbIconModule,
-    NbSelectModule,
-    HttpClientModule,
-    Ng2SmartTableModule,
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FormsModule,
+        NbLayoutModule,
+        NbSidebarModule.forRoot(),
+        NbButtonModule,
+        NbThemeModule.forRoot({name: 'customized'}),
+        NbCardModule,
+        NbAccordionModule,
+        NbMenuModule.forRoot(),
+        NbTreeGridModule,
+        NbEvaIconsModule,
+        BrowserAnimationsModule,
+        NbTabsetModule,
+        NbStepperModule,
+        ReactiveFormsModule,
+        NbInputModule,
+        NbActionsModule,
+        NbIconModule,
+        NbSelectModule,
+        HttpClientModule,
+        Ng2SmartTableModule,
+        NbAlertModule,
+    ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,37 @@
+textarea {
+  width: 280px;
+  height: 150px;
+  background-color: white;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  border: 1px solid black;
+}
+
+button {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+div.row{
+  width: max-content;
+  padding: 1em;
+}
+div.constraintColumn{
+  width: 25%;
+  margin-top: 1em;
+}
+div.canvasColumn {
+  width: 75%;
+}
+canvas{
+  width: 100%;
+  height: 80%;
+}
+
+div.constraint{
+  padding: 2px;
+  margin-left: 1px;
+  margin-right: 1px;
+  width: max-content;
+  visibility: hidden;
+}
