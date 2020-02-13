@@ -1,8 +1,8 @@
 <nb-card-body>
-  <p>
-    Help the robot bake a cake!  This robot needs to bake its humans a cake, but it doesn't know how!
-    There are some sample recipes you can follow, but feel free to surprise the humans with a new recipe!
-  </p>
+<!--  <p>-->
+<!--    Help the robot bake a cake!  This robot needs to bake its humans a cake, but it doesn't know how!-->
+<!--    There are some sample recipes you can follow, but feel free to surprise the humans with a new recipe!-->
+<!--  </p>-->
   <div class="row">
 
     <div class="canvasColumn">
@@ -12,7 +12,7 @@
         <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
         <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
       </div> <!-- recipe button div -->
-      <nb-alert id="alert" status="danger" closable (close)="onClose()" *ngIf="alertIsOpen">Oh no!</nb-alert>
+<!--      <nb-alert id="alert" status="danger" closable (close)="onClose()" *ngIf="alertIsOpen">Oh no!</nb-alert>-->
       <!--      <div class="row">-->
       <!--        <div class = "column">-->
       <!-- Recipe algorithm will be added in this spot -->
@@ -26,6 +26,16 @@
       <button nbButton (click)="parseInput()">Bake it!</button>
     </div>
     <div class="constraintColumn" id="constraints">
+      <div class="dialog" id="dialogBox">Behold the BakeBot 5000! It can bake anything in an automated fashion!
+        Press a button to enter a preset recipe, or you can modify the recipe pseudocode to bake something new!
+        <button nbButton (click)="resetDialog()" *ngIf="hiddenButton" id="dialogButton">Start over</button>
+      </div>
+<!--      <div class ="dialog" style="background-color: green; visibility: hidden" id="successBox">-->
+<!--        Congrats! You made a food!-->
+<!--      </div>-->
+<!--      <div class="dialog" style="background-color: red; visibility: hidden" id="badBox">-->
+<!--        <button nbButton (click)="resetDialog()">Try again</button>-->
+<!--      </div>-->
       <!-- Constraints here -->
       <div class="constraint" id="maxTime">
         <label for="maxTimeInput">Enter maximum baking time:</label>
@@ -60,6 +70,5 @@
         <input nbInput type=text placeholder="Illegal ingredients" id="illegalIngredientInput">
       </div>
     </div><!-- end constraint div -->
-
   </div>
 </nb-card-body>

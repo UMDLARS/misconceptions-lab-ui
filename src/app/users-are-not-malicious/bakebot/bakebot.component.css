@@ -17,17 +17,22 @@ div.row{
   padding: 1em;
 }
 div.constraintColumn{
-  width: 25%;
+  width: 350px;
   margin-top: 1em;
 }
 div.canvasColumn {
-  width: 75%;
+  width: 800px;
 }
 canvas{
-  width: 100%;
-  height: 80%;
+  width: inherit;
+  height: 650px;
 }
-
+div.dialog{
+  padding: 1rem;
+  margin: 1px;
+  text-align: center;
+  background: cornflowerblue;
+}
 div.constraint{
   padding: 2px;
   margin-left: 1px;
