@@ -2,16 +2,12 @@
   <span title>I can trust people to keep my security interests in mind</span>
   <div intro>
     <p>People who hold this misconception trust that users or other “upstream” data sources will only provide harmless
-    input. Users - either purposely or just through chance - may provide input that breaks the expected flow of the
-    program. However, instead of trusting input, if input is treated as malicious “until proven innocent” by validating
-    and sanitizing it before use, dangerous input cannot cause bad outcomes. Additionally, because of this process,
-    normal users with unusual input are likely to get a better experience, as the program will always perform as
-      expected.</p>
-
-    <p>Users may use a system in a certain way and break it as a result. User input is a form of user interaction
-      that creates vulnerabilities. A user may unintentionally or maliciously break a system exploiting vulnerabilities
-      like for example a <a href="https://medium.com/@amannagpal4/buffer-overflow-attack-and-its-evolution-519db3c396ad"
-                            target="_blank"> buffer overflow</a>.</p>
+    input. Users - either purposely or by accident - may provide input that breaks the expected flow of the
+    program, because computer programs follow the old adage "garbage in, garbage out." If input is treated as malicious
+      “until proven innocent” by validating and sanitizing it before use, dangerous input cannot cause bad outcomes.
+      In addition to filtering out malicious input, validation and sanitization ensure the program always behaves
+      as intended, which improves the user experience for the good guys.
+    </p>
   </div>
   <figure headerImage>
     <img alt="Anonymized data header image" src="assets/images/20130326163535-0_0.jpg">
@@ -25,17 +21,36 @@
 
 <app-lab-industry>
   <div industry>
-    <p>
-      Examples of this misconception in the wild.
-    </p>
+<!--      Examples of this misconception in the wild.-->
 
+    <h5> Code Injection </h5>
     <p>
-      With code insertion, a user can inject malicious code into a system by submitting code into a user inout field
-      as opposed to what the developer expects. This <a
-      href="https://xkcd.com/327/" target="_blank"> XKCD comic </a> explores how user input can destroy a database.
+      In an old-school attack known as Code Injection, users purposefully paste a block of code into a web form input
+      field where a developer would never expect code to exist.  This <a href="https://xkcd.com/327/" target="_blank">
+      XKCD comic </a> explores how user input can destroy a database.
       For further reading here is an <a
       href="https://www.explainxkcd.com/wiki/index.php/Little_Bobby_Tables" target="_blank"> explanation</a> of the
       XKCD comic.
+    </p>
+    <h5> Buffer Overflow </h5>
+    <p>
+      A buffer overflow attack closely mimics a code injection attack.  In this scenario, a user exploits the limited
+      size of memory given to a function.  The very last line of code in a function is the return address, which tells
+      the computer where the next executable code exists.  If a user writes a large piece of executable code in a
+      buffer, then keeps writing beyond the end of that buffer, they can possibly overwrite the return address.  If
+      they rewrite the return address to point to the beginning of their injected code, the computer will execute
+      everything the user wrote!  Read more about buffer overflows
+      <a href="https://medium.com/@amannagpal4/buffer-overflow-attack-and-its-evolution-519db3c396ad"
+         target="_blank">here</a>, or check out <a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank">
+      Computerphile's video</a> on buffer overflows if you want to see a live demonstration.
+    </p>
+    <h5> Samy Worm </h5>
+    <p>
+      Back in the days of MySpace, a 20-year-old named Samy Kamkar launched a successful cross-site scripting attack
+      known as the "Samy Worm," which created a pop-up saying "but most of all, Samy is my hero" and automatically sent
+      Samy a friend request.  While the vulnerability lay within web browsers, MySpace took most of the heat and
+      eventually found a way to patch the bug themselves.  Samy released an explanation of the exploit, which is archived <a
+      href="https://web.archive.org/web/20160305044015/http://samy.pl/popular/tech.html" target="_blank">here</a>.
     </p>
   </div>
 </app-lab-industry>
