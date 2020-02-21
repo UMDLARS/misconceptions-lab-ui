@@ -13,6 +13,7 @@ export class BakebotComponent implements OnInit {
   welcomeMsg: string;
   hideSuccess = true;
   hideBad = true;
+  successMsg = 'Congrats! You made a food!';
   hideWelcome = false;
   private context: CanvasRenderingContext2D;
   recipeInput: HTMLTextAreaElement;
@@ -53,12 +54,14 @@ export class BakebotComponent implements OnInit {
     'water',
     'salt',
     'sugar',
-    'milk'
+    'milk',
+    'egg'
   ];
   toxicIngredients = [
     'knife',
     'bleach',
-    'sponge'
+    'sponge',
+    'poison'
   ];
 
   welcome = 'Behold the BakeBot 5000! It can bake anything in an automated fashion!\n' +
@@ -405,7 +408,7 @@ export class BakebotComponent implements OnInit {
       this.alertText = this.firstConstraintMsg;
     }
     this.hideBad = false;
-    this.hideSuccess = true;
+    this.onCloseSuccess();
     this.hideWelcome = true;
   }
 
@@ -442,5 +445,12 @@ export class BakebotComponent implements OnInit {
   }
   onCloseSuccess() {
     this.hideSuccess = true;
+    if (this.Constraint.hasPoisonConstraint && this.Constraint.hasMaxWaterConstraint
+    && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint
+    && this.Constraint.hasMaxTimeConstraint && this.Constraint.hasMinTimeConstraint
+    && this.Constraint.hasMaxTempConstraint && this.Constraint.hasMinTempConstraint) {
+      this.successMsg = 'You found every constraint!  BakeBot is finally safe from flawed humans!';
+      this.hideSuccess = false;
+    }
   }
 }

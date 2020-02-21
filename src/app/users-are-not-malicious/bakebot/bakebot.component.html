@@ -12,7 +12,7 @@
       </nb-alert>
       <nb-alert id="badAlert" status="danger" closable (close)="onCloseBad()" [hidden]="hideBad">{{alertText}}</nb-alert>
       <nb-alert id="successAlert" status="success" closable (close)="onCloseSuccess()" [hidden]="hideSuccess">
-        Congrats! You made a food!
+        {{successMsg}}
       </nb-alert>
       <div>
         <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>

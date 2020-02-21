@@ -13,23 +13,23 @@ export class UsersAreNotMaliciousComponent implements OnInit {
   constructor() {
     this.questions = [
 
-      {prompt: '1) Question one?',
+      {prompt: '1) Which of the following is an example of invalid input?',
         options: [
-          'Answer 0.',
-          'Answer 1.',
-          'Answer 2.',
-          'Answer 3.'
+          'BAKE AT 350 FOR -60 MINUTES',
+          'ADD &=^',
+          'Both A and B are invalid',
+          'Neither is invalid'
         ],
-        answer: '3',
+        answer: '1',
         result: ' '},
-      {prompt: '2) Question two?',
+      {prompt: '2) Suppose a user enters: BAKE AT 400 FOR 35 MNITUES. What should BakeBot do?',
         options: [
-          'Answer 0.',
-          'Answer 1.',
-          'Answer 2.',
-          'Answer 3.'
+          'Shutdown before the user enters something more dangerous.',
+          'Assume the user meant "minutes," so bake for 35 minutes',
+          'Show an error message',
+          'Any of the above is sufficient.'
         ],
-        answer: '0',
+        answer: '2',
         result: ' '}
     ];
 
