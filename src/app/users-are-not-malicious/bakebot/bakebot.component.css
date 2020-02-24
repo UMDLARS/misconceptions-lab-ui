@@ -25,13 +25,15 @@ div.canvasColumn {
 }
 canvas{
   width: inherit;
-  height: 650px;
+  height: 640px;
 }
 div.dialog{
+  width: inherit;
   padding: 1rem;
   margin: 1px;
   text-align: center;
-  background: cornflowerblue;
+  font-size: x-large;
+  background: green;
 }
 div.constraint{
   padding: 2px;

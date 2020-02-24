@@ -32,16 +32,7 @@
       <button nbButton (click)="parseInput()">Bake it!</button>
     </div>
     <div class="constraintColumn" id="constraints">
-<!--      <div class="dialog" id="dialogBox">Behold the BakeBot 5000! It can bake anything in an automated fashion!-->
-<!--        Press a button to enter a preset recipe, or you can modify the recipe pseudocode to bake something new!-->
-<!--        <button nbButton (click)="resetDialog()" id="dialogButton">Start over</button>-->
-<!--      </div>-->
-<!--&lt;!&ndash;      <div class ="dialog" style="background-color: green; visibility: hidden" id="successBox">&ndash;&gt;-->
-<!--        Congrats! You made a food!-->
-<!--      </div>-->
-<!--      <div class="dialog" style="background-color: red; visibility: hidden" id="badBox">-->
-<!--        <button nbButton (click)="resetDialog()">Try again</button>-->
-<!--      </div>-->
+      <div class="dialog" id="dialogBox" [hidden]="hideConstraintLabel">Input Constraints:</div>
       <!-- Constraints here -->
       <div class="constraint" id="maxTime">
         <label for="maxTimeInput">Enter maximum baking time:</label>
