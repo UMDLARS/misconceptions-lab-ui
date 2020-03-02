@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class BakebotComponent implements OnInit {
   canvas: HTMLCanvasElement;
-  alertText = 'Try Again';
+  badDialogText = 'Try Again';
   welcomeMsg: string;
   hideSuccess = true;
   hideBad = true;
@@ -60,9 +60,12 @@ export class BakebotComponent implements OnInit {
   ];
   toxicIngredients = [
     'knife',
+    'fork',
+    'spoon',
     'bleach',
     'sponge',
-    'poison'
+    'poison',
+    'asbestos'
   ];
 
   welcome = 'Behold the BakeBot 5000! It can bake anything in an automated fashion!\n' +
@@ -183,32 +186,39 @@ export class BakebotComponent implements OnInit {
     const hasBakeLine = new RegExp(/bake /).test(lines[lines.length - 1]);
     let temp = '';
     let time;
+    const getBake = /bake( at)? (-?\d+)/;
 
     if (hasBakeLine) {
+      // short circuit when incorrect bake line
+      if (! getBake.test(lines[lines.length - 1])) {
+        this.displayAlert('You need to BAKE it!');
+        this.resetBackground();
+        return;
+      }
       temp = (lines[lines.length - 1].match(/bake[ at]* (-?\d+)/))[1];
       // console.log(temp);
       time = this.parseTime(lines[lines.length - 1]);
       if (isNaN(time)) {
-        this.badDialog('You want me to bake this for how long?');
+        this.displayAlert('You want me to bake this for how long?');
         this.resetBackground();
         return;
       }
       // console.log('time is: ' + time);
     }  else { // (!hasBakeLine) {
       // person didn't enter BAKE line
-      this.badDialog('You need to BAKE it!');
+      this.displayAlert('You need to BAKE it!');
       this.resetBackground();
       return;
     }
 
     // checks for emergency conditions in baking line
     if (this.Constraint.hasMinTempConstraint && +temp < this.Constraint.minTemp) {
-      this.badDialog('The oven can\'t be that cold!');
+      this.displayAlert('The oven can\'t be that cold!');
       this.resetBackground();
       return;
     }
     if (this.Constraint.hasMaxTempConstraint && +temp > this.Constraint.maxTemp) {
-      this.badDialog('That\'s too hot!');
+      this.displayAlert('That\'s too hot!');
       this.resetBackground();
       return;
     }
@@ -217,12 +227,12 @@ export class BakebotComponent implements OnInit {
     } else if (+temp > 500) { fire = true; }
 
     if (this.Constraint.hasMinTimeConstraint && time < this.Constraint.minTime) {
-      this.badDialog('You need to bake it longer than that!');
+      this.displayAlert('You need to bake it longer than that!');
       this.resetBackground();
       return;
     }
     if (this.Constraint.hasMaxTimeConstraint && time > this.Constraint.maxTime) {
-      this.badDialog('You can\'t bake it that long!');
+      this.displayAlert('You can\'t bake it that long!');
       this.resetBackground();
       return;
     }
@@ -242,14 +252,14 @@ export class BakebotComponent implements OnInit {
     for (let i = 0; i < lines.length - 1; i++) {
       ingredient = (lines[i].match(getIngredient))[0];
       if (! getQuantity.test(lines[i])) {
-        this.badDialog('Not sure what line ' + +(i + 1) + ' is supposed to be...');
+        this.displayAlert('Not sure what line ' + +(i + 1) + ' is supposed to be...');
         this.resetBackground();
         return;
       }
       quantity = parseFloat((lines[i].match(getQuantity))[1]);
 
       if (isNaN(quantity)) {
-        this.badDialog('How much ' + ingredient + ' did you want?');
+        this.displayAlert('How much ' + ingredient + ' did you want?');
         this.resetBackground();
         return;
       }
@@ -259,14 +269,14 @@ export class BakebotComponent implements OnInit {
           if (ingredient === 'water') {
             if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
               // alert('That\'s too much water!');
-              this.badDialog('That\'s too much water!');
+              this.displayAlert('That\'s too much water!');
               this.resetBackground();
               return;
             }
             flood = true;
           } else {
             if (this.Constraint.hasMaxIngredientConstraint && quantity > this.Constraint.maxIngredient) {
-              this.badDialog('That\'s too much ' + ingredient + '!');
+              this.displayAlert('That\'s too much ' + ingredient + '!');
               this.resetBackground();
               return;
             }
@@ -275,7 +285,7 @@ export class BakebotComponent implements OnInit {
         }
         if (ingredient === 'water' && quantity > 10) {
           if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
-            this.badDialog('That\'s too much water!');
+            this.displayAlert('That\'s too much water!');
             this.resetBackground();
             return;
           }
@@ -285,7 +295,7 @@ export class BakebotComponent implements OnInit {
         // ingredient is one of the defined toxic ingredients
         if (this.Constraint.hasPoisonConstraint) {
           if (this.Constraint.illegalIngredients.match(ingredient)) {
-            this.badDialog(ingredient + ' is not allowed!');
+            this.displayAlert(ingredient + ' is not allowed!');
             this.resetBackground();
             return;
           }
@@ -293,12 +303,12 @@ export class BakebotComponent implements OnInit {
         poison = true;
       } else { // ingredient doesn't exist
         invalidIngredient = true;
-        this.badDialog(ingredient + ' is not a valid ingredient :(');
+        this.displayAlert(ingredient + ' is not a valid ingredient :(');
         this.resetBackground();
         return;
       }
       if (this.Constraint.hasMinIngredientConstraint && quantity < this.Constraint.minIngredient) {
-        this.badDialog('You need to add more ' + ingredient + '!');
+        this.displayAlert('You need to add more ' + ingredient + '!');
         this.resetBackground();
         return;
       }
@@ -415,12 +425,19 @@ export class BakebotComponent implements OnInit {
     canvas.style.width = '100%';
     canvas.style.height = '80%';
   }
+
+  displayAlert(s: string) {
+    this.welcomeMsg = s;
+    this.hideWelcome = false;
+    this.hideBad = true;
+    this.hideSuccess = true;
+  }
   badDialog(s: string) {
-    this.alertText = s;
+    this.badDialogText = s;
     if (this.Constraint.firstConstraint) {
       this.Constraint.firstConstraint = false;
       this.hideConstraintLabel = false;
-      this.alertText = this.firstConstraintMsg;
+      this.badDialogText = this.firstConstraintMsg;
     }
     this.hideBad = false;
     this.onCloseSuccess();
@@ -429,6 +446,7 @@ export class BakebotComponent implements OnInit {
 
   ngOnInit() {
 
+    this.welcomeMsg = this.welcome;
     // get canvas
     this.canvas = document.getElementById('robot') as HTMLCanvasElement;
     // below is used to potentially improve image quality
