@@ -46,7 +46,7 @@ export class BakebotComponent implements OnInit {
   }
 
   /* Defining recipe strings here */
-  cakeIngredients = 'ADD 2 Flour\nADD 1 Water\nADD 0.5 Sugar\n';
+  cakeIngredients = 'ADD 1 Flour\nADD 2 Water\nADD 1 Sugar\n';
   breadIngredients = 'ADD 3 Flour\nADD 1 Water\nADD 0.25 Sugar\n';
   biscuitIngredients = 'ADD 2 Flour\nADD 1 Water\nADD 0.5 Sugar\n';
   bakeBase = 'BAKE AT 350 DEGREES FOR 60 MINUTES';
