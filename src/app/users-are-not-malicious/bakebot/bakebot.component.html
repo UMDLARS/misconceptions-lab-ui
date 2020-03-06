@@ -1,8 +1,9 @@
 <nb-card-body>
-<!--  <p>-->
-<!--    Help the robot bake a cake!  This robot needs to bake its humans a cake, but it doesn't know how!-->
-<!--    There are some sample recipes you can follow, but feel free to surprise the humans with a new recipe!-->
-<!--  </p>-->
+  <p>
+    Congratulations! You've just been hired as a Quality Assurance Inspector to test the latest in home innovation:
+    The BakeBot 5000!  Unfortunately, you suspect the software development team has naively assumed users would only
+    enter meaningful input.  Try using the BakeBot 5000, and see if you can find a vulnerability in its programming.
+  </p>
   <div class="row">
 
     <div class="canvasColumn">
@@ -19,15 +20,11 @@
         <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
         <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
       </div> <!-- end recipe button div -->
-      <!--      <div class="row">-->
-      <!--        <div class = "column">-->
       <!-- Recipe algorithm will be added in this spot -->
       <textarea nbInput fullWidth
                 rows="20"
                 placeholder="Enter recipe here"
                 id="recipe_input"></textarea>
-      <!--        </div>-->
-      <!--      </div>-->
 
       <button nbButton (click)="parseInput()">Bake it!</button>
     </div>
@@ -68,7 +65,7 @@
       </div>
       <div class="dialog" [hidden]="!win">
         {{winner}}
-        <img alt="Anonymized data header image" src="assets/images/blue_ribbon.jpg">
+        <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png">
       </div>
 <!--      <nb-alert status="success" [hidden]="!win">-->
 <!--      {{winner}}-->
