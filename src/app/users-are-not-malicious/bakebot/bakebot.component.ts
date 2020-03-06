@@ -319,35 +319,35 @@ export class BakebotComponent implements OnInit {
     if (spacetimeParadox) {
       this.drawEnding('spacetime');
       this.Constraint.hasMinIngredientConstraint = true;
-      document.getElementById('minIngredient').style.visibility = 'visible';
+      // document.getElementById('minIngredient').style.visibility = 'visible';
     } else if (flood) {
       this.drawEnding('flood');
       this.Constraint.hasMaxWaterConstraint = true;
-      document.getElementById('maxWater').style.visibility = 'visible';
+      // document.getElementById('maxWater').style.visibility = 'visible';
     } else if (fire) {
       this.drawEnding('fire');
       this.Constraint.hasMaxTempConstraint = true;
-      document.getElementById('maxTemp').style.visibility = 'visible';
+      // document.getElementById('maxTemp').style.visibility = 'visible';
     } else if (cold) {
       this.drawEnding('cold');
       this.Constraint.hasMinTempConstraint = true;
-      document.getElementById('minTemp').style.visibility = 'visible';
+      // document.getElementById('minTemp').style.visibility = 'visible';
     } else if (apocalypse) {
       this.drawEnding('apocalypse');
       this.Constraint.hasMaxTimeConstraint = true;
-      document.getElementById('maxTime').style.visibility = 'visible';
+      // document.getElementById('maxTime').style.visibility = 'visible';
     } else if (past) {
       this.drawEnding('past');
       this.Constraint.hasMinTimeConstraint = true;
-      document.getElementById('minTime').style.visibility = 'visible';
+      // document.getElementById('minTime').style.visibility = 'visible';
     } else if (poison) {
       this.drawEnding('poison');
       this.Constraint.hasPoisonConstraint = true;
-      document.getElementById('illegalIngredient').style.visibility = 'visible';
+      // document.getElementById('illegalIngredient').style.visibility = 'visible';
     } else if (tooMuchIngredient) {
       this.drawEnding('tooMuchIngredient');
       this.Constraint.hasMaxIngredientConstraint = true;
-      document.getElementById('maxIngredient').style.visibility = 'visible';
+      // document.getElementById('maxIngredient').style.visibility = 'visible';
     } else if (!invalidIngredient) {
       this.drawEnding('success');
     }
