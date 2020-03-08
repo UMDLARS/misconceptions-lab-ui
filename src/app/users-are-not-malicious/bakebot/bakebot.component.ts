@@ -7,7 +7,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   styleUrls: ['./bakebot.component.css']
 })
 export class BakebotComponent implements OnInit {
-  canvas: HTMLCanvasElement;
+
   badDialogText = 'Try Again';
   welcomeMsg: string;
   hideSuccess = true;
@@ -16,7 +16,6 @@ export class BakebotComponent implements OnInit {
   successMsg = 'Congrats! You made a food!';
   hideWelcome = false;
   win = false;
-  private context: CanvasRenderingContext2D;
   recipeInput: HTMLTextAreaElement;
 
   // toggles whether constraints are valid
@@ -41,9 +40,7 @@ export class BakebotComponent implements OnInit {
     maxTemp: number;
     illegalIngredients: string;
   }();
-  constructor() {
-
-  }
+  constructor() {}
 
   /* Defining recipe strings here */
   cakeIngredients = 'ADD 1 Flour\nADD 2 Water\nADD 1 Sugar\n';
@@ -155,7 +152,8 @@ export class BakebotComponent implements OnInit {
     }
 
     i.onload = () => {
-      this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
+      // this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
+      (document.getElementById('robot') as HTMLImageElement).src = i.src;
     };
   }
   deleteMsg(msg: string, data: string[]) {
@@ -421,11 +419,6 @@ export class BakebotComponent implements OnInit {
     }
   }
 
-  fitToContainer(canvas) {
-    canvas.style.width = '100%';
-    canvas.style.height = '80%';
-  }
-
   displayAlert(s: string) {
     this.welcomeMsg = s;
     this.hideWelcome = false;
@@ -445,24 +438,7 @@ export class BakebotComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.welcomeMsg = this.welcome;
-    // get canvas
-    this.canvas = document.getElementById('robot') as HTMLCanvasElement;
-    // below is used to potentially improve image quality
-    this.canvas.width = Math.floor(this.canvas.width);
-    this.canvas.height = Math.floor(this.canvas.height);
-    this.context = this.canvas.getContext('2d');
-
-    // this.fitToContainer(this.canvas);
-
-    const kitchen = new Image();
-    kitchen.src = 'assets/images/robot/bakebot5000.jpg';
-
-    kitchen.onload = () => {
-      // console.log('Drawing kitchen');
-      this.context.drawImage(kitchen, 0, 0, this.canvas.width, this.canvas.height);
-    };
   }
 
   resetBackground() {
@@ -470,7 +446,8 @@ export class BakebotComponent implements OnInit {
     i.src = 'assets/images/robot/bakebot5000.jpg';
     i.onload = () => {
       // console.log('Drawing kitchen');
-      this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
+      // this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
+      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000.jpg';
     };
   }
 
@@ -479,7 +456,8 @@ export class BakebotComponent implements OnInit {
     const i = new Image();
     i.src = 'assets/images/robot/bakebot5000.jpg';
     i.onload = () => {
-      this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
+      // this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
+      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000.jpg';
     };
     if (!this.win && this.Constraint.hasPoisonConstraint && this.Constraint.hasMaxWaterConstraint
       && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint

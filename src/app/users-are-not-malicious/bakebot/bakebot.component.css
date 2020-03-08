@@ -6,6 +6,7 @@ textarea {
   font-weight: bold;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   border: 1px solid black;
+  max-width: 600px;
 }
 
 button {
@@ -16,16 +17,11 @@ div.row{
   width: 100%;
   padding: 1em;
 }
-div.constraintColumn{
-  width: 350px;
-  margin-top: 1em;
-}
-div.canvasColumn {
-  width: 800px;
-}
-canvas{
-  width: inherit;
-  height: 640px;
+div.constraint{
+  padding: 2px;
+  margin-left: 1px;
+  margin-right: 1px;
+  width: max-content;
 }
 div.dialog{
   width: inherit;
@@ -35,14 +31,10 @@ div.dialog{
   font-size: x-large;
   background: green;
 }
-div.constraint{
-  padding: 2px;
-  margin-left: 1px;
-  margin-right: 1px;
-  width: max-content;
-  visibility: hidden;
+img {
+  width: 100%;
+  height: auto;
 }
-
 .cover-container {
   height: 100vh;
 }
