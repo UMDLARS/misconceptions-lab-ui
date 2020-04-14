@@ -1,37 +1,40 @@
 textarea {
-  width: 280px;
+  width: 100%;
   height: 150px;
   background-color: white;
   font-size: 2em;
   font-weight: bold;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   border: 1px solid black;
+  max-width: 600px;
 }
 
 button {
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 div.row{
-  width: max-content;
+  width: 100%;
   padding: 1em;
 }
-div.constraintColumn{
-  width: 25%;
-  margin-top: 1em;
-}
-div.canvasColumn {
-  width: 75%;
-}
-canvas{
-  width: 100%;
-  height: 80%;
-}
-
 div.constraint{
   padding: 2px;
   margin-left: 1px;
   margin-right: 1px;
   width: max-content;
-  visibility: hidden;
+}
+div.dialog{
+  width: inherit;
+  padding: 1rem;
+  margin: 1px;
+  text-align: center;
+  font-size: x-large;
+  background: green;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+.cover-container {
+  height: 100vh;
 }
