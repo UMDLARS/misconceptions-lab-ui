@@ -25,8 +25,8 @@ export class AppComponent {
 
     },
     {
-      title: 'Physical Secruity',
-      link: '/physicalsecruity',
+      title: 'Physical Security',
+      link: '/physicalsecurity',
       icon: 'lock',
     },
     {
@@ -55,8 +55,8 @@ export class AppComponent {
       icon: 'brain',
     },
     {
-      title: 'Secruity Product',
-      link: '/secruityproduct',
+      title: 'Security Product',
+      link: '/securityproduct',
       icon: 'magic',
     },
     {
