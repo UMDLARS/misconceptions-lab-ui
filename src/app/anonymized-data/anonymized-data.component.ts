@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {jsonData} from '../../assets/anonymized-data';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-anonymized-data',
@@ -44,7 +43,7 @@ export class AnonymizedDataComponent implements OnInit {
 
   public questions;
   constructor() {
-    this.questions =[
+    this.questions = [
 
       {prompt: '1) Question one?',
         options: [
@@ -70,7 +69,5 @@ export class AnonymizedDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new LocalDataSource(jsonData);
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 }

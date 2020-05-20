@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-encrapter',
@@ -19,7 +18,7 @@ export class EncryptionIsEnoughComponent implements OnInit {
 
   public questions;
   constructor() {
-    this.questions =[
+    this.questions = [
 
       {prompt: '1) Question one?',
         options: [
@@ -40,12 +39,9 @@ export class EncryptionIsEnoughComponent implements OnInit {
         answer: '0',
         result: ' '}
     ];
-    
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
   ROT13(inString) {

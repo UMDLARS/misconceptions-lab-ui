@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-physicalsecurity',
@@ -16,7 +15,7 @@ export class PhysicalsecurityComponent implements OnInit {
   public questions;
   constructor(private fb: FormBuilder, private domSanitizer: DomSanitizer) {
 
-      this.questions =[
+      this.questions = [
 
         {prompt: '1) Question one?',
           options: [
@@ -41,9 +40,6 @@ export class PhysicalsecurityComponent implements OnInit {
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
-
     this.firstForm = this.fb.group({
       firstCtrl: ['', Validators.required],
     });

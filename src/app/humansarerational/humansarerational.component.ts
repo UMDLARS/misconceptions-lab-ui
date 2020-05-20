@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-humansarerational',
@@ -10,7 +9,7 @@ export class HumansarerationalComponent implements OnInit {
 
   public questions;
   constructor() {
-    this.questions =[
+    this.questions = [
 
       {prompt: '1) Question one?',
         options: [
@@ -35,8 +34,6 @@ export class HumansarerationalComponent implements OnInit {
   }
 
   ngOnInit() {
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
 }

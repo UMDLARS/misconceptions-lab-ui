@@ -1,7 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {NbIconLibraries, NbMenuItem} from '@nebular/theme';
-import * as $ from 'jquery';
-
 
 @Component({
   selector: 'app-root',
@@ -113,6 +111,3 @@ export class AppComponent {
     // tslint:disable-next-line:triple-equals
   }
 }
-
-// tslint:disable-next-line:triple-equals
-$('h1').contents().filter(function() { return this.nodeType != 1; }).remove();

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-goodpasswords',
@@ -15,7 +14,7 @@ export class GoodpasswordsComponent implements OnInit {
   public questions;
 
   constructor(private fb: FormBuilder) {
-      this.questions =[
+      this.questions = [
 
         {prompt: '1) Question one?',
           options: [
@@ -52,9 +51,6 @@ export class GoodpasswordsComponent implements OnInit {
     this.thirdForm = this.fb.group({
       thirdCtrl: ['', Validators.required],
     });
-
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
   onFirstSubmit() {

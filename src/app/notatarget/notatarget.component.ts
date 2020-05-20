@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import * as $ from 'jquery';
 
 interface Docker {
   url: string;
@@ -23,7 +22,7 @@ export class NotatargetComponent implements OnInit, OnDestroy {
   public questions;
 
   constructor(private  http: HttpClient) {
-      this.questions =[
+      this.questions = [
 
         {prompt: '1) Question one?',
           options: [
@@ -53,8 +52,6 @@ export class NotatargetComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
   ngOnDestroy(): void {

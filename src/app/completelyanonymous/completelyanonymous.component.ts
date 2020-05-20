@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as $ from 'jquery';
 
 declare function generate_circuits(): any;
 declare function start_sim(): any;
@@ -20,7 +19,7 @@ export class CompletelyanonymousComponent implements OnInit {
 
   public questions;
   constructor() {
-    this.questions =[
+    this.questions = [
 
       {prompt: '1) Question one?',
         options: [
@@ -45,8 +44,6 @@ export class CompletelyanonymousComponent implements OnInit {
 
   ngOnInit() {
     init();
-    // tslint:disable-next-line:triple-equals
-    $('nb-icon').contents().filter(function() { return this.nodeType != 1; }).remove();
   }
 
 }
