@@ -2,12 +2,23 @@
 <app-lab-overview>
   <span title>I can trust people to keep my security interests in mind</span>
   <div intro>
-    <p>People who hold this misconception trust that users or other “upstream” data sources will only provide harmless
-    input. Users - either purposely or by accident - may provide input that breaks the expected flow of the
-    program, because computer programs follow the old adage "garbage in, garbage out." If input is treated as malicious
-      “until proven innocent” by validating and sanitizing it before use, dangerous input cannot cause bad outcomes.
-      In addition to filtering out malicious input, validation and sanitization ensure the program always behaves
-      as intended, which improves the user experience for the good guys.
+    <p>A classic mistake that programmers often make is to assume that people will only use their systems as the
+      programmers expect them to. This assumption allows programmers to ignore issues that could arise from a system
+      being used in an unexpected way. Unfortunately, this is a dangerous assumption. In reality, not all users are
+      benevolent or act in good faith; some of them are actively malicious, looking for ways to exploit systems for
+      their own benefit. Some users are unauthorized, perhaps having gained access to the system through another
+      vulnerability, but sometimes authorized users have bad intentions (this is also known as an “insider attack”).
+      Additionally, sometimes users are acting in good faith, but do things that the programmer did not anticipate,
+      resulting in unexpected outcomes that can leak or corrupt data, damage hardware, deny service, or have other
+      negative effects.
+    </p>
+    <p>
+      The solution to this problem is well-known, and takes the form of input validation and input sanitization.
+      Input validation is making sure that input matches a required form or type. For example, ensuring that input
+      meant to be a number is composed only of digits and not any other symbols. Input sanitization takes valid input
+      and ensures that the input cannot do anything malicious or undesired. For example, input sanitization for an
+      online “comment section” is responsible for making sure that HTML entered into a comment is shown as HTML in the
+      comment, and not interpreted as HTML, which would modify the web page.
     </p>
   </div>
   <figure headerImage>
@@ -58,6 +69,15 @@
 
 <app-lab-activity>
   <div activity>
+    <p>
+    In this activity, you play the role of a user of a fabulous new android, the BakeBot 5000 -- a robot capable of
+    parsing recipes written in a special language and baking splendiferous comestibles. Unfortunately, the original
+    developer of the BakeBot made the assumption that, since people would never ask BakeBot to do anything weird, the
+    developer didn’t need to protect BakeBot from any kind of edge cases resulting from malicious or unexpected input.
+    Your task is to find all the ways that BakeBot can be misused. Each time you find something bad that BakeBot can
+    do, you can set a constraint that is used to make sure that BakeBot’s input fits within the required parameter.
+    Once you’ve found all the edge cases and set all the constraints, you’ve completed the activity!
+    </p>
     <app-bakebot></app-bakebot>
   </div>
 </app-lab-activity>
