@@ -1,7 +1,9 @@
 <div class="header-container">
   <div class="logo-container">
     <a (click)="toggleSidebar()" class="sidebar-toggle">
-      <nb-icon icon="bars"></nb-icon>
+<!--      <nb-icon icon="bars"></nb-icon>-->
+      <nb-icon icon="chevron-right" [hidden]="!expanded"></nb-icon>
+      <nb-icon icon="chevron-left" [hidden]="expanded"></nb-icon>
     </a>
     <a class="logo">Misconception Labs</a>
   </div>

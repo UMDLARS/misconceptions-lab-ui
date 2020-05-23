@@ -8,6 +8,8 @@ import {NbSidebarService} from '@nebular/theme';
 })
 export class HeaderComponent implements OnInit {
 
+  expanded: boolean;
+
   constructor(private sidebarService: NbSidebarService) {
   }
 
@@ -16,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true);
+    this.expanded = !this.expanded;
     return false;
   }
 }
