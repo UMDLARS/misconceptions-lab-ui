@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
+// try using 'cpu-benchmark' in node.js
+// https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 interface Docker {
   url: string;
   container: string;
