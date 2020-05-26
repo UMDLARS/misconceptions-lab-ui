@@ -24,5 +24,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: ng build --prod --base-href=/misconceptions-lab-ui/
+    - name: npm dependencies
+      run: npm install
+    - name: build
+      run: ng build --prod --base-href=/misconceptions-lab-ui/
