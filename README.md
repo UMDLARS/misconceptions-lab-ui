@@ -1,5 +1,5 @@
 # Security Misconception Lab Exercises
-[![Build Status](https://travis-ci.com/UMDLARS/misconceptions-lab-ui.svg?branch=master)](https://travis-ci.com/UMDLARS/misconceptions-lab-ui)
+![Node.js CI](https://github.com/UMDLARS/misconceptions-lab-ui/workflows/Node.js%20CI/badge.svg?branch=master)
 
 
 ## About
