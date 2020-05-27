@@ -47,6 +47,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
+      - name: PWD
+        run: pwd
       - name: Display structure of downloaded files
         run: ls -R
       - name: rsync Deploy
