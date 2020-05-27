@@ -51,7 +51,6 @@ jobs:
         run: ls -R
       - name: rsync Deploy
         uses: burnett01/rsync-deployments@4.0
-        wor
         with:
           switches: -avzr --delete
           path: dist/return-of-the-julian/
