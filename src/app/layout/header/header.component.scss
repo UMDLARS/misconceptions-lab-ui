@@ -1,5 +1,5 @@
 @import '~@nebular/theme/styles/global/breakpoints';
-@import '../../../styles';
+@import '../../../themes';
 
 @include nb-install-component() {
   display: flex;

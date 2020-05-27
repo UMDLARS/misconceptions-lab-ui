@@ -1,5 +1,11 @@
 @import '../themes';
 
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
+
+@import 'node_modules/bootstrap/scss/images';
+
 ::ng-deep .menu-icon {
   width: 2em !important;
 }
@@ -7,4 +13,18 @@
 ::ng-deep .nb-theme-customized nb-sidebar .scrollable {
   // Remove padding at the top of the icon list
   padding-top: 0;
+}
+
+::ng-deep figure {
+  @extend .figure;
+}
+
+::ng-deep figure > img {
+  @extend .img-fluid;
+  @extend .figure-img;
+  align-self: center;
+}
+
+::ng-deep figcaption {
+  @extend .figure-caption;
 }
