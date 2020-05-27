@@ -36,6 +36,7 @@ jobs:
         path: dist
   
   deploy:
+    needs: build
     # Only deploy on commits to master, not pull requests
     if: ${{ github.event_name == 'push' }}
     
