@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: dist
-        path: dist/return-of-the-julian/
+        path: dist/returnOfTheJulian/
   
   deploy:
     needs: build
