@@ -1,13 +1,34 @@
 <app-lab-overview>
   <span title>I am not a target of cyberattacks</span>
   <div intro>
-    The misconception is people thinking that since their individual data or information isn’t “valuable” to anyone, no
-    one would want to steal it. In the age of ransomware, people’s data is as valuable to attackers as it is to the
-    victims -- as long as you’ll pay to get it back, your data is a target. Similarly, some people seem to think that
-    data is the only motive for a cyber attack. However, attackers may want to use a computer’s resources, whether it’s
-    processing power for mining cryptocurrency or network bandwidth used for denial of service attacks, a computer’s
-    resources are valuable to attackers. Given these motivations, most people are likely victims of a cyber attack at
-    some point.
+    <p>
+    The average user frequently thinks that they are not interesting to cyber criminals.  Cyber criminals and bad actors
+    know that a college student likely doesn’t have a lot of money in their bank account, and their mid-range laptop
+    full of saved homework doesn’t contain any valuable data.  Cyber criminals aren’t going to encrypt your drive with
+    ransomware, because there are “bigger fish to fry.”  With so many massive organizations in cyberspace, why would
+    anyone want to target you?  The answer lies in economies of scale.
+    </p>
+    <p>
+    Massive organizations have a lot to lose, so they hire security professionals to construct complex systems that
+    deter attacks and mitigate damage.  You, however, probably don’t have more than a simple antivirus software
+    installed (if any).  That means hackers can spend much less energy hacking many smaller machines like yours, and
+    hackers can pool the resources of all those small machines to accomplish major tasks.
+    </p>
+    <p>
+    The major tasks are primarily cryptomining and distributed denial of service (DDoS) attacks.  Malicious
+    cryptomining, more frequently called “cryptojacking,” is any mining operation happening without the machine owner’s
+    consent.  Though we typically think that cryptomining requires massive computing machines, it can easily be
+    distributed among many smaller machines working in unison.  A DDoS attack similarly requires many machines working
+    in unison, but more importantly, the machines must be spread out across a large geographic area and connected to
+    multiple higher-tier network services.  We call the machines working in unison a “botnet,” and the automated
+    program that creates the botnet is called a bot.  Hackers certainly don’t have the time to find thousands of
+      disparate machines, so they automate the process entirely.
+    </p>
+    <p>
+    The solution to this misconception is to view everything connected to the internet as a “hackable” specimen.
+    Change default passwords on IoT devices, regularly install security updates, and understand that hackers want
+    control of your internet devices, no matter how small and unexciting they may be.
+    </p>
   </div>
   <figure headerImage>
     <img src="assets/images/13945792813168.png">
@@ -20,60 +41,62 @@
 
 <app-lab-industry>
   <div industry>
+    <h5>Mirai botnet</h5>
     <p>
-      Example of trusting users too much in industry.
+      On October 21, 2016, the internet went down in most of the east coast of the US.  It was later revealed that
+      someone was performing a DDoS attack against a large internet provider [1].  To perform a DDoS attack, a hacker
+      needs control of many, many machines that are spread out over a wide area of the web.  The hacker then directs its
+      army of machines to send massive amounts of traffic to a server, overwhelming it and preventing it from sending
+      outbound communication.  All the machines in this army were IoT devices, which frequently have minimal security.
+      Some mischievous teenagers coded a program that automatically scanned the web for IoT devices, then tested common
+      default usernames and passwords for those devices.  Since many people are too lazy to change these passwords, the
+      teenagers gained control of plenty of small workers capable of taking down a behemoth of a corporation [2].
+    </p>
+    <h5>Coinhive</h5>
+    <p>
+      In 2017, the internet service Coinhive was created as a way to mine the cryptocurrency Monero in the background of
+      a web browser using Javascript.  If this sounds sketchy, it’s because it’s very sketchy.  Unlike Bitcoin, Monero
+      transactions are kept private, making it even more attractive for cyber criminals [3].  Coinhive was a way for
+      cyber criminals to generate dark money from the beginning; there’s no need to launder currency when it was
+      generated in the dark.  Ad blockers learned to detect and halt cryptojacking code, dealing a serious blow to
+      Coinhive.  Eventually, the value of Monero plummeted, and in 2019, Coinhive officially shut down [4].
+    </p>
+    <h5>IdleBuddy</h5>
+    <p>
+      Cryptojacking can also occur as a local process, not just a web browser problem.  A mysterious example of
+      cryptojacking malware is IdleBuddy [5], listed as a product of “Ingenering Group Inc.” This Windows trojan
+      masqueraded as a benevolent process by claiming it “securely allows you to donate the time your computer is not
+      in use to calculate complex equations and solve problems” [6].  It appears unknown as to which cryptocurrency it
+      was mining, but it is definitely a dangerous piece of malware.  It will resist any normal attempts to uninstall
+      it, but it can be removed with any reputable, up-to-date antivirus software.
     </p>
   </div>
 </app-lab-industry>
 
-<nb-card>
+<app-lab-activity>
   <nb-card-body>
-    <nb-stepper #stepper>
-      <nb-step [stepControl]="firstForm" label="First step">
-        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
-
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="secondForm" label="Second step">
-        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
-
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>next</button>
-        </form>
-      </nb-step>
-      <nb-step [stepControl]="thirdForm" label="Third step">
-        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
-
-          <button nbButton nbStepperPrevious>prev</button>
-          <button nbButton nbStepperNext>Confirm</button>
-        </form>
-      </nb-step>
-      <nb-step [hidden] [stepControl]="thirdForm" label="Third step">
-        <div class="step-container">
-          <h3>Wizard completed!</h3>
-          <button nbButton (click)="stepper.reset()">Try again</button>
-        </div>
-      </nb-step>
-    </nb-stepper>
+    <p>
+      In this activity, you will learn how much power a hacker wields with a botnet.  Select the type of internet
+      device, the number of devices connected, and see what your botnet will be capable of doing.
+    </p>
   </nb-card-body>
-</nb-card>
-
-<nb-card>
-  <nb-card-body id="vm">
-        <iframe src="http://10.1.1.12:5000/"  height="627px" width="805px" style="border:none;">
-          Your browser does not support iframes.
-        </iframe>
-  </nb-card-body>
-</nb-card>
+</app-lab-activity>
 
 <app-lab-relevance>
   <div relevance>
 
     <p>
       <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
-    </p>
 
+    [1] https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/antonakakis
+
+    [2] https://www.csoonline.com/article/3258748/the-mirai-botnet-explained-how-teen-scammers-and-cctv-cameras-almost-brought-down-the-internet.html
+
+    [3] https://krebsonsecurity.com/2018/03/who-and-what-is-coinhive/
+    [4] https://blog.malwarebytes.com/cybercrime/2019/05/cryptojacking-in-the-post-coinhive-era/
+    [5] https://malware.wikia.org/wiki/IdleBuddy
+    [6] https://howtoremove.guide/how-to-uninstall-idle-buddy-virus/
+    </p>
   </div>
   <figure headerImage>
     <img alt="Anonymized data header image" src="assets/images/jon-moore-bBavss4ZQcA-unsplash.jpg">

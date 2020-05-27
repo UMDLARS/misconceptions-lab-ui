@@ -2,100 +2,41 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 // try using 'cpu-benchmark' in node.js
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
-interface Docker {
-  url: string;
-  container: string;
-}
 
 @Component({
   selector: 'app-notatarget',
   templateUrl: './notatarget.component.html',
   styleUrls: ['./notatarget.component.css']
 })
-export class NotatargetComponent implements OnInit, OnDestroy {
-  thisdocker: Docker;
-  thisurl: string;
-  thirdForm: any;
-  secondForm: any;
-  firstForm: any;
-  ifrm: any;
-  thiscontainer: any;
+export class NotatargetComponent implements OnInit {
   public questions;
 
-  constructor(private  http: HttpClient) {
+  constructor() {
       this.questions = [
 
-        {prompt: '1) Question one?',
+        {prompt: '1) Which quality/characteristic of a botnet explains why attacking small machines is so cost efficient?',
           options: [
-            'Answer 0.',
-            'Answer 1.',
-            'Answer 2.',
-            'Answer 3.'
+            'Low maintenance',
+            'Automation',
+            'Scalability',
+            'Vulnerability'
           ],
-          answer: '3',
+          answer: '1',
           result: ' '},
-        {prompt: '2) Question two?',
+        {prompt: '2) All of these practices can mitigate your vulnerability except:',
           options: [
-            'Answer 0.',
-            'Answer 1.',
-            'Answer 2.',
-            'Answer 3.'
+            'Turn your computer off at night',
+            'Change default passwords on devices',
+            'Keep software up-to-date',
+            'Prefer signed software'
           ],
           answer: '0',
           result: ' '}
       ];
 
-    // const url = 'http://10.1.1.12:5000';
-    // this.http.get(url).subscribe(
-    //   data => this.doSomething(data)
-    // );
   }
 
 
   ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-    // console.log('AAAAAAHHHHH');
-    // this.http.post('http://10.1.1.12:5000/destroy',
-    //   {
-    //     container:  this.thiscontainer
-    //   })
-    //   .subscribe(
-    //     data  => {
-    //       console.log('POST Request is successful ', data);
-    //     },
-    //     error  => {
-    //
-    //       console.log('Error', error);
-    //
-    //     }
-    //
-    //   );
-  }
-
-  // doSomething(data) {
-  //   this.thisdocker = data;
-  //   this.thisurl = data.url;
-  //   this.ifrm = document.createElement('iframe');
-  //   this.ifrm.setAttribute('id', 'ifrm');
-  //   this.ifrm.setAttribute('src', this.thisurl);
-  //   this.ifrm.setAttribute('height', '1000px');
-  //   this.ifrm.setAttribute('width', '100%');
-  //   this.ifrm.setAttribute('style', 'border:none;');
-  //   let el = document.getElementById('vm');
-  //   el.parentNode.append(this.ifrm);
-  //   this.thiscontainer = data.container;
-  // }
-
-  onThirdSubmit() {
-  }
-
-  onSecondSubmit() {
-
-  }
-
-  onFirstSubmit() {
-
   }
 }
