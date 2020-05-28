@@ -1,7 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {fib, dist} from 'cpu-benchmark';
+// import {shodan-client} from 'shodan-client';
 import {HttpClient} from '@angular/common/http';
 // try using 'cpu-benchmark' in node.js
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
+
+// API key for shodan.io: 90Y9GrTk3GTa4TQyW6XvNdPk3otyRu4B
 
 @Component({
   selector: 'app-notatarget',
@@ -10,8 +14,11 @@ import {HttpClient} from '@angular/common/http';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
+  // private searchOps = {
+  //   facets: 'country:100'
+  // };
 
-  constructor() {
+  constructor() {// private http: HttpClient) {
       this.questions = [
 
         {prompt: '1) Which quality/characteristic of a botnet explains why attacking small machines is so cost efficient?',
@@ -34,9 +41,17 @@ export class NotatargetComponent implements OnInit {
           result: ' '}
       ];
 
+    // const url = 'http://10.1.1.12:5000';
+    // this.http.get(url).subscribe(
+    //   data => this.doSomething(data)
+    // );
+
+    // Server: SQ-WEBCAM
   }
 
 
   ngOnInit() {
+    console.log('41st Fibonacci number: ');
+    console.log(fib(41));
   }
 }
