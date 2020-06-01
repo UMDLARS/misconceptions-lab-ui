@@ -51,6 +51,7 @@ import {LabRelevanceComponent} from './layout/lab-relevance/lab-relevance.compon
 import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
 import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
+import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.comp
     LabIndustryComponent,
     LabCheckComponent,
     LabQuizComponent,
-    BakebotComponent
+    BakebotComponent,
+    LabRefsComponent
   ],
     imports: [
         AppRoutingModule,
