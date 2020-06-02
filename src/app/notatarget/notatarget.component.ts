@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {fib, dist} from 'cpu-benchmark';
 // import {shodan-client} from 'shodan-client';
 import {HttpClient} from '@angular/common/http';
-// try using 'cpu-benchmark' in node.js
+
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 
-// API key for shodan.io: 90Y9GrTk3GTa4TQyW6XvNdPk3otyRu4B
+// API key for shodan.io: pohejcwyL1yLuY6wunOkbEaEjhLZM5fw
+// A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
 
 @Component({
   selector: 'app-notatarget',
@@ -14,11 +15,16 @@ import {HttpClient} from '@angular/common/http';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
+  private apiUrl = 'https://api.shodan.io';
+  /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
+   * I DON'T WANT TO LOSE ACCESS.
+   */
+  private apiKey = 'pohejcwyL1yLuY6wunOkbEaEjhLZM5fw';
   // private searchOps = {
   //   facets: 'country:100'
   // };
 
-  constructor() {// private http: HttpClient) {
+  constructor(private http: HttpClient) {
       this.questions = [
 
         {prompt: '1) Which quality/characteristic of a botnet explains why attacking small machines is so cost efficient?',
@@ -49,9 +55,15 @@ export class NotatargetComponent implements OnInit {
     // Server: SQ-WEBCAM
   }
 
-
+  async getHostsCount(query: string, facets: string) {
+    const tmpUrl = this.apiUrl + '/shodan/host/count' + '?key=' + this.apiKey
+    + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
+    this.http.get(tmpUrl, {}).subscribe((res) => {
+      console.log(res);
+    });
+  }
   ngOnInit() {
-    console.log('41st Fibonacci number: ');
-    console.log(fib(41));
+    //console.log('41st Fibonacci number: ');
+    //console.log(fib(41));
   }
 }

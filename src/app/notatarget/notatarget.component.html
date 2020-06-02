@@ -80,12 +80,21 @@
 <!-- DDoS SVG: Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 -->
 <app-lab-activity>
+  <div activity>
   <nb-card-body>
     <p>
       In this activity, you will learn how much power a hacker wields with a botnet.  Select the type of internet
       device, the number of devices connected, and see what your botnet will be capable of doing.
     </p>
+<!--    TEST CONTENT BELOW ... REMOVE THIS STUPH -->
+    <div>Content testing:</div>
+    <div class="row justify-content-around">
+      <button nbButton (click)="getHostsCount('Server%3A+SQ-WEBCAM', '')">Get global num webcams</button>
+      <button nbButton (click)="getHostsCount('scada', '')">Get SCADA systems</button>
+    </div>
+<!--    END TEST CONTENT   -->
   </nb-card-body>
+  </div>
 </app-lab-activity>
 
 <app-lab-relevance>
@@ -93,6 +102,8 @@
 
     <p>
       <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
+      <br>
+      <a href="https://shodan.io" target="_blank"> Shodan.io: IoT search engine</a>
     </p>
   </div>
   <figure headerImage>
