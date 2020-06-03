@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('page title should be "Miscolabs"', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to encrapter!');
+    expect(page.getTitleText()).toEqual('Miscolabs');
   });
 
   afterEach(async () => {
