@@ -55,6 +55,14 @@ export class NotatargetComponent implements OnInit {
     // Server: SQ-WEBCAM
   }
 
+  /**
+   * Get number of devices associated with a query.
+   * This function will not consume credits with Shodan. Please avoid
+   * modifying it.  Carson doesn't want to be charged.
+   *
+   * @param query A string that is a meaningful query through shodan.io
+   * @param facets Not sure how to use this yet... leave blank
+   */
   async getHostsCount(query: string, facets: string) {
     const tmpUrl = this.apiUrl + '/shodan/host/count' + '?key=' + this.apiKey
     + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
@@ -63,7 +71,7 @@ export class NotatargetComponent implements OnInit {
     });
   }
   ngOnInit() {
-    //console.log('41st Fibonacci number: ');
-    //console.log(fib(41));
+    // console.log('41st Fibonacci number: ');
+    // console.log(fib(41));
   }
 }
