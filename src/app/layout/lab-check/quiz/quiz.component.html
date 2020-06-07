@@ -25,13 +25,13 @@
     <div *ngFor="let question of this.questions; let j = index">
       <p>{{question.prompt}}</p>
       <div *ngFor="let option of question.options; let i = index">
-        <input type="radio" value="{{i}}"  [formControlName]="question.prompt" >
+        <input [formControlName]="question.prompt" type="radio" value="{{i}}">
         <label>{{option}}
 
         </label>
       </div>
       <p>{{question.result}}</p>
     </div>
-    <input type="button" (click)="grade()" value="Check Answers" />
+    <input (click)="grade()" type="button" value="Check Answers"/>
   </div>
 </form>

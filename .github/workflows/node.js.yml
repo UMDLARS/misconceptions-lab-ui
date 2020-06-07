@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: dist
-        path: dist
+        path: dist/returnOfTheJulian/
   
   deploy:
     needs: build
@@ -47,13 +47,14 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
+      - name: PWD
+        run: pwd
       - name: Display structure of downloaded files
         run: ls -R
       - name: rsync Deploy
         uses: burnett01/rsync-deployments@4.0
         with:
           switches: -avzr --delete
-          path: dist/return-of-the-julian/
           remote_path: ${{ secrets.DEPLOY_PATH }}
           remote_host: ${{ secrets.DEPLOY_HOST }}
           remote_user: ${{ secrets.DEPLOY_USER }}
