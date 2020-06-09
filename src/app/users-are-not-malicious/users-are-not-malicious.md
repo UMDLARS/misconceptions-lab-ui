@@ -28,8 +28,6 @@ Back in the days of MySpace, a 20-year-old named Samy Kamkar launched a successf
 ## Activity
  In this activity, you play the role of a user of a fabulous new android, the BakeBot 5000 -- a robot capable of parsing recipes written in a special language and baking splendiferous comestibles. Unfortunately, the original developer of the BakeBot made the assumption that, since people would never ask BakeBot to do anything weird, the developer didn’t need to protect BakeBot from any kind of edge cases resulting from malicious or unexpected input. Your task is to find all the ways that BakeBot can be misused. Each time you find something bad that BakeBot can do, you can set a constraint that is used to make sure that BakeBot’s input fits within the required parameter. Once you’ve found all the edge cases and set all the constraints, you’ve completed the activity!
 
-Congratulations! You've just been hired as a Quality Assurance Inspector to test the latest in home innovation: The BakeBot 5000! Unfortunately, you suspect the software development team has naively assumed users would only enter meaningful input. Try using the BakeBot 5000, and see if you can find a vulnerability in its programming. 
-
 <app-bakebot></app-bakebot>
 
 <hr>
