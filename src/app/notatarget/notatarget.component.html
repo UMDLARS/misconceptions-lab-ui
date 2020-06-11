@@ -81,17 +81,29 @@
 -->
 <app-lab-activity>
   <div activity>
-  <nb-card-body>
+  <nb-card-body style="">
     <p>
       In this activity, you will learn how much power a hacker wields with a botnet.  Select the type of internet
       device, the number of devices connected, and see what your botnet will be capable of doing.
     </p>
-<!--    TEST CONTENT BELOW ... REMOVE THIS STUPH -->
-    <div>Content testing:</div>
-    <div class="row justify-content-around">
-      <button nbButton (click)="getHostsCount('Server%3A+SQ-WEBCAM', '')">Get global num webcams</button>
-      <button nbButton (click)="getHostsCount('scada', '')">Get SCADA systems</button>
+    <div class="welcome" [hidden]="!welcomeScreen">
+      <h3>Attack Calculator</h3>
+      <div style="padding-top: 10%"><button nbButton (click)="begin()">Start</button></div>
     </div>
+    <div class="scene" [hidden]="welcomeScreen">
+      <div class="list">
+        <div class="category">Devices</div>
+        <div class="item">Laptop</div>
+        <div class="item">Smartphone</div>
+        <div class="item">Webcam</div>
+      </div>
+    </div>
+<!--    TEST CONTENT BELOW ... REMOVE THIS STUPH -->
+<!--    <div>Content testing:</div>-->
+<!--    <div class="row justify-content-around">-->
+<!--      <button nbButton (click)="getHostsCount('Server%3A+SQ-WEBCAM', '')">Get global num webcams</button>-->
+<!--      <button nbButton (click)="getHostsCount('scada', '')">Get SCADA systems</button>-->
+<!--    </div>-->
 <!--    END TEST CONTENT   -->
   </nb-card-body>
   </div>

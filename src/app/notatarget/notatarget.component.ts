@@ -20,6 +20,7 @@ export class NotatargetComponent implements OnInit {
    * I DON'T WANT TO LOSE ACCESS.
    */
   private apiKey = 'pohejcwyL1yLuY6wunOkbEaEjhLZM5fw';
+  welcomeScreen = true;
   // private searchOps = {
   //   facets: 'country:100'
   // };
@@ -73,5 +74,9 @@ export class NotatargetComponent implements OnInit {
   ngOnInit() {
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
+  }
+
+  public begin() {
+    this.welcomeScreen = !this.welcomeScreen;
   }
 }
