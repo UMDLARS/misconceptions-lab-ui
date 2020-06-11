@@ -58,9 +58,9 @@
         <label for="maxWaterInput">Enter max amount of water:</label>
         <input nbInput type=number placeholder="Max Water" id="maxWaterInput">
       </div>
-      <div class="constraint" id="illegalIngredient" [hidden]="!Constraint.hasPoisonConstraint">
-        <label for="illegalIngredientInput">Enter list of banned ingredients:</label>
-        <input nbInput type=text placeholder="Illegal ingredients" id="illegalIngredientInput">
+      <div class="constraint" id="approvedIngredient" [hidden]="!Constraint.hasPoisonConstraint">
+        <label for="approvedIngredientInput">Enter list of approved ingredients:</label>
+        <input nbInput type=text placeholder="Approved ingredients" id="approvedIngredientInput">
       </div>
       <div class="dialog" [hidden]="!win">
         {{winner}}

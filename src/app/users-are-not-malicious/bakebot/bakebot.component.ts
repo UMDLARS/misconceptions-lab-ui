@@ -38,7 +38,7 @@ export class BakebotComponent implements OnInit {
     maxTime: number;
     minTemp: number;
     maxTemp: number;
-    illegalIngredients: string;
+    approvedIngredients: string;
   }();
   constructor() {}
 
@@ -152,7 +152,6 @@ export class BakebotComponent implements OnInit {
     }
 
     i.onload = () => {
-      // this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
       (document.getElementById('robot') as HTMLImageElement).src = i.src;
     };
   }
@@ -189,7 +188,7 @@ export class BakebotComponent implements OnInit {
     if (hasBakeLine) {
       // short circuit when incorrect bake line
       if (! getBake.test(lines[lines.length - 1])) {
-        this.displayAlert('You need to BAKE it!');
+        this.displayAlert('The last line must be a BAKE instruction!');
         this.resetBackground();
         return;
       }
@@ -204,7 +203,7 @@ export class BakebotComponent implements OnInit {
       // console.log('time is: ' + time);
     }  else { // (!hasBakeLine) {
       // person didn't enter BAKE line
-      this.displayAlert('You need to BAKE it!');
+      this.displayAlert('The last line must be a BAKE instruction!');
       this.resetBackground();
       return;
     }
@@ -262,42 +261,33 @@ export class BakebotComponent implements OnInit {
         return;
       }
 
-      if (this.validIngredients.some(v => ingredient.includes(v))) {
-        if (quantity > 20) {
-          if (ingredient === 'water') {
-            if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
-              // alert('That\'s too much water!');
-              this.displayAlert('That\'s too much water!');
-              this.resetBackground();
-              return;
-            }
-            flood = true;
-          } else {
-            if (this.Constraint.hasMaxIngredientConstraint && quantity > this.Constraint.maxIngredient) {
-              this.displayAlert('That\'s too much ' + ingredient + '!');
-              this.resetBackground();
-              return;
-            }
-            tooMuchIngredient = true;
-          }
+      /* Check for ingredient in approved list */
+      if (this.Constraint.hasPoisonConstraint) {
+        if (!this.Constraint.approvedIngredients.match(ingredient)) {
+          this.displayAlert(ingredient + ' is not approved!');
+          this.resetBackground();
+          return;
         }
-        if (ingredient === 'water' && quantity > 10) {
+      }
+
+      if (this.validIngredients.some(v => ingredient.includes(v))) {
+        if (ingredient === 'water') {
           if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
             this.displayAlert('That\'s too much water!');
             this.resetBackground();
             return;
+          } else if (quantity > 10) {
+            flood = true;
           }
-          flood = true;
+        } else if (this.Constraint.hasMaxIngredientConstraint && quantity > this.Constraint.maxIngredient) {
+              this.displayAlert('That\'s too much ' + ingredient + '!');
+              this.resetBackground();
+              return;
+        } else if (quantity > 20) {
+              tooMuchIngredient = true;
         }
       } else if (this.toxicIngredients.some(v => ingredient.includes(v))) {
-        // ingredient is one of the defined toxic ingredients
-        if (this.Constraint.hasPoisonConstraint) {
-          if (this.Constraint.illegalIngredients.match(ingredient)) {
-            this.displayAlert(ingredient + ' is not allowed!');
-            this.resetBackground();
-            return;
-          }
-        }
+        // ingredient is toxic!
         poison = true;
       } else { // ingredient doesn't exist
         invalidIngredient = true;
@@ -317,35 +307,27 @@ export class BakebotComponent implements OnInit {
     if (spacetimeParadox) {
       this.drawEnding('spacetime');
       this.Constraint.hasMinIngredientConstraint = true;
-      // document.getElementById('minIngredient').style.visibility = 'visible';
     } else if (flood) {
       this.drawEnding('flood');
       this.Constraint.hasMaxWaterConstraint = true;
-      // document.getElementById('maxWater').style.visibility = 'visible';
     } else if (fire) {
       this.drawEnding('fire');
       this.Constraint.hasMaxTempConstraint = true;
-      // document.getElementById('maxTemp').style.visibility = 'visible';
     } else if (cold) {
       this.drawEnding('cold');
       this.Constraint.hasMinTempConstraint = true;
-      // document.getElementById('minTemp').style.visibility = 'visible';
     } else if (apocalypse) {
       this.drawEnding('apocalypse');
       this.Constraint.hasMaxTimeConstraint = true;
-      // document.getElementById('maxTime').style.visibility = 'visible';
     } else if (past) {
       this.drawEnding('past');
       this.Constraint.hasMinTimeConstraint = true;
-      // document.getElementById('minTime').style.visibility = 'visible';
     } else if (poison) {
       this.drawEnding('poison');
       this.Constraint.hasPoisonConstraint = true;
-      // document.getElementById('illegalIngredient').style.visibility = 'visible';
     } else if (tooMuchIngredient) {
       this.drawEnding('tooMuchIngredient');
       this.Constraint.hasMaxIngredientConstraint = true;
-      // document.getElementById('maxIngredient').style.visibility = 'visible';
     } else if (!invalidIngredient) {
       this.drawEnding('success');
     }
@@ -415,7 +397,7 @@ export class BakebotComponent implements OnInit {
       this.Constraint.maxIngredient = parseFloat((document.getElementById('maxIngredientInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasPoisonConstraint) {
-      this.Constraint.illegalIngredients = (document.getElementById('illegalIngredientInput') as HTMLInputElement).value;
+      this.Constraint.approvedIngredients = (document.getElementById('approvedIngredientInput') as HTMLInputElement).value;
     }
   }
 
@@ -445,8 +427,6 @@ export class BakebotComponent implements OnInit {
     const i = new Image();
     i.src = 'assets/images/robot/bakebot5000.jpg';
     i.onload = () => {
-      // console.log('Drawing kitchen');
-      // this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
       (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000.jpg';
     };
   }
@@ -456,7 +436,6 @@ export class BakebotComponent implements OnInit {
     const i = new Image();
     i.src = 'assets/images/robot/bakebot5000.jpg';
     i.onload = () => {
-      // this.context.drawImage(i, 0, 0, this.canvas.width, this.canvas.height);
       (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000.jpg';
     };
     if (!this.win && this.Constraint.hasPoisonConstraint && this.Constraint.hasMaxWaterConstraint
