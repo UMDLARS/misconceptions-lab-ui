@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-body>
+    <div class="row">
+      <div class="col">
+        <textarea class="text-monospace" nbInput fullWidth [(ngModel)]="plaintext" (ngModelChange)="updateCiphertext()"
+        ></textarea>
+      </div>
+      <div class="col">
+        <label>
+<textarea class="text-monospace" nbInput fullWidth disabled [(ngModel)]="ciphertext"
+          (ngModelChange)="updateCiphertext()"></textarea>
+        </label>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
