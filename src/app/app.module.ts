@@ -95,7 +95,7 @@ import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-        NbProgressBarModule,
+    NbProgressBarModule,
     NbLayoutModule,
     NbSidebarModule.forRoot(),
     NbButtonModule,
@@ -116,7 +116,7 @@ import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
     HttpClientModule,
     Ng2SmartTableModule,
     NbAlertModule,
-        NgxEchartsModule.forRoot({echarts}),
+    NgxEchartsModule.forRoot({echarts}),
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
