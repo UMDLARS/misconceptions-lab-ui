@@ -54,6 +54,7 @@ import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
 import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
 import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
+import { HmacExerciseComponent } from './encryption-auto-integrity/hmac-exercise/hmac-exercise.component';
 import { LineChartComponent } from './notatarget/line-chart/line-chart.component';
 
 @NgModule({
@@ -87,6 +88,7 @@ import { LineChartComponent } from './notatarget/line-chart/line-chart.component
     LabQuizComponent,
     BakebotComponent,
     LabRefsComponent,
+    HmacExerciseComponent,
     LineChartComponent
   ],
     imports: [
