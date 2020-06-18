@@ -107,6 +107,6 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
       .attr('y', d => this.yScale(d[1]))
       .attr('height', d => this.height - this.yScale(d[1]));
 
-    console.log('y attr: ' + this.height);
+    console.log('height: ' + this.height);
   }
 }

@@ -93,7 +93,13 @@ export class NotatargetComponent implements OnInit {
   }
 
   public calculate() {
-    this.chartData = [1, 2, 3, 4, 5, 6, 7];
+    this.chartData = [];
+    for (let i = 0; i < 7; i++) {
+      this.chartData.push([
+        `Index ${i}`,
+        Math.floor(Math.random() * 100)
+      ]);
+    }
   }
 
   public updateOption() {

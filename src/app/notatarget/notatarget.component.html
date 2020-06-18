@@ -90,7 +90,7 @@
       <h3>Attack Calculator</h3>
       <div style="padding-top: 10%"><button nbButton (click)="begin()">Start</button></div>
     </div>
-    <div class="scene" [hidden]="welcomeScreen">
+    <div class="scene" [hidden]="!welcomeScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
       <div class="column">
 <!--        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">-->
