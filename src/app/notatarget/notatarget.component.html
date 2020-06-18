@@ -139,6 +139,7 @@
           <button nbButton (click)="updateOption()">Go!</button>
         </div>
       </div>
+      <app-line-chart *ngIf="chartData" [data]="chartData"></app-line-chart>
       <!--    BEGIN GRAPH STUFF-->
 <!--      <div echarts class="demo-chart" [options]="chartOption" [merge]="updateOption"></div>-->
     </div>

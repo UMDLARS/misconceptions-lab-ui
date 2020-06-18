@@ -52,6 +52,7 @@ import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
 import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
 import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
+import { LineChartComponent } from './notatarget/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
     LabCheckComponent,
     LabQuizComponent,
     BakebotComponent,
-    LabRefsComponent
+    LabRefsComponent,
+    LineChartComponent
   ],
     imports: [
         AppRoutingModule,

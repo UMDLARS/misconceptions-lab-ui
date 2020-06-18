@@ -23,27 +23,27 @@ export class NotatargetComponent implements OnInit {
   public device;
   public operation;
   public target;
-  public data: any[];
+  public chartData: any[];
   public specs = {
     laptop: 3,
     smartphone: 1,
     iot: 0.5
   };
-  public chartOption: EChartOption = {
-    xAxis: {
-      type: 'category',
-      data: ['1', '2', '3', '4', '5', '6', '7'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [0, 0, 0, 0, 0, 0, 0],
-        type: 'line',
-      },
-    ],
-  };
+  // public chartOption: EChartOption = {
+  //   xAxis: {
+  //     type: 'category',
+  //     data: ['1', '2', '3', '4', '5', '6', '7'],
+  //   },
+  //   yAxis: {
+  //     type: 'value',
+  //   },
+  //   series: [
+  //     {
+  //       data: [0, 0, 0, 0, 0, 0, 0],
+  //       type: 'line',
+  //     },
+  //   ],
+  // };
 
   constructor(private http: HttpClient) {
       this.questions = [
@@ -89,10 +89,11 @@ export class NotatargetComponent implements OnInit {
   ngOnInit() {
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
+    this.calculate();
   }
 
   public calculate() {
-    this.data = [1, 2, 3, 4, 5, 6, 7];
+    this.chartData = [1, 2, 3, 4, 5, 6, 7];
   }
 
   public updateOption() {
