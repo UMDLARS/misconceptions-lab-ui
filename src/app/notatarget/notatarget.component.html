@@ -91,12 +91,56 @@
       <div style="padding-top: 10%"><button nbButton (click)="begin()">Start</button></div>
     </div>
     <div class="scene" [hidden]="welcomeScreen">
-      <div class="list">
-        <div class="category">Devices</div>
-        <div class="item">Laptop</div>
-        <div class="item">Smartphone</div>
-        <div class="item">Webcam</div>
+      <span style="text-align: center"><h3>Attack Calculator</h3></span>
+      <div class="column">
+<!--        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">-->
+<!--          <button>-->
+<!--            <label>-->
+<!--              <input type="radio" name="options" id="option1" autocomplete="off" checked><h3>Laptop/Desktop Computer</h3>-->
+<!--            </label>-->
+<!--          </button>-->
+<!--          <img src="assets/images/bank.png" width="100px"/><p>what do you think this is?</p>-->
+<!--          <label class="btn btn-secondary">-->
+<!--            <input type="radio" name="options" id="option2" autocomplete="off"> <h3>Smartphones</h3><p>📱📱📱📱📱📱📱</p>-->
+<!--          </label>-->
+<!--          <label class="btn btn-secondary">-->
+<!--            <input type="radio" name="options" id="option3" autocomplete="off"> <h3>IoT</h3><p>Internet of Shit</p>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons" style="margin: 0.5em">-->
+<!--          <label class="btn btn-secondary active" style="margin: 0.5em">-->
+<!--            <input type="radio" name="options" id="laptop" autocomplete="off" checked="checked"><h4>Laptop/Desktop Computer</h4>-->
+<!--            <p>what do you think this is?</p>-->
+<!--          </label>-->
+<!--          <label class="btn btn-secondary" style="margin: 0.5em">-->
+<!--            <input type="radio" name="options" id="smartphone" autocomplete="off" checked> <h4>Smartphones</h4>-->
+<!--          </label>-->
+<!--          <label class="btn btn-secondary" style="margin: 0.5em">-->
+<!--            <input type="radio" name="options" id="iot" autocomplete="off" checked> <h4>IoT</h4><p>Internet of Shit</p>-->
+<!--          </label>-->
+<!--        </div>-->
+        <div class="column justify-content-center">
+          <nb-select placeholder="Device" id="deviceSelector" [selected]="device">
+            <nb-option value="laptop">Laptop/Desktop Computer</nb-option>
+            <nb-option value="smartphone">Smartphone</nb-option>
+            <nb-option value="iot">IoT</nb-option>
+          </nb-select>
+          <nb-select placeholder="Operation" id="operationSelector" [selected]="operation">
+            <nb-option value="cryptojacking">Cryptojacking</nb-option>
+            <nb-option value="ddos">DDoS</nb-option>
+          </nb-select>
+          <nb-select placeholder="Target" id="targetSelector" [selected]="target">
+            <nb-option value="bitcoin">Bitcoin</nb-option>
+            <nb-option value="monero">Monero</nb-option>
+            <nb-option value="amonaz">Amonaz.com</nb-option>
+            <nb-option value="isp">Internet, Co.</nb-option>
+            <nb-option value="healthcare">Health, Inc.</nb-option>
+          </nb-select>
+          <button nbButton (click)="updateOption()">Go!</button>
+        </div>
       </div>
+      <!--    BEGIN GRAPH STUFF-->
+<!--      <div echarts class="demo-chart" [options]="chartOption" [merge]="updateOption"></div>-->
     </div>
 <!--    TEST CONTENT BELOW ... REMOVE THIS STUPH -->
 <!--    <div>Content testing:</div>-->

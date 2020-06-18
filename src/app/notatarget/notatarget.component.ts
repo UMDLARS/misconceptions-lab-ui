@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {fib, dist} from 'cpu-benchmark';
-// import {shodan-client} from 'shodan-client';
 import {HttpClient} from '@angular/common/http';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
@@ -20,10 +19,31 @@ export class NotatargetComponent implements OnInit {
    * I DON'T WANT TO LOSE ACCESS.
    */
   private apiKey = 'pohejcwyL1yLuY6wunOkbEaEjhLZM5fw';
-  welcomeScreen = true;
-  // private searchOps = {
-  //   facets: 'country:100'
-  // };
+  public welcomeScreen = true;
+  public device;
+  public operation;
+  public target;
+  public data: any[];
+  public specs = {
+    laptop: 3,
+    smartphone: 1,
+    iot: 0.5
+  };
+  public chartOption: EChartOption = {
+    xAxis: {
+      type: 'category',
+      data: ['1', '2', '3', '4', '5', '6', '7'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [0, 0, 0, 0, 0, 0, 0],
+        type: 'line',
+      },
+    ],
+  };
 
   constructor(private http: HttpClient) {
       this.questions = [
@@ -48,11 +68,6 @@ export class NotatargetComponent implements OnInit {
           result: ' '}
       ];
 
-    // const url = 'http://10.1.1.12:5000';
-    // this.http.get(url).subscribe(
-    //   data => this.doSomething(data)
-    // );
-
     // Server: SQ-WEBCAM
   }
 
@@ -74,6 +89,14 @@ export class NotatargetComponent implements OnInit {
   ngOnInit() {
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
+  }
+
+  public calculate() {
+    this.data = [1, 2, 3, 4, 5, 6, 7];
+  }
+
+  public updateOption() {
+    this.calculate();
   }
 
   public begin() {
