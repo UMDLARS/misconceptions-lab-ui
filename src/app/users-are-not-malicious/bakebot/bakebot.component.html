@@ -1,14 +1,19 @@
-<link rel="preload" href="assets/images/robot/bakebot5000.jpg" as="image">
-<link rel="preload" href="assets/images/robot/apocalypse.jpg" as="image">
-<link rel="preload" href="assets/images/robot/cold.jpg" as="image">
-<link rel="preload" href="assets/images/robot/dino.jpg" as="image">
-<link rel="preload" href="assets/images/robot/fire.jpg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000.svg-base" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-future.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-frozen.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-prehistoric.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-fire.svg" as="image">
 <link rel="preload" href="assets/images/robot/flooded.jpg" as="image">
 <link rel="preload" href="assets/images/robot/kitchen.jpg" as="image">
 <link rel="preload" href="assets/images/robot/poison.jpg" as="image">
-<link rel="preload" href="assets/images/robot/sad.jpg" as="image">
-<link rel="preload" href="assets/images/robot/spacetime.jpg" as="image">
-<link rel="preload" href="assets/images/robot/success.jpg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-too-much-dry.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-spacetime.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-success-a-thing.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-success-cake.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-nope.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-what.svg" as="image">
+
+
 
 <nb-card-body>
   <p>
@@ -23,7 +28,7 @@
   <div class="d-flex flex-wrap justify-content-center" style="flex-direction: row">
 
     <div class="flex-column col-sm-12 col-md-9 col-lg-8" style="max-width: 1024px">
-      <img alt="BakeBot 5000" src="assets/images/robot/bakebot5000.jpg" id="robot">
+      <img alt="BakeBot 5000" src="assets/images/robot/bakebot5000-base.svg" id="robot">
       <nb-alert id="welcomeAlert" status="primary" closable (close)="onCloseWelcome()" [hidden]="hideWelcome">
         {{welcomeMsg}}
       </nb-alert>
