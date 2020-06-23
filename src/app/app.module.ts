@@ -1,4 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
+import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -111,6 +113,7 @@ import { LineChartComponent } from './notatarget/line-chart/line-chart.component
         HttpClientModule,
         Ng2SmartTableModule,
         NbAlertModule,
+        NgxEchartsModule.forRoot({echarts}),
     ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]

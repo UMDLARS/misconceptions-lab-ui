@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild} from '@angular/core';
+import {OnInit, Component, OnChanges} from '@angular/core';
 import * as d3 from 'd3';
 
 @Component({
@@ -6,107 +6,88 @@ import * as d3 from 'd3';
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements AfterViewInit, OnChanges {
-  @ViewChild('chart', {read: ElementRef}) chartContainer: ElementRef;
-  @Input() private data: Array<any>;
-  private margin: any = { top: 20, bottom: 20, left: 20, right: 20};
-  private chart: any;
-  private width: number;
-  private height: number;
-  private xScale: any;
-  private yScale: any;
-  private colors: any;
-  private xAxis: any;
-  private yAxis: any;
+export class LineChartComponent implements OnInit, OnChanges {
+  options: any;
+  updateOptions: any;
+  // private oneDay = 24 * 3600 * 1000;
+  // private now: Date;
+  private value: number;
+  private data: any[];
+  private xAxisData: number[];
+  private specs: number;
 
   constructor() { }
 
-  ngAfterViewInit() {
-    console.log(this.data);
-    this.createChart();
-    if (this.data) {
-      this.updateChart();
+  ngOnInit() {
+    // generate some random testing data:
+    this.data = [];
+    this.xAxisData = [];
+    // this.now = new Date(1997, 9, 3);
+    this.specs = 7;
+    this.value = Math.random() * 1000;
+
+    for (let i = 0; i < 10000; i++) {
+      this.data.push({
+        x: `${i} devices`,
+        value: i * this.specs
+      });
+      this.xAxisData.push(i);
     }
+    console.log(this.data[9]);
+
+    // initialize chart options:
+    this.options = {
+      title: {
+        text: 'Fake Data'
+      },
+      tooltip: {
+        trigger: 'axis',
+        // formatter: (params) => {
+        //   params = params[0];
+        //   // const date = new Date(params.name);
+        //   return params.x + ' : ' + params.value;
+        // },
+        axisPointer: {
+          animation: false
+        }
+      },
+      xAxis: {
+        type: 'value',
+        data: this.xAxisData,
+        splitLine: {
+          show: false
+        }
+      },
+      yAxis: {
+        type: 'value',
+        boundaryGap: [0, '10%'],
+        splitLine: {
+          show: false
+        }
+      },
+      series: [{
+        name: 'Mocking Data',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: this.data
+      }]
+    };
   }
 
   ngOnChanges() {
-    if (this.chart) {
-      this.updateChart();
-    }
   }
 
-  createChart() {
-    const element = this.chartContainer.nativeElement;
-    this.width = element.offsetWidth - this.margin.left - this.margin.right;
-    this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
-    const svg = d3.select(element).append('svg')
-      .attr('width', element.offsetWidth)
-      .attr('height', element.offsetHeight);
+  // randomData() {
+  //   this.now = new Date(this.now.getTime() + this.oneDay);
+  //   this.value = this.value + Math.random() * 21 - 10;
+  //   return {
+  //     name: this.now.toString(),
+  //     value: [
+  //       [this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join('/'),
+  //       Math.round(this.value)
+  //     ]
+  //   };
+  // }
 
-    // chart plot area
-    this.chart = svg.append('g')
-      .attr('class', 'bars')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
-
-    // define X & Y domains
-    const xDomain = this.data.map(d => d[0]);
-    const yDomain = [0, d3.max(this.data, d => d[1])];
-
-    // create scales
-    this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
-    this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
-
-    // bar colors
-    this.colors = d3.scaleLinear().domain([0, this.data.length]).range(['red', 'blue'] as any[]);
-
-    // x & y axis
-    this.xAxis = svg.append('g')
-      .attr('class', 'axis axis-x')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top + this.height})`)
-      .call(d3.axisBottom(this.xScale));
-    this.yAxis = svg.append('g')
-      .attr('class', 'axis axis-y')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
-      .call(d3.axisLeft(this.yScale));
-  }
-
-  updateChart() {
-    // update scales & axis
-    this.xScale.domain(this.data.map(d => d[0]));
-    this.yScale.domain([0, d3.max(this.data, d => d[1])]);
-    this.colors.domain([0, this.data.length]);
-    this.xAxis.transition().call(d3.axisBottom(this.xScale));
-    this.yAxis.transition().call(d3.axisLeft(this.yScale));
-
-    const update = this.chart.selectAll('.bar')
-      .data(this.data);
-
-    // remove exiting bars
-    update.exit().remove();
-
-    // update existing bars
-    this.chart.selectAll('.bar').transition()
-      .attr('x', d => this.xScale(d[0]))
-      .attr('y', d => this.yScale(d[1]))
-      .attr('width', d => this.xScale.bandwidth())
-      .attr('height', d => this.height - this.yScale(d[1]))
-      .style('fill', (d, i) => this.colors(i));
-
-    // add new bars
-    update
-      .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', d => this.xScale(d[0]))
-      .attr('y', d => this.yScale(0))
-      .attr('width', this.xScale.bandwidth())
-      .attr('height', 0)
-      .style('fill', (d, i) => this.colors(i))
-      .transition()
-      .delay((d, i) => i * 10)
-      .attr('y', d => this.yScale(d[1]))
-      .attr('height', d => this.height - this.yScale(d[1]));
-
-    console.log('height: ' + this.height);
-  }
 }
