@@ -1,4 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
+import * as echarts from 'echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -52,6 +54,7 @@ import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
 import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
 import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
+import { LineChartComponent } from './notatarget/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +86,8 @@ import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
     LabCheckComponent,
     LabQuizComponent,
     BakebotComponent,
-    LabRefsComponent
+    LabRefsComponent,
+    LineChartComponent
   ],
     imports: [
         AppRoutingModule,
@@ -109,6 +113,7 @@ import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
         HttpClientModule,
         Ng2SmartTableModule,
         NbAlertModule,
+        NgxEchartsModule.forRoot({echarts}),
     ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
