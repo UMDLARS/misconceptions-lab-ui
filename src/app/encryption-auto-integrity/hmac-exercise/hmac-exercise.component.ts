@@ -15,7 +15,7 @@ export class HmacExerciseComponent implements OnInit {
     padding: CryptoJS.pad.NoPadding
   };
 
-  plainText = 0;
+  plainText = 20;
   cipherText = '';
   decryptedText = '';
   transformMask = Array(32);
@@ -28,6 +28,7 @@ export class HmacExerciseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.updateCipherText();
   }
 
   updateCipherText() {
@@ -44,7 +45,7 @@ export class HmacExerciseComponent implements OnInit {
   updateDecryptedText() {
     this.modifyCipherObject();
 
-    this.decryptedText = CryptoJS.AES.decrypt(this.cipherObject, this.key, this.cipherParams);
+    this.decryptedText = Number.parseInt(CryptoJS.AES.decrypt(this.cipherObject, this.key, this.cipherParams), 16).toString();
   }
 
   modifyCipherObject() {
