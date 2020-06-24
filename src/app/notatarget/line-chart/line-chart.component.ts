@@ -1,92 +1,90 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Chart} from 'chart.js';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit, OnChanges {
-  options: any;
-  updateOptions: any;
-  // private oneDay = 24 * 3600 * 1000;
-  // private now: Date;
-  private value: number;
-  private data: any[];
-  private xAxisData: number[];
-  private specs: number;
+export class LineChartComponent implements OnInit, AfterViewInit {
+  @ViewChild('lineChart') chartRef: ElementRef;
+  chart: any;
 
-  constructor() { }
+  dataPoints: any[] = [];
+  chartContext: any;
+  labels: any[] = [];
+
+  specs = 7;
+
+  constructor() {
+  }
 
   ngOnInit() {
     // generate some random testing data:
-    this.data = [];
-    this.xAxisData = [];
-    // this.now = new Date(1997, 9, 3);
-    this.specs = 7;
-    this.value = Math.random() * 1000;
 
     for (let i = 0; i < 10000; i++) {
-      this.data.push({
-        x: `${i} devices`,
-        value: i * this.specs
-      });
-      this.xAxisData.push(i);
+      this.dataPoints.push({x: i, y: i * this.specs});
+      this.labels.push(i.toString() + ' devices');
     }
-    console.log(this.data[9]);
-
-    // initialize chart options:
-    this.options = {
-      title: {
-        text: 'Fake Data'
-      },
-      tooltip: {
-        trigger: 'axis',
-        // formatter: (params) => {
-        //   params = params[0];
-        //   // const date = new Date(params.name);
-        //   return params.x + ' : ' + params.value;
-        // },
-        axisPointer: {
-          animation: false
-        }
-      },
-      xAxis: {
-        type: 'value',
-        data: this.xAxisData,
-        splitLine: {
-          show: false
-        }
-      },
-      yAxis: {
-        type: 'value',
-        boundaryGap: [0, '10%'],
-        splitLine: {
-          show: false
-        }
-      },
-      series: [{
-        name: 'Mocking Data',
-        type: 'line',
-        showSymbol: false,
-        hoverAnimation: false,
-        data: this.data
-      }]
-    };
+    console.log(this.dataPoints);
   }
 
-  ngOnChanges() {
+  ngAfterViewInit() {
+    // let index = 0;
+    // for (let i = 0; i < 50; i++) {
+    //   this.dataPoints.push({x: index, y: 0});
+    //   this.labels.push(index);
+    //   index++;
+    // }
+    this.chartContext = this.chartRef.nativeElement.getContext('2d');
+    this.initChart();
   }
 
-  // randomData() {
-  //   this.now = new Date(this.now.getTime() + this.oneDay);
-  //   this.value = this.value + Math.random() * 21 - 10;
-  //   return {
-  //     name: this.now.toString(),
-  //     value: [
-  //       [this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join('/'),
-  //       Math.round(this.value)
-  //     ]
-  //   };
-  // }
-
+  initChart() {
+    this.chart = new Chart(this.chartContext, {
+      type: 'line',
+      data: {
+        labels: this.labels,
+        datasets: [
+          {
+            data: this.dataPoints,
+            // radius: 5,
+            // fill: true
+            showLine: false
+          }
+        ]
+      },
+      options: {
+        animation: {
+          duration: 0
+        },
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 70000,
+              display: true
+            },
+            type: 'logarithmic'
+          }],
+          yAxes: [{
+            display: true,
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 80000,
+              display: true
+            }
+          }],
+        },
+        tooltip: {
+          enabled: true
+        },
+        responsive: true
+      }
+    });
+  }
 }

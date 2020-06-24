@@ -1,26 +1,25 @@
 import {BrowserModule} from '@angular/platform-browser';
-import * as echarts from 'echarts';
-import { NgxEchartsModule } from 'ngx-echarts';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
-    NbAccordionModule,
-    NbActionsModule, NbAlertModule,
-    NbButtonModule,
-    NbCardModule,
-    NbIconModule,
-    NbInputModule,
-    NbLayoutModule,
-    NbMenuModule,
-    NbMenuService,
-    NbSelectModule,
-    NbSidebarModule,
-    NbStepperModule,
-    NbTabsetModule,
-    NbThemeModule,
-    NbTreeGridModule,
+  NbAccordionModule,
+  NbActionsModule,
+  NbAlertModule,
+  NbButtonModule,
+  NbCardModule,
+  NbIconModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbMenuModule,
+  NbMenuService,
+  NbSelectModule,
+  NbSidebarModule,
+  NbStepperModule,
+  NbTabsetModule,
+  NbThemeModule,
+  NbTreeGridModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
@@ -52,9 +51,9 @@ import {ConfigurationsComponent} from './configurations/configurations.component
 import {LabRelevanceComponent} from './layout/lab-relevance/lab-relevance.component';
 import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
-import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
-import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
-import { LineChartComponent } from './notatarget/line-chart/line-chart.component';
+import {BakebotComponent} from './users-are-not-malicious/bakebot/bakebot.component';
+import {LabRefsComponent} from './layout/lab-refs/lab-refs.component';
+import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -89,32 +88,31 @@ import { LineChartComponent } from './notatarget/line-chart/line-chart.component
     LabRefsComponent,
     LineChartComponent
   ],
-    imports: [
-        AppRoutingModule,
-        BrowserModule,
-        FormsModule,
-        NbLayoutModule,
-        NbSidebarModule.forRoot(),
-        NbButtonModule,
-        NbThemeModule.forRoot({name: 'customized'}),
-        NbCardModule,
-        NbAccordionModule,
-        NbMenuModule.forRoot(),
-        NbTreeGridModule,
-        NbEvaIconsModule,
-        BrowserAnimationsModule,
-        NbTabsetModule,
-        NbStepperModule,
-        ReactiveFormsModule,
-        NbInputModule,
-        NbActionsModule,
-        NbIconModule,
-        NbSelectModule,
-        HttpClientModule,
-        Ng2SmartTableModule,
-        NbAlertModule,
-        NgxEchartsModule.forRoot({echarts}),
-    ],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    NbLayoutModule,
+    NbSidebarModule.forRoot(),
+    NbButtonModule,
+    NbThemeModule.forRoot({name: 'customized'}),
+    NbCardModule,
+    NbAccordionModule,
+    NbMenuModule.forRoot(),
+    NbTreeGridModule,
+    NbEvaIconsModule,
+    BrowserAnimationsModule,
+    NbTabsetModule,
+    NbStepperModule,
+    ReactiveFormsModule,
+    NbInputModule,
+    NbActionsModule,
+    NbIconModule,
+    NbSelectModule,
+    HttpClientModule,
+    Ng2SmartTableModule,
+    NbAlertModule,
+  ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]
 })
