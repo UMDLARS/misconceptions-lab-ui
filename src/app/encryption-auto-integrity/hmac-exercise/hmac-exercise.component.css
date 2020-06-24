@@ -1,0 +1,8 @@
+textarea {
+  resize: none;
+}
+
+input[type='checkbox'] {
+  scale: 2;
+  margin: 1em;
+}
