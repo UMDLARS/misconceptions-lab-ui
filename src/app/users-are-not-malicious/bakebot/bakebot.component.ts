@@ -13,7 +13,6 @@ export class BakebotComponent implements OnInit {
   hideSuccess = true;
   hideBad = true;
   hideConstraintLabel = true;
-  successMsg = 'Congrats! You made a food!';
   hideWelcome = false;
   win = false;
   recipeInput: HTMLTextAreaElement;
@@ -29,6 +28,7 @@ export class BakebotComponent implements OnInit {
     hasMaxIngredientConstraint: boolean;
     hasMinIngredientConstraint: boolean;
     hasPoisonConstraint: boolean;
+    hasUnknownConstraint: boolean;
 
     // user-defined constraint values
     maxWater: number;
@@ -51,18 +51,16 @@ export class BakebotComponent implements OnInit {
     'flour',
     'water',
     'salt',
-    'sugar',
-    'milk',
-    'egg'
+    'sugar'
   ];
   toxicIngredients = [
     'knife',
-    'fork',
-    'spoon',
     'bleach',
     'sponge',
-    'poison',
-    'asbestos'
+    'mixer',
+    'sink',
+    'oven',
+    'range'
   ];
 
   welcome = 'Behold the BakeBot 5000! It can bake anything in an automated fashion!\n' +
@@ -70,22 +68,27 @@ export class BakebotComponent implements OnInit {
     'the recipe pseudocode to bake something new!';
 
   // success = 'Congrats! You made a food!';
-  poison = 'Oh no! Your humans are dead!';
+  successMsg = 'Congrats! You made a food!';
+  poison = 'Oh no! You used something in your recipe that is dangerous for humans! Define a list of accepted ingredients!';
+  confused = 'You confused the robot by naming a nonexistent ingredient!';
   flood = 'You flooded the kitchen!\n' +
-          'Set or adjust a constraint for the maximum amount of water.';
-  spacetime = 'Negative ingredients?! You\'ve created a spacetime paradox!';
-  future = 'Oh no! The food was in the oven so long that Bakebot has been transported to the distant future!';
-  fire = 'You caused a fire!';
-  past = 'Oh no! You sent the robot into the past!';
-  cold = 'You set a negative temperature and froze everything!';
-  tooMuchIngredient = 'That\'s way too much of a dry ingredient!  What a disaster!';
+          ' Set or adjust a constraint for the maximum amount of an ingredient.';
+  spacetime = 'Negative ingredients?! Bakebot can\'t handle that idea! Define a minimum ingredient constraint!';
+  future = 'Oh no! The food was in the oven so long that Bakebot has been transported to the distant future! Define a maximum bake time limit.';
+  fire = 'You caused a fire! Define a maximum temperature limit!';
+  past = 'Oh no! You sent the robot into the past! Define a minimum bake time constraint.';
+  cold = 'You set a negative temperature and froze everything! Define a minimum bake temperature.';
+  tooMuchIngredient = 'That\'s way too much of an ingredient!  What a disaster!\n'
+    + ' Set or adjust a constraint for the maximum amount of an ingredient.';
   winner = 'You found all the constraints! Now BakeBot is safe from harmful input!';
 
+  bake_syntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!'
+
   // this displays first time someone gets a constraint
-  firstConstraintMsg = 'Woah! Some serious nonsense just happened! If a user enters input like that, '
-    + 'BakeBot could do dangerous things! '
-    + 'To prevent users from entering dangerous data, we gave you a tool to check user input '
-    + 'before sending it to BakeBot.';
+  firstConstraintMsg = 'You made Bakebot do something that shouldn\'t be possible! '
+    + 'Each time you do this, we\'ll give you a tool to constrain the relevant input '
+    + 'so that only valid input is processed. '
+    + 'Adjust the new constraint above, and then complete the exercise by finding the five other types of bad input Bakebot doesn\'t catch!';
 
   insertCakeRecipe() {
     this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
@@ -110,34 +113,41 @@ export class BakebotComponent implements OnInit {
       case 'success':
         i.src = 'assets/images/robot/bakebot5000-success-a-thing.svg';
         this.hideSuccess = false;
+        this.successMsg = "Congrats, you made a food!"
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_cake':
         i.src = 'assets/images/robot/bakebot5000-success-cake.svg';
         this.hideSuccess = false;
+        this.successMsg = "Congrats, you made a cake!"
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_bread':
         i.src = 'assets/images/robot/bakebot5000-success-bread.svg';
         this.hideSuccess = false;
+        this.successMsg = "Congrats, you made a loaf of bread!"
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_biscuits':
         i.src = 'assets/images/robot/bakebot5000-success-biscuits.svg';
         this.hideSuccess = false;
+        this.successMsg = "Congrats, you made some biscuits!"
+        this.hideBad = true;
+        this.hideWelcome = true;
+        break;
+      case 'success_nothing':
+        i.src = 'assets/images/robot/bakebot5000-success-nothing.svg';
+        this.hideSuccess = false;
+        this.successMsg = "Congrats, you baked some air!"
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'poison':
-        i.src = 'assets/images/robot/poison.jpg';
+        i.src = 'assets/images/robot/bakebot5000-poisoned.svg';
         this.badDialog(this.poison);
-        break;
-      case 'flood':
-        i.src = 'assets/images/robot/bakebot5000-water.svg';
-        this.badDialog(this.flood);
         break;
       case 'spacetime':
         i.src = 'assets/images/robot/bakebot5000-spacetime.svg';
@@ -158,6 +168,10 @@ export class BakebotComponent implements OnInit {
       case 'cold':
         i.src = 'assets/images/robot/bakebot5000-frozen.svg';
         this.badDialog(this.cold);
+        break;
+      case 'flood':
+        i.src = 'assets/images/robot/bakebot5000-water.svg';
+        this.badDialog(this.flood);
         break;
       case 'tooMuchIngredient':
         i.src = 'assets/images/robot/bakebot5000-too-much-dry.svg';
@@ -184,6 +198,7 @@ export class BakebotComponent implements OnInit {
     let future = false;
     let flood = false;
     let poison = false;
+    const confused = false;
     let cold = false;
     let spacetimeParadox = false;
     let past = false;
@@ -204,7 +219,7 @@ export class BakebotComponent implements OnInit {
     if (hasBakeLine) {
       // short circuit when incorrect bake line
       if (! getBake.test(lines[lines.length - 1])) {
-        this.displayAlert('The last line must be a BAKE instruction!');
+        this.displayAlert(this.bake_syntax);
         this.nopeBackground();
         return;
       }
@@ -219,7 +234,7 @@ export class BakebotComponent implements OnInit {
       // console.log('time is: ' + time);
     }  else { // (!hasBakeLine) {
       // person didn't enter BAKE line
-      this.displayAlert('The last line must be a BAKE instruction!');
+      this.displayAlert(this.bake_syntax);
       this.nopeBackground();
       return;
     }
@@ -231,7 +246,7 @@ export class BakebotComponent implements OnInit {
       return;
     }
     if (this.Constraint.hasMaxTempConstraint && +temp > this.Constraint.maxTemp) {
-      this.displayAlert('That\'s too hot!');
+      this.displayAlert('That\'s too hot! Set the oven to a lower temperature.');
       this.nopeBackground();
       return;
     }
@@ -251,7 +266,7 @@ export class BakebotComponent implements OnInit {
     }
     if (time < 0) {
       past = true;
-    } else if (time > 100000) {
+    } else if (time > 999) {
       future = true;
     }
 
@@ -260,6 +275,7 @@ export class BakebotComponent implements OnInit {
     const getQuantity = /add (-?\d*[.]?\d*)/;
     let ingredient: string;
     let quantity: number;
+    let HasSomeQuantity = false;
 
     // loop through lines checking ingredients and quantities
     for (let i = 0; i < lines.length - 1; i++) {
@@ -280,35 +296,30 @@ export class BakebotComponent implements OnInit {
       /* Check for ingredient in approved list */
       if (this.Constraint.hasPoisonConstraint) {
         if (!this.Constraint.approvedIngredients.match(ingredient)) {
-          this.displayAlert(ingredient + ' is not approved!');
+          this.displayAlert(ingredient + ' is not in the list of approved ingredients!');
           this.nopeBackground();
           return;
         }
       }
 
       if (this.validIngredients.some(v => ingredient.includes(v))) {
-        if (ingredient === 'water') {
-          if (this.Constraint.hasMaxWaterConstraint && quantity > this.Constraint.maxWater) {
-            this.displayAlert('That\'s too much water!');
-            this.nopeBackground();
-            return;
-          } else if (quantity > 10) {
-            flood = true;
-          }
-        } else if (this.Constraint.hasMaxIngredientConstraint && quantity > this.Constraint.maxIngredient) {
+        if (this.Constraint.hasMaxIngredientConstraint && quantity > this.Constraint.maxIngredient) {
               this.displayAlert('That\'s too much ' + ingredient + '!');
               this.nopeBackground();
               return;
-        } else if (quantity > 20) {
+        } else if (quantity > 99) {
               tooMuchIngredient = true;
+              if (ingredient === 'water') {
+                flood = true;
+              }
         }
       } else if (this.toxicIngredients.some(v => ingredient.includes(v))) {
         // ingredient is toxic!
         poison = true;
       } else { // ingredient doesn't exist
         invalidIngredient = true;
-        this.displayAlert(ingredient + ' is not a valid ingredient :(');
-        this.nopeBackground();
+        this.displayAlert('The robot doesn\'t know what \"' + ingredient + '\" is!');
+        this.confusedBackground();
         return;
       }
       if (this.Constraint.hasMinIngredientConstraint && quantity < this.Constraint.minIngredient) {
@@ -317,15 +328,17 @@ export class BakebotComponent implements OnInit {
         return;
       }
       if (quantity < 0) { spacetimeParadox = true; }
+
+      if (quantity !== 0) {
+        // some quantity of some thing was included - used to check for baking "nothing"
+        HasSomeQuantity = true;
+      }
     }
 
     // choose the ending
     if (spacetimeParadox) {
       this.drawEnding('spacetime');
       this.Constraint.hasMinIngredientConstraint = true;
-    } else if (flood) {
-      this.drawEnding('flood');
-      this.Constraint.hasMaxWaterConstraint = true;
     } else if (fire) {
       this.drawEnding('fire');
       this.Constraint.hasMaxTempConstraint = true;
@@ -341,9 +354,14 @@ export class BakebotComponent implements OnInit {
     } else if (poison) {
       this.drawEnding('poison');
       this.Constraint.hasPoisonConstraint = true;
+    } else if (flood) {
+      this.drawEnding('flood');
+      this.Constraint.hasMaxIngredientConstraint = true;
     } else if (tooMuchIngredient) {
       this.drawEnding('tooMuchIngredient');
       this.Constraint.hasMaxIngredientConstraint = true;
+    } else if (!HasSomeQuantity) {
+      this.drawEnding('success_nothing');
     } else if (!invalidIngredient && input === this.cakeIngredients.toLowerCase()) {
       this.drawEnding('success_cake');
     } else if (!invalidIngredient && input === this.breadIngredients.toLowerCase()) {
@@ -429,6 +447,7 @@ export class BakebotComponent implements OnInit {
     this.hideBad = true;
     this.hideSuccess = true;
   }
+
   badDialog(s: string) {
     this.badDialogText = s;
     if (this.Constraint.firstConstraint) {
@@ -461,6 +480,14 @@ export class BakebotComponent implements OnInit {
     };
   }
 
+  confusedBackground() {
+    const i = new Image();
+    i.src = 'assets/images/robot/bakebot5000-confused.svg';
+    i.onload = () => {
+      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-confused.svg';
+    };
+  }
+
   whatBackground() {
     const i = new Image();
     i.src = 'assets/images/robot/bakebot5000-what.svg';
@@ -476,7 +503,9 @@ export class BakebotComponent implements OnInit {
     i.onload = () => {
       (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-base.svg';
     };
-    if (!this.win && this.Constraint.hasPoisonConstraint && this.Constraint.hasMaxWaterConstraint
+
+    // removed maxWaterConstraint bc i think it should just be one max ingredient constraint
+    if (!this.win && this.Constraint.hasPoisonConstraint
       && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint
       && this.Constraint.hasMaxTimeConstraint && this.Constraint.hasMinTimeConstraint
       && this.Constraint.hasMaxTempConstraint && this.Constraint.hasMinTempConstraint) {

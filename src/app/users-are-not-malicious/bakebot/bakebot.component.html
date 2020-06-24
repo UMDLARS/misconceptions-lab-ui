@@ -10,8 +10,11 @@
 <link rel="preload" href="assets/images/robot/bakebot5000-spacetime.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-success-a-thing.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-success-cake.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-success-nothing.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-nope.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-what.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-confused.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-poisoned.svg" as="image">
 
 
 
@@ -40,49 +43,50 @@
         <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>
         <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
         <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
+        <button status="success" nbButton (click)="parseInput()">Bake it!</button>
       </div><!-- end recipe button div -->
       <!-- Recipe algorithm will be added in this spot -->
 
     </div>
     <div class="flex-column col-sm-12 col-md-3 col-lg-4" id="constraints">
-      <div class="dialog" id="dialogBox" [hidden]="hideConstraintLabel">Input Constraints:</div>
+      <div class="dialog" id="dialogBox" [hidden]="hideConstraintLabel">Input Validation :</div>
       <!-- Constraints here -->
       <div class="constraint" id="maxTime" [hidden]="!Constraint.hasMaxTimeConstraint">
-        <label for="maxTimeInput">Enter maximum baking time:</label>
+        <label for="maxTimeInput">Maximum baking time:</label>
         <input nbInput type=number placeholder="Maximum Time" id="maxTimeInput">
       </div>
       <div class="constraint" id="minTime" [hidden]="!Constraint.hasMinTimeConstraint">
-        <label for="minTimeInput">Enter minimum baking time:</label>
+        <label for="minTimeInput">Minimum baking time:</label>
         <input nbInput type=number placeholder="Minimum Time" id="minTimeInput">
       </div>
       <div class="constraint" id="maxTemp" [hidden]="!Constraint.hasMaxTempConstraint">
-        <label for="maxTempInput">Enter maximum temperature:</label>
+        <label for="maxTempInput">Maximum temperature:</label>
         <input nbInput type=number placeholder="Maximum Temp" id="maxTempInput">
       </div>
       <div class="constraint" id="minTemp" [hidden]="!Constraint.hasMinTempConstraint">
-        <label for="minTempInput">Enter minimum temperature:</label>
+        <label for="minTempInput">Minimum temperature:</label>
         <input nbInput type=number placeholder="Minimum temp" id="minTempInput">
       </div>
       <div class="constraint" id="maxIngredient" [hidden]="!Constraint.hasMaxIngredientConstraint">
-        <label for="maxIngredientInput">Enter max amount of ingredient:</label>
+        <label for="maxIngredientInput">Maximum amount ingredient:</label>
         <input nbInput type=number placeholder="Max Ingredient" id="maxIngredientInput">
       </div>
       <div class="constraint" id="minIngredient" [hidden]="!Constraint.hasMinIngredientConstraint">
-        <label for="minIngredientInput">Enter min amount of ingredient:</label>
+        <label for="minIngredientInput">Minimum amount of ingredient:</label>
         <input nbInput type=number placeholder="Min Ingredient" id="minIngredientInput">
       </div>
-      <div class="constraint" id="maxWater" [hidden]="!Constraint.hasMaxWaterConstraint">
+      <!-- <div class="constraint" id="maxWater" [hidden]="!Constraint.hasMaxWaterConstraint">
         <label for="maxWaterInput">Enter max amount of water:</label>
         <input nbInput type=number placeholder="Max Water" id="maxWaterInput">
-      </div>
+      </div> -->
       <div class="constraint" id="approvedIngredient" [hidden]="!Constraint.hasPoisonConstraint">
-        <label for="approvedIngredientInput">Enter list of approved ingredients:</label>
+        <label for="approvedIngredientInput">List of approved ingredients:</label>
         <input nbInput type=text placeholder="Approved ingredients" id="approvedIngredientInput">
       </div>
       <div class="dialog" [hidden]="!win">
         {{winner}}
         <br>
-        <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png" style="max-width: 200px">
+        <!-- <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png" style="max-width: 200px"> -->
       </div>
     </div><!-- end constraint div -->
   </div>
@@ -92,6 +96,6 @@
             placeholder="Enter recipe here"
             id="recipe_input"></textarea>
 
-  <button nbButton (click)="parseInput()">Bake it!</button>
+
   </div>
 </nb-card-body>
