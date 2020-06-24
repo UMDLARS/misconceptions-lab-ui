@@ -10,7 +10,7 @@
                     (ngModelChange)="updateDecryptedText()"></textarea>
         </label>
         <span *ngFor="let bit of this.transformMask">
-          <input type="checkbox" class="checkbox" [(ngModel)]="bit.checked" (ngModelChange)="updateDecryptedText()">
+          <nb-checkbox status="basic" (valueChange)="bit.checked = !bit.checked; updateDecryptedText()"></nb-checkbox>
         </span>
         <textarea class="text-monospace" nbInput disabled [(ngModel)]="decryptedText"></textarea>
       </div>
