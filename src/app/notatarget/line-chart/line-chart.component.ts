@@ -1,5 +1,4 @@
-import {OnInit, Component, OnChanges} from '@angular/core';
-import * as d3 from 'd3';
+import {Component, OnChanges, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-line-chart',
