@@ -48,9 +48,8 @@ export class LineChartComponent implements OnInit, AfterViewInit {
         datasets: [
           {
             data: this.dataPoints,
-            // radius: 5,
-            // fill: true
-            showLine: false
+            radius: 0,
+            fill: false,
           }
         ]
       },
