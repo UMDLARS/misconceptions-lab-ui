@@ -20,13 +20,21 @@
 
 <nb-card-body>
   <p>
-    Congratulations! You've just been hired as a Quality Assurance Inspector to test the latest in home innovation:
-    The BakeBot 5000!  Unfortunately, you suspect the software development team has naively assumed users would only
-    enter meaningful input.  Try using the BakeBot 5000, and see if you can find a vulnerability in its programming.
+    Congratulations! You've just been hired as a Quality Assurance Inspector to test the latest baking innovation:
+    The BakeBot 5000, which uses cutting-edge technology to bake anything a user desires from ingredients available to the Bakebot.
+    Unfortunately, some of the powerful interdimensional nanobot technology used by the Bakebot is unstable and can cause bizarre
+    results when given unexpected inputs.
   </p>
   <p>
-    To use the BakeBot 5000, enter a list of ingredients, followed by the baking time and oven temperature.
-    There are a few pre-programmed recipes for newcomers!
+    You suspect the software development team
+    has naively assumed users would only enter "normal" recipes, and never do anything weird or unexpected (intentionally or unintentionally).
+    Before releasing BakeBot 5000 to the public, we need to make sure that Bakebot handles unexpected inputs without causing any catastrophes.
+    It's up to you to see if you can find and fix any vulnerabilities in its programming -- the safety of the Universe may hang in the balance!
+  </p>
+  <p>
+    To use the BakeBot 5000, enter a list of ingredients and quantities (<em>anything in Bakebot's kitchen</em>),
+    the baking time and oven temperature, and press the "Bake It!" button.
+    Buttons provide sample recipes for newcomers!
   </p>
   <div class="d-flex flex-wrap justify-content-center" style="flex-direction: row">
 
@@ -35,7 +43,7 @@
       <nb-alert id="welcomeAlert" status="primary" closable (close)="onCloseWelcome()" [hidden]="hideWelcome">
         {{welcomeMsg}}
       </nb-alert>
-      <nb-alert id="badAlert" status="danger" closable (close)="onCloseBad()" [hidden]="hideBad">{{badDialogText}}</nb-alert>
+      <nb-alert id="badAlert" status="danger" ngPreserveWhitespaces closable  (close)="onCloseBad()" [hidden]="hideBad">{{badDialogText}}</nb-alert>
       <nb-alert id="successAlert" status="success" closable (close)="onCloseSuccess()" [hidden]="hideSuccess">
         {{successMsg}}
       </nb-alert>
@@ -50,6 +58,10 @@
     </div>
     <div class="flex-column col-sm-12 col-md-3 col-lg-4" id="constraints">
       <div class="dialog" id="dialogBox" [hidden]="hideConstraintLabel">Input Validation :</div>
+      <div [hidden]="hideConstraintLabel">
+        <p>Set the constraint(s) to a reasonable value and test by baking something.</p>
+      </div>
+
       <!-- Constraints here -->
       <div class="constraint" id="maxTime" [hidden]="!Constraint.hasMaxTimeConstraint">
         <label for="maxTimeInput">Maximum baking time:</label>
@@ -83,10 +95,14 @@
         <label for="approvedIngredientInput">List of approved ingredients:</label>
         <input nbInput type=text placeholder="Approved ingredients" id="approvedIngredientInput">
       </div>
+      <div [hidden]="hideProgressMeter">
+        <p>Bakebot issues resolved:</p>
+        <nb-progress-bar [value]="constraintProgress">{{constraintsFound}}/{{constraintsToWin}}</nb-progress-bar>
+      </div>
       <div class="dialog" [hidden]="!win">
         {{winner}}
         <br>
-        <!-- <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png" style="max-width: 200px"> -->
+        <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png" style="max-height: 100px">
       </div>
     </div><!-- end constraint div -->
   </div>

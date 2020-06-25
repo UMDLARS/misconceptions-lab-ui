@@ -13,14 +13,18 @@ export class BakebotComponent implements OnInit {
   hideSuccess = true;
   hideBad = true;
   hideConstraintLabel = true;
+  hideProgressMeter = true;
   hideWelcome = false;
+  constraintsToWin = 7;
+  constraintsFound = 0;
+  constraintProgress;
+  constraintProgressFraction = '0/0';
   win = false;
   recipeInput: HTMLTextAreaElement;
 
   // toggles whether constraints are valid
   public Constraint = new class {
     firstConstraint = true;
-    hasMaxWaterConstraint: boolean;
     hasMaxTimeConstraint: boolean;
     hasMinTimeConstraint: boolean;
     hasMaxTempConstraint: boolean;
@@ -31,7 +35,6 @@ export class BakebotComponent implements OnInit {
     hasUnknownConstraint: boolean;
 
     // user-defined constraint values
-    maxWater: number;
     maxIngredient: number;
     minIngredient: number;
     minTime: number;
@@ -64,8 +67,8 @@ export class BakebotComponent implements OnInit {
   ];
 
   welcome = 'Behold the BakeBot 5000! It can bake anything in an automated fashion!\n' +
-    'Press a button to enter a preset recipe, or you can modify ' +
-    'the recipe pseudocode to bake something new!';
+    'Press a button to load an example recipe that you can use or modify, or enter your own creation!' +
+    'Press the "Bake It!" button to see what happens. Bon appetit!';
 
   // success = 'Congrats! You made a food!';
   successMsg = 'Congrats! You made a food!';
@@ -82,13 +85,13 @@ export class BakebotComponent implements OnInit {
     + ' Set or adjust a constraint for the maximum amount of an ingredient.';
   winner = 'You found all the constraints! Now BakeBot is safe from harmful input!';
 
-  bake_syntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!'
+  bake_syntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!';
 
   // this displays first time someone gets a constraint
   firstConstraintMsg = 'You made Bakebot do something that shouldn\'t be possible! '
     + 'Each time you do this, we\'ll give you a tool to constrain the relevant input '
-    + 'so that only valid input is processed. '
-    + 'Adjust the new constraint above, and then complete the exercise by finding the five other types of bad input Bakebot doesn\'t catch!';
+    + 'so that only valid input is processed by Bakebot. '
+    + 'After a new constraint is revealed, set it to a sensible value and bake something to ensure that the constraint works.';
 
   insertCakeRecipe() {
     this.recipeInput = document.getElementById('recipe_input') as HTMLTextAreaElement;
@@ -110,38 +113,45 @@ export class BakebotComponent implements OnInit {
     i.src = 'assets/images/robot/bakebot5000-base.svg';
 
     switch (ending) {
+      case 'winner':
+        i.src = 'assets/images/robot/bakebot5000-winner.svg';
+        this.hideSuccess = false;
+        this.successMsg = this.winner;
+        this.hideBad = true;
+        this.hideWelcome = true;
+        break;
       case 'success':
         i.src = 'assets/images/robot/bakebot5000-success-a-thing.svg';
         this.hideSuccess = false;
-        this.successMsg = "Congrats, you made a food!"
+        this.successMsg = 'Congrats, you made a food!';
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_cake':
         i.src = 'assets/images/robot/bakebot5000-success-cake.svg';
         this.hideSuccess = false;
-        this.successMsg = "Congrats, you made a cake!"
+        this.successMsg = 'Congrats, you made a cake!';
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_bread':
         i.src = 'assets/images/robot/bakebot5000-success-bread.svg';
         this.hideSuccess = false;
-        this.successMsg = "Congrats, you made a loaf of bread!"
+        this.successMsg = 'Congrats, you made a loaf of bread!';
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_biscuits':
         i.src = 'assets/images/robot/bakebot5000-success-biscuits.svg';
         this.hideSuccess = false;
-        this.successMsg = "Congrats, you made some biscuits!"
+        this.successMsg = 'Congrats, you made some biscuits!';
         this.hideBad = true;
         this.hideWelcome = true;
         break;
       case 'success_nothing':
         i.src = 'assets/images/robot/bakebot5000-success-nothing.svg';
         this.hideSuccess = false;
-        this.successMsg = "Congrats, you baked some air!"
+        this.successMsg = 'Congrats, you baked some air!';
         this.hideBad = true;
         this.hideWelcome = true;
         break;
@@ -415,30 +425,45 @@ export class BakebotComponent implements OnInit {
   }
 
   getConstraints() {
+    this.constraintsFound = 0;
     if (this.Constraint.hasMaxTimeConstraint) {
+      this.constraintsFound++;
       this.Constraint.maxTime = parseFloat((document.getElementById('maxTimeInput') as HTMLInputElement).value);
     }
     if (this.Constraint.hasMinTimeConstraint) {
       this.Constraint.minTime = parseFloat((document.getElementById('minTimeInput') as HTMLInputElement).value);
+      this.constraintsFound++;
     }
     if (this.Constraint.hasMaxTempConstraint) {
       this.Constraint.maxTemp = parseFloat((document.getElementById('maxTempInput') as HTMLInputElement).value);
+      this.constraintsFound++;
     }
     if (this.Constraint.hasMinTempConstraint) {
       this.Constraint.minTemp = parseFloat((document.getElementById('minTempInput') as HTMLInputElement).value);
-    }
-    if (this.Constraint.hasMaxWaterConstraint) {
-      this.Constraint.maxWater = parseFloat((document.getElementById('maxWaterInput') as HTMLInputElement).value);
+      this.constraintsFound++;
     }
     if (this.Constraint.hasMinIngredientConstraint) {
       this.Constraint.minIngredient = parseFloat((document.getElementById('minIngredientInput') as HTMLInputElement).value);
+      this.constraintsFound++;
     }
     if (this.Constraint.hasMaxIngredientConstraint) {
       this.Constraint.maxIngredient = parseFloat((document.getElementById('maxIngredientInput') as HTMLInputElement).value);
+      this.constraintsFound++;
     }
     if (this.Constraint.hasPoisonConstraint) {
       this.Constraint.approvedIngredients = (document.getElementById('approvedIngredientInput') as HTMLInputElement).value;
+      this.constraintsFound++;
     }
+    this.constraintProgress = this.constraintsFound * 1.0 / this.constraintsToWin * 100;
+    this.constraintProgressFraction = this.constraintsFound + "/" + this.constraintsToWin;
+    if (this.constraintsFound > 0) {
+      this.hideProgressMeter = false;
+    }
+    if (this.constraintsFound == this.constraintsToWin) {
+      this.win = true
+      this.drawEnding("winner")
+    }
+    //console.log('constraintProgress: ' + this.constraintProgress + ' constraintsFound: ' + this.constraintsFound + ' constraintsToWin: ' + this.constraintsToWin + " " + this.constraintProgressFraction);
   }
 
   displayAlert(s: string) {
@@ -464,13 +489,17 @@ export class BakebotComponent implements OnInit {
     this.welcomeMsg = this.welcome;
   }
 
-  resetBackground() {
-    const i = new Image();
-    i.src = 'assets/images/robot/bakebot5000.jpg';
-    i.onload = () => {
-      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000.jpg';
-    };
-  }
+  //resetBackground() {
+//    const i = new Image();
+//    i.src = 'assets/images/robot/bakebot5000-base.svg';
+//    i.onload = () => {
+//      if (!this.win) {
+//        (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-base.svg';
+//      } else {
+//        (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-winner.svg';
+//      }
+//    };
+//  }
 
   nopeBackground() {
     const i = new Image();
@@ -504,7 +533,6 @@ export class BakebotComponent implements OnInit {
       (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-base.svg';
     };
 
-    // removed maxWaterConstraint bc i think it should just be one max ingredient constraint
     if (!this.win && this.Constraint.hasPoisonConstraint
       && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint
       && this.Constraint.hasMaxTimeConstraint && this.Constraint.hasMinTimeConstraint
