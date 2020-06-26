@@ -3,6 +3,8 @@ import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
+// https://www.cryptocompare.com/mining/calculator/ for mining calculations
+// BETTER: https://www.coincalculators.io/api
 
 // API key for shodan.io: pohejcwyL1yLuY6wunOkbEaEjhLZM5fw
 // A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
@@ -14,7 +16,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  private apiUrl = 'https://api.shodan.io';
+  private cryptoUrl = 'https://www.coincalculators.io/api';
+  private shodanUrl = 'https://api.shodan.io';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
    */
@@ -44,6 +47,7 @@ export class NotatargetComponent implements OnInit {
   //     },
   //   ],
   // };
+  private profitInYearUSD: any;
 
   constructor(private http: HttpClient) {
       this.questions = [
@@ -80,16 +84,25 @@ export class NotatargetComponent implements OnInit {
    * @param facets Not sure how to use this yet... leave blank
    */
   async getHostsCount(query: string, facets: string) {
-    const tmpUrl = this.apiUrl + '/shodan/host/count' + '?key=' + this.apiKey
+    const tmpUrl = this.shodanUrl + '/shodan/host/count' + '?key=' + this.apiKey
     + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
     this.http.get(tmpUrl, {}).subscribe((res) => {
       console.log(res);
     });
   }
+
+  async getProfitCalc(crypto: string, hashrate: string) {
+    const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
+    this.http.get(url, {}).subscribe((res) => {
+      console.log(res[this.profitInYearUSD]);
+    });
+  }
+
   ngOnInit() {
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
     this.calculate();
+    this.getProfitCalc('bitcoin', '40000000');
   }
 
   public calculate() {
