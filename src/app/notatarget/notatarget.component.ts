@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {fib, dist} from 'cpu-benchmark';
+import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
@@ -108,5 +108,18 @@ export class NotatargetComponent implements OnInit {
 
   public begin() {
     this.welcomeScreen = !this.welcomeScreen;
+  }
+
+  public hashTest(timeLimit) {
+    let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
+    const start = new Date().getTime();
+    let hashes = 0;
+    let curTime = new Date().getTime();
+    while (curTime < start + timeLimit) {
+      digest = sha256(digest);
+      hashes++;
+      curTime = new Date().getTime();
+    }
+    console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
   }
 }
