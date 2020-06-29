@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
+import {Exchanges} from './exchanges';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
@@ -27,10 +28,20 @@ export class NotatargetComponent implements OnInit {
   public operation;
   public target;
   public chartData: any[];
-  public specs = {
+  public hashrates = {
+    laptop: 50000,
+    smartphone: 30000,
+    iot: 15000
+  };
+  public flops = {
     laptop: 3,
     smartphone: 1,
     iot: 0.5
+  };
+  public exchangeRates = {
+    BTC : 9000,
+    ETH : 1,
+    MON : 1
   };
   // public chartOption: EChartOption = {
   //   xAxis: {
@@ -91,6 +102,11 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
+  /**
+   * Calculates daily/monthly/yearly profit
+   * @param crypto The cryptocurrency to be mined
+   * @param hashrate The number of hashes per sec of all combined devices
+   */
   async getProfitCalc(crypto: string, hashrate: string) {
     const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
     this.http.get(url, {}).subscribe((res) => {
@@ -98,10 +114,24 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
+  async getExchangeRates() {
+    const url = 'https://api.coinbase.com/v2/exchange-rates?currency=USD';
+    // const rates = 'rates';
+    const BTC = 'USD';
+    this.http.get<Exchanges>(url, {}).subscribe((res) => {
+      console.log(res);
+      // const {BTC: BTC1} = res.rates.BTC;
+      const {BTC: BTC1} = res.data.rates;
+      this.exchangeRates.BTC = 1 / (BTC1);
+    });
+  }
+
   ngOnInit() {
+    // get real exchange rates
+    this.getExchangeRates().then(r => this.calculate());
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
-    this.calculate();
+    // this.calculate();
     this.getProfitCalc('bitcoin', '40000000');
   }
 
