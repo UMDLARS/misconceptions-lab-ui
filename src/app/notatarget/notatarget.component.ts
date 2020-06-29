@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
-import {Exchanges} from './exchanges';
+import {Exchanges} from "./exchanges";
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
@@ -119,10 +119,8 @@ export class NotatargetComponent implements OnInit {
     // const rates = 'rates';
     const BTC = 'USD';
     this.http.get<Exchanges>(url, {}).subscribe((res) => {
-      console.log(res);
-      // const {BTC: BTC1} = res.rates.BTC;
-      const {BTC: BTC1} = res.data.rates;
-      this.exchangeRates.BTC = 1 / (BTC1);
+      console.log(res.data);
+      // this.exchangeRates.BTC = 1 / Number(BTC1);
     });
   }
 
