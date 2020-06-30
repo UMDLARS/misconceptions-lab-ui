@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
-import {Exchanges} from "./exchanges";
+import {Exchange} from './exchanges';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
-// BETTER: https://www.coincalculators.io/api
 
 // API key for shodan.io: pohejcwyL1yLuY6wunOkbEaEjhLZM5fw
 // A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
@@ -31,7 +30,8 @@ export class NotatargetComponent implements OnInit {
   public hashrates = {
     laptop: 50000,
     smartphone: 30000,
-    iot: 15000
+    iot: 15000,
+    yourDevice: 0
   };
   public flops = {
     laptop: 3,
@@ -39,9 +39,9 @@ export class NotatargetComponent implements OnInit {
     iot: 0.5
   };
   public exchangeRates = {
-    BTC : 9000,
-    ETH : 1,
-    MON : 1
+    BTC: 9000,
+    ETH: 1,
+    XMR: 65
   };
   // public chartOption: EChartOption = {
   //   xAxis: {
@@ -115,12 +115,21 @@ export class NotatargetComponent implements OnInit {
   }
 
   async getExchangeRates() {
-    const url = 'https://api.coinbase.com/v2/exchange-rates?currency=USD';
-    // const rates = 'rates';
-    const BTC = 'USD';
-    this.http.get<Exchanges>(url, {}).subscribe((res) => {
-      console.log(res.data);
-      // this.exchangeRates.BTC = 1 / Number(BTC1);
+    // const url = 'https://api.coinbase.com/v2/exchange-rates?currency=USD';
+    this.http.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD',
+      {}).subscribe((res: Exchange) => {
+      console.log(res);
+      this.exchangeRates.BTC = res.USD;
+    });
+    this.http.get('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD',
+      {}).subscribe((res: Exchange) => {
+      console.log(res);
+      this.exchangeRates.XMR = res.USD;
+    });
+    this.http.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
+      {}).subscribe((res: Exchange) => {
+      console.log(res);
+      this.exchangeRates.ETH = res.USD;
     });
   }
 
