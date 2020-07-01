@@ -32,18 +32,24 @@
     It's up to you to see if you can find and fix any vulnerabilities in its programming -- the safety of the Universe may hang in the balance!
   </p>
   <p>
-    To use the BakeBot 5000, enter a list of ingredients and quantities (<em>anything in Bakebot's kitchen</em>),
+    To use the BakeBot 5000, enter a list of ingredients (<em>anything in Bakebot's kitchen</em>),
     the baking time and oven temperature, and press the "Bake It!" button.
-    Buttons provide sample recipes for newcomers!
+    Try the sample recipe buttons to see the recipe syntax.
   </p>
   <div class="d-flex flex-wrap justify-content-center" style="flex-direction: row">
 
     <div class="flex-column col-sm-12 col-md-9 col-lg-8" style="max-width: 1024px">
       <img alt="BakeBot 5000" src="assets/images/robot/bakebot5000-base.svg" id="robot">
       <nb-alert id="welcomeAlert" status="primary" closable (close)="onCloseWelcome()" [hidden]="hideWelcome">
-        {{welcomeMsg}}
+        {{AlertMsg}}
       </nb-alert>
       <nb-alert id="badAlert" status="danger" ngPreserveWhitespaces closable  (close)="onCloseBad()" [hidden]="hideBad">{{badDialogText}}</nb-alert>
+      <nb-alert id="firstConstraintAlert" status="success" ngPreserveWhitespaces closable  (close)="onCloseBad()" [hidden]="hideFirstConstraintAlert">
+        You made Bakebot do something that shouldn't be possible! Each time you do this, we'll give you a tool to
+        constrain the relevant input so that only valid input is processed by Bakebot. After a new constraint is
+        revealed, set it to a sensible value and bake something to ensure that the constraint restricts Bakebot to safe
+        operation.
+      </nb-alert>
       <nb-alert id="successAlert" status="success" closable (close)="onCloseSuccess()" [hidden]="hideSuccess">
         {{successMsg}}
       </nb-alert>
@@ -57,9 +63,14 @@
 
     </div>
     <div class="flex-column col-sm-12 col-md-3 col-lg-4" id="constraints">
-      <div class="dialog" id="dialogBox" [hidden]="hideConstraintLabel">Input Validation :</div>
-      <div [hidden]="hideConstraintLabel">
-        <p>Set the constraint(s) to a reasonable value and test by baking something.</p>
+      <div class="dialog" id="dialogBox">Input Validation :</div>
+      <div [hidden]="hideConstraintIntro">
+        <p>To complete this activity, find all the ways that unexpected input causes Bakebot to do something bad.
+        Each time you find something, set the constraint to the correct value and bake something to demonstrate that
+        it is safe.</p>
+      </div>
+      <div [hidden]="hideConstraintInstructions">
+        <p>Set the constraint(s) below to a reasonable value and test by baking something.</p>
       </div>
 
       <!-- Constraints here -->
@@ -96,13 +107,13 @@
         <input nbInput type=text placeholder="Approved ingredients" id="approvedIngredientInput">
       </div>
       <div [hidden]="hideProgressMeter">
-        <p>Bakebot issues resolved:</p>
+        <p>Bakebot issue progress:</p>
         <nb-progress-bar [value]="constraintProgress">{{constraintsFound}}/{{constraintsToWin}}</nb-progress-bar>
       </div>
       <div class="dialog" [hidden]="!win">
         {{winner}}
         <br>
-        <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png" style="max-height: 100px">
+        <img alt="You completed all the tasks!" src="assets/images/robot/congrats-star.svg" style="max-height: 100px">
       </div>
     </div><!-- end constraint div -->
   </div>
