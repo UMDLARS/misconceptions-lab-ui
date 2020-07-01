@@ -319,7 +319,7 @@ export class BakebotComponent implements OnInit {
       }
 
       /* Check for ingredient in approved list */
-       if (this.Constraint.hasPoisonConstraint) {
+      if (this.Constraint.hasPoisonConstraint) {
          if (!this.Constraint.approvedIngredients.match(ingredient)) {
            this.displayAlert(ingredient + ' is not in the list of approved ingredients! ' +
              'The list of ingredients should include ALL valid ingredients in the kitchen (and only those items). ' +
@@ -394,7 +394,7 @@ export class BakebotComponent implements OnInit {
     } else if (tooMuchIngredient) {
       this.drawEnding('tooMuchIngredient');
       this.Constraint.hasMaxIngredientConstraint = true;
-    } else if (this.constraintsFixed == this.constraintsToWin) {
+    } else if (this.constraintsFixed === this.constraintsToWin) {
       this.drawEnding('winner');
     } else if (!HasSomeQuantity) {
       this.drawEnding('success_nothing');
@@ -514,19 +514,19 @@ getConstraints() {
 
       // sort the list lexicographically
       this.Constraint.approvedIngredientsItems = this.Constraint.approvedIngredientsItems.sort();
-      console.log(correct + " " + this.Constraint.approvedIngredientsItems);
+      console.log(correct + ' ' + this.Constraint.approvedIngredientsItems);
 
       // check to make sure the lists are the same length and items match
-      if (correct.length == this.Constraint.approvedIngredientsItems.length) {
+      if (correct.length === this.Constraint.approvedIngredientsItems.length) {
 
         for (let i = 0; i < correct.length; i++) {
-          if (correct[i] == this.Constraint.approvedIngredientsItems[i]) {
+          if (correct[i] === this.Constraint.approvedIngredientsItems[i]) {
             matched++;
           }
         }
 
-        if (matched == correct.length) {
-          console.log("ingredients list matches");
+        if (matched === correct.length) {
+          console.log('ingredients list matches');
           this.constraintsFixed++;
         }
       }
@@ -552,7 +552,7 @@ badDialog(s: string) {
       this.hideConstraintInstructions = false;
       this.hideConstraintIntro = true;
       this.hideFirstConstraintAlert = false;
-      console.log("First constraint.");
+      console.log('First constraint.');
     } else {
       this.hideFirstConstraintAlert = true;
     }

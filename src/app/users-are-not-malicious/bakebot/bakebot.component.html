@@ -108,7 +108,7 @@
       </div>
       <div [hidden]="hideProgressMeter">
         <p>Bakebot issue progress:</p>
-        <nb-progress-bar [value]="constraintProgress">{{constraintsFound}}/{{constraintsToWin}}</nb-progress-bar>
+        <nb-progress-bar [value]="constraintProgress">{{constraintsFixed}}/{{constraintsToWin}}</nb-progress-bar>
       </div>
       <div class="dialog" [hidden]="!win">
         {{winner}}
