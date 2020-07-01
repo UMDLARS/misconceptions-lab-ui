@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
+import {MiningStats} from './miningstats';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
@@ -38,27 +39,24 @@ export class NotatargetComponent implements OnInit {
     smartphone: 1,
     iot: 0.5
   };
-  public exchangeRates = {
-    BTC: 9000,
-    ETH: 1,
-    XMR: 65
+  public cryptos = {
+    BTC: {
+      exchangeRate: 9000,
+      difficulty: 0,
+      dailyProfit: 0
+    },
+    ETH: {
+      exchangeRate: 0,
+      difficulty: 0,
+      dailyProfit: 0
+    },
+    XMR: {
+      exchangeRate: 0,
+      networkHashRate: 0,
+      blockReward: 0,
+      dailyProfit: 0
+    }
   };
-  // public chartOption: EChartOption = {
-  //   xAxis: {
-  //     type: 'category',
-  //     data: ['1', '2', '3', '4', '5', '6', '7'],
-  //   },
-  //   yAxis: {
-  //     type: 'value',
-  //   },
-  //   series: [
-  //     {
-  //       data: [0, 0, 0, 0, 0, 0, 0],
-  //       type: 'line',
-  //     },
-  //   ],
-  // };
-  private profitInYearUSD: any;
 
   constructor(private http: HttpClient) {
       this.questions = [
@@ -103,43 +101,83 @@ export class NotatargetComponent implements OnInit {
   }
 
   /**
-   * Calculates daily/monthly/yearly profit
+   * Calculates daily profit NOT in USD!!
    * @param crypto The cryptocurrency to be mined
    * @param hashrate The number of hashes per sec of all combined devices
    */
-  async getProfitCalc(crypto: string, hashrate: string) {
-    const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
-    this.http.get(url, {}).subscribe((res) => {
-      console.log(res[this.profitInYearUSD]);
-    });
+  public getProfitCalc(crypto: string, hashrate: string) {
+    // const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
+    // this.http.get(url, {}).subscribe((res) => {
+    //   console.log(res[this.profitInYearUSD]);
+    // });
+    switch (crypto.toLowerCase()) {
+      case 'bitcoin':
+      case 'btc':
+        // this.cryptos.BTC.dailyProfit = 86400 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 32);
+        // below is a simplified form of the above equation:
+        this.cryptos.BTC.dailyProfit = 675 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 25);
+        break;
+      case 'monero':
+      case 'xmr':
+        // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
+        this.cryptos.XMR.dailyProfit = Number(hashrate) * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
+        break;
+      case 'ethereum':
+      case 'eth':
+        this.cryptos.ETH.dailyProfit = 3e17 * Number(hashrate) / this.cryptos.ETH.difficulty;
+        break;
+      default:
+        console.error('Error: getProfitCalc received invalid cryptocurrency');
+    }
   }
 
+  /**
+   * Uses Cryptocompare API to get exchange rates for bitcoin, monero, and ethereum.
+   * Can easily be modified to get other exchange rates if we want.
+   */
   async getExchangeRates() {
-    // const url = 'https://api.coinbase.com/v2/exchange-rates?currency=USD';
     this.http.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD',
       {}).subscribe((res: Exchange) => {
-      console.log(res);
-      this.exchangeRates.BTC = res.USD;
+      this.cryptos.BTC.exchangeRate = res.USD;
     });
     this.http.get('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD',
       {}).subscribe((res: Exchange) => {
-      console.log(res);
-      this.exchangeRates.XMR = res.USD;
+      this.cryptos.XMR.exchangeRate = res.USD;
     });
     this.http.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
       {}).subscribe((res: Exchange) => {
+      this.cryptos.ETH.exchangeRate = res.USD;
+    });
+  }
+
+  /**
+   * Retrieves info about cryptos to be used in mining calculations.
+   * For now, we only need to keep the network difficulty.
+   */
+  async getMiningStats() {
+    this.http.get('https://eth.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
+      console.log(res.nodes[0].difficulty);
+      this.cryptos.ETH.difficulty = res.nodes[0].difficulty;
+    });
+    this.http.get('https://xmr.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
+      console.log(res.nodes[0].difficulty);
+      this.cryptos.XMR.networkHashRate = res.nodes[0].networkhashps;
+      this.cryptos.XMR.blockReward = res.nodes[0].blockReward;
+    });
+    this.http.get('https://blockchain.info/q/getdifficulty', {}).subscribe((res: number) => {
       console.log(res);
-      this.exchangeRates.ETH = res.USD;
+      this.cryptos.BTC.difficulty = res;
     });
   }
 
   ngOnInit() {
     // get real exchange rates
     this.getExchangeRates().then(r => this.calculate());
+    this.getMiningStats();
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
     // this.calculate();
-    this.getProfitCalc('bitcoin', '40000000');
+    // this.getProfitCalc('bitcoin', '40000000');
   }
 
   public calculate() {
