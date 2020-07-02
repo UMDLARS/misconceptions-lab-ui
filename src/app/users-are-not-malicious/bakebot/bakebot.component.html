@@ -40,17 +40,17 @@
 
     <div class="flex-column col-sm-12 col-md-9 col-lg-8" style="max-width: 1024px">
       <img alt="BakeBot 5000" src="assets/images/robot/bakebot5000-base.svg" id="robot">
-      <nb-alert id="welcomeAlert" status="primary" closable (close)="onCloseWelcome()" [hidden]="hideWelcome">
+      <nb-alert id="welcomeAlert" status="primary" [hidden]="hideWelcome">
         {{AlertMsg}}
       </nb-alert>
-      <nb-alert id="badAlert" status="danger" ngPreserveWhitespaces closable  (close)="onCloseBad()" [hidden]="hideBad">{{badDialogText}}</nb-alert>
-      <nb-alert id="firstConstraintAlert" status="success" ngPreserveWhitespaces closable  (close)="onCloseBad()" [hidden]="hideFirstConstraintAlert">
+      <nb-alert id="badAlert" status="danger" ngPreserveWhitespaces [hidden]="hideBad">{{badDialogText}}</nb-alert>
+      <nb-alert id="firstConstraintAlert" status="success" ngPreserveWhitespaces [hidden]="hideFirstConstraintAlert">
         You made Bakebot do something that shouldn't be possible! Each time you do this, we'll give you a tool to
         constrain the relevant input so that only valid input is processed by Bakebot. After a new constraint is
         revealed, set it to a sensible value and bake something to ensure that the constraint restricts Bakebot to safe
         operation.
       </nb-alert>
-      <nb-alert id="successAlert" status="success" closable (close)="onCloseSuccess()" [hidden]="hideSuccess">
+      <nb-alert id="successAlert" status="success" [hidden]="hideSuccess">
         {{successMsg}}
       </nb-alert>
       <div class="row justify-content-around">
@@ -63,7 +63,7 @@
 
     </div>
     <div class="flex-column col-sm-12 col-md-3 col-lg-4" id="constraints">
-      <div class="dialog" id="dialogBox">Input Validation :</div>
+      <div class="dialog" id="dialogBox">Input Validation</div>
       <div [hidden]="hideConstraintIntro">
         <p>To complete this activity, find all the ways that unexpected input causes Bakebot to do something bad.
         Each time you find something, set the constraint to the correct value and bake something to demonstrate that

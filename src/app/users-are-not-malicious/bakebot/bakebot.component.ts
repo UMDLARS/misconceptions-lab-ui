@@ -85,12 +85,7 @@ export class BakebotComponent implements OnInit {
 
   // success = 'Congrats! You made a food!';
   successMsg = 'Congrats! You made a food!';
-  poison = 'Oh no! You used something in your recipe that is dangerous for humans! ' +
-    'Define a list of accepted ingredients! ' +
-    'The list of ingredients should include ALL valid ingredients in the kitchen (and only those items).';
-  confused = 'You confused the robot by naming a nonexistent ingredient!';
-  // flood = 'You flooded the kitchen!\n' +
-//          ' Set or adjust a constraint for the maximum amount of an ingredient.';
+
   spacetime = 'Oh dear. Negative ingredients?! Bakebot can\'t handle that idea! Define a minimum ingredient ' +
     'constraint!';
   future = 'Oh no! Bake times over ' + this.maxTime + ' minutes result in the kitchen being transported to the ' +
@@ -108,6 +103,13 @@ export class BakebotComponent implements OnInit {
 
   bake_syntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!';
 
+  poison = 'Oh no! You used something in your recipe that is dangerous for humans! ' +
+    'Define a comma-separated list of accepted ingredients! ' +
+    'The list of ingredients should include ALL valid ingredients in the kitchen (and only those items).';
+
+  disapprovedIngredient = ' is not in the list of approved ingredients! ' +
+    'The comma-separated list of ingredients should include ALL valid ingredients in the kitchen (and only those items). ' +
+    'Recipes should not include any disapproved ingredients.';
 
 
   insertCakeRecipe() {
@@ -214,6 +216,30 @@ export class BakebotComponent implements OnInit {
       (document.getElementById('robot') as HTMLImageElement).src = i.src;
     };
   }
+
+  displayAlert(s: string) {
+    this.AlertMsg = s;
+    this.hideWelcome = false;
+    this.hideBad = true;
+    this.hideSuccess = true;
+  }
+
+  badDialog(s: string) {
+    this.badDialogText = s;
+    this.hideSuccess = true;
+    if (this.Constraint.firstConstraint) {
+      this.Constraint.firstConstraint = false;
+      this.hideFirstConstraintAlert = false;
+      this.hideConstraintInstructions = false;
+      this.hideConstraintIntro = true;
+    } else {
+      this.hideConstraintInstructions = true;
+    }
+
+    this.hideBad = false;
+    this.hideWelcome = true;
+  }
+
   deleteMsg(msg: string, data: string[]) {
     const index: number = data.indexOf(msg);
     if (index !== -1) {
@@ -223,6 +249,7 @@ export class BakebotComponent implements OnInit {
   parseInput() {
 
     this.getConstraints();
+    this.hideFirstConstraintAlert = true;
 
     let future = false;
     let flood = false;
@@ -328,9 +355,7 @@ export class BakebotComponent implements OnInit {
       /* Check for ingredient in approved list */
       if (this.Constraint.hasPoisonConstraint) {
          if (!this.Constraint.approvedIngredientsList.includes(ingredient)) {
-           this.displayAlert(ingredient + ' is not in the list of approved ingredients! ' +
-             'The list of ingredients should include ALL valid ingredients in the kitchen (and only those items). ' +
-              'Recipes should not include any disapproved ingredients.');
+           this.displayAlert(ingredient + this.disapprovedIngredient);
            this.nopeBackground();
            return;
          }
@@ -541,31 +566,7 @@ getConstraints() {
 
   }
 
-displayAlert(s: string) {
-    this.AlertMsg = s;
-    this.hideWelcome = false;
-    this.hideBad = true;
-    this.hideSuccess = true;
-  }
 
-badDialog(s: string) {
-    this.badDialogText = s;
-    console.log('fc: ', this.Constraint.firstConstraint);
-    if (this.Constraint.firstConstraint) {
-      console.log('showing first constraint');
-      this.Constraint.firstConstraint = false;
-      this.hideConstraintInstructions = false;
-      this.hideConstraintIntro = true;
-      this.hideFirstConstraintAlert = false;
-      console.log('First constraint.');
-    } else {
-      this.hideConstraintInstructions = true;
-    }
-
-    this.hideBad = false;
-    this.onCloseSuccess();
-    this.hideWelcome = true;
-  }
 
 ngOnInit() {
     this.AlertMsg = this.welcome;
@@ -608,28 +609,22 @@ whatBackground() {
     };
   }
 
-onCloseBad() {
-    this.hideBad = true;
-    const i = new Image();
-    i.src = 'assets/images/robot/bakebot5000-base.svg';
-    i.onload = () => {
-      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-base.svg';
-    };
-
-    if (!this.win && this.Constraint.hasPoisonConstraint
-      && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint
-      && this.Constraint.hasMaxTimeConstraint && this.Constraint.hasMinTimeConstraint
-      && this.Constraint.hasMaxTempConstraint && this.Constraint.hasMinTempConstraint) {
-      // this.hideBad = true;
-      this.successMsg = this.winner;
-      this.hideSuccess = false;
-      this.win = true;
-    }
-  }
-onCloseWelcome() {
-    this.hideWelcome = true;
-  }
-onCloseSuccess() {
-    this.hideSuccess = true;
-  }
+// onCloseBad() {
+//    this.hideBad = true;
+//    const i = new Image();
+//    i.src = 'assets/images/robot/bakebot5000-base.svg';
+//    i.onload = () => {
+//      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-base.svg';
+//    };
+//
+//    if (!this.win && this.Constraint.hasPoisonConstraint
+//      && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint
+//      && this.Constraint.hasMaxTimeConstraint && this.Constraint.hasMinTimeConstraint
+//      && this.Constraint.hasMaxTempConstraint && this.Constraint.hasMinTempConstraint) {
+//      // this.hideBad = true;
+//      this.successMsg = this.winner;
+//      this.hideSuccess = false;
+//      this.win = true;
+//    }
+//  }
 }
