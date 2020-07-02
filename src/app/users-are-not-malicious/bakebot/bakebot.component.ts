@@ -52,7 +52,7 @@ export class BakebotComponent implements OnInit {
     minTemp: number;
     maxTemp: number;
     approvedIngredients: string;
-    approvedIngredientsItems: string[];
+    approvedIngredientsList: string[];
   }();
   constructor() {}
 
@@ -320,7 +320,8 @@ export class BakebotComponent implements OnInit {
 
       /* Check for ingredient in approved list */
       if (this.Constraint.hasPoisonConstraint) {
-         if (!this.Constraint.approvedIngredients.match(ingredient)) {
+         if (!this.Constraint.approvedIngredientsList.includes(ingredient)) {
+           console.log('ingredient: ' + ingredient + ' user string: ' + this.Constraint.approvedIngredients + ' user list: ' + this.Constraint.approvedIngredientsList);
            this.displayAlert(ingredient + ' is not in the list of approved ingredients! ' +
              'The list of ingredients should include ALL valid ingredients in the kitchen (and only those items). ' +
               'Recipes should not include any disapproved ingredients.');
@@ -493,13 +494,13 @@ getConstraints() {
       // split the approved ingredients on whitespace or commas
       this.Constraint.approvedIngredients = (document.getElementById('approvedIngredientInput') as HTMLInputElement).value;
       if (this.Constraint.approvedIngredients.match(',')) {
-        this.Constraint.approvedIngredientsItems = this.Constraint.approvedIngredients.split(',', 100);
+        this.Constraint.approvedIngredientsList = this.Constraint.approvedIngredients.split(',', 100);
       } else {
-        this.Constraint.approvedIngredientsItems = this.Constraint.approvedIngredients.split(' ', 100);
+        this.Constraint.approvedIngredientsList = this.Constraint.approvedIngredients.split(' ', 100);
       }
 
-      console.log('ingredients_items:' + this.Constraint.approvedIngredientsItems + ',' +
-        this.Constraint.approvedIngredientsItems.length);
+      console.log('ingredients_items:' + this.Constraint.approvedIngredientsList + ',' +
+        this.Constraint.approvedIngredientsList.length);
 
       // compare lists by lowercasing and sorting them, then checking each item
       let correct = ['flour', 'salt', 'sugar', 'water'];
@@ -507,20 +508,20 @@ getConstraints() {
       correct = correct.sort();
 
       // lowercase the items from the user-provided list and erase whitespace
-      for (let i = 0; i < this.Constraint.approvedIngredientsItems.length; i++) {
-        this.Constraint.approvedIngredientsItems[i] = this.Constraint.approvedIngredientsItems[i].toLowerCase();
-        this.Constraint.approvedIngredientsItems[i] = this.Constraint.approvedIngredientsItems[i].trim();
+      for (let i = 0; i < this.Constraint.approvedIngredientsList.length; i++) {
+        this.Constraint.approvedIngredientsList[i] = this.Constraint.approvedIngredientsList[i].toLowerCase();
+        this.Constraint.approvedIngredientsList[i] = this.Constraint.approvedIngredientsList[i].trim();
       }
 
       // sort the list lexicographically
-      this.Constraint.approvedIngredientsItems = this.Constraint.approvedIngredientsItems.sort();
-      console.log(correct + ' ' + this.Constraint.approvedIngredientsItems);
+      this.Constraint.approvedIngredientsList = this.Constraint.approvedIngredientsList.sort();
+      console.log('Correct: ' + correct + ' User: ' + this.Constraint.approvedIngredientsList);
 
       // check to make sure the lists are the same length and items match
-      if (correct.length === this.Constraint.approvedIngredientsItems.length) {
+      if (correct.length === this.Constraint.approvedIngredientsList.length) {
 
         for (let i = 0; i < correct.length; i++) {
-          if (correct[i] === this.Constraint.approvedIngredientsItems[i]) {
+          if (correct[i] === this.Constraint.approvedIngredientsList[i]) {
             matched++;
           }
         }
