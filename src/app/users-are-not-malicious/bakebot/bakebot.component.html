@@ -107,10 +107,10 @@
         <input nbInput type=text placeholder="Approved ingredients" id="approvedIngredientInput">
       </div>
       <div [hidden]="hideProgressMeter">
-        <p>Bakebot issue progress:</p>
+        <p>Bakebot constraint progress:</p>
         <nb-progress-bar [value]="constraintProgress">{{constraintsFixed}}/{{constraintsToWin}}</nb-progress-bar>
       </div>
-      <div class="dialog" [hidden]="!win">
+      <div class="dialog" [hidden]="!YouWon">
         {{winner}}
         <br>
         <img alt="You completed all the tasks!" src="assets/images/robot/congrats-star.svg" style="max-height: 100px">

@@ -29,7 +29,7 @@ export class BakebotComponent implements OnInit {
   maxTemp = 500;
   constraintProgress = 0;
   constraintProgressFraction = '0/0';
-  win = false;
+  YouWon = false;
   recipeInput: HTMLTextAreaElement;
 
   // toggles whether constraints are valid
@@ -99,7 +99,7 @@ export class BakebotComponent implements OnInit {
   tooMuchIngredient = 'Uh oh, ingredient amounts greater than ' + this.maxIngredient + ' units result a disastrous ' +
     'overflow! Please define a maximum ingredient amount at or below ' + this.maxIngredient + '.';
   flood = this.tooMuchIngredient;
-  winner = 'You found all the constraints! Now BakeBot is safe from harmful input!';
+  winner = 'You set all the constraints to valid values! Now BakeBot is safe from harmful input!';
 
   bake_syntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!';
 
@@ -265,6 +265,32 @@ export class BakebotComponent implements OnInit {
     const input = (document.getElementById('recipe_input') as HTMLTextAreaElement).value.toLowerCase();
     const lines = input.split('\n'); // break input into array of lines
     this.deleteMsg('', lines); // remove empty lines
+
+    // need instawin to speed debugging
+    if (lines[0].includes("instawin")) {
+      this.Constraint.firstConstraint = false;
+      this.Constraint.hasMaxTimeConstraint = true;
+      this.Constraint.hasMinTimeConstraint = true;
+      this.Constraint.hasMaxTempConstraint = true;
+      this.Constraint.hasMinTempConstraint = true;
+      this.Constraint.hasMaxIngredientConstraint = true;
+      this.Constraint.hasMinIngredientConstraint = true;
+      this.Constraint.hasPoisonConstraint = true;
+      this.recipeInput = document.getElementById('maxTimeInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "1440";
+      this.recipeInput = document.getElementById('minTimeInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "0";
+      this.recipeInput = document.getElementById('maxIngredientInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "1000";
+      this.recipeInput = document.getElementById('minIngredientInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "0";
+      this.recipeInput = document.getElementById('maxTempInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "500";
+      this.recipeInput = document.getElementById('minTempInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "0";
+      this.recipeInput = document.getElementById('approvedIngredientInput') as HTMLTextAreaElement;
+      this.recipeInput.value = "flour, sugar, salt, water";
+    }
 
     // checks that there is a valid baking line before parsing input
     const hasBakeLine = new RegExp(/bake /).test(lines[lines.length - 1]);
@@ -483,6 +509,8 @@ parseTime(s: string): number {
   }
 
 getConstraints() {
+
+    this.YouWon = false;
     this.constraintsFixed = 0;
     if (this.Constraint.hasMaxTimeConstraint) {
       this.Constraint.maxTime = parseFloat((document.getElementById('maxTimeInput') as HTMLInputElement).value);
@@ -563,6 +591,9 @@ getConstraints() {
 
     this.constraintProgress = this.constraintsFixed / this.constraintsToWin * 100;
     this.constraintProgressFraction = this.constraintsFixed + '/' + this.constraintsToWin;
+    if (this.constraintsFixed === this.constraintsToWin) {
+      this.YouWon = true;
+    }
 
   }
 
@@ -609,22 +640,4 @@ whatBackground() {
     };
   }
 
-// onCloseBad() {
-//    this.hideBad = true;
-//    const i = new Image();
-//    i.src = 'assets/images/robot/bakebot5000-base.svg';
-//    i.onload = () => {
-//      (document.getElementById('robot') as HTMLImageElement).src = 'assets/images/robot/bakebot5000-base.svg';
-//    };
-//
-//    if (!this.win && this.Constraint.hasPoisonConstraint
-//      && this.Constraint.hasMaxIngredientConstraint && this.Constraint.hasMinIngredientConstraint
-//      && this.Constraint.hasMaxTimeConstraint && this.Constraint.hasMinTimeConstraint
-//      && this.Constraint.hasMaxTempConstraint && this.Constraint.hasMinTempConstraint) {
-//      // this.hideBad = true;
-//      this.successMsg = this.winner;
-//      this.hideSuccess = false;
-//      this.win = true;
-//    }
-//  }
 }
