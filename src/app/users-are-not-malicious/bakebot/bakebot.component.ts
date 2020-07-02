@@ -91,13 +91,18 @@ export class BakebotComponent implements OnInit {
   confused = 'You confused the robot by naming a nonexistent ingredient!';
   // flood = 'You flooded the kitchen!\n' +
 //          ' Set or adjust a constraint for the maximum amount of an ingredient.';
-  spacetime = 'Oh dear. Negative ingredients?! Bakebot can\'t handle that idea! Define a minimum ingredient constraint!';
-  future = 'Oh no! Bake times over ' + this.maxTime + ' minutes result in the kitchen being transported to the distant future! How embarassing. Define a safe maximum bake time limit.';
-  fire = 'Uffda! Bake temperatures above ' + this.maxTemp + ' cause everything to burst into flames! We really should have thought of that! Please define a maximum temperature limit!';
-  past = 'Uh oh! Negative bake times transport the kitchen to the prehistoric past! That\'s not great. Define a safe minimum bake time constraint.';
-  cold = 'Brrrrr! Negative bake temperatures cause the system to go haywire and freeze everything! Define a safe minimum bake temperature.';
-  tooMuchIngredient = 'Uh oh, ingredient amounts greater than ' + this.maxIngredient + ' units result a disastrous overflow!\n'
-    + ' Set a safe maximum amount of an ingredient.';
+  spacetime = 'Oh dear. Negative ingredients?! Bakebot can\'t handle that idea! Define a minimum ingredient ' +
+    'constraint!';
+  future = 'Oh no! Bake times over ' + this.maxTime + ' minutes result in the kitchen being transported to the ' +
+    'distant future! How embarassing. Define a safe maximum bake time limit at or below ' + this.maxTime + '.';
+  fire = 'Uffda! Bake temperatures above ' + this.maxTemp + ' cause everything to burst into flames! We really ' +
+    'should have thought of that! Please define a maximum temperature limit at or below ' + this.maxTemp + '!';
+  past = 'Uh oh! Negative bake times transport the kitchen to the prehistoric past! That\'s not great. Define a ' +
+    'safe minimum bake time constraint.';
+  cold = 'Brrrrr! Negative bake temperatures cause the system to go haywire and freeze everything! Define a safe ' +
+    'minimum bake temperature.';
+  tooMuchIngredient = 'Uh oh, ingredient amounts greater than ' + this.maxIngredient + ' units result a disastrous ' +
+    'overflow! Please define a maximum ingredient amount at or below ' + this.maxIngredient + '.';
   flood = this.tooMuchIngredient;
   winner = 'You found all the constraints! Now BakeBot is safe from harmful input!';
 
@@ -123,6 +128,8 @@ export class BakebotComponent implements OnInit {
   drawEnding(ending: string) {
     const i = new Image();
     i.src = 'assets/images/robot/bakebot5000-base.svg';
+
+    this.hideFirstConstraintAlert = true;
 
     switch (ending) {
       case 'winner':
@@ -321,7 +328,6 @@ export class BakebotComponent implements OnInit {
       /* Check for ingredient in approved list */
       if (this.Constraint.hasPoisonConstraint) {
          if (!this.Constraint.approvedIngredientsList.includes(ingredient)) {
-           console.log('ingredient: ' + ingredient + ' user string: ' + this.Constraint.approvedIngredients + ' user list: ' + this.Constraint.approvedIngredientsList);
            this.displayAlert(ingredient + ' is not in the list of approved ingredients! ' +
              'The list of ingredients should include ALL valid ingredients in the kitchen (and only those items). ' +
               'Recipes should not include any disapproved ingredients.');
@@ -455,37 +461,37 @@ getConstraints() {
     this.constraintsFixed = 0;
     if (this.Constraint.hasMaxTimeConstraint) {
       this.Constraint.maxTime = parseFloat((document.getElementById('maxTimeInput') as HTMLInputElement).value);
-      if (this.Constraint.maxTime <= this.maxTime) {
+      if (this.Constraint.maxTime <= this.maxTime && this.Constraint.maxTime >= 0) {
         this.constraintsFixed++;
       }
     }
     if (this.Constraint.hasMinTimeConstraint) {
       this.Constraint.minTime = parseFloat((document.getElementById('minTimeInput') as HTMLInputElement).value);
-      if (this.Constraint.minTime >= this.minTime) {
+      if (this.Constraint.minTime >= this.minTime && this.Constraint.minTime <= this.maxTime) {
         this.constraintsFixed++;
       }
     }
     if (this.Constraint.hasMaxTempConstraint) {
       this.Constraint.maxTemp = parseFloat((document.getElementById('maxTempInput') as HTMLInputElement).value);
-      if (this.Constraint.maxTemp <= this.maxTemp) {
+      if (this.Constraint.maxTemp <= this.maxTemp && this.Constraint.maxTemp >= 0) {
         this.constraintsFixed++;
       }
     }
     if (this.Constraint.hasMinTempConstraint) {
       this.Constraint.minTemp = parseFloat((document.getElementById('minTempInput') as HTMLInputElement).value);
-      if (this.Constraint.minTemp >= this.minTemp) {
+      if (this.Constraint.minTemp >= this.minTemp && this.Constraint.minTemp <= this.maxTemp) {
         this.constraintsFixed++;
       }
     }
     if (this.Constraint.hasMinIngredientConstraint) {
       this.Constraint.minIngredient = parseFloat((document.getElementById('minIngredientInput') as HTMLInputElement).value);
-      if (this.Constraint.minIngredient >= this.minIngredient) {
+      if (this.Constraint.minIngredient >= this.minIngredient && this.Constraint.minIngredient <= this.maxIngredient) {
         this.constraintsFixed++;
       }
     }
     if (this.Constraint.hasMaxIngredientConstraint) {
       this.Constraint.maxIngredient = parseFloat((document.getElementById('maxIngredientInput') as HTMLInputElement).value);
-      if (this.Constraint.maxIngredient <= this.maxIngredient) {
+      if (this.Constraint.maxIngredient <= this.maxIngredient && this.Constraint.maxIngredient > 0) {
         this.constraintsFixed++;
       }
     }
@@ -498,9 +504,6 @@ getConstraints() {
       } else {
         this.Constraint.approvedIngredientsList = this.Constraint.approvedIngredients.split(' ', 100);
       }
-
-      console.log('ingredients_items:' + this.Constraint.approvedIngredientsList + ',' +
-        this.Constraint.approvedIngredientsList.length);
 
       // compare lists by lowercasing and sorting them, then checking each item
       let correct = ['flour', 'salt', 'sugar', 'water'];
@@ -515,7 +518,6 @@ getConstraints() {
 
       // sort the list lexicographically
       this.Constraint.approvedIngredientsList = this.Constraint.approvedIngredientsList.sort();
-      console.log('Correct: ' + correct + ' User: ' + this.Constraint.approvedIngredientsList);
 
       // check to make sure the lists are the same length and items match
       if (correct.length === this.Constraint.approvedIngredientsList.length) {
@@ -548,14 +550,16 @@ displayAlert(s: string) {
 
 badDialog(s: string) {
     this.badDialogText = s;
+    console.log('fc: ', this.Constraint.firstConstraint);
     if (this.Constraint.firstConstraint) {
+      console.log('showing first constraint');
       this.Constraint.firstConstraint = false;
       this.hideConstraintInstructions = false;
       this.hideConstraintIntro = true;
       this.hideFirstConstraintAlert = false;
       console.log('First constraint.');
     } else {
-      this.hideFirstConstraintAlert = true;
+      this.hideConstraintInstructions = true;
     }
 
     this.hideBad = false;
