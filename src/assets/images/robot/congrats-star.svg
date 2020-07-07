@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="122.30869mm"
+   height="88.071785mm"
+   viewBox="0 0 122.30869 88.071785"
+   version="1.1"
+   id="svg2111"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="congrats-star.svg">
+  <defs
+     id="defs2105" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.2677632"
+     inkscape:cx="106.50559"
+     inkscape:cy="166.43487"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2658"
+       originx="-43.730742"
+       originy="-169.00816" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata2108">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-43.730743,-39.920047)">
+    <path
+       sodipodi:type="star"
+       style="opacity:1;fill:#fffe9c;fill-opacity:1;stroke:#fab300;stroke-width:1.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path2656"
+       sodipodi:sides="5"
+       sodipodi:cx="52.916664"
+       sodipodi:cy="72.482147"
+       sodipodi:r1="46.753075"
+       sodipodi:r2="23.376535"
+       sodipodi:arg1="0.88847977"
+       sodipodi:arg2="1.5167983"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 82.398808,108.76786 54.178338,95.82461 27.517381,111.73424 31.106541,80.895288 7.7368999,60.455556 38.175593,54.339291 50.393317,25.797217 l 15.222987,27.058888 30.92061,2.79976 -21.03037,22.839577 z"
+       inkscape:transform-center-x="0.11510869"
+       inkscape:transform-center-y="-4.3549061"
+       transform="rotate(2.6373591,-269.59791,1164.5839)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:18.13201523px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#00a3ff;fill-opacity:1;stroke:#004aff;stroke-width:1.06500006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="text2662"
+       x="46.864101"
+       y="96.510338"><tspan
+   id="tspan2660"
+   style="font-weight:bold;fill:#00a3ff;fill-opacity:1;stroke:#004aff;stroke-width:1.06500006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">CONGRATS!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="84.666672"
+       y="66.812492"
+       id="text2690"><tspan
+         sodipodi:role="line"
+         id="tspan2688"
+         x="84.666672"
+         y="76.176262"
+         style="stroke-width:0.26458332" /></text>
+  </g>
+</svg>

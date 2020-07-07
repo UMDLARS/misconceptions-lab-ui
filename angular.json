@@ -30,8 +30,7 @@
             ],
             "scripts": [
               "src/assets/js/tor.js"
-            ],
-            "es5BrowserSupport": true
+            ]
           },
           "configurations": {
             "production": {

@@ -10,79 +10,110 @@
 <link rel="preload" href="assets/images/robot/bakebot5000-spacetime.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-success-a-thing.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-success-cake.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-success-nothing.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-nope.svg" as="image">
 <link rel="preload" href="assets/images/robot/bakebot5000-what.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-confused.svg" as="image">
+<link rel="preload" href="assets/images/robot/bakebot5000-poisoned.svg" as="image">
 
 
 
 <nb-card-body>
   <p>
-    Congratulations! You've just been hired as a Quality Assurance Inspector to test the latest in home innovation:
-    The BakeBot 5000!  Unfortunately, you suspect the software development team has naively assumed users would only
-    enter meaningful input.  Try using the BakeBot 5000, and see if you can find a vulnerability in its programming.
+    Congratulations! You've just been hired as a Quality Assurance Inspector to test the latest baking innovation:
+    The BakeBot 5000, which uses cutting-edge technology to bake anything a user desires from ingredients available to the Bakebot.
+    Unfortunately, some of the powerful interdimensional nanobot technology used by the Bakebot is unstable and can cause bizarre
+    results when given unexpected inputs.
   </p>
   <p>
-    To use the BakeBot 5000, enter a list of ingredients, followed by the baking time and oven temperature.
-    There are a few pre-programmed recipes for newcomers!
+    You suspect the software development team
+    has naively assumed users would only enter "normal" recipes, and never do anything weird or unexpected (intentionally or unintentionally).
+    Before releasing BakeBot 5000 to the public, we need to make sure that Bakebot handles unexpected inputs without causing any catastrophes.
+    It's up to you to see if you can find and fix any vulnerabilities in its programming -- the safety of the Universe may hang in the balance!
+  </p>
+  <p>
+    To use the BakeBot 5000, enter a list of ingredients (<em>anything in Bakebot's kitchen</em>),
+    the baking time and oven temperature, and press the "Bake It!" button.
+    Try the sample recipe buttons to see the recipe syntax.
   </p>
   <div class="d-flex flex-wrap justify-content-center" style="flex-direction: row">
 
     <div class="flex-column col-sm-12 col-md-9 col-lg-8" style="max-width: 1024px">
       <img alt="BakeBot 5000" src="assets/images/robot/bakebot5000-base.svg" id="robot">
-      <nb-alert id="welcomeAlert" status="primary" closable (close)="onCloseWelcome()" [hidden]="hideWelcome">
-        {{welcomeMsg}}
+      <nb-alert id="welcomeAlert" status="primary" [hidden]="hideWelcome">
+        {{AlertMsg}}
       </nb-alert>
-      <nb-alert id="badAlert" status="danger" closable (close)="onCloseBad()" [hidden]="hideBad">{{badDialogText}}</nb-alert>
-      <nb-alert id="successAlert" status="success" closable (close)="onCloseSuccess()" [hidden]="hideSuccess">
+      <nb-alert id="badAlert" status="danger" ngPreserveWhitespaces [hidden]="hideBad">{{badDialogText}}</nb-alert>
+      <nb-alert id="firstConstraintAlert" status="success" ngPreserveWhitespaces [hidden]="hideFirstConstraintAlert">
+        You made Bakebot do something that shouldn't be possible! Each time you do this, we'll give you a tool to
+        constrain the relevant input so that only valid input is processed by Bakebot. After a new constraint is
+        revealed, set it to a sensible value and bake something to ensure that the constraint restricts Bakebot to safe
+        operation.
+      </nb-alert>
+      <nb-alert id="successAlert" status="success" [hidden]="hideSuccess">
         {{successMsg}}
       </nb-alert>
       <div class="row justify-content-around">
         <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>
         <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
         <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
+        <button status="success" nbButton (click)="parseInput()">Bake it!</button>
       </div><!-- end recipe button div -->
       <!-- Recipe algorithm will be added in this spot -->
 
     </div>
     <div class="flex-column col-sm-12 col-md-3 col-lg-4" id="constraints">
-      <div class="dialog" id="dialogBox" [hidden]="hideConstraintLabel">Input Constraints:</div>
+      <div class="dialog" id="dialogBox">Input Validation</div>
+      <div [hidden]="hideConstraintIntro">
+        <p>To complete this activity, find all the ways that unexpected input causes Bakebot to do something bad.
+        Each time you find something, set the constraint to the correct value and bake something to demonstrate that
+        it is safe.</p>
+      </div>
+      <div [hidden]="hideConstraintInstructions">
+        <p>Set the constraint(s) below to a reasonable value and test by baking something.</p>
+      </div>
+
       <!-- Constraints here -->
       <div class="constraint" id="maxTime" [hidden]="!Constraint.hasMaxTimeConstraint">
-        <label for="maxTimeInput">Enter maximum baking time:</label>
+        <label for="maxTimeInput">Maximum baking time:</label>
         <input nbInput type=number placeholder="Maximum Time" id="maxTimeInput">
       </div>
       <div class="constraint" id="minTime" [hidden]="!Constraint.hasMinTimeConstraint">
-        <label for="minTimeInput">Enter minimum baking time:</label>
+        <label for="minTimeInput">Minimum baking time:</label>
         <input nbInput type=number placeholder="Minimum Time" id="minTimeInput">
       </div>
       <div class="constraint" id="maxTemp" [hidden]="!Constraint.hasMaxTempConstraint">
-        <label for="maxTempInput">Enter maximum temperature:</label>
+        <label for="maxTempInput">Maximum temperature:</label>
         <input nbInput type=number placeholder="Maximum Temp" id="maxTempInput">
       </div>
       <div class="constraint" id="minTemp" [hidden]="!Constraint.hasMinTempConstraint">
-        <label for="minTempInput">Enter minimum temperature:</label>
+        <label for="minTempInput">Minimum temperature:</label>
         <input nbInput type=number placeholder="Minimum temp" id="minTempInput">
       </div>
       <div class="constraint" id="maxIngredient" [hidden]="!Constraint.hasMaxIngredientConstraint">
-        <label for="maxIngredientInput">Enter max amount of ingredient:</label>
+        <label for="maxIngredientInput">Maximum amount ingredient:</label>
         <input nbInput type=number placeholder="Max Ingredient" id="maxIngredientInput">
       </div>
       <div class="constraint" id="minIngredient" [hidden]="!Constraint.hasMinIngredientConstraint">
-        <label for="minIngredientInput">Enter min amount of ingredient:</label>
+        <label for="minIngredientInput">Minimum amount of ingredient:</label>
         <input nbInput type=number placeholder="Min Ingredient" id="minIngredientInput">
       </div>
-      <div class="constraint" id="maxWater" [hidden]="!Constraint.hasMaxWaterConstraint">
+      <!-- <div class="constraint" id="maxWater" [hidden]="!Constraint.hasMaxWaterConstraint">
         <label for="maxWaterInput">Enter max amount of water:</label>
         <input nbInput type=number placeholder="Max Water" id="maxWaterInput">
-      </div>
+      </div> -->
       <div class="constraint" id="approvedIngredient" [hidden]="!Constraint.hasPoisonConstraint">
-        <label for="approvedIngredientInput">Enter list of approved ingredients:</label>
+        <label for="approvedIngredientInput">List of approved ingredients:</label>
         <input nbInput type=text placeholder="Approved ingredients" id="approvedIngredientInput">
       </div>
-      <div class="dialog" [hidden]="!win">
+      <div [hidden]="hideProgressMeter">
+        <p>Bakebot constraint progress:</p>
+        <nb-progress-bar [value]="constraintProgress">{{constraintsFixed}}/{{constraintsToWin}}</nb-progress-bar>
+      </div>
+      <div class="dialog" [hidden]="!YouWon">
         {{winner}}
         <br>
-        <img alt="Anonymized data header image" src="assets/images/blue_ribbon.png" style="max-width: 200px">
+        <img alt="You completed all the tasks!" src="assets/images/robot/congrats-star.svg" style="max-height: 100px">
       </div>
     </div><!-- end constraint div -->
   </div>
@@ -92,6 +123,6 @@
             placeholder="Enter recipe here"
             id="recipe_input"></textarea>
 
-  <button nbButton (click)="parseInput()">Bake it!</button>
+
   </div>
 </nb-card-body>
