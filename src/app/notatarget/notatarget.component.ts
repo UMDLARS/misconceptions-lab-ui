@@ -17,7 +17,7 @@ import {MiningStats} from './miningstats';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  private cryptoUrl = 'https://www.coincalculators.io/api';
+  // private cryptoUrl = 'https://www.coincalculators.io/api';
   private shodanUrl = 'https://api.shodan.io';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
@@ -43,18 +43,18 @@ export class NotatargetComponent implements OnInit {
     BTC: {
       exchangeRate: 9000,
       difficulty: 0,
-      dailyProfit: 0
+      yearlyProfit: 0
     },
     ETH: {
       exchangeRate: 0,
       difficulty: 0,
-      dailyProfit: 0
+      yearlyProfit: 0
     },
     XMR: {
       exchangeRate: 0,
       networkHashRate: 0,
       blockReward: 0,
-      dailyProfit: 0
+      yearlyProfit: 0
     }
   };
 
@@ -101,7 +101,7 @@ export class NotatargetComponent implements OnInit {
   }
 
   /**
-   * Calculates daily profit NOT in USD!!
+   * Calculates yearly profit in USD
    * @param crypto The cryptocurrency to be mined
    * @param hashrate The number of hashes per sec of all combined devices
    */
@@ -110,25 +110,34 @@ export class NotatargetComponent implements OnInit {
     // this.http.get(url, {}).subscribe((res) => {
     //   console.log(res[this.profitInYearUSD]);
     // });
+    let yearlyGenerated: number;
     switch (crypto.toLowerCase()) {
       case 'bitcoin':
       case 'btc':
         // this.cryptos.BTC.dailyProfit = 86400 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 32);
         // below is a simplified form of the above equation:
-        this.cryptos.BTC.dailyProfit = 675 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 25);
+        yearlyGenerated = 246375 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 25);
+        yearlyGenerated *= this.cryptos.BTC.exchangeRate;
+        // return this.cryptos.BTC.yearlyProfit;
         break;
       case 'monero':
       case 'xmr':
         // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
-        this.cryptos.XMR.dailyProfit = Number(hashrate) * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
+        yearlyGenerated = Number(hashrate) * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
+        yearlyGenerated *= this.cryptos.XMR.exchangeRate;
+        // return this.cryptos.XMR.yearlyProfit;
         break;
       case 'ethereum':
       case 'eth':
-        this.cryptos.ETH.dailyProfit = 3e17 * Number(hashrate) / this.cryptos.ETH.difficulty;
+        yearlyGenerated = 3e17 * Number(hashrate) / this.cryptos.ETH.difficulty;
+        yearlyGenerated *= this.cryptos.ETH.exchangeRate;
+        // return this.cryptos.ETH.yearlyProfit;
         break;
       default:
         console.error('Error: getProfitCalc received invalid cryptocurrency');
+        return;
     }
+    this.calculate(yearlyGenerated);
   }
 
   /**
@@ -156,23 +165,23 @@ export class NotatargetComponent implements OnInit {
    */
   async getMiningStats() {
     this.http.get('https://eth.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
-      console.log(res.nodes[0].difficulty);
+      // console.log(res.nodes[0].difficulty);
       this.cryptos.ETH.difficulty = res.nodes[0].difficulty;
     });
     this.http.get('https://xmr.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
-      console.log(res.nodes[0].difficulty);
+      // console.log(res.nodes[0].difficulty);
       this.cryptos.XMR.networkHashRate = res.nodes[0].networkhashps;
       this.cryptos.XMR.blockReward = res.nodes[0].blockReward;
     });
     this.http.get('https://blockchain.info/q/getdifficulty', {}).subscribe((res: number) => {
-      console.log(res);
+      // console.log(res);
       this.cryptos.BTC.difficulty = res;
     });
   }
 
   ngOnInit() {
     // get real exchange rates
-    this.getExchangeRates().then(r => this.calculate());
+    this.getExchangeRates();
     this.getMiningStats();
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
@@ -180,18 +189,18 @@ export class NotatargetComponent implements OnInit {
     // this.getProfitCalc('bitcoin', '40000000');
   }
 
-  public calculate() {
+  public calculate(yearlyGeneratedUSD: number) {
     this.chartData = [];
     for (let i = 0; i < 7; i++) {
       this.chartData.push([
         `Index ${i}`,
-        Math.floor(Math.random() * 100)
+        yearlyGeneratedUSD * i
       ]);
     }
   }
 
   public updateOption() {
-    this.calculate();
+    this.getProfitCalc(this.target, this.device);
   }
 
   public begin() {
