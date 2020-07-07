@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "docker": "ng serve --host 0.0.0.0",
+    "prebuild": "node ./src/timestamp.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -35,6 +36,7 @@
     "highlight.js": "^9.18.1",
     "marked": "^0.7.0",
     "minimist": "^1.2.5",
+    "moment-timezone": "^0.5.31",
     "nebular-icons": "^1.1.0",
     "ng2-completer": "^3.0.3",
     "ng2-smart-table": "^1.6.0",
@@ -42,6 +44,7 @@
     "ngx-highlightjs": "^3.0.3",
     "ngx-markdown": "^8.2.2",
     "popper.js": "^1.16.1",
+    "replace-in-file": "^6.1.0",
     "rxjs": "^6.6.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
