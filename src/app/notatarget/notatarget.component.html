@@ -120,16 +120,16 @@
 <!--          </label>-->
 <!--        </div>-->
         <div class="column justify-content-center">
-          <nb-select placeholder="Device" id="deviceSelector" [selected]="device">
+          <nb-select placeholder="Device" id="deviceSelector" [(selected)]="device">
             <nb-option value="laptop">Laptop/Desktop Computer</nb-option>
             <nb-option value="smartphone">Smartphone</nb-option>
             <nb-option value="iot">IoT</nb-option>
           </nb-select>
-          <nb-select placeholder="Operation" id="operationSelector" [selected]="operation">
+          <nb-select placeholder="Operation" id="operationSelector" [(selected)]="operation">
             <nb-option value="cryptojacking">Cryptojacking</nb-option>
             <nb-option value="ddos">DDoS</nb-option>
           </nb-select>
-          <nb-select placeholder="Target" id="targetSelector" [selected]="target">
+          <nb-select placeholder="Target" id="targetSelector" [(selected)]="target">
             <nb-option value="bitcoin">Bitcoin</nb-option>
             <nb-option value="monero">Monero</nb-option>
             <nb-option value="amonaz">Amonaz.com</nb-option>
@@ -140,7 +140,7 @@
           <button nbButton (click)="hashTest(1000)">Hash test</button>
         </div>
       </div>
-      <app-line-chart *ngIf="chartData" [data]="chartData"></app-line-chart>
+      <app-line-chart *ngIf="chartData" [chartData]="chartData"></app-line-chart>
       <!--    BEGIN GRAPH STUFF-->
 <!--      <div echarts class="demo-chart" [options]="chartOption" [merge]="updateOption"></div>-->
     </div>

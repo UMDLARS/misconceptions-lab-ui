@@ -1,36 +1,38 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit, OnChanges {
+export class LineChartComponent implements AfterViewInit, OnChanges {
+  @Input() chartData: number;
   options: any;
-  updateOptions: any;
+  // updateOptions: any;
   // private oneDay = 24 * 3600 * 1000;
   // private now: Date;
-  private value: number;
+  // private value: number;
   private data: any[];
-  private xAxisData: number[];
-  private specs: number;
+  private xAxisData: any[];
+  // private specs: number;
 
   constructor() { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     // generate some random testing data:
     this.data = [];
     this.xAxisData = [];
     // this.now = new Date(1997, 9, 3);
-    this.specs = 7;
-    this.value = Math.random() * 1000;
+    // this.specs = 7;
+    // this.value = Math.random() * 1000;
 
     for (let i = 0; i < 10000; i++) {
-      this.data.push({
-        x: `${i} devices`,
-        value: i * this.specs
-      });
-      this.xAxisData.push(i);
+      // this.data.push({
+      //   x: `${i} devices`,
+      //   value: i * this.chartData
+      // });
+      this.data.push(i * this.chartData);
+      this.xAxisData.push(`${i} devices`);
     }
     console.log(this.data[9]);
 
@@ -51,7 +53,7 @@ export class LineChartComponent implements OnInit, OnChanges {
         }
       },
       xAxis: {
-        type: 'value',
+        type: 'category',
         data: this.xAxisData,
         splitLine: {
           show: false
@@ -72,6 +74,17 @@ export class LineChartComponent implements OnInit, OnChanges {
         data: this.data
       }]
     };
+  }
+
+  updateOptions() {
+    for (let i = 0; i < 10000; i++) {
+      this.data.push({
+        x: `${i} devices`,
+        value: i * this.chartData
+      });
+      this.xAxisData.push(i);
+    }
+    this.options.xAxis.data = this.xAxisData;
   }
 
   ngOnChanges() {

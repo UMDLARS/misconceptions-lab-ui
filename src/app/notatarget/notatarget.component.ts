@@ -24,10 +24,10 @@ export class NotatargetComponent implements OnInit {
    */
   private apiKey = 'pohejcwyL1yLuY6wunOkbEaEjhLZM5fw';
   public welcomeScreen = true;
-  public device;
-  public operation;
-  public target;
-  public chartData: any[];
+  public device: string;
+  public operation: string;
+  public target: string;
+  public chartData: any;
   public hashrates = {
     laptop: 50000,
     smartphone: 30000,
@@ -102,16 +102,16 @@ export class NotatargetComponent implements OnInit {
 
   /**
    * Calculates yearly profit in USD
-   * @param crypto The cryptocurrency to be mined
+   * @param currency The cryptocurrency to be mined
    * @param hashrate The number of hashes per sec of all combined devices
    */
-  public getProfitCalc(crypto: string, hashrate: string) {
+  public getProfitCalc(currency: string, hashrate: string) {
     // const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
     // this.http.get(url, {}).subscribe((res) => {
     //   console.log(res[this.profitInYearUSD]);
     // });
     let yearlyGenerated: number;
-    switch (crypto.toLowerCase()) {
+    switch (currency.toLowerCase()) {
       case 'bitcoin':
       case 'btc':
         // this.cryptos.BTC.dailyProfit = 86400 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 32);
@@ -137,7 +137,8 @@ export class NotatargetComponent implements OnInit {
         console.error('Error: getProfitCalc received invalid cryptocurrency');
         return;
     }
-    this.calculate(yearlyGenerated);
+    this.chartData = yearlyGenerated;
+    // this.calculate(yearlyGenerated);
   }
 
   /**
@@ -189,15 +190,15 @@ export class NotatargetComponent implements OnInit {
     // this.getProfitCalc('bitcoin', '40000000');
   }
 
-  public calculate(yearlyGeneratedUSD: number) {
-    this.chartData = [];
-    for (let i = 0; i < 7; i++) {
-      this.chartData.push([
-        `Index ${i}`,
-        yearlyGeneratedUSD * i
-      ]);
-    }
-  }
+  // public calculate(yearlyGeneratedUSD: number) {
+  //   this.chartData = [];
+  //   for (let i = 0; i < 7; i++) {
+  //     this.chartData.push([
+  //       `Index ${i}`,
+  //       yearlyGeneratedUSD * i
+  //     ]);
+  //   }
+  // }
 
   public updateOption() {
     this.getProfitCalc(this.target, this.device);
