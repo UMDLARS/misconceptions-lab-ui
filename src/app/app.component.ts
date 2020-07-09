@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {NbIconLibraries, NbMenuItem} from '@nebular/theme';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import {NbIconLibraries, NbMenuItem} from '@nebular/theme';
   styleUrls: ['./app.component.scss'],
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   menuItems: NbMenuItem[] = [
     {
       title: 'Home',
@@ -109,5 +110,9 @@ export class AppComponent {
     this.iconLibraries.registerFontPack('font-awesome-brands', {packClass: 'fab', iconClassPrefix: 'fa'});
     this.iconLibraries.setDefaultPack('font-awesome');
     // tslint:disable-next-line:triple-equals
+  }
+
+  ngOnInit() {
+    console.log('Build date:', environment.timeStamp);
   }
 }

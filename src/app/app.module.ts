@@ -50,9 +50,10 @@ import {ConfigurationsComponent} from './configurations/configurations.component
 import {LabRelevanceComponent} from './layout/lab-relevance/lab-relevance.component';
 import {LabCheckComponent} from './layout/lab-check/lab-check.component';
 import {LabQuizComponent} from './layout/lab-check/quiz/quiz.component';
-import { BakebotComponent } from './users-are-not-malicious/bakebot/bakebot.component';
-import { LabRefsComponent } from './layout/lab-refs/lab-refs.component';
-import { LineChartComponent } from './notatarget/line-chart/line-chart.component';
+import {BakebotComponent} from './users-are-not-malicious/bakebot/bakebot.component';
+import {LabRefsComponent} from './layout/lab-refs/lab-refs.component';
+import {HmacExerciseComponent} from './encryption-auto-integrity/hmac-exercise/hmac-exercise.component';
+import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,35 @@ import { LineChartComponent } from './notatarget/line-chart/line-chart.component
     LabQuizComponent,
     BakebotComponent,
     LabRefsComponent,
+    HmacExerciseComponent,
     LineChartComponent
+  ],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    NbProgressBarModule,
+    NbLayoutModule,
+    NbSidebarModule.forRoot(),
+    NbButtonModule,
+    NbThemeModule.forRoot({name: 'customized'}),
+    NbCardModule,
+    NbAccordionModule,
+    NbMenuModule.forRoot(),
+    NbTreeGridModule,
+    NbEvaIconsModule,
+    BrowserAnimationsModule,
+    NbTabsetModule,
+    NbStepperModule,
+    ReactiveFormsModule,
+    NbInputModule,
+    NbActionsModule,
+    NbIconModule,
+    NbSelectModule,
+    HttpClientModule,
+    Ng2SmartTableModule,
+    NbAlertModule,
+    NgxEchartsModule.forRoot({echarts}),
   ],
     imports: [
         AppRoutingModule,
