@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js';
 
 @Component({
@@ -8,6 +8,7 @@ import {Chart} from 'chart.js';
 })
 export class LineChartComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart') chartRef: ElementRef;
+  @Input() chartData: number;
   chart: any;
 
   dataPoints: any[] = [];
@@ -26,7 +27,7 @@ export class LineChartComponent implements OnInit, AfterViewInit {
       this.dataPoints.push({x: i, y: i * this.specs});
       this.labels.push(i.toString() + ' devices');
     }
-    console.log(this.dataPoints);
+    // console.log(this.dataPoints);
   }
 
   ngAfterViewInit() {

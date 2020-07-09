@@ -27,7 +27,7 @@ export class NotatargetComponent implements OnInit {
   public device: string;
   public operation: string;
   public target: string;
-  public chartData: any;
+  public chartData: number;
   public hashrates = {
     laptop: 50000,
     smartphone: 30000,
@@ -116,20 +116,20 @@ export class NotatargetComponent implements OnInit {
       case 'btc':
         // this.cryptos.BTC.dailyProfit = 86400 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 32);
         // below is a simplified form of the above equation:
-        yearlyGenerated = 246375 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 25);
+        yearlyGenerated = 246375 * this.hashrates[hashrate] / this.cryptos.BTC.difficulty / Math.pow(2, 25);
         yearlyGenerated *= this.cryptos.BTC.exchangeRate;
         // return this.cryptos.BTC.yearlyProfit;
         break;
       case 'monero':
       case 'xmr':
         // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
-        yearlyGenerated = Number(hashrate) * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
+        yearlyGenerated = this.hashrates[hashrate] * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
         yearlyGenerated *= this.cryptos.XMR.exchangeRate;
         // return this.cryptos.XMR.yearlyProfit;
         break;
       case 'ethereum':
       case 'eth':
-        yearlyGenerated = 3e17 * Number(hashrate) / this.cryptos.ETH.difficulty;
+        yearlyGenerated = 3e17 * this.hashrates[hashrate] / this.cryptos.ETH.difficulty;
         yearlyGenerated *= this.cryptos.ETH.exchangeRate;
         // return this.cryptos.ETH.yearlyProfit;
         break;
@@ -190,6 +190,7 @@ export class NotatargetComponent implements OnInit {
     // this.getProfitCalc('bitcoin', '40000000');
   }
 
+  // calculate() has moved to line-chart.component
   // public calculate(yearlyGeneratedUSD: number) {
   //   this.chartData = [];
   //   for (let i = 0; i < 7; i++) {
@@ -202,6 +203,7 @@ export class NotatargetComponent implements OnInit {
 
   public updateOption() {
     this.getProfitCalc(this.target, this.device);
+    // console.log(this.chartData);
   }
 
   public begin() {
