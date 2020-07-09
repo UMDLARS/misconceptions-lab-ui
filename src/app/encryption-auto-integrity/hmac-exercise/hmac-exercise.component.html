@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-2">
+        <input type="number" nbInput [(ngModel)]="plainText" (ngModelChange)="updateCipherText()"/>
+      </div>
+      <div class="col">
+        <label>
+          <textarea class="text-monospace" nbInput [(ngModel)]="cipherText"
+                    (ngModelChange)="updateDecryptedText()"></textarea>
+        </label>
+        <span *ngFor="let bit of this.transformMask">
+          <nb-checkbox status="basic" (valueChange)="bit.checked = !bit.checked; updateDecryptedText()"></nb-checkbox>
+        </span>
+        <textarea class="text-monospace" nbInput disabled [(ngModel)]="decryptedText"></textarea>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+

@@ -113,6 +113,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Build date:', environment.buildTime);
+    console.log('Build date:', environment.timeStamp);
   }
 }
