@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -16,7 +16,6 @@ export class HmacExerciseComponent implements OnInit {
   };
 
   plainText = 20;
-  cipherText = '';
   decryptedText = '';
   transformMask = Array(32);
 
@@ -36,8 +35,6 @@ export class HmacExerciseComponent implements OnInit {
     new DataView(buffer).setInt32(0, this.plainText, false);
 
     this.cipherObject = CryptoJS.AES.encrypt(CryptoJS.lib.WordArray.create(buffer), this.key, this.cipherParams);
-    // Omit OpenSSL 'SALTED__' and salt from display in page
-    this.cipherText = this.cipherObject.ciphertext;
 
     this.updateDecryptedText();
   }
@@ -58,13 +55,9 @@ export class HmacExerciseComponent implements OnInit {
       }
     }
 
-    // tslint:disable:no-bitwise
-    let original = this.cipherObject.ciphertext.words[0];
-    let selected = original & mask;
-    selected = ~selected & mask;
-    original = original & (~mask);
-    this.cipherObject.ciphertext.words[0] = original | selected;
-    // tslint:enable:no-bitwise
+    const original = this.cipherObject.ciphertext.words[0];
+    // tslint:disable-next-line:no-bitwise
+    this.cipherObject.ciphertext.words[0] = original ^ mask;
   }
 
   checkboxChanged(index: number) {

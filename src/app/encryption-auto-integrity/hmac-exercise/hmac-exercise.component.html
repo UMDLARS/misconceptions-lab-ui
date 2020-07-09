@@ -6,19 +6,19 @@
     <div class="col-2">
       <nb-card>
         <nb-card-body>
-          
+
         </nb-card-body>
       </nb-card>
       <input type="number" nbInput [(ngModel)]="plainText" (ngModelChange)="updateCipherText()"/>
     </div>
     <div class="col">
       <label>
-          <textarea class="text-monospace" nbInput [(ngModel)]="cipherText"
+          <textarea disabled class="text-monospace" nbInput [(ngModel)]="this.cipherObject.ciphertext"
                     (ngModelChange)="updateDecryptedText()"></textarea>
       </label>
       <span *ngFor="let bit of this.transformMask; let i = index;">
-          <input type="checkbox" name="{{bit.value}}" class="m-1" [checked]="bit.checked"
-                 (change)="checkboxChanged(i)">{{bit.value}}
+          <button nbButton name="{{bit.value}}" class="m-1"
+                  (click)="checkboxChanged(i)">{{bit.value}}</button>
         </span>
       <textarea class="text-monospace" nbInput disabled [(ngModel)]="decryptedText"></textarea>
     </div>
