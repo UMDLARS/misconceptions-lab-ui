@@ -1,20 +1,26 @@
-<nb-card>
-  <nb-card-body>
-    <div class="row">
-      <div class="col-2">
-        <input type="number" nbInput [(ngModel)]="plainText" (ngModelChange)="updateCipherText()"/>
-      </div>
-      <div class="col">
-        <label>
+<div class="">
+  <div class="row">
+    <img src="assets/images/hmac-exercise/crypto-bot.svg">
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <nb-card>
+        <nb-card-body>
+          
+        </nb-card-body>
+      </nb-card>
+      <input type="number" nbInput [(ngModel)]="plainText" (ngModelChange)="updateCipherText()"/>
+    </div>
+    <div class="col">
+      <label>
           <textarea class="text-monospace" nbInput [(ngModel)]="cipherText"
                     (ngModelChange)="updateDecryptedText()"></textarea>
-        </label>
-        <span *ngFor="let bit of this.transformMask">
-          <nb-checkbox status="basic" (valueChange)="bit.checked = !bit.checked; updateDecryptedText()"></nb-checkbox>
+      </label>
+      <span *ngFor="let bit of this.transformMask; let i = index;">
+          <input type="checkbox" name="{{bit.value}}" class="m-1" [checked]="bit.checked"
+                 (change)="checkboxChanged(i)">{{bit.value}}
         </span>
-        <textarea class="text-monospace" nbInput disabled [(ngModel)]="decryptedText"></textarea>
-      </div>
+      <textarea class="text-monospace" nbInput disabled [(ngModel)]="decryptedText"></textarea>
     </div>
-  </nb-card-body>
-</nb-card>
-
+  </div>
+</div>
