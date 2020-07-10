@@ -90,7 +90,7 @@
       <h3>Attack Calculator</h3>
       <div style="padding-top: 10%"><button nbButton (click)="begin()">Start</button></div>
     </div>
-    <div class="scene" [hidden]="!welcomeScreen">
+    <div class="scene" [hidden]="welcomeScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
       <div class="column">
 <!--        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">-->
@@ -120,26 +120,28 @@
 <!--          </label>-->
 <!--        </div>-->
         <div class="column justify-content-center">
-          <nb-select placeholder="Device" id="deviceSelector" [selected]="device">
+          <nb-select placeholder="Device" id="deviceSelector" [(selected)]="device">
             <nb-option value="laptop">Laptop/Desktop Computer</nb-option>
             <nb-option value="smartphone">Smartphone</nb-option>
             <nb-option value="iot">IoT</nb-option>
           </nb-select>
-          <nb-select placeholder="Operation" id="operationSelector" [selected]="operation">
+          <nb-select placeholder="Operation" id="operationSelector" [(selected)]="operation">
             <nb-option value="cryptojacking">Cryptojacking</nb-option>
             <nb-option value="ddos">DDoS</nb-option>
           </nb-select>
-          <nb-select placeholder="Target" id="targetSelector" [selected]="target">
+          <nb-select placeholder="Target" id="targetSelector" [(selected)]="target">
             <nb-option value="bitcoin">Bitcoin</nb-option>
             <nb-option value="monero">Monero</nb-option>
+            <nb-option value="ethereum">Ethereum</nb-option>
             <nb-option value="amonaz">Amonaz.com</nb-option>
             <nb-option value="isp">Internet, Co.</nb-option>
             <nb-option value="healthcare">Health, Inc.</nb-option>
           </nb-select>
           <button nbButton (click)="updateOption()">Go!</button>
+          <button nbButton (click)="hashTest(1000)">Hash test</button>
         </div>
       </div>
-      <app-line-chart *ngIf="chartData" [data]="chartData"></app-line-chart>
+      <app-line-chart *ngIf="chartData" [chartData]="chartData"></app-line-chart>
       <!--    BEGIN GRAPH STUFF-->
 <!--      <div echarts class="demo-chart" [options]="chartOption" [merge]="updateOption"></div>-->
     </div>
@@ -161,6 +163,8 @@
       <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
       <br>
       <a href="https://shodan.io" target="_blank"> Shodan.io: IoT search engine</a>
+      <br>
+      <a href="https://horizon.netscout.com/" target="_blank"> Netscout real-time DDoS attack map</a>
     </p>
   </div>
   <figure headerImage>

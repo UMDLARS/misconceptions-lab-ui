@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {fib, dist} from 'cpu-benchmark';
+import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
+import {Exchange} from './exchanges';
+import {MiningStats} from './miningstats';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
+// https://www.cryptocompare.com/mining/calculator/ for mining calculations
 
 // API key for shodan.io: pohejcwyL1yLuY6wunOkbEaEjhLZM5fw
 // A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
@@ -14,36 +17,46 @@ import {HttpClient} from '@angular/common/http';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  private apiUrl = 'https://api.shodan.io';
+  // private cryptoUrl = 'https://www.coincalculators.io/api';
+  private shodanUrl = 'https://api.shodan.io';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
    */
   private apiKey = 'pohejcwyL1yLuY6wunOkbEaEjhLZM5fw';
   public welcomeScreen = true;
-  public device;
-  public operation;
-  public target;
-  public chartData: any[];
-  public specs = {
+  public device: string;
+  public operation: string;
+  public target: string;
+  public chartData: number;
+  public hashrates = {
+    laptop: 50000,
+    smartphone: 30000,
+    iot: 15000,
+    yourDevice: 0
+  };
+  public flops = {
     laptop: 3,
     smartphone: 1,
     iot: 0.5
   };
-  // public chartOption: EChartOption = {
-  //   xAxis: {
-  //     type: 'category',
-  //     data: ['1', '2', '3', '4', '5', '6', '7'],
-  //   },
-  //   yAxis: {
-  //     type: 'value',
-  //   },
-  //   series: [
-  //     {
-  //       data: [0, 0, 0, 0, 0, 0, 0],
-  //       type: 'line',
-  //     },
-  //   ],
-  // };
+  public cryptos = {
+    BTC: {
+      exchangeRate: 9000,
+      difficulty: 0,
+      yearlyProfit: 0
+    },
+    ETH: {
+      exchangeRate: 0,
+      difficulty: 0,
+      yearlyProfit: 0
+    },
+    XMR: {
+      exchangeRate: 0,
+      networkHashRate: 0,
+      blockReward: 0,
+      yearlyProfit: 0
+    }
+  };
 
   constructor(private http: HttpClient) {
       this.questions = [
@@ -80,33 +93,133 @@ export class NotatargetComponent implements OnInit {
    * @param facets Not sure how to use this yet... leave blank
    */
   async getHostsCount(query: string, facets: string) {
-    const tmpUrl = this.apiUrl + '/shodan/host/count' + '?key=' + this.apiKey
+    const tmpUrl = this.shodanUrl + '/shodan/host/count' + '?key=' + this.apiKey
     + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
     this.http.get(tmpUrl, {}).subscribe((res) => {
       console.log(res);
     });
   }
+
+  /**
+   * Calculates yearly profit in USD
+   * @param currency The cryptocurrency to be mined
+   * @param hashrate The number of hashes per sec of all combined devices
+   */
+  public getProfitCalc(currency: string, hashrate: string) {
+    // const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
+    // this.http.get(url, {}).subscribe((res) => {
+    //   console.log(res[this.profitInYearUSD]);
+    // });
+    let yearlyGenerated: number;
+    switch (currency.toLowerCase()) {
+      case 'bitcoin':
+      case 'btc':
+        // this.cryptos.BTC.dailyProfit = 86400 * Number(hashrate) / this.cryptos.BTC.difficulty / Math.pow(2, 32);
+        // below is a simplified form of the above equation:
+        yearlyGenerated = 246375 * this.hashrates[hashrate] / this.cryptos.BTC.difficulty / Math.pow(2, 25);
+        yearlyGenerated *= this.cryptos.BTC.exchangeRate;
+        // return this.cryptos.BTC.yearlyProfit;
+        break;
+      case 'monero':
+      case 'xmr':
+        // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
+        yearlyGenerated = this.hashrates[hashrate] * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
+        yearlyGenerated *= this.cryptos.XMR.exchangeRate;
+        // return this.cryptos.XMR.yearlyProfit;
+        break;
+      case 'ethereum':
+      case 'eth':
+        yearlyGenerated = 3e17 * this.hashrates[hashrate] / this.cryptos.ETH.difficulty;
+        yearlyGenerated *= this.cryptos.ETH.exchangeRate;
+        // return this.cryptos.ETH.yearlyProfit;
+        break;
+      default:
+        console.error('Error: getProfitCalc received invalid cryptocurrency');
+        return;
+    }
+    this.chartData = yearlyGenerated;
+    // this.calculate(yearlyGenerated);
+  }
+
+  /**
+   * Uses Cryptocompare API to get exchange rates for bitcoin, monero, and ethereum.
+   * Can easily be modified to get other exchange rates if we want.
+   */
+  async getExchangeRates() {
+    this.http.get('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD',
+      {}).subscribe((res: Exchange) => {
+      this.cryptos.BTC.exchangeRate = res.USD;
+    });
+    this.http.get('https://min-api.cryptocompare.com/data/price?fsym=XMR&tsyms=USD',
+      {}).subscribe((res: Exchange) => {
+      this.cryptos.XMR.exchangeRate = res.USD;
+    });
+    this.http.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
+      {}).subscribe((res: Exchange) => {
+      this.cryptos.ETH.exchangeRate = res.USD;
+    });
+  }
+
+  /**
+   * Retrieves info about cryptos to be used in mining calculations.
+   * For now, we only need to keep the network difficulty.
+   */
+  async getMiningStats() {
+    this.http.get('https://eth.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
+      // console.log(res.nodes[0].difficulty);
+      this.cryptos.ETH.difficulty = res.nodes[0].difficulty;
+    });
+    this.http.get('https://xmr.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
+      // console.log(res.nodes[0].difficulty);
+      this.cryptos.XMR.networkHashRate = res.nodes[0].networkhashps;
+      this.cryptos.XMR.blockReward = res.nodes[0].blockReward;
+    });
+    this.http.get('https://blockchain.info/q/getdifficulty', {}).subscribe((res: number) => {
+      // console.log(res);
+      this.cryptos.BTC.difficulty = res;
+    });
+  }
+
   ngOnInit() {
+    // get real exchange rates
+    this.getExchangeRates();
+    this.getMiningStats();
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
-    this.calculate();
+    // this.calculate();
+    // this.getProfitCalc('bitcoin', '40000000');
   }
 
-  public calculate() {
-    this.chartData = [];
-    for (let i = 0; i < 7; i++) {
-      this.chartData.push([
-        `Index ${i}`,
-        Math.floor(Math.random() * 100)
-      ]);
-    }
-  }
+  // calculate() has moved to line-chart.component
+  // public calculate(yearlyGeneratedUSD: number) {
+  //   this.chartData = [];
+  //   for (let i = 0; i < 7; i++) {
+  //     this.chartData.push([
+  //       `Index ${i}`,
+  //       yearlyGeneratedUSD * i
+  //     ]);
+  //   }
+  // }
 
   public updateOption() {
-    this.calculate();
+    this.getProfitCalc(this.target, this.device);
+    // console.log(this.chartData);
   }
 
   public begin() {
     this.welcomeScreen = !this.welcomeScreen;
+  }
+
+  public hashTest(timeLimit) {
+    let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
+    const start = new Date().getTime();
+    let hashes = 0;
+    let curTime = new Date().getTime();
+    while (curTime < start + timeLimit) {
+      digest = sha256(digest);
+      hashes++;
+      curTime = new Date().getTime();
+    }
+    console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
   }
 }
