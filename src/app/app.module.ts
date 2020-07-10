@@ -7,7 +7,7 @@ import {
   NbAccordionModule,
   NbActionsModule, NbAlertModule,
   NbButtonModule,
-  NbCardModule,
+  NbCardModule, NbCheckboxModule,
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
@@ -114,6 +114,7 @@ import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
     HttpClientModule,
     Ng2SmartTableModule,
     NbAlertModule,
+    NbCheckboxModule,
   ],
   providers: [NbMenuService],
   bootstrap: [AppComponent]

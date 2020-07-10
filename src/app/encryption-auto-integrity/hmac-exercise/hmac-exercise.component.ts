@@ -66,4 +66,10 @@ export class HmacExerciseComponent implements OnInit {
     this.cipherObject.ciphertext.words[0] = original | selected;
     // tslint:enable:no-bitwise
   }
+
+  checkboxChanged(index: number) {
+    this.transformMask[index].checked = !this.transformMask[index].checked;
+
+    this.updateDecryptedText();
+  }
 }
