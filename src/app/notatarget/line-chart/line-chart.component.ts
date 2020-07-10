@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js';
 
 @Component({
@@ -6,7 +6,7 @@ import {Chart} from 'chart.js';
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit, AfterViewInit {
+export class LineChartComponent implements AfterViewInit {
   @ViewChild('lineChart') chartRef: ElementRef;
   @Input() chartData: number;
   chart: any;
@@ -15,20 +15,7 @@ export class LineChartComponent implements OnInit, AfterViewInit {
   chartContext: any;
   labels: any[] = [];
 
-  specs = 7;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-    // generate some random testing data:
-
-    for (let i = 0; i < 10000; i++) {
-      this.dataPoints.push({x: i, y: i * this.specs});
-      this.labels.push(i.toString() + ' devices');
-    }
-    // console.log(this.dataPoints);
-  }
+  constructor() {}
 
   ngAfterViewInit() {
     // let index = 0;
@@ -37,6 +24,10 @@ export class LineChartComponent implements OnInit, AfterViewInit {
     //   this.labels.push(index);
     //   index++;
     // }
+    for (let i = 0; i < 10000; i++) {
+      this.dataPoints.push({x: i, y: i * this.chartData});
+      this.labels.push(i.toString() + ' devices');
+    }
     this.chartContext = this.chartRef.nativeElement.getContext('2d');
     this.initChart();
   }
@@ -50,7 +41,8 @@ export class LineChartComponent implements OnInit, AfterViewInit {
           {
             data: this.dataPoints,
             radius: 0,
-            fill: false,
+            fill: true, // default is true
+            borderWidth: 8, // default is 3
           }
         ]
       },
@@ -65,8 +57,6 @@ export class LineChartComponent implements OnInit, AfterViewInit {
           xAxes: [{
             display: true,
             ticks: {
-              suggestedMin: 0,
-              suggestedMax: 70000,
               display: true
             },
             type: 'logarithmic'
@@ -74,14 +64,15 @@ export class LineChartComponent implements OnInit, AfterViewInit {
           yAxes: [{
             display: true,
             ticks: {
-              suggestedMin: 0,
-              suggestedMax: 80000,
+              callback: (value, index, values) => {
+                return '$' + value;
+              },
               display: true
             }
           }],
         },
         tooltip: {
-          enabled: true
+          enabled: true,
         },
         responsive: true
       }
