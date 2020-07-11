@@ -5,14 +5,18 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   NbAccordionModule,
-  NbActionsModule, NbAlertModule,
+  NbActionsModule,
+  NbAlertModule,
   NbButtonModule,
-  NbCardModule, NbCheckboxModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbDialogModule,
   NbIconModule,
   NbInputModule,
   NbLayoutModule,
   NbMenuModule,
-  NbMenuService, NbProgressBarModule,
+  NbMenuService,
+  NbProgressBarModule,
   NbSelectModule,
   NbSidebarModule,
   NbStepperModule,
@@ -54,6 +58,7 @@ import {BakebotComponent} from './users-are-not-malicious/bakebot/bakebot.compon
 import {LabRefsComponent} from './layout/lab-refs/lab-refs.component';
 import {HmacExerciseComponent} from './encryption-auto-integrity/hmac-exercise/hmac-exercise.component';
 import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
+import {DialogPromptComponent} from './notatarget/line-chart/dialog/dialog-prompt';
 
 @NgModule({
   declarations: [
@@ -87,7 +92,8 @@ import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
     BakebotComponent,
     LabRefsComponent,
     HmacExerciseComponent,
-    LineChartComponent
+    LineChartComponent,
+    DialogPromptComponent
   ],
   imports: [
     AppRoutingModule,
@@ -114,10 +120,12 @@ import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
     HttpClientModule,
     Ng2SmartTableModule,
     NbAlertModule,
+    NbDialogModule.forRoot(),
     NbCheckboxModule,
   ],
   providers: [NbMenuService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogPromptComponent],
 })
 
 export class AppModule {

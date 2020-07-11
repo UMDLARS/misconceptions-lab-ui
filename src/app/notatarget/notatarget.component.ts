@@ -3,6 +3,8 @@ import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
+import {NbDialogService} from '@nebular/theme';
+import {DialogPromptComponent} from './line-chart/dialog/dialog-prompt';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
@@ -58,7 +60,7 @@ export class NotatargetComponent implements OnInit {
     }
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dialogService: NbDialogService) {
       this.questions = [
 
         {prompt: '1) Which quality/characteristic of a botnet explains why attacking small machines is so cost efficient?',
@@ -106,10 +108,11 @@ export class NotatargetComponent implements OnInit {
    * @param hashrate The number of hashes per sec of all combined devices
    */
   public getProfitCalc(currency: string, hashrate: string) {
-    // const url = this.cryptoUrl + '?name=' + crypto + '&hashrate=' + hashrate;
-    // this.http.get(url, {}).subscribe((res) => {
-    //   console.log(res[this.profitInYearUSD]);
-    // });
+
+    if (hashrate === 'yourDevice' && this.hashrates.yourDevice === 0) {
+      this.openDialog();
+      if (this.hashrates.yourDevice === 0) { return; }
+    }
     let yearlyGenerated: number;
     switch (currency.toLowerCase()) {
       case 'bitcoin':
@@ -210,6 +213,17 @@ export class NotatargetComponent implements OnInit {
     this.welcomeScreen = !this.welcomeScreen;
   }
 
+  // opens a dialog that prompts the user whether to run yourDevice tests
+  openDialog() {
+    this.dialogService.open(DialogPromptComponent).onClose.subscribe(runTest => runTest && this.runTests());
+  }
+  runTests() {
+    this.hashTest(10000); // 10000 millisecs is rather arbitrary...
+    this.bandwidthTest();
+  }
+
+  bandwidthTest() {}
+
   public hashTest(timeLimit) {
     let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
     const start = new Date().getTime();
@@ -220,6 +234,7 @@ export class NotatargetComponent implements OnInit {
       hashes++;
       curTime = new Date().getTime();
     }
+    this.hashrates.yourDevice = hashes;
     console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
   }
 }
