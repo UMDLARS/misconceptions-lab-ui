@@ -3,7 +3,7 @@ import {NbDialogRef} from '@nebular/theme';
 
 @Component({
   selector: 'app-dialog-prompt',
-  template: `<ng-template #dialog let-data let-ref="dialogRef">
+  template: `
     <nb-card>
       <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
       <nb-card-body>Running these tests will take about a minute, but it will be burdensome on your CPU
@@ -14,8 +14,6 @@ import {NbDialogRef} from '@nebular/theme';
         <button nbButton status="danger" (click)="close(false)">Maybe later</button>
       </nb-card-footer>
     </nb-card>
-  </ng-template>
-<!--  <button nbButton (click)="open(dialog)">Open Dialog</button>-->
   `,
   styleUrls: ['./dialog-prompt.component.scss'],
 })

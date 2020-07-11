@@ -58,7 +58,7 @@ import {BakebotComponent} from './users-are-not-malicious/bakebot/bakebot.compon
 import {LabRefsComponent} from './layout/lab-refs/lab-refs.component';
 import {HmacExerciseComponent} from './encryption-auto-integrity/hmac-exercise/hmac-exercise.component';
 import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
-import {DialogPromptComponent} from './notatarget/line-chart/dialog/dialog-prompt';
+import {DialogPromptComponent} from './notatarget/dialog/dialog-prompt';
 
 @NgModule({
   declarations: [

@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
-import {DialogPromptComponent} from './line-chart/dialog/dialog-prompt';
+import {DialogPromptComponent} from './dialog/dialog-prompt';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
@@ -234,7 +234,7 @@ export class NotatargetComponent implements OnInit {
       hashes++;
       curTime = new Date().getTime();
     }
-    this.hashrates.yourDevice = hashes;
+    this.hashrates.yourDevice = hashes / 1000; // yields hashes per second
     console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
   }
 }
