@@ -4,7 +4,7 @@ import {NbDialogRef} from '@nebular/theme';
 @Component({
   selector: 'app-dialog-prompt',
   template: `
-    <nb-card>
+    <nb-card [nbSpinner]="testing" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="">
       <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
       <nb-card-body>Running these tests will take about a minute, but it will be burdensome on your CPU
       and will require a large chunk of data transfer. If your device's battery is low or you don't want to
@@ -18,10 +18,12 @@ import {NbDialogRef} from '@nebular/theme';
   styleUrls: ['./dialog-prompt.component.scss'],
 })
 export class DialogPromptComponent {
+  public testing = false;
 
   constructor(protected ref: NbDialogRef<DialogPromptComponent>) {}
 
   close(runTest: boolean) {
+    this.testing = runTest;
     this.ref.close(runTest);
   }
 }

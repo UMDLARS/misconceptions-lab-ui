@@ -11,6 +11,7 @@ import {DialogPromptComponent} from './dialog/dialog-prompt';
 
 // API key for shodan.io: pohejcwyL1yLuY6wunOkbEaEjhLZM5fw
 // A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
+// DDoS numbers from https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/
 
 @Component({
   selector: 'app-notatarget',
@@ -19,7 +20,6 @@ import {DialogPromptComponent} from './dialog/dialog-prompt';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  // private cryptoUrl = 'https://www.coincalculators.io/api';
   private shodanUrl = 'https://api.shodan.io';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
@@ -44,19 +44,16 @@ export class NotatargetComponent implements OnInit {
   public cryptos = {
     BTC: {
       exchangeRate: 9000,
-      difficulty: 0,
-      yearlyProfit: 0
+      difficulty: 0
     },
     ETH: {
       exchangeRate: 0,
-      difficulty: 0,
-      yearlyProfit: 0
+      difficulty: 0
     },
     XMR: {
       exchangeRate: 0,
       networkHashRate: 0,
-      blockReward: 0,
-      yearlyProfit: 0
+      blockReward: 0
     }
   };
 
@@ -121,27 +118,23 @@ export class NotatargetComponent implements OnInit {
         // below is a simplified form of the above equation:
         yearlyGenerated = 246375 * this.hashrates[hashrate] / this.cryptos.BTC.difficulty / Math.pow(2, 25);
         yearlyGenerated *= this.cryptos.BTC.exchangeRate;
-        // return this.cryptos.BTC.yearlyProfit;
         break;
       case 'monero':
       case 'xmr':
         // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
         yearlyGenerated = this.hashrates[hashrate] * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
         yearlyGenerated *= this.cryptos.XMR.exchangeRate;
-        // return this.cryptos.XMR.yearlyProfit;
         break;
       case 'ethereum':
       case 'eth':
         yearlyGenerated = 3e17 * this.hashrates[hashrate] / this.cryptos.ETH.difficulty;
         yearlyGenerated *= this.cryptos.ETH.exchangeRate;
-        // return this.cryptos.ETH.yearlyProfit;
         break;
       default:
         console.error('Error: getProfitCalc received invalid cryptocurrency');
         return;
     }
     this.chartData = yearlyGenerated;
-    // this.calculate(yearlyGenerated);
   }
 
   /**
@@ -189,20 +182,7 @@ export class NotatargetComponent implements OnInit {
     this.getMiningStats();
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
-    // this.calculate();
-    // this.getProfitCalc('bitcoin', '40000000');
   }
-
-  // calculate() has moved to line-chart.component
-  // public calculate(yearlyGeneratedUSD: number) {
-  //   this.chartData = [];
-  //   for (let i = 0; i < 7; i++) {
-  //     this.chartData.push([
-  //       `Index ${i}`,
-  //       yearlyGeneratedUSD * i
-  //     ]);
-  //   }
-  // }
 
   public updateOption() {
     this.getProfitCalc(this.target, this.device);
