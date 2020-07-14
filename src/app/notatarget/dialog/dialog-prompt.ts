@@ -7,7 +7,7 @@ import * as sha256 from 'crypto-js/sha256';
   template: `
     <nb-card [nbSpinner]="testing" nbSpinnerStatus="success" nbSpinnerSize="large" nbSpinnerMessage="">
       <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
-      <nb-card-body>{{prompt}}</nb-card-body>
+      <nb-card-body id="promptBody">{{prompt}}</nb-card-body>
       <div class="spinner-border" *ngIf="testing"></div>
       <nb-card-footer>
         <button nbButton status="success" (click)="test()">Run the tests!</button>
@@ -32,6 +32,10 @@ export class DialogPromptComponent {
   test() {
     this.testing = true;
     this.prompt = 'Perfoming tests...';
+    console.log(document.getElementById('promptBody').innerText);
+    while (document.getElementById('promptBody').innerText !== 'Performing tests...') {
+      document.getElementById('promptBody').innerText = 'Performing tests...';
+    }
     const hashrate = this.hashTest(10000);
     const bandwidth = this.bandwidthTest();
     this.testing = false;
