@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>Testing in progress</nb-card-header>
+  <nb-card-body>
+    <span id="hashspan">
+      <div class="spinner-border" *ngIf="hashTesting"></div>
+    </span><br>
+    <span id="bwspan"><div class="spinner-border" *ngIf="bwTesting"></div></span>
+    <nb-progress-bar [value]="percentDone" *ngIf="bwTesting"></nb-progress-bar>
+  </nb-card-body>
+<!--  maybe include a cancel button in footer? -->
+</nb-card>

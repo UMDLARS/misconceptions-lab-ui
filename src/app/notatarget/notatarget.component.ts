@@ -5,6 +5,7 @@ import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
 import {DialogPromptComponent} from './dialog/dialog-prompt';
+import {DeviceTestComponent} from "./device-test/device-test.component";
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
@@ -191,10 +192,20 @@ export class NotatargetComponent implements OnInit {
 
   // opens a dialog that runs yourDevice tests
   openDialog() {
-    this.dialogService.open(DialogPromptComponent).onClose.subscribe(res => {
-      this.hashrates.yourDevice = res[0];
-      this.bandwidth = res[1];
-    });
+    // this.dialogService.open(DialogPromptComponent).onClose.subscribe(r => {
+    //   if (r === true) {
+    //     this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
+    //       this.hashrates.yourDevice = res[0];
+    //       this.bandwidth = res[1];
+    //     });
+    //   }
+    // });
+    this.dialogService.open(DialogPromptComponent).onClose.toPromise().then(r => {if (r === true) {
+      this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
+        this.hashrates.yourDevice = res[0];
+        this.bandwidth = res[1];
+      });
+    }});
   }
   // runTests() {
   //   this.hashTest(10000); // 10000 millisecs is rather arbitrary...
