@@ -36,11 +36,7 @@ export class NotatargetComponent implements OnInit {
     iot: 15000,
     yourDevice: 0
   };
-  public flops = {
-    laptop: 3,
-    smartphone: 1,
-    iot: 0.5
-  };
+  public bandwidth = 0;
   public cryptos = {
     BTC: {
       exchangeRate: 9000,
@@ -215,26 +211,29 @@ export class NotatargetComponent implements OnInit {
 
   // opens a dialog that prompts the user whether to run yourDevice tests
   openDialog() {
-    this.dialogService.open(DialogPromptComponent).onClose.subscribe(runTest => runTest && this.runTests());
+    this.dialogService.open(DialogPromptComponent).onClose.subscribe(res => {
+      res[0] = this.hashrates.yourDevice;
+      res[1] = this.bandwidth;
+    });
   }
-  runTests() {
-    this.hashTest(10000); // 10000 millisecs is rather arbitrary...
-    this.bandwidthTest();
-  }
-
-  bandwidthTest() {}
-
-  public hashTest(timeLimit) {
-    let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
-    const start = new Date().getTime();
-    let hashes = 0;
-    let curTime = new Date().getTime();
-    while (curTime < start + timeLimit) {
-      digest = sha256(digest);
-      hashes++;
-      curTime = new Date().getTime();
-    }
-    this.hashrates.yourDevice = hashes / 1000; // yields hashes per second
-    console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
-  }
+  // runTests() {
+  //   this.hashTest(10000); // 10000 millisecs is rather arbitrary...
+  //   this.bandwidthTest();
+  // }
+  //
+  // bandwidthTest() {}
+  //
+  // public hashTest(timeLimit) {
+  //   let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
+  //   const start = new Date().getTime();
+  //   let hashes = 0;
+  //   let curTime = new Date().getTime();
+  //   while (curTime < start + timeLimit) {
+  //     digest = sha256(digest);
+  //     hashes++;
+  //     curTime = new Date().getTime();
+  //   }
+  //   this.hashrates.yourDevice = hashes / 1000; // yields hashes per second
+  //   console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
+  // }
 }
