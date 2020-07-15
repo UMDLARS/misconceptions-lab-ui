@@ -8,6 +8,8 @@ import * as sha256 from 'crypto-js/sha256';
     <nb-card>
       <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
       <nb-card-body id="promptBody">{{prompt}}</nb-card-body>
+      <div class="spinner-border" *ngIf="testing"></div>
+      <nb-card-body id="promptBody">{{prompt}}</nb-card-body>
       <div *ngIf="testing" id="wrap">
         <p>
           <nb-progress-bar [value]="progress"></nb-progress-bar>
