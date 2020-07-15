@@ -65,7 +65,7 @@ export class DialogPromptComponent {
      *
      * @param ev  Click event
      */
-    if (this.req) {
+    if (this.req != null) {
         this.req.abort ();
       }
 
@@ -111,7 +111,6 @@ export class DialogPromptComponent {
       return;
     }
 
-    document.querySelector ('progress').style.visibility = 'hidden';
     document.querySelector ('#result').className = 'resultDone';
     document.querySelector ('#eta').innerHTML = (Math.round(diff * 100) / 100).toString(); // dec (diff, 2) + ' sec';
     this.req = null;
