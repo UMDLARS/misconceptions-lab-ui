@@ -15,8 +15,8 @@ import * as sha256 from 'crypto-js/sha256';
           <nb-progress-bar [value]="progress"></nb-progress-bar>
         </p>
         <p>
-          <span id="result"></span><br>
-          <span id="eta"></span>
+          <span id="result">{{result}}</span><br>
+          <span id="eta">{{eta}}</span>
         </p>
       </div>
       <nb-card-footer>
@@ -33,10 +33,12 @@ export class DialogPromptComponent {
   public prompt = 'Running these tests will take about a minute, but it will be burdensome on your CPU '
     + 'and will require a large chunk of data transfer. If your device\'s battery is low or you don\'t want to '
     + 'waste data consumption, you can try this at a later time.';
-  public req: XMLHttpRequest = null;
+  public req: XMLHttpRequest = new XMLHttpRequest();
   public start = 0;
   public count = 0;
   public sum = 0;
+  public eta = '';
+  public result = '';
 
   constructor(protected ref: NbDialogRef<DialogPromptComponent>) {}
 
@@ -65,9 +67,9 @@ export class DialogPromptComponent {
      *
      * @param ev  Click event
      */
-    if (this.req != null) {
-        this.req.abort ();
-      }
+    // if (this.req != null) {
+        // this.req.abort ();
+      // }
 
     this.req = new XMLHttpRequest();
 
@@ -88,6 +90,8 @@ export class DialogPromptComponent {
     // load file avoiding the cache
     this.req.open('GET', 'https://lars.d.umn.edu/hijodecoche/10mb.bin?' + this.start, true);
     this.req.send(null);
+
+    return +(this.eta);
   }
 
   public hashTest(timeLimit) {
@@ -111,9 +115,10 @@ export class DialogPromptComponent {
       return;
     }
 
-    document.querySelector ('#result').className = 'resultDone';
-    document.querySelector ('#eta').innerHTML = (Math.round(diff * 100) / 100).toString(); // dec (diff, 2) + ' sec';
-    this.req = null;
+    // document.querySelector ('#result').className = 'resultDone';
+    // document.querySelector ('#eta').innerHTML = (Math.round(diff * 100) / 100).toString(); // dec (diff, 2) + ' sec';
+    this.eta = (Math.round(diff * 100) / 100).toString();
+    // this.req = null;
   }
   testRunning(ev) {
     const now = Date.now ();
@@ -135,7 +140,7 @@ export class DialogPromptComponent {
     }
 
     this.progress = percent;
-    document.querySelector ('#result').innerHTML = (Math.round(avg * 100) / 100).toString() + ' Mbit/s';
-    document.querySelector ('#eta').innerHTML = (Math.round(eta * 100) / 100).toString() + ' sec';
+    this.result = (Math.round(avg * 100) / 100).toString() + ' Mbit/s';
+    this.eta = (Math.round(eta * 100) / 100).toString() + ' sec';
   }
 }
