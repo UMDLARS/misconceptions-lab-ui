@@ -12,7 +12,7 @@ export class DeviceTestComponent {
   public prompt = 'Running these tests will take about a minute, but it will be burdensome on your CPU '
     + 'and will require a large chunk of data transfer. If your device\'s battery is low or you don\'t want to '
     + 'waste data consumption, you can try this at a later time.';
-  public hashTesting = true;
+  public hashTesting = false;
   public bwTesting = false;
   private hashrate = 0;
   private bandwidth = 0;
@@ -34,7 +34,20 @@ export class DeviceTestComponent {
 
   test(doTest: boolean) {
     if (doTest) {
-      this.hashrate = this.hashTest(10000);
+      this.hashTesting = true;
+      if (typeof Worker !== 'undefined') {
+        // Create a new
+        const worker = new Worker('./device-test.worker', { type: 'module' });
+        worker.onmessage = ({ data }) => {
+          // console.log(`page got message: ${data}`);
+          this.hashrate = data;
+        };
+        worker.postMessage({});
+      } else {
+        // Web workers are not supported in this environment.
+        // You should add a fallback so that your program still executes correctly.
+        this.hashrate = this.hashTest(10000);
+      }
       document.getElementById('hashspan').style.opacity = '0.5';
       this.hashTesting = false;
       this.bandwidth = this.bandwidthTest();

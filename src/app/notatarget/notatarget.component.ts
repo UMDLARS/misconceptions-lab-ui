@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-// import * as sha256 from 'crypto-js/sha256';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
-import {DialogPromptComponent} from './dialog/dialog-prompt';
-import {DeviceTestComponent} from "./device-test/device-test.component";
+import {DeviceTestComponent} from './device-test/device-test.component';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations

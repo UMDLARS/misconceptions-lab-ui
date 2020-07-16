@@ -58,7 +58,6 @@ import {BakebotComponent} from './users-are-not-malicious/bakebot/bakebot.compon
 import {LabRefsComponent} from './layout/lab-refs/lab-refs.component';
 import {HmacExerciseComponent} from './encryption-auto-integrity/hmac-exercise/hmac-exercise.component';
 import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
-import {DialogPromptComponent} from './notatarget/dialog/dialog-prompt';
 import { DeviceTestComponent } from './notatarget/device-test/device-test.component';
 
 @NgModule({
@@ -94,7 +93,6 @@ import { DeviceTestComponent } from './notatarget/device-test/device-test.compon
     LabRefsComponent,
     HmacExerciseComponent,
     LineChartComponent,
-    DialogPromptComponent,
     DeviceTestComponent
   ],
     imports: [
@@ -128,7 +126,7 @@ import { DeviceTestComponent } from './notatarget/device-test/device-test.compon
     ],
   providers: [NbMenuService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogPromptComponent],
+  entryComponents: [DeviceTestComponent],
 })
 
 export class AppModule {
