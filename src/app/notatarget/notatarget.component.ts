@@ -192,20 +192,10 @@ export class NotatargetComponent implements OnInit {
 
   // opens a dialog that runs yourDevice tests
   openDialog() {
-    // this.dialogService.open(DialogPromptComponent).onClose.subscribe(r => {
-    //   if (r === true) {
-    //     this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
-    //       this.hashrates.yourDevice = res[0];
-    //       this.bandwidth = res[1];
-    //     });
-    //   }
-    // });
-    this.dialogService.open(DialogPromptComponent).onClose.toPromise().then(r => {if (r === true) {
-      this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
-        this.hashrates.yourDevice = res[0];
-        this.bandwidth = res[1];
-      });
-    }});
+    this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
+      this.hashrates.yourDevice = res[0];
+      this.bandwidth = res[1];
+    });
   }
   // runTests() {
   //   this.hashTest(10000); // 10000 millisecs is rather arbitrary...
