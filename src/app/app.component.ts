@@ -109,7 +109,6 @@ export class AppComponent implements OnInit {
     this.iconLibraries.registerFontPack('font-awesome', {packClass: 'fas', iconClassPrefix: 'fa'});
     this.iconLibraries.registerFontPack('font-awesome-brands', {packClass: 'fab', iconClassPrefix: 'fa'});
     this.iconLibraries.setDefaultPack('font-awesome');
-    // tslint:disable-next-line:triple-equals
   }
 
   ngOnInit() {
