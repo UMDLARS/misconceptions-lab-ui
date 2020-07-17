@@ -63,6 +63,6 @@ export class HmacExerciseComponent implements OnInit {
   checkboxChanged(index: number) {
     this.transformMask[index].checked = !this.transformMask[index].checked;
 
-    this.updateDecryptedText();
+    this.updateCipherText();
   }
 }
