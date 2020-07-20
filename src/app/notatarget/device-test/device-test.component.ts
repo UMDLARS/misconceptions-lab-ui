@@ -67,13 +67,13 @@ export class DeviceTestComponent {
         // console.log(`File is ${this.percentDone}% downloaded.`);
 
         this.currTime = new Date().getTime();
-        if (this.percentDone === 0) {
+        // percentDone gets rounded up to 1...so this should catch that (with negligible side effects)
+        if (this.percentDone <= 1) {
           this.startTime = new Date().getTime();
           this.prevTime = this.startTime;
         }
 
         this.bytesReceived = event.loaded / 1000000;
-        // console.log('bytesReceived', this.bytesReceived);
         this.speed =
           (this.bytesReceived - this.oldbytes) /
           ((this.currTime - this.prevTime) / 1000);
@@ -81,15 +81,9 @@ export class DeviceTestComponent {
           this.unit = 'Kbps';
           this.speed *= 1000;
         } else { this.unit = 'Mbps'; }
-        // console.log('speed', this.speed + this.unit);
-        // console.log(this.prevTime);
-        // console.log(this.currTime);
-        // console.log('time', this.currTime - this.prevTime);
         this.prevTime = this.currTime;
 
         this.oldbytes = this.bytesReceived;
-        // console.log('oldbytes', this.oldbytes);
-        // console.log('\n');
 
         if (this.percentDone === 100) {
           this.endTime = new Date().getTime();
@@ -104,23 +98,13 @@ export class DeviceTestComponent {
           }
         }
       } else if (event instanceof HttpResponse) {
-        // const res: any = event.body;
-        // // console.log('start download:', res);
-        // const url = window.URL.createObjectURL(res);
-        // const a = document.createElement('a');
-        // document.body.appendChild(a);
-        // a.setAttribute('style', 'display: none');
-        // a.href = url;
-        // a.download = 'SpeedTest_32MB.dat';
-        // a.click();
-        // window.URL.revokeObjectURL(url);
-        // a.remove();
-        console.log('File is completely downloaded!');
+        // console.log('File is completely downloaded!');
       }
     });
     return this.speed;
   }
 
+  // this will only be used when worker fails for some reason
   public hashTest(timeLimit) {
     let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
     const start = new Date().getTime();

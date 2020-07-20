@@ -14,6 +14,5 @@ addEventListener('message', ({ data }) => {
     }
     console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
     const response = hashes / timeLimit * 1000; // yields hashes per second
-    console.log(response);
     postMessage(response);
 });
