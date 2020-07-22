@@ -18,7 +18,7 @@ export class LineChartComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit() {
-    for (let i = 0; i < 10000; i += 10) {
+    for (let i = 0; i < 10000; i ++) {
       this.dataPoints.push(i * this.chartData);
       this.labels.push(i.toString());
     }
