@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js';
+import * as ChartAnnotation from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-line-chart',
@@ -41,9 +42,9 @@ export class LineChartComponent implements AfterViewInit {
         ]
       },
       options: {
-        animation: {
-          duration: 5
-        },
+        // animation: {
+        //   duration: 5
+        // },
         legend: {
           display: false
         },
@@ -76,9 +77,29 @@ export class LineChartComponent implements AfterViewInit {
         hover: {
           mode: 'label'
         },
+        annotation: {
+          drawTime: 'afterDatasetsDraw', // this is the default
+          annotations: [{
+            id: 'shodan-line', // optional
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-0',
+            value: 1000,
+            borderColor: 'red',
+            borderWidth: 2,
+            label: {
+              enabled: true,
+              position: 'center',
+              content: 'content goes here'
+            }
+          }]
+        },
         responsive: true
-      }
+      },
+      plugins: [ChartAnnotation]
     });
   }
+
+  public updateChart() {}
 
 }

@@ -27,6 +27,7 @@ export class NotatargetComponent implements OnInit {
   public welcomeScreen = true;
   public device: string;
   public operation: string;
+  public bandwidth = 0;
   public target: string;
   public chartData: number;
   public hashrates = {
@@ -35,7 +36,7 @@ export class NotatargetComponent implements OnInit {
     iot: 15000,
     yourDevice: 0
   };
-  public bandwidth = 0;
+  public yourBandwidth = 0;
   public cryptos = {
     BTC: {
       exchangeRate: 9000,
@@ -171,6 +172,16 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
+  public getAttackMagnitude() {
+    if (this.bandwidth <= 0) { // then yourDevice is selected
+      if (this.yourBandwidth <= 0) {
+        this.openDialog();
+        if (this.yourBandwidth <= 0) { return; }
+      }
+      this.bandwidth = this.yourBandwidth;
+    }
+  }
+
   ngOnInit() {
     // get real exchange rates
     this.getExchangeRates();
@@ -180,7 +191,11 @@ export class NotatargetComponent implements OnInit {
   }
 
   public updateOption() {
-    this.getProfitCalc(this.target, this.device);
+    if (this.operation === 'crypto') {
+      this.getProfitCalc(this.target, this.device);
+    } else {
+      this.getAttackMagnitude();
+    }
     // console.log(this.chartData);
   }
 
@@ -192,7 +207,7 @@ export class NotatargetComponent implements OnInit {
   openDialog() {
     this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
       this.hashrates.yourDevice = res[0];
-      this.bandwidth = res[1];
+      this.yourBandwidth = res[1];
     });
   }
   // runTests() {

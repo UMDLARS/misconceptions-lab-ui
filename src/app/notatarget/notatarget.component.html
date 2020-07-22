@@ -122,23 +122,31 @@
 <!--          </label>-->
 <!--        </div>-->
         <div class="column justify-content-center">
-          <nb-select placeholder="Device" id="deviceSelector" [(selected)]="device">
+          <nb-select placeholder="Operation" id="operationSelector" [(selected)]="operation">
+            <nb-option value="crypto">Cryptojacking</nb-option>
+            <nb-option value="ddos">DDoS</nb-option>
+          </nb-select>
+          <nb-select *ngIf="operation === 'crypto'" placeholder="Device" id="deviceSelector" [(selected)]="device">
             <nb-option value="laptop">Laptop/Desktop Computer</nb-option>
             <nb-option value="smartphone">Smartphone</nb-option>
             <nb-option value="iot">IoT</nb-option>
             <nb-option value="yourDevice">Your device</nb-option>
           </nb-select>
-          <nb-select placeholder="Operation" id="operationSelector" [(selected)]="operation">
-            <nb-option value="cryptojacking">Cryptojacking</nb-option>
-            <nb-option value="ddos">DDoS</nb-option>
+<!--          All values are in Mbps -->
+          <nb-select *ngIf="operation === 'ddos'" placeholder="Bandwidth" id="bwSelector" [(selected)]="bandwidth">
+            <nb-option value=0.05>Dial-up</nb-option>
+            <nb-option value=10>DSL</nb-option>
+            <nb-option value=100>5G</nb-option>
+            <nb-option value=10000>Fiber Optic</nb-option> <!-- assumes 10 Gbps -->
+            <nb-option value=-1>Your bandwidth</nb-option>
           </nb-select>
-          <nb-select placeholder="Target" id="targetSelector" [(selected)]="target">
+          <nb-select *ngIf="operation === 'crypto'" placeholder="Target" id="targetSelector" [(selected)]="target">
             <nb-option value="bitcoin">Bitcoin</nb-option>
             <nb-option value="monero">Monero</nb-option>
             <nb-option value="ethereum">Ethereum</nb-option>
-            <nb-option value="amonaz">Amonaz.com</nb-option>
-            <nb-option value="isp">Internet, Co.</nb-option>
-            <nb-option value="healthcare">Health, Inc.</nb-option>
+<!--            <nb-option value="amonaz">Amonaz.com</nb-option>-->
+<!--            <nb-option value="isp">Internet, Co.</nb-option>-->
+<!--            <nb-option value="healthcare">Health, Inc.</nb-option>-->
           </nb-select>
           <button nbButton (click)="updateOption()">Go!</button>
         </div>
