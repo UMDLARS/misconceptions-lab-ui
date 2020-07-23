@@ -15,10 +15,10 @@
   "dependencies": {
     "@akveo/ng2-completer": "^9.0.1",
     "@angular/animations": "^10.0.2",
-    "@angular/cdk": "^10.1.0",
+    "@angular/cdk": "^10.0.1",
     "@angular/common": "^10.0.2",
     "@angular/compiler": "^10.0.2",
-    "@angular/core": "^10.0.5",
+    "@angular/core": "^10.0.2",
     "@angular/forms": "^10.0.2",
     "@angular/platform-browser": "^10.0.2",
     "@angular/platform-browser-dynamic": "^10.0.2",
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1000.1",
-    "@angular/cli": "^10.0.4",
+    "@angular/cli": "^10.0.1",
     "@angular/compiler-cli": "^10.0.2",
     "@angular/language-service": "^10.0.2",
     "@fortawesome/fontawesome-free": "^5.13.1",
