@@ -1,4 +1,11 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  OnChanges
+} from '@angular/core';
 import {Chart} from 'chart.js';
 import * as ChartAnnotation from 'chartjs-plugin-annotation';
 
@@ -7,7 +14,7 @@ import * as ChartAnnotation from 'chartjs-plugin-annotation';
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements AfterViewInit {
+export class LineChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('lineChart') chartRef: ElementRef;
   @Input() chartData: number;
   chart: any;
@@ -25,6 +32,14 @@ export class LineChartComponent implements AfterViewInit {
     }
     this.chartContext = this.chartRef.nativeElement.getContext('2d');
     this.initChart();
+  }
+
+  ngOnChanges(change: any) {
+    this.chartData = change.chartData.currentValue;
+    // console.log(change);
+    if (!change.chartData.firstChange) {
+      this.updateChart();
+    }
   }
 
   initChart() {
@@ -50,7 +65,10 @@ export class LineChartComponent implements AfterViewInit {
         },
         scales: {
           xAxes: [{
-            labelString: '# of devices',
+            scaleLabel: {
+              labelString: '# of devices',
+              display: true
+            },
             display: true,
             ticks: {
               display: true
@@ -58,7 +76,10 @@ export class LineChartComponent implements AfterViewInit {
             // type: 'logarithmic'
           }],
           yAxes: [{
-            labelString: 'Yearly earnings (in USD)',
+            scaleLabel: {
+              labelString: 'Yearly earnings (in USD)',
+              display: true
+            },
             display: true,
             ticks: {
               callback: (value, index, values) => {
@@ -100,6 +121,15 @@ export class LineChartComponent implements AfterViewInit {
     });
   }
 
-  public updateChart() {}
+  public updateChart() {
+    // console.log('in updateChart');
+    this.dataPoints = [];
+    this.labels = [];
+    for (let i = 0; i < 10000; i ++) {
+      this.dataPoints.push(i * this.chartData);
+      this.labels.push(i.toString());
+    }
+    this.initChart();
+  }
 
 }
