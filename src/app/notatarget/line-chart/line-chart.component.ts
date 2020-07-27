@@ -17,6 +17,7 @@ import * as ChartAnnotation from 'chartjs-plugin-annotation';
 export class LineChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('lineChart') chartRef: ElementRef;
   @Input() chartData: number;
+  @Input() realDevices: number;
   chart: any;
 
   dataPoints: any[] = [];
@@ -105,13 +106,16 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-0',
-            value: 1000,
+            value: this.realDevices,
             borderColor: 'red',
             borderWidth: 2,
             label: {
               enabled: true,
               position: 'center',
-              content: 'content goes here'
+              content: 'real world devices'
+            },
+            onClick: (e) => {
+              console.log('OnClick works!');
             }
           }]
         },

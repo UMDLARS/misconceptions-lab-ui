@@ -4,10 +4,10 @@ export interface MiningStats {
   'luck': number;
   'nodes': [
     {
-      'avgBlockTime': number,
-      'blockReward': number,
-      'difficulty': number,
-      'networkhashps': number
+      'avgBlockTime': string,
+      'blockReward': string,
+      'difficulty': string,
+      'networkhashps': string
     }
     ];
   'stats': any;

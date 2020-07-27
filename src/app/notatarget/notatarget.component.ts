@@ -30,6 +30,7 @@ export class NotatargetComponent implements OnInit {
   public bandwidth = 0;
   public target: string;
   public chartData: number;
+  public realDevices = 0;
   public hashrates = {
     laptop: 50000,
     smartphone: 30000,
@@ -159,12 +160,12 @@ export class NotatargetComponent implements OnInit {
   async getMiningStats() {
     this.http.get('https://eth.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
       // console.log(res.nodes[0].difficulty);
-      this.cryptos.ETH.difficulty = res.nodes[0].difficulty;
+      this.cryptos.ETH.difficulty = Number(res.nodes[0].difficulty);
     });
     this.http.get('https://xmr.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
       // console.log(res.nodes[0].difficulty);
-      this.cryptos.XMR.networkHashRate = res.nodes[0].networkhashps;
-      this.cryptos.XMR.blockReward = res.nodes[0].blockReward;
+      this.cryptos.XMR.networkHashRate = Number(res.nodes[0].networkhashps);
+      this.cryptos.XMR.blockReward = Number(res.nodes[0].blockReward);
     });
     this.http.get('https://blockchain.info/q/getdifficulty', {}).subscribe((res: number) => {
       // console.log(res);
@@ -191,6 +192,7 @@ export class NotatargetComponent implements OnInit {
   }
 
   public updateOption() {
+    this.getHostsCount('', '');
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
     } else {
