@@ -1,13 +1,13 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  ViewChild,
-  OnChanges
-} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js';
 import * as ChartAnnotation from 'chartjs-plugin-annotation';
+
+// the marks for previous attacks:
+// 2014 ICMP/NTP attack: 196 Gbps
+// 2015 UDP/ICMP/NTP attack: 127 Gbps
+// early 2016 UDP/DNS: 230
+// SYN/ACK/GRE/HTTP Mirai: 623 Gbps
+// Github memcached servers: 1350 Gbps
 
 @Component({
   selector: 'app-line-chart',
@@ -18,11 +18,32 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('lineChart') chartRef: ElementRef;
   @Input() chartData: number;
   @Input() realDevices: number;
+  @Input() chartType: string;
   chart: any;
 
   dataPoints: any[] = [];
   chartContext: any;
   labels: any[] = [];
+  cryptoYAxis = [{
+    scaleLabel: {
+      labelString: 'Yearly earnings (in USD)',
+      display: true
+    },
+    display: true,
+    ticks: {
+      callback: (value, index, values) => {
+        return '$' + value;
+      },
+      display: true
+    }
+  }];
+  public ddosYAxis = [{
+    scaleLabel: {
+      labelString: 'Attack traffic (Gbps)',
+      display: true
+    },
+    display: true
+  }];
 
   constructor() {}
 
@@ -36,15 +57,20 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(change: any) {
-    this.chartData = change.chartData.currentValue;
-    // console.log(change);
-    if (!change.chartData.firstChange) {
-      this.updateChart();
+    if (change.chartData) {
+      this.chartData = change.chartData.currentValue;
+      if (!change.chartData.firstChange) {
+        this.updateChart();
+      }
     }
+    if (change.realDevices) {
+      this.realDevices = change.realDevices.currentValue;
+    }
+    // console.log(change);
   }
 
   initChart() {
-    this.chart = new Chart(this.chartContext, {
+    const chartConfig = {
       type: 'line',
       data: {
         labels: this.labels,
@@ -76,19 +102,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
             },
             // type: 'logarithmic'
           }],
-          yAxes: [{
-            scaleLabel: {
-              labelString: 'Yearly earnings (in USD)',
-              display: true
-            },
-            display: true,
-            ticks: {
-              callback: (value, index, values) => {
-                return '$' + value;
-              },
-              display: true
-            }
-          }],
+          yAxes: (this.chartType === 'crypto' ? this.cryptoYAxis : this.ddosYAxis),
         },
         tooltip: {
           enabled: true,
@@ -122,11 +136,14 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
         responsive: true
       },
       plugins: [ChartAnnotation]
-    });
+    };
+    // chartConfig.options.scales.yAxes = (this.chartType === 'crypto' ? this.cryptoYAxis : this.ddosYAxis);
+    this.chart = new Chart(this.chartContext, chartConfig);
   }
 
   public updateChart() {
     // console.log('in updateChart');
+    if (this.chart != null) { this.chart.destroy(); }
     this.dataPoints = [];
     this.labels = [];
     for (let i = 0; i < 10000; i ++) {

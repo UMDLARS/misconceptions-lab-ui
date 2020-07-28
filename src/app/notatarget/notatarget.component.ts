@@ -32,7 +32,7 @@ export class NotatargetComponent implements OnInit {
   public chartData: number;
   public realDevices = 0;
   public hashrates = {
-    laptop: 50000,
+    laptop: 1250000,
     smartphone: 30000,
     iot: 15000,
     yourDevice: 0
@@ -45,12 +45,13 @@ export class NotatargetComponent implements OnInit {
     },
     ETH: {
       exchangeRate: 0,
-      difficulty: 0
+      networkHashRate: 0,
+      blockTime: 0
     },
     XMR: {
       exchangeRate: 0,
       networkHashRate: 0,
-      blockReward: 0
+      blockTime: 0
     }
   };
 
@@ -91,8 +92,9 @@ export class NotatargetComponent implements OnInit {
   async getHostsCount(query: string, facets: string) {
     const tmpUrl = this.shodanUrl + '/shodan/host/count' + '?key=' + this.apiKey
     + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
-    this.http.get(tmpUrl, {}).subscribe((res) => {
+    this.http.get(tmpUrl, {}).subscribe((res:{matches: any[], total: number}) => {
       console.log(res);
+      this.realDevices = res.total;
     });
   }
 
@@ -119,12 +121,13 @@ export class NotatargetComponent implements OnInit {
       case 'monero':
       case 'xmr':
         // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
-        yearlyGenerated = this.hashrates[hashrate] * this.cryptos.XMR.blockReward * 720 / this.cryptos.XMR.networkHashRate;
+        yearlyGenerated = this.hashrates[hashrate] * 31536000 / this.cryptos.XMR.networkHashRate / this.cryptos.XMR.blockTime;
         yearlyGenerated *= this.cryptos.XMR.exchangeRate;
         break;
       case 'ethereum':
       case 'eth':
-        yearlyGenerated = 3e17 * this.hashrates[hashrate] / this.cryptos.ETH.difficulty;
+        // based on block reward of 3:
+        yearlyGenerated = 94608000 * this.hashrates[hashrate] / this.cryptos.ETH.networkHashRate / this.cryptos.ETH.blockTime;
         yearlyGenerated *= this.cryptos.ETH.exchangeRate;
         break;
       default:
@@ -160,12 +163,13 @@ export class NotatargetComponent implements OnInit {
   async getMiningStats() {
     this.http.get('https://eth.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
       // console.log(res.nodes[0].difficulty);
-      this.cryptos.ETH.difficulty = Number(res.nodes[0].difficulty);
+      this.cryptos.ETH.networkHashRate = Number(res.nodes[0].networkhashps);
+      this.cryptos.ETH.blockTime = Number(res.nodes[0].avgBlockTime);
     });
     this.http.get('https://xmr.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
       // console.log(res.nodes[0].difficulty);
       this.cryptos.XMR.networkHashRate = Number(res.nodes[0].networkhashps);
-      this.cryptos.XMR.blockReward = Number(res.nodes[0].blockReward);
+      this.cryptos.XMR.blockTime = Number(res.nodes[0].avgBlockTime);
     });
     this.http.get('https://blockchain.info/q/getdifficulty', {}).subscribe((res: number) => {
       // console.log(res);
@@ -181,6 +185,8 @@ export class NotatargetComponent implements OnInit {
       }
       this.bandwidth = this.yourBandwidth;
     }
+    console.log(this.bandwidth);
+    this.chartData = this.bandwidth;
   }
 
   ngOnInit() {
@@ -212,24 +218,4 @@ export class NotatargetComponent implements OnInit {
       this.yourBandwidth = res[1];
     });
   }
-  // runTests() {
-  //   this.hashTest(10000); // 10000 millisecs is rather arbitrary...
-  //   this.bandwidthTest();
-  // }
-  //
-  // bandwidthTest() {}
-
-  // public hashTest(timeLimit) {
-  //   let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
-  //   const start = new Date().getTime();
-  //   let hashes = 0;
-  //   let curTime = new Date().getTime();
-  //   while (curTime < start + timeLimit) {
-  //     digest = sha256(digest);
-  //     hashes++;
-  //     curTime = new Date().getTime();
-  //   }
-  //   this.hashrates.yourDevice = hashes / timeLimit * 1000; // yields hashes per second
-  //   console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
-  // }
 }
