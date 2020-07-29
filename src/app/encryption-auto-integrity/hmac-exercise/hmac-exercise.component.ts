@@ -8,9 +8,12 @@ import * as CryptoJS from 'crypto-js';
 })
 export class HmacExerciseComponent implements OnInit {
 
-  key = 'Bakebot is the best';
+  // For some reason without explicit parsing of Key and IV
+  // CryptoJS doesn't produce the same ciphertext between reloads
+  key = CryptoJS.enc.Utf8.parse('Bakebot is the best');
   cipherObject: any;
   cipherParams = {
+    iv: CryptoJS.enc.Utf8.parse('Bakebot'),
     mode: CryptoJS.mode.CTR,
     padding: CryptoJS.pad.NoPadding
   };
