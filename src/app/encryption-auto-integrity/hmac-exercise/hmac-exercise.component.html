@@ -1,19 +1,20 @@
-<div class="">
+<div class="container-fluid">
   <div class="row">
-    <img src="assets/images/hmac-exercise/crypto-bot.svg">
+    <img src="assets/images/hmac-exercise/crypto-bot.svg" width="100%">
   </div>
   <div class="row">
-    <div class="col-2">
+    <div class="col-auto">
+      <label>Requested speed</label><br>
       <input type="number" nbInput [(ngModel)]="plainText" (ngModelChange)="updateCipherText()"/>
     </div>
-    <div class="col">
-      <label>
-          <span class="text-monospace">{{this.cipherObject.ciphertext}}</span>
-      </label>
+    <div class="col d-flex justify-content-center align-items-center">
       <span *ngFor="let bit of this.transformMask; let i = index;">
-          <button nbButton name="{{bit.value}}" class="m-1"
-                  (click)="this.checkboxChanged(i)">{{bit.value}}</button>
+          <button (click)="this.checkboxChanged(i)" [class.flipped-bit]="bit.checked" class="m-0"
+                  name="{{bit.value}}">{{this.binaryCipherText[i]}}</button>
         </span>
+    </div>
+    <div class="col-auto">
+      <label>Received speed</label><br>
       <span class="text-monospace">{{this.decryptedText}}</span>
     </div>
   </div>

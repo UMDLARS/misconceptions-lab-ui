@@ -2,7 +2,17 @@ textarea {
   resize: none;
 }
 
-input[type='checkbox'] {
-  scale: 2;
-  margin: 1em;
+button {
+  background-color: green; /* Green */
+  padding: .5rem 0 .5rem 0;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+.flipped-bit {
+  background-color: orangered; /* Green */
 }
