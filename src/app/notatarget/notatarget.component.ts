@@ -29,8 +29,11 @@ export class NotatargetComponent implements OnInit {
   public operation: string;
   public bandwidth = 0;
   public target: string;
+  public showAmplify = false;
+  public amplified = 1;
   public chartData: number;
   public realDevices = 0;
+  public shodanMsg: string;
   public hashrates = {
     laptop: 1250000,
     smartphone: 30000,
@@ -92,7 +95,7 @@ export class NotatargetComponent implements OnInit {
   async getHostsCount(query: string, facets: string) {
     const tmpUrl = this.shodanUrl + '/shodan/host/count' + '?key=' + this.apiKey
     + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
-    this.http.get(tmpUrl, {}).subscribe((res:{matches: any[], total: number}) => {
+    this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
       console.log(res);
       this.realDevices = res.total;
     });
@@ -186,7 +189,8 @@ export class NotatargetComponent implements OnInit {
       this.bandwidth = this.yourBandwidth;
     }
     console.log(this.bandwidth);
-    this.chartData = this.bandwidth;
+    this.chartData = this.amplified * this.bandwidth;
+    this.showAmplify = true;
   }
 
   ngOnInit() {
@@ -198,7 +202,8 @@ export class NotatargetComponent implements OnInit {
   }
 
   public updateOption() {
-    this.getHostsCount('', '');
+    this.getHostsCount('"default+password"', '');
+    this.displayMsg();
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
     } else {
@@ -217,5 +222,13 @@ export class NotatargetComponent implements OnInit {
       this.hashrates.yourDevice = res[0];
       this.yourBandwidth = res[1];
     });
+  }
+
+  // Controls message that shows up below line chart
+  public displayMsg() {
+    // this probably shouldn't happen if shodan is down or otherwise doesn't provide meaningful numbers
+    this.shodanMsg = 'Shodan found ' + this.realDevices + ' potentially vulnerable devices.';
+    // 'An attack with these devices would be larger than '
+    // + attackName + '!'
   }
 }

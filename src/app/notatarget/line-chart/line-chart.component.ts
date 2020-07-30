@@ -24,7 +24,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   dataPoints: any[] = [];
   chartContext: any;
   labels: any[] = [];
-  cryptoYAxis = [{
+  public cryptoYAxis = [{
     scaleLabel: {
       labelString: 'Yearly earnings (in USD)',
       display: true
@@ -39,16 +39,38 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   }];
   public ddosYAxis = [{
     scaleLabel: {
-      labelString: 'Attack traffic (Gbps)',
+      labelString: 'Attack traffic (Mbps)',
       display: true
     },
     display: true
   }];
+  public volumeMarks = ['2015 UDP', '2014 NTP', 'Mirai', 'Github', 'Amazon'];
+  public amounts = [127000, 400000, 623000, 1350000, 2300000];
+  public annotations = this.volumeMarks.map((name, index) => {
+    return {
+        id: name + 'line', // optional
+        type: 'line',
+        events: ['click'],
+        mode: 'horizontal',
+        scaleID: 'y-axis-0',
+        value: this.amounts[index],
+        borderColor: 'red',
+        borderWidth: 2,
+        label: {
+          enabled: true,
+          position: 'center',
+          content: name
+        },
+        onClick(e) {
+          console.log('OnClick works!');
+        }
+    };
+  });
 
   constructor() {}
 
   ngAfterViewInit() {
-    for (let i = 0; i < 10000; i ++) {
+    for (let i = 0; i < 10000; i++) {
       this.dataPoints.push(i * this.chartData);
       this.labels.push(i.toString());
     }
@@ -115,23 +137,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
         },
         annotation: {
           drawTime: 'afterDatasetsDraw', // this is the default
-          annotations: [{
-            id: 'shodan-line', // optional
-            type: 'line',
-            mode: 'vertical',
-            scaleID: 'x-axis-0',
-            value: this.realDevices,
-            borderColor: 'red',
-            borderWidth: 2,
-            label: {
-              enabled: true,
-              position: 'center',
-              content: 'real world devices'
-            },
-            onClick: (e) => {
-              console.log('OnClick works!');
-            }
-          }]
+          ...(this.chartType !== 'crypto') && { annotations: this.annotations }
         },
         responsive: true
       },
@@ -152,5 +158,4 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
     }
     this.initChart();
   }
-
 }

@@ -88,6 +88,7 @@
       In this activity, you will learn how much power a hacker wields with a botnet.  Select the type of internet
       device, the number of devices connected, and see what your botnet will be capable of doing.
     </p>
+    Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
     <div class="welcome" [hidden]="!welcomeScreen">
       <h3>Attack Calculator</h3>
       <div style="padding-top: 10%"><button nbButton (click)="begin()">Start</button></div>
@@ -144,15 +145,19 @@
             <nb-option value="bitcoin">Bitcoin</nb-option>
             <nb-option value="monero">Monero</nb-option>
             <nb-option value="ethereum">Ethereum</nb-option>
-<!--            <nb-option value="amonaz">Amonaz.com</nb-option>-->
-<!--            <nb-option value="isp">Internet, Co.</nb-option>-->
-<!--            <nb-option value="healthcare">Health, Inc.</nb-option>-->
+          </nb-select>
+          <nb-select *ngIf="operation === 'ddos' && showAmplify" placeholder="Amplify My Attack!"
+                     id="amplifier" [(selected)]="amplified">
+            <nb-option value=1>No amplification</nb-option>
+            <nb-option value=600>NTP monlist</nb-option>
+            <nb-option value=3>DNS</nb-option>
           </nb-select>
           <button nbButton (click)="updateOption()">Go!</button>
         </div>
       </div>
       <app-line-chart *ngIf="chartData" [chartData]="chartData"
                       [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
+      <nb-alert status="control" *ngIf="shodanMsg">{{shodanMsg}}</nb-alert>
       <!--    BEGIN GRAPH STUFF-->
 <!--      <div echarts class="demo-chart" [options]="chartOption" [merge]="updateOption"></div>-->
     </div>
@@ -230,6 +235,10 @@
       <br>
       <a id="ref7">[7]</a><a href="https://howtoremove.guide/how-to-uninstall-idle-buddy-virus/" target="_blank">
       https://howtoremove.guide/how-to-uninstall-idle-buddy-virus/</a>
+      <br>
+<!--      ref8 is source for 2.3 Tbps attack in 2020 -->
+      <a id="ref8">[8]</a><a href="https://aws-shield-tlr.s3.amazonaws.com/2020-Q1_AWS_Shield_TLR.pdf" target="_blank">
+      https://aws-shield-tlr.s3.amazonaws.com/2020-Q1_AWS_Shield_TLR.pdf</a>
     </p>
   </div>
 </app-lab-refs>
