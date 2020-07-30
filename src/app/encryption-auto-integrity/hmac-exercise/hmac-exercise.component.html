@@ -9,18 +9,29 @@
     </div>
     <div class="col d-flex justify-content-center align-items-center">
       <span *ngFor="let bit of this.transformMask; let i = index;">
-          <button (click)="this.checkboxChanged(i)" [class.flipped-bit]="bit.checked" class="m-0"
+          <button (click)="this.checkboxChanged(i)" [class.flipped-bit]="bit.checked" class="bitButton m-0"
                   name="{{bit.value}}">{{this.binaryCipherText[i]}}</button>
         </span>
     </div>
     <div class="col-2 d-flex flex-column align-items-center">
       <label class="align-self-start">Received speed</label><br>
       <span class="text-monospace">{{this.decryptedText}}</span><br>
-      <button [status]="hmacValid ? 'success' : 'danger'" fullWidth nbButton outline>
+      <button [nbPopoverPlacement]="'bottom'" [nbPopover]="hmacPopover" [status]="hmacValid ? 'success' : 'danger'"
+              fullWidth nbButton outline>
         <span *ngIf="hmacValid">HMAC Valid</span>
         <span *ngIf="!hmacValid">HMAC Invalid</span>
         <nb-icon class="moreInfo" icon="question-circle"></nb-icon>
       </button>
+      <ng-template #hmacPopover>
+        <div class="d-flex flex-column m-3" id="hmacPopover">
+          <div class="d-inline-flex flex-row justify-content-between">
+            Original HMAC: <span class="ml-1 hmac">{{this.originalHmac}}</span>
+          </div>
+          <div class="d-inline-flex flex-row justify-content-between">
+            New HMAC: <span class="ml-1 hmac">{{this.newHmac}}</span>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

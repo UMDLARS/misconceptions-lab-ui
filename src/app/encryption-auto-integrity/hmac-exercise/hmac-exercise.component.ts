@@ -22,6 +22,7 @@ export class HmacExerciseComponent implements OnInit {
   plainText = 20;
   binaryCipherText = '';
   originalHmac = '';
+  newHmac = '';
   hmacValid = true;
   decryptedText = '';
   transformMask = Array(32);
@@ -53,7 +54,9 @@ export class HmacExerciseComponent implements OnInit {
     this.binaryCipherText = Number.parseInt(this.cipherObject.ciphertext, 16).toString(2).padStart(32, '0');
 
     this.decryptedText = Number.parseInt(CryptoJS.AES.decrypt(this.cipherObject, this.key, this.cipherParams), 16).toString();
-    this.hmacValid = CryptoJS.HmacSHA256(this.cipherObject.ciphertext, this.hmacSecret).toString() === this.originalHmac;
+
+    this.newHmac = CryptoJS.HmacSHA256(this.cipherObject.ciphertext, this.hmacSecret).toString();
+    this.hmacValid = this.newHmac === this.originalHmac;
   }
 
   modifyCipherObject() {
