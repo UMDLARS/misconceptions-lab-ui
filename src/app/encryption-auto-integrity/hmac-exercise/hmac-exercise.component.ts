@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
@@ -8,14 +8,22 @@ import * as CryptoJS from 'crypto-js';
 })
 export class HmacExerciseComponent implements OnInit {
 
-  key = 'Bakebot is the best';
+  // For some reason without explicit parsing of Key and IV
+  // CryptoJS doesn't produce the same ciphertext between reloads
+  key = CryptoJS.enc.Utf8.parse('Bakebot is the best');
+  hmacSecret = CryptoJS.enc.Utf8.parse('Super Secret');
   cipherObject: any;
   cipherParams = {
+    iv: CryptoJS.enc.Utf8.parse('Bakebot'),
     mode: CryptoJS.mode.CTR,
     padding: CryptoJS.pad.NoPadding
   };
 
   plainText = 20;
+  binaryCipherText = '';
+  originalHmac = '';
+  newHmac = '';
+  hmacValid = true;
   decryptedText = '';
   transformMask = Array(32);
 
@@ -35,6 +43,7 @@ export class HmacExerciseComponent implements OnInit {
     new DataView(buffer).setInt32(0, this.plainText, false);
 
     this.cipherObject = CryptoJS.AES.encrypt(CryptoJS.lib.WordArray.create(buffer), this.key, this.cipherParams);
+    this.originalHmac = CryptoJS.HmacSHA256(this.cipherObject.ciphertext, this.hmacSecret).toString();
 
     this.updateDecryptedText();
   }
@@ -42,7 +51,12 @@ export class HmacExerciseComponent implements OnInit {
   updateDecryptedText() {
     this.modifyCipherObject();
 
+    this.binaryCipherText = Number.parseInt(this.cipherObject.ciphertext, 16).toString(2).padStart(32, '0');
+
     this.decryptedText = Number.parseInt(CryptoJS.AES.decrypt(this.cipherObject, this.key, this.cipherParams), 16).toString();
+
+    this.newHmac = CryptoJS.HmacSHA256(this.cipherObject.ciphertext, this.hmacSecret).toString();
+    this.hmacValid = this.newHmac === this.originalHmac;
   }
 
   modifyCipherObject() {

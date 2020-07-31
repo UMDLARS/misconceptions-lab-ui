@@ -1,20 +1,37 @@
-<div class="">
+<div class="container-fluid">
   <div class="row">
-    <img src="assets/images/hmac-exercise/crypto-bot.svg">
+    <img src="assets/images/hmac-exercise/crypto-bot.svg" width="100%">
   </div>
   <div class="row">
-    <div class="col-2">
+    <div class="flex-column d-flex justify-content-center align-items-center">
+      <label class="align-self-start">Requested speed</label>
       <input type="number" nbInput [(ngModel)]="plainText" (ngModelChange)="updateCipherText()"/>
     </div>
-    <div class="col">
-      <label>
-          <span class="text-monospace">{{this.cipherObject.ciphertext}}</span>
-      </label>
+    <div class="col d-flex justify-content-center align-items-center">
       <span *ngFor="let bit of this.transformMask; let i = index;">
-          <button nbButton name="{{bit.value}}" class="m-1"
-                  (click)="this.checkboxChanged(i)">{{bit.value}}</button>
+          <button (click)="this.checkboxChanged(i)" [class.flipped-bit]="bit.checked" class="bitButton m-0"
+                  name="{{bit.value}}">{{this.binaryCipherText[i]}}</button>
         </span>
-      <span class="text-monospace">{{this.decryptedText}}</span>
+    </div>
+    <div class="col-2 d-flex flex-column align-items-center">
+      <label class="align-self-start">Received speed</label><br>
+      <span class="text-monospace">{{this.decryptedText}}</span><br>
+      <button [nbPopoverPlacement]="'bottom'" [nbPopover]="hmacPopover" [status]="hmacValid ? 'success' : 'danger'"
+              fullWidth nbButton outline>
+        <span *ngIf="hmacValid">HMAC Valid</span>
+        <span *ngIf="!hmacValid">HMAC Invalid</span>
+        <nb-icon class="moreInfo" icon="question-circle"></nb-icon>
+      </button>
+      <ng-template #hmacPopover>
+        <div class="d-flex flex-column m-3" id="hmacPopover">
+          <div class="d-inline-flex flex-row justify-content-between">
+            Original HMAC: <span class="ml-1 hmac">{{this.originalHmac}}</span>
+          </div>
+          <div class="d-inline-flex flex-row justify-content-between">
+            New HMAC: <span class="ml-1 hmac">{{this.newHmac}}</span>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
