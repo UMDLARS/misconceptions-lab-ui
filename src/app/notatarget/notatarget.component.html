@@ -147,7 +147,11 @@
             <nb-option value="ethereum">Ethereum</nb-option>
           </nb-select>
           <nb-select *ngIf="operation === 'ddos' && showAmplify" placeholder="Amplify My Attack!"
-                     id="amplifier" [(selected)]="amplified">
+                     [nbPopover]="popover" nbPopoverTrigger="hover" id="amplifier" [(selected)]="amplified">
+            <ng-template #popover style="padding: 1em"><span>
+              <a href="https://www.cloudflare.com/learning/ddos/dns-amplification-ddos-attack/"
+                 target="_blank">Learn how amplification works!</a></span>
+            </ng-template>
             <nb-option value=1>No amplification</nb-option>
             <nb-option value=600>NTP monlist</nb-option>
             <nb-option value=3>DNS</nb-option>

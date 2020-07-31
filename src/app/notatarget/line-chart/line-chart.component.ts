@@ -44,9 +44,10 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
     },
     display: true
   }];
-  public volumeMarks = ['2015 UDP', '2014 NTP', 'Mirai', 'Github', 'Amazon'];
+  public volumeMarks = ['2015 UDP', '2014 NTP', 'Mirai 2016', 'Github 2018', 'Amazon 2020'];
   public amounts = [127000, 400000, 623000, 1350000, 2300000];
   public annotations = this.volumeMarks.map((name, index) => {
+    if (this.dataPoints[this.dataPoints.length - 1] < this.amounts[index]) { return; }
     return {
         id: name + 'line', // optional
         type: 'line',

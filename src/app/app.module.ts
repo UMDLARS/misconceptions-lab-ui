@@ -4,8 +4,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
-    NbAccordionModule,
-    NbActionsModule,
+  NbAccordionModule,
+  NbActionsModule,
   NbAlertModule,
   NbButtonModule,
   NbCardModule,
@@ -23,7 +23,7 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbTabsetModule,
-  NbThemeModule,
+  NbThemeModule, NbTooltipModule,
   NbTreeGridModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -102,6 +102,7 @@ import { DeviceTestComponent } from './notatarget/device-test/device-test.compon
         BrowserModule,
         FormsModule,
         NbProgressBarModule,
+        NbPopoverModule,
         NbLayoutModule,
         NbSidebarModule.forRoot(),
         NbButtonModule,

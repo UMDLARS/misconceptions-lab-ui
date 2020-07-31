@@ -4,6 +4,7 @@ import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
 import {DeviceTestComponent} from './device-test/device-test.component';
+import {NbPopoverDirective} from '@nebular/theme';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
