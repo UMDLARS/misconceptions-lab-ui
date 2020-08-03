@@ -203,8 +203,7 @@ export class NotatargetComponent implements OnInit {
   }
 
   public updateOption() {
-    this.getHostsCount('"default+password"', '');
-    this.displayMsg();
+    this.getHostsCount('"default+password"', '').then(r => this.displayMsg());
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
     } else {

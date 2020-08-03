@@ -44,8 +44,13 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
     },
     display: true
   }];
-  public volumeMarks = ['2015 UDP', '2014 NTP', 'Mirai 2016', 'Github 2018', 'Amazon 2020'];
-  public amounts = [127000, 400000, 623000, 1350000, 2300000];
+  public volumeMarks = ['2015 ProtonMail', '2014 NTP', 'Mirai 2016', 'Github 2018', 'Amazon 2020'];
+  public amounts = [80000, 400000, 623000, 1350000, 2300000];
+  public urls = ['https://protonmail.com/blog/protonmail-ddos-attacks/',
+  'https://blog.cloudflare.com/technical-details-behind-a-400gbps-ntp-amplification-ddos-attack/',
+  'https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/',
+  'https://www.wired.com/story/github-ddos-memcached/',
+  'https://www.theverge.com/2020/6/18/21295337/amazon-aws-biggest-ddos-attack-ever-2-3-tbps-shield-github-netscout-arbor'];
   public annotations = this.volumeMarks.map((name, index) => {
     if (this.dataPoints[this.dataPoints.length - 1] < this.amounts[index]) { return; }
     return {
@@ -62,8 +67,8 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
           position: 'center',
           content: name
         },
-        onClick(e) {
-          console.log('OnClick works!');
+        onClick: (e) => {
+          window.open(this.urls[index]);
         }
     };
   });
@@ -121,7 +126,9 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
             },
             display: true,
             ticks: {
-              display: true
+              display: true,
+              autoSkip: true,
+              maxTicksLimit: 10
             },
             // type: 'logarithmic'
           }],
@@ -138,7 +145,8 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
         },
         annotation: {
           drawTime: 'afterDatasetsDraw', // this is the default
-          ...(this.chartType !== 'crypto') && { annotations: this.annotations }
+          ...(this.chartType !== 'crypto') && { annotations: this.annotations },
+          events: ['click']
         },
         responsive: true
       },
