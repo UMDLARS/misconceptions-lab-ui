@@ -23,7 +23,7 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbTabsetModule,
-  NbThemeModule, NbTooltipModule,
+  NbThemeModule, NbToastrModule, NbTooltipModule,
   NbTreeGridModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -114,6 +114,7 @@ import { DeviceTestComponent } from './notatarget/device-test/device-test.compon
         NbEvaIconsModule,
         BrowserAnimationsModule,
         NbTabsetModule,
+        NbToastrModule.forRoot(),
         NbStepperModule,
         ReactiveFormsModule,
       NbInputModule,

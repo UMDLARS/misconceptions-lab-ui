@@ -115,7 +115,9 @@ export class DeviceTestComponent {
             resolve(this.speed);
           }
         } else if (event instanceof HttpHeaderResponse) {
-          reject(new Error(event.statusText));
+          if (event.status !== 200) {
+            reject(new Error(event.statusText));
+          }
         }
       });
     });
