@@ -267,8 +267,9 @@ export class BakebotComponent implements OnInit {
     this.deleteMsg('', lines); // remove empty lines
 
     // need instawin to speed debugging
-    if (lines[0].includes("instawin")) {
+    if (lines[0].includes('instawin')) {
       this.Constraint.firstConstraint = false;
+      this.hideConstraintIntro = true;
       this.Constraint.hasMaxTimeConstraint = true;
       this.Constraint.hasMinTimeConstraint = true;
       this.Constraint.hasMaxTempConstraint = true;
@@ -277,19 +278,19 @@ export class BakebotComponent implements OnInit {
       this.Constraint.hasMinIngredientConstraint = true;
       this.Constraint.hasPoisonConstraint = true;
       this.recipeInput = document.getElementById('maxTimeInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "1440";
+      this.recipeInput.value = '1440';
       this.recipeInput = document.getElementById('minTimeInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "0";
+      this.recipeInput.value = '0';
       this.recipeInput = document.getElementById('maxIngredientInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "1000";
+      this.recipeInput.value = '1000';
       this.recipeInput = document.getElementById('minIngredientInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "0";
+      this.recipeInput.value = '0';
       this.recipeInput = document.getElementById('maxTempInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "500";
+      this.recipeInput.value = '500';
       this.recipeInput = document.getElementById('minTempInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "0";
+      this.recipeInput.value = '0';
       this.recipeInput = document.getElementById('approvedIngredientInput') as HTMLTextAreaElement;
-      this.recipeInput.value = "flour, sugar, salt, water";
+      this.recipeInput.value = 'flour, sugar, salt, water';
     }
 
     // checks that there is a valid baking line before parsing input
