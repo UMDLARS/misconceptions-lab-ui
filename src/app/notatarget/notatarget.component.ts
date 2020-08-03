@@ -189,7 +189,7 @@ export class NotatargetComponent implements OnInit {
       }
       this.bandwidth = this.yourBandwidth;
     }
-    console.log(this.bandwidth);
+    console.log('This bandwidth is: ' + this.bandwidth);
     this.chartData = this.amplified * this.bandwidth;
     this.showAmplify = true;
   }
