@@ -23,7 +23,10 @@ export class NotatargetComponent implements OnInit {
    * I DON'T WANT TO LOSE ACCESS.
    */
   private apiKey = '';
-  public screen = 1;
+  public welcomeScreen = true;
+  public introScreen = false;
+  public intro2 = false;
+  public mainScreen = false;
   public device: string;
   public operation: string;
   public bandwidth = 0;
@@ -227,9 +230,18 @@ export class NotatargetComponent implements OnInit {
   }
 
   public nextScreen() {
-    this.screen = this.screen === 4 ? 4 : this.screen++;
+    if (this.welcomeScreen) {
+      this.welcomeScreen = false;
+      this.introScreen = true;
+    } else if (this.introScreen) {
+      this.introScreen = false;
+      this.intro2 = true;
+    } else {
+      this.intro2 = false;
+      this.mainScreen = true;
+    }
   }
-  public prevScreen() {
-    this.screen = this.screen === 1 ? 1 : this.screen--;
-  }
+  // public prevScreen() {
+  //   this.screen = this.screen === 1 ? 1 : this.screen--;
+  // }
 }

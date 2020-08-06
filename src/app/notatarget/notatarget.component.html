@@ -89,26 +89,28 @@
       device, the number of devices connected, and see what your botnet will be capable of doing.
     </p>
     Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
-    <div class="welcome" [hidden]="screen !== 1">
+    <div class="welcome" [hidden]="!welcomeScreen">
       <h3>Attack Calculator</h3>
       <div style="padding-top: 10%"><button nbButton (click)="nextScreen()">Start</button></div>
     </div>
-    <div markdown class="welcome" [hidden]="screen !== 2">
+    <div class="welcome" [hidden]="!introScreen">
       Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
 
       A hacker gains power when they assume control of a machine. The more machines the hacker controls, the greater
       the power they wield. So to execute a successful attack, a hacker must build an army of devices to work in a
       coordinated manner. But where does this army come from?
+      <div style="padding-top: 10%"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
-    <div markdown class="welcome" [hidden]="screen !== 3">
+    <div class="welcome" [hidden]="!intro2">
       To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
-      attempt to assume control of those devices. This program is called a _bot_, and the army it controls is called
-      its _botnet_.
+      attempt to assume control of those devices. This program is called a <i>bot</i>, and the army it controls is called
+      its <i>botnet</i>.
 
       In this activity, you will see the power of a botnet, and you will see how many vulnerable devices are connected
       to the internet right now.
+      <div style="padding-top: 10%"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
-    <div class="scene" [hidden]="screen !== 4">
+    <div class="scene" [hidden]="!mainScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
       <div class="column">
 <!--        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">-->
