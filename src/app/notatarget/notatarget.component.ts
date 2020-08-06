@@ -23,7 +23,7 @@ export class NotatargetComponent implements OnInit {
    * I DON'T WANT TO LOSE ACCESS.
    */
   private apiKey = '';
-  public welcomeScreen = true;
+  public screen = 1;
   public device: string;
   public operation: string;
   public bandwidth = 0;
@@ -209,10 +209,6 @@ export class NotatargetComponent implements OnInit {
     // console.log(this.chartData);
   }
 
-  public begin() {
-    this.welcomeScreen = !this.welcomeScreen;
-  }
-
   // opens a dialog that runs yourDevice tests
   openDialog() {
     this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
@@ -228,5 +224,12 @@ export class NotatargetComponent implements OnInit {
       // 'An attack with these devices would be larger than '
       // + attackName + '!
     } else { this.shodanMsg = null; }
+  }
+
+  public nextScreen() {
+    this.screen = this.screen === 4 ? 4 : this.screen++;
+  }
+  public prevScreen() {
+    this.screen = this.screen === 1 ? 1 : this.screen--;
   }
 }
