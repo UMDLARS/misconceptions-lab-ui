@@ -60,7 +60,8 @@ import {BakebotComponent} from './users-are-not-malicious/bakebot/bakebot.compon
 import {LabRefsComponent} from './layout/lab-refs/lab-refs.component';
 import {HmacExerciseComponent} from './encryption-auto-integrity/hmac-exercise/hmac-exercise.component';
 import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
-import { DeviceTestComponent } from './notatarget/device-test/device-test.component';
+import {DeviceTestComponent} from './notatarget/device-test/device-test.component';
+import {MarkdownModule, MarkdownService} from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -107,16 +108,16 @@ import { DeviceTestComponent } from './notatarget/device-test/device-test.compon
         NbSidebarModule.forRoot(),
         NbButtonModule,
         NbThemeModule.forRoot({name: 'customized'}),
-        NbCardModule,
-        NbAccordionModule,
-        NbMenuModule.forRoot(),
-        NbTreeGridModule,
-        NbEvaIconsModule,
-        BrowserAnimationsModule,
-        NbTabsetModule,
-        NbToastrModule.forRoot(),
-        NbStepperModule,
-        ReactiveFormsModule,
+      NbCardModule,
+      NbAccordionModule,
+      NbMenuModule.forRoot(),
+      NbTreeGridModule,
+      NbEvaIconsModule,
+      BrowserAnimationsModule,
+      NbTabsetModule,
+      NbToastrModule.forRoot(),
+      NbStepperModule,
+      ReactiveFormsModule,
       NbInputModule,
       NbActionsModule,
       NbIconModule,
@@ -128,8 +129,9 @@ import { DeviceTestComponent } from './notatarget/device-test/device-test.compon
       NbCheckboxModule,
       NbSpinnerModule,
       NbPopoverModule,
+      MarkdownModule.forRoot(),
     ],
-  providers: [NbMenuService],
+  providers: [NbMenuService, MarkdownService],
   bootstrap: [AppComponent],
   entryComponents: [DeviceTestComponent],
 })
