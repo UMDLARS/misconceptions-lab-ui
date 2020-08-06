@@ -30,3 +30,9 @@ div.item {
   border-style: solid;
   border-color: black;
 }
+
+div.shodanMsgBox {
+  fill: #3366ff;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}

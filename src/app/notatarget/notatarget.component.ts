@@ -4,12 +4,10 @@ import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
 import {DeviceTestComponent} from './device-test/device-test.component';
-import {NbPopoverDirective} from '@nebular/theme';
 
 // https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
 
-// API key for shodan.io: pohejcwyL1yLuY6wunOkbEaEjhLZM5fw
 // A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
 // DDoS numbers from https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/
 
@@ -24,7 +22,7 @@ export class NotatargetComponent implements OnInit {
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
    */
-  private apiKey = 'pohejcwyL1yLuY6wunOkbEaEjhLZM5fw';
+  private apiKey = '';
   public welcomeScreen = true;
   public device: string;
   public operation: string;
@@ -96,12 +94,11 @@ export class NotatargetComponent implements OnInit {
   async getHostsCount(query: string, facets: string) {
     const tmpUrl = this.shodanUrl + '/shodan/host/count' + '?key=' + this.apiKey
     + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
-    this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
-      console.log(res);
+    await this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
+      // console.log(res);
       this.realDevices = res.total;
     });
   }
-
   /**
    * Calculates yearly profit in USD
    * @param currency The cryptocurrency to be mined
@@ -226,9 +223,10 @@ export class NotatargetComponent implements OnInit {
 
   // Controls message that shows up below line chart
   public displayMsg() {
-    // this probably shouldn't happen if shodan is down or otherwise doesn't provide meaningful numbers
-    this.shodanMsg = 'Shodan found ' + this.realDevices + ' potentially vulnerable devices.';
-    // 'An attack with these devices would be larger than '
-    // + attackName + '!'
+    if (this.realDevices > 0) {
+      this.shodanMsg = 'Shodan found ' + this.realDevices + ' potentially vulnerable devices.';
+      // 'An attack with these devices would be larger than '
+      // + attackName + '!
+    } else { this.shodanMsg = null; }
   }
 }

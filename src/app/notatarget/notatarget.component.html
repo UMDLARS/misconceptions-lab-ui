@@ -167,15 +167,10 @@
       </div>
       <app-line-chart *ngIf="chartData" [chartData]="chartData"
                       [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
-      <nb-alert status="control" accent="control" *ngIf="shodanMsg">{{shodanMsg}}</nb-alert>
+      <div class="control-status-example">
+        <nb-alert status="control" outline="control" *ngIf="shodanMsg">{{shodanMsg}}</nb-alert>
+      </div>
     </div>
-<!--    TEST CONTENT BELOW ... REMOVE THIS STUPH -->
-<!--    <div>Content testing:</div>-->
-<!--    <div class="row justify-content-around">-->
-<!--      <button nbButton (click)="getHostsCount('Server%3A+SQ-WEBCAM', '')">Get global num webcams</button>-->
-<!--      <button nbButton (click)="getHostsCount('scada', '')">Get SCADA systems</button>-->
-<!--    </div>-->
-<!--    END TEST CONTENT   -->
   </nb-card-body>
   </div>
 </app-lab-activity>
