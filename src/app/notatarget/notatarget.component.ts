@@ -129,6 +129,7 @@ export class NotatargetComponent implements OnInit {
         // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
         yearlyGenerated = this.hashrates[hashrate] * 31536000 / this.cryptos.XMR.networkHashRate / this.cryptos.XMR.blockTime;
         yearlyGenerated *= this.cryptos.XMR.exchangeRate;
+        console.log(this.cryptos.XMR);
         break;
       case 'ethereum':
       case 'eth':
@@ -228,9 +229,27 @@ export class NotatargetComponent implements OnInit {
   // Controls message that shows up below line chart
   public displayMsg() {
     if (this.realDevices > 0) {
-      this.shodanMsg = 'Shodan found ' + this.realDevices + ' potentially vulnerable devices.';
-      // 'An attack with these devices would be larger than '
-      // + attackName + '!
+      this.shodanMsg = 'Shodan found ' + this.realDevices + ' potentially vulnerable devices. ';
+      if (this.operation === 'ddos') {
+        // 'An attack with these devices would be larger than '
+        // + attackName + '!
+        if (this.chartData * this.realDevices / 2 > 2300000) {
+          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+          + 'launch an attack larger than the 2020 Amazon attack!';
+        } else if (this.chartData * this.realDevices / 2 > 1350000) {
+          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+            + 'launch an attack larger than the 2018 Github attack!';
+        } else if (this.chartData * this.realDevices / 2 > 623000) {
+          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+            + 'launch an attack larger than the 2016 Mirai botnet attack!';
+        } else if (this.chartData * this.realDevices / 2 > 80000) {
+          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+            + 'launch an attack larger than the 2015 ProtonMail attack!';
+        }
+      } else {
+        this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of a quarter of these devices, you could '
+          + `theoretically generate $${(this.chartData * this.realDevices * 0.25).toPrecision(2)} per year!`;
+      }
     } else { this.shodanMsg = null; }
   }
 

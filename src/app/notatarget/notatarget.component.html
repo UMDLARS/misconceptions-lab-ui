@@ -113,7 +113,7 @@
     <div class="scene" [hidden]="!mainScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
       <div class="control-status-example">
-        <nb-alert status="control" outline="info">{{guidance}}</nb-alert>
+        <nb-alert status="control" outline="info">{{guidance}}<br>{{shodanMsg}}</nb-alert>
       </div>
       <div class="column">
         <div class="column justify-content-center">
@@ -164,7 +164,7 @@
       <app-line-chart *ngIf="chartData" [chartData]="chartData"
                       [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
       <div class="control-status-example">
-        <nb-alert status="control" outline="info" *ngIf="shodanMsg">{{shodanMsg}}</nb-alert>
+<!--        <nb-alert status="control" outline="info" *ngIf="shodanMsg">{{shodanMsg}}</nb-alert>-->
       </div>
     </div>
   </nb-card-body>
