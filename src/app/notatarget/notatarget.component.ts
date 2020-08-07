@@ -5,10 +5,7 @@ import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
 import {DeviceTestComponent} from './device-test/device-test.component';
 
-// https://github.com/fvdm/speedtest/blob/master/index.html for bandwidth
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
-
-// A lot of this code is going to be stolen from github.com/PaulSec/Shodan.io-mobile-app
 // DDoS numbers from https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/
 
 @Component({
@@ -18,7 +15,7 @@ import {DeviceTestComponent} from './device-test/device-test.component';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  private shodanUrl = 'https://api.shodan.io';
+  private shodanUrl = 'https://api.shodan.io/shodan/host/count';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
    */
@@ -36,6 +33,7 @@ export class NotatargetComponent implements OnInit {
   public chartData: number;
   public realDevices = 0;
   public shodanMsg: string;
+  public guidance: string;
   public hashrates = {
     laptop: 1250000,
     smartphone: 30000,
@@ -58,6 +56,12 @@ export class NotatargetComponent implements OnInit {
       networkHashRate: 0,
       blockTime: 0
     }
+  };
+  public activityGuidance = {
+    intro: 'Start by selecting an operation, then select the operation\'s parameters',
+    afterCrypto: 'The graph below shows how much money you could make with the given parameters.',
+    afterDDoS: 'The graph below shows the attack volume you could generate with the given parameters. '
+    + 'The red lines indicate the size of historical attacks. Click on them to learn more about a particular attack.'
   };
 
   constructor(private http: HttpClient, private dialogService: NbDialogService) {
@@ -92,11 +96,9 @@ export class NotatargetComponent implements OnInit {
    * modifying it.  Carson doesn't want to be charged.
    *
    * @param query A string that is a meaningful query through shodan.io
-   * @param facets Not sure how to use this yet... leave blank
    */
-  async getHostsCount(query: string, facets: string) {
-    const tmpUrl = this.shodanUrl + '/shodan/host/count' + '?key=' + this.apiKey
-    + '&query=' + query + '+country%3A\"US\"' + '&facets=' + facets;
+  async getHostsCount(query: string) {
+    const tmpUrl = this.shodanUrl + '?key=' + this.apiKey + '&query=' + query;
     await this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
       // console.log(res);
       this.realDevices = res.total;
@@ -198,16 +200,19 @@ export class NotatargetComponent implements OnInit {
     // get real exchange rates
     this.getExchangeRates();
     this.getMiningStats();
+    this.guidance = this.activityGuidance.intro;
     // console.log('41st Fibonacci number: ');
     // console.log(fib(41));
   }
 
   public updateOption() {
-    this.getHostsCount('"default+password"', '').then(r => this.displayMsg());
+    this.getHostsCount('"default+password"').then(r => this.displayMsg());
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
+      this.guidance = this.activityGuidance.afterCrypto;
     } else {
       this.getAttackMagnitude();
+      this.guidance = this.activityGuidance.afterDDoS;
     }
     // console.log(this.chartData);
   }
@@ -241,6 +246,7 @@ export class NotatargetComponent implements OnInit {
       this.mainScreen = true;
     }
   }
+  // a previous screen function might come in handy...
   // public prevScreen() {
   //   this.screen = this.screen === 1 ? 1 : this.screen--;
   // }

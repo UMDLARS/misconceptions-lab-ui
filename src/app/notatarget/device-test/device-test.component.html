@@ -2,9 +2,9 @@
   <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
   <nb-card-body>
     <p>{{prompt}}</p>
-    <span id="hashspan"><div class="spinner-border" *ngIf="hashTesting"></div></span>
+    <span id="hashspan" *ngIf="hashTesting">Performing hash test...<div class="spinner-border"></div></span>
     <br>
-    <span id="bwspan"><div class="spinner-border" *ngIf="bwTesting"></div></span>
+    <span id="bwspan" *ngIf="bwTesting">Performing bandwidth test<div class="spinner-border"></div></span>
     <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting"></nb-progress-bar>
   </nb-card-body>
   <nb-card-footer>
