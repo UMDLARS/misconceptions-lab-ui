@@ -49,12 +49,14 @@ export class NotatargetComponent implements OnInit {
     ETH: {
       exchangeRate: 0,
       networkHashRate: 0,
-      blockTime: 0
+      blockTime: 0,
+      difficulty: 1
     },
     XMR: {
       exchangeRate: 0,
       networkHashRate: 0,
-      blockTime: 0
+      blockTime: 0,
+      difficulty: 1
     }
   };
   public activityGuidance = {
@@ -126,15 +128,14 @@ export class NotatargetComponent implements OnInit {
         break;
       case 'monero':
       case 'xmr':
-        // Daily mining estimate = ( (your hashrate) * (current block reward) * 720 ) / (network hashrate)
-        yearlyGenerated = this.hashrates[hashrate] * 31536000 / this.cryptos.XMR.networkHashRate / this.cryptos.XMR.blockTime;
+        yearlyGenerated = this.hashrates[hashrate] * 31536000 / this.cryptos.XMR.difficulty;
         yearlyGenerated *= this.cryptos.XMR.exchangeRate;
         console.log(this.cryptos.XMR);
         break;
       case 'ethereum':
       case 'eth':
         // based on block reward of 3:
-        yearlyGenerated = 94608000 * this.hashrates[hashrate] / this.cryptos.ETH.networkHashRate / this.cryptos.ETH.blockTime;
+        yearlyGenerated = 94608000 * this.hashrates[hashrate] / this.cryptos.ETH.difficulty;
         yearlyGenerated *= this.cryptos.ETH.exchangeRate;
         break;
       default:
@@ -172,11 +173,13 @@ export class NotatargetComponent implements OnInit {
       // console.log(res.nodes[0].difficulty);
       this.cryptos.ETH.networkHashRate = Number(res.nodes[0].networkhashps);
       this.cryptos.ETH.blockTime = Number(res.nodes[0].avgBlockTime);
+      this.cryptos.ETH.difficulty = Number(res.nodes[0].difficulty);
     });
     this.http.get('https://xmr.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
       // console.log(res.nodes[0].difficulty);
       this.cryptos.XMR.networkHashRate = Number(res.nodes[0].networkhashps);
       this.cryptos.XMR.blockTime = Number(res.nodes[0].avgBlockTime);
+      this.cryptos.XMR.difficulty = Number(res.nodes[0].difficulty);
     });
     this.http.get('https://blockchain.info/q/getdifficulty', {}).subscribe((res: number) => {
       // console.log(res);
