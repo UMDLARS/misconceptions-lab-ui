@@ -15,11 +15,11 @@ import {DeviceTestComponent} from './device-test/device-test.component';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  private shodanUrl = 'https://api.shodan.io/shodan/host/count';
+  // private shodanUrl = 'https://api.shodan.io/shodan/host/count';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
    * I DON'T WANT TO LOSE ACCESS.
    */
-  private apiKey = '';
+  // private apiKey = '';
   public welcomeScreen = true;
   public introScreen = false;
   public intro2 = false;
@@ -32,6 +32,11 @@ export class NotatargetComponent implements OnInit {
   public amplified = 1;
   public chartData: number;
   public realDevices = 0;
+  // accessed 8/10/2020
+  public deviceCounts = {
+    defaultPass: 50525,
+    webcam: 5904
+  };
   public shodanMsg: string;
   public guidance: string;
   public hashrates = {
@@ -88,8 +93,6 @@ export class NotatargetComponent implements OnInit {
           answer: '0',
           result: ' '}
       ];
-
-    // Server: SQ-WEBCAM
   }
 
   /**
@@ -99,12 +102,12 @@ export class NotatargetComponent implements OnInit {
    *
    * @param query A string that is a meaningful query through shodan.io
    */
-  async getHostsCount(query: string) {
-    const tmpUrl = this.shodanUrl + '?key=' + this.apiKey + '&query=' + query;
-    await this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
-      // console.log(res);
-      this.realDevices = res.total;
-    });
+  getHostsCount(query: string) {
+    // const tmpUrl = this.shodanUrl + '?key=' + this.apiKey + '&query=' + query;
+    // await this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
+    //   // console.log(res);
+    //   this.realDevices = res.total;
+    // });
   }
   /**
    * Calculates yearly profit in USD
@@ -210,7 +213,10 @@ export class NotatargetComponent implements OnInit {
   }
 
   public updateOption() {
-    this.getHostsCount('"default+password"').then(r => this.displayMsg());
+    // this.getHostsCount('"default+password"');
+    // in lieu of a real shodan query:
+    this.realDevices = this.deviceCounts.defaultPass;
+    this.displayMsg();
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
       this.guidance = this.activityGuidance.afterCrypto;
