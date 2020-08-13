@@ -11,9 +11,6 @@ import {catchError} from 'rxjs/operators';
   styleUrls: ['./device-test.component.css']
 })
 export class DeviceTestComponent {
-  public prompt = 'Running these tests will take about a minute, but it will be burdensome on your CPU '
-    + 'and will require a large chunk of data transfer. If your device\'s battery is low or you don\'t want to '
-    + 'waste data consumption, you can try this at a later time.';
   public hashTesting = false;
   public bwTesting = false;
   private hashrate = 0;
@@ -29,11 +26,8 @@ export class DeviceTestComponent {
   oldbytes = 0;
   unit = 'Mbps';
 
-  constructor(
-    private http: HttpClient,
-    protected ref: NbDialogRef<DeviceTestComponent>
-  ) {
-  }
+  constructor(private http: HttpClient,
+              protected ref: NbDialogRef<DeviceTestComponent>) {}
 
   test(doTest: boolean) {
     if (doTest) {

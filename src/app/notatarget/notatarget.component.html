@@ -2,32 +2,32 @@
   <span title>I am not a target of cyberattacks</span>
   <div intro>
     <p>
-    The average user frequently thinks that they are not interesting to cyber criminals.  Cyber criminals and bad actors
-    know that a college student likely doesn’t have a lot of money in their bank account, and their mid-range laptop
-    full of saved homework doesn’t contain any valuable data.  Cyber criminals aren’t going to encrypt your drive with
-    ransomware, because there are “bigger fish to fry.”  With so many massive organizations in cyberspace, why would
-    anyone want to target you?  The answer lies in economies of scale.
-    </p>
+      What is your data worth to you? Think about the files on your computer right now. Do you have a file with valuable
+      corporate secrets? Probably not, and a hacker probably assumes that. A hacker also knows that your data has value
+      to you. How much would you pay to get back that folder of vacation pictures? What about that semester-long
+      project? How much would you pay someone to get back your fifteen-page paper due tomorrow? Cyber criminals know
+      that if the price is right, you would probably pay something to get this chunk of your life back. But why wouldn't
+      they attack some large corporation that would pay millions in ransom? Massive organizations have a lot to lose,
+      so they hire security professionals to construct complex systems that deter attacks and mitigate damage. You,
+      however, probably don’t have more than a simple antivirus software installed (if any). More importantly, a hacker
+      probably doesn’t know who they’re attacking. Attacks are frequently just automated processes moving throughout the
+      web, infecting machines as they are discovered. An automated process that attacks machines is known as a <i>bot</i>,
+      and the collection of infected machines is called a <i>botnet</i>. </p>
     <p>
-    Massive organizations have a lot to lose, so they hire security professionals to construct complex systems that
-    deter attacks and mitigate damage.  You, however, probably don’t have more than a simple antivirus software
-    installed (if any).  That means hackers can spend much less energy hacking many smaller machines like yours, and
-    hackers can pool the resources of all those small machines to accomplish major tasks.
-    </p>
+      A hacked computer can provide multiple kinds of worth to cyber criminals. They could encrypt all of the computer’s
+      data and hope the user pays a ransom, or they could pool the resources of a botnet to complete larger tasks.
+      Malicious cryptomining, more frequently called “cryptojacking,” is any mining operation happening without the
+      machine owner’s consent. Though we typically think that cryptomining requires massive computing rigs, it can
+      easily be distributed among many smaller machines working in unison. A DDoS attack works best with many machines
+      working in unison, but more importantly, the machines must be spread out across a large geographic area and
+      connected to multiple higher-tier network services. A botnet’s power to launch a DDoS attack lies in the bandwidth
+      of each device’s internet connection, not the speed of the device’s CPU. Yes, your device is valuable to a hacker,
+      and yes, you are a potential target. </p>
     <p>
-    The major tasks are primarily cryptomining and distributed denial of service (DDoS) attacks.  Malicious
-    cryptomining, more frequently called “cryptojacking,” is any mining operation happening without the machine owner’s
-    consent.  Though we typically think that cryptomining requires massive computing machines, it can easily be
-    distributed among many smaller machines working in unison.  A DDoS attack similarly requires many machines working
-    in unison, but more importantly, the machines must be spread out across a large geographic area and connected to
-    multiple higher-tier network services.  We call the machines working in unison a “botnet,” and the automated
-    program that creates the botnet is called a bot.  Hackers certainly don’t have the time to find thousands of
-      disparate machines, so they automate the process entirely.
-    </p>
-    <p>
-    The solution to this misconception is to view everything connected to the internet as a “hackable” specimen.
-    Change default passwords on IoT devices, regularly install security updates, and understand that hackers want
-    control of your internet devices, no matter how small and unexciting they may seem.
+      The solution to this misconception is to view everything connected to the internet as a “hackable” specimen.
+      Always change default passwords on IoT devices, and remember to regularly install security updates. For maximum
+      protection against ransomware, keep backups of your data on flash drives or other media that is not connected to
+      your computer. Hackers want control of your devices, no matter how small and unexciting they may seem.
     </p>
   </div>
   <figure headerImage>
@@ -76,12 +76,12 @@
       definitely a dangerous piece of malware.  It will resist any normal attempts to uninstall it, but it can be
       removed with any reputable, up-to-date antivirus software.
     </p>
-    <h5>WannaCry Ransomware</h5>
+    <h5>WannaCry</h5>
     <p>
-      Also known as Wanna Crypt or Decrypt0r 2.0, WannaCry began attacking Windows machines worldwide in May 2017.  This
+      A ransomware also known as Wanna Crypt or Decrypt0r 2.0, WannaCry began attacking Windows machines worldwide in May 2017.  This
       ransomware gained access to machines with an exploit named EternalBlue, discovered by the National Security Agency
       and leaked to a malicious hacker group called the Shadow Brokers <a href="notatarget#ref9">[9]</a>.  Once it had
-      access, it installed and executed using DoublePulsar, another exploit created by the National Security Agency.
+      access, it installed and executed using DoublePulsar, another exploit created by NSA.
       Microsoft had actually already released patches for EternalBlue months earlier, meaning all victims were people
       who hadn't installed security updates or were running versions of Windows beyond their end-of-life.  Because of
       the severity of this attack, Microsoft quickly released patches for out-of-date products, including Windows XP and
@@ -92,6 +92,16 @@
       computer worm didn't just attack large organizations; many people had their personal computers compromised, any
       many paid the ransom.  By mid June 2017, <b>victims paid more than $130,000 in ransom</b> <a href="notatarget#ref11">[11]</a>.
       Economists estimate the total economic impact of WannaCry to be more than $4 billion <a href="notatarget#ref12">[12]</a>.
+    </p>
+    <h5>Sodinokibi: Your worst nightmare</h5>
+    <p>
+      The year 2020 saw a milestone in ransomware history: your data could now be auctioned off! A malicious hacker group
+      called Sodinokibi has set up an auction site on the dark web, where they now publicly auction off victims' decrypted data.
+      In the first known auction, the bidding started at $50,000, and anyone could stop the auction early by paying
+      $100,000. This new tactic may have been a reaction to the economic downturn of early 2020, when ransomware
+      payments plummeted <a href="notatarget#ref13">[13]</a>. Besides increasing the potential payout, auctions provide
+      and easy way to publicly shame people who never pay the ransom. To any mischievous readers who would consider
+      buying someone else's stolen data: beware. Don't be surprised if a gang of criminals tries to double-cross you!
     </p>
   </div>
 </app-lab-industry>
@@ -141,10 +151,10 @@
             <nb-option value="ddos">DDoS</nb-option>
           </nb-select>
           <nb-select *ngIf="operation === 'crypto'" placeholder="Device" id="deviceSelector" [(selected)]="device">
+            <nb-option value="yourDevice">Your device</nb-option>
             <nb-option value="laptop">Laptop/Desktop Computer</nb-option>
             <nb-option value="smartphone">Smartphone</nb-option>
             <nb-option value="iot">IoT</nb-option>
-            <nb-option value="yourDevice">Your device</nb-option>
           </nb-select>
 <!--          All values are in Mbps -->
           <nb-select *ngIf="operation === 'ddos'" placeholder="Bandwidth" id="bwSelector" [(selected)]="bandwidth">
@@ -269,6 +279,10 @@
       <a id="ref12">[12]</a>
       <a href="https://www.cbsnews.com/news/wannacry-ransomware-attacks-wannacry-virus-losses/" target="_blank">
         https://www.cbsnews.com/news/wannacry-ransomware-attacks-wannacry-virus-losses/</a>
+      <br>
+      <a id="ref13">[13]</a>
+      <a href="https://krebsonsecurity.com/2020/06/revil-ransomware-gang-starts-auctioning-victim-data/#more-51868" target="_blank">
+        https://krebsonsecurity.com/2020/06/revil-ransomware-gang-starts-auctioning-victim-data/#more-51868</a>
     </p>
   </div>
 </app-lab-refs>

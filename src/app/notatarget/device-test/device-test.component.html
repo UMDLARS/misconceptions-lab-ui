@@ -1,10 +1,15 @@
 <nb-card>
   <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
   <nb-card-body>
-    <p>{{prompt}}</p>
-    <span id="hashspan" *ngIf="hashTesting">Performing hash test...<div class="spinner-border"></div></span>
+    <p>
+      Testing your system will take 1-2 minutes. By making some timed small data transfers and testing your CPU (which
+      uses battery), we will see how fast your computer can compute hashes used for mining cryptocurrency and test your
+      bandwidth. If you prefer to not test your own device, you can choose from a few standard example devices later in
+      the exercise.
+    </p>
+    <span id="hashspan" *ngIf="hashTesting" nbSpinner nbSpinnerSize="tiny">Performing hash test...</span>
     <br>
-    <span id="bwspan" *ngIf="bwTesting">Performing bandwidth test<div class="spinner-border"></div></span>
+    <span id="bwspan" *ngIf="bwTesting" nbSpinner nbSpinnerSize="tiny">Performing bandwidth test...</span>
     <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting"></nb-progress-bar>
   </nb-card-body>
   <nb-card-footer>
