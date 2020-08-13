@@ -70,6 +70,7 @@ export class NotatargetComponent implements OnInit {
     afterDDoS: 'The graph below shows the attack volume you could generate with the given parameters. '
     + 'The red lines indicate the size of historical attacks. Click on them to learn more about a particular attack.'
   };
+  private moneyFormatter; // used to make currency numbers look normal
 
   constructor(private http: HttpClient, private dialogService: NbDialogService) {
       this.questions = [
@@ -93,6 +94,20 @@ export class NotatargetComponent implements OnInit {
           answer: '0',
           result: ' '}
       ];
+      this.moneyFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      });
+  }
+
+  ngOnInit() {
+    // get real exchange rates
+    this.getExchangeRates();
+    this.getMiningStats();
+    this.guidance = this.activityGuidance.intro;
+    // console.log('41st Fibonacci number: ');
+    // console.log(fib(41));
   }
 
   /**
@@ -117,7 +132,7 @@ export class NotatargetComponent implements OnInit {
   public getProfitCalc(currency: string, hashrate: string) {
 
     if (hashrate === 'yourDevice' && this.hashrates.yourDevice === 0) {
-      this.openDialog();
+      this.promptDeviceTest();
       if (this.hashrates.yourDevice === 0) { return; }
     }
     let yearlyGenerated: number;
@@ -193,7 +208,7 @@ export class NotatargetComponent implements OnInit {
   public getAttackMagnitude() {
     if (this.bandwidth <= 0) { // then yourDevice is selected
       if (this.yourBandwidth <= 0) {
-        this.openDialog();
+        this.promptDeviceTest();
         if (this.yourBandwidth <= 0) { return; }
       }
       this.bandwidth = this.yourBandwidth;
@@ -203,20 +218,10 @@ export class NotatargetComponent implements OnInit {
     this.showAmplify = true;
   }
 
-  ngOnInit() {
-    // get real exchange rates
-    this.getExchangeRates();
-    this.getMiningStats();
-    this.guidance = this.activityGuidance.intro;
-    // console.log('41st Fibonacci number: ');
-    // console.log(fib(41));
-  }
-
-  public updateOption() {
+  public updateGraph() {
     // this.getHostsCount('"default+password"');
     // in lieu of a real shodan query:
     this.realDevices = this.deviceCounts.defaultPass;
-    this.displayMsg();
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
       this.guidance = this.activityGuidance.afterCrypto;
@@ -224,11 +229,12 @@ export class NotatargetComponent implements OnInit {
       this.getAttackMagnitude();
       this.guidance = this.activityGuidance.afterDDoS;
     }
+    this.displayMsg();
     // console.log(this.chartData);
   }
 
   // opens a dialog that runs yourDevice tests
-  openDialog() {
+  promptDeviceTest() {
     this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
       this.hashrates.yourDevice = res[0];
       this.yourBandwidth = res[1];
@@ -238,28 +244,32 @@ export class NotatargetComponent implements OnInit {
   // Controls message that shows up below line chart
   public displayMsg() {
     if (this.realDevices > 0) {
-      this.shodanMsg = 'Shodan found ' + this.realDevices + ' potentially vulnerable devices. ';
-      if (this.operation === 'ddos') {
-        // 'An attack with these devices would be larger than '
-        // + attackName + '!
-        if (this.chartData * this.realDevices / 2 > 2300000) {
-          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
-          + 'launch an attack larger than the 2020 Amazon attack!';
-        } else if (this.chartData * this.realDevices / 2 > 1350000) {
-          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
-            + 'launch an attack larger than the 2018 Github attack!';
-        } else if (this.chartData * this.realDevices / 2 > 623000) {
-          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
-            + 'launch an attack larger than the 2016 Mirai botnet attack!';
-        } else if (this.chartData * this.realDevices / 2 > 80000) {
-          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
-            + 'launch an attack larger than the 2015 ProtonMail attack!';
+      this.shodanMsg = `Shodan found ${this.realDevices} potentially vulnerable devices. `;
+      if (this.chartData) {
+        if (this.operation === 'ddos') {
+          // 'An attack with these devices would be larger than '
+          // + attackName + '!
+          if (this.chartData * this.realDevices / 2 > 2300000) {
+            this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+              + 'launch an attack larger than the 2020 Amazon attack!';
+          } else if (this.chartData * this.realDevices / 2 > 1350000) {
+            this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+              + 'launch an attack larger than the 2018 Github attack!';
+          } else if (this.chartData * this.realDevices / 2 > 623000) {
+            this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+              + 'launch an attack larger than the 2016 Mirai botnet attack!';
+          } else if (this.chartData * this.realDevices / 2 > 80000) {
+            this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+              + 'launch an attack larger than the 2015 ProtonMail attack!';
+          }
+        } else {
+          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of a quarter of these devices, you could '
+            + `theoretically generate ${this.moneyFormatter.format(this.chartData * this.realDevices * 0.25)} per year!`;
         }
       } else {
-        this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of a quarter of these devices, you could '
-          + `theoretically generate $${(this.chartData * this.realDevices * 0.25).toPrecision(2)} per year!`;
+        this.shodanMsg = null;
       }
-    } else { this.shodanMsg = null; }
+    }
   }
 
   public nextScreen() {
