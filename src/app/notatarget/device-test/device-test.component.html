@@ -7,9 +7,9 @@
       bandwidth. If you prefer to not test your own device, you can choose from a few standard example devices later in
       the exercise.
     </p>
-    <span id="hashspan" *ngIf="hashTesting" nbSpinner nbSpinnerSize="tiny">Performing hash test...</span>
+    <span id="hashspan" *ngIf="hashTesting">Performing hash test...<div class="spinner-border spinner-border-sm"></div></span>
     <br>
-    <span id="bwspan" *ngIf="bwTesting" nbSpinner nbSpinnerSize="tiny">Performing bandwidth test...</span>
+    <span id="bwspan" *ngIf="bwTesting">Performing bandwidth test...<div class="spinner-border spinner-border-sm"></div></span>
     <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting"></nb-progress-bar>
   </nb-card-body>
   <nb-card-footer>

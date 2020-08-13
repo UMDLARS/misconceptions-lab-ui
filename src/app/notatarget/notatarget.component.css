@@ -36,3 +36,7 @@ div.shodanMsgBox {
   border-radius: 0.25rem;
   padding: 1rem;
 }
+
+div:target {
+  border: 2px cornflowerblue;
+}
