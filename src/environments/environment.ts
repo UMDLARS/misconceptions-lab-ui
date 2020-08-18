@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   timeStamp: '',
   realDevices: 10,
-  realDeviceDate: 'Ag'
+  realDeviceDate: 'Au'
 };
 
 /*
