@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   timeStamp: '',
-  realDevices: 1,
+  realDevices: 10,
   realDeviceDate: 'Aug'
 };
 
