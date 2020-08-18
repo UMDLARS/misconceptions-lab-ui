@@ -4,6 +4,7 @@ import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
 import {NbDialogService} from '@nebular/theme';
 import {DeviceTestComponent} from './device-test/device-test.component';
+import {environment} from '../../environments/environment';
 
 // https://www.cryptocompare.com/mining/calculator/ for mining calculations
 // DDoS numbers from https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/
@@ -15,6 +16,7 @@ import {DeviceTestComponent} from './device-test/device-test.component';
 })
 export class NotatargetComponent implements OnInit {
   @ViewChild('imagemodal') imagemodal;
+  @ViewChild('imagepreview') imageDest: HTMLImageElement;
   public questions;
   // private shodanUrl = 'https://api.shodan.io/shodan/host/count';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
@@ -32,12 +34,12 @@ export class NotatargetComponent implements OnInit {
   public showAmplify = false;
   public amplified = 1;
   public chartData: number;
-  public realDevices = 0;
+  public realDevices = environment.realDevices;
   // accessed 8/10/2020
-  public deviceCounts = {
-    defaultPass: 50525,
-    webcam: 5904
-  };
+  // public deviceCounts = {
+  //   defaultPass: 50525,
+  //   webcam: 5904
+  // };
   public shodanMsg: string;
   public guidance: string;
   public hashrates = {
@@ -222,7 +224,7 @@ export class NotatargetComponent implements OnInit {
   public updateGraph() {
     // this.getHostsCount('"default+password"');
     // in lieu of a real shodan query:
-    this.realDevices = this.deviceCounts.defaultPass;
+    // this.realDevices = this.deviceCounts.defaultPass;
     if (this.operation === 'crypto') {
       this.getProfitCalc(this.target, this.device);
       this.guidance = this.activityGuidance.afterCrypto;
@@ -245,7 +247,7 @@ export class NotatargetComponent implements OnInit {
   // Controls message that shows up below line chart
   public displayMsg() {
     if (this.realDevices > 0) {
-      this.shodanMsg = `Shodan found ${this.realDevices} potentially vulnerable devices. `;
+      this.shodanMsg = `Shodan found ${this.realDevices} potentially vulnerable devices on ${environment.realDeviceDate}. `;
       if (this.chartData) {
         if (this.operation === 'ddos') {
           // 'An attack with these devices would be larger than '
@@ -291,7 +293,7 @@ export class NotatargetComponent implements OnInit {
   // }
 
   showModal(src: string) {
-    document.getElementById('imagepreview').setAttribute('src', src);
+    this.imageDest.setAttribute('src', src);
     // (document.getElementById('#imagemodal')).modal('show');
     this.imagemodal.modal('show');
   }

@@ -132,15 +132,19 @@
       device, the number of devices connected, and see what your botnet will be capable of doing.
     </p>
     <div class="welcome" [hidden]="!welcomeScreen">
-      <h3>Attack Calculator</h3>
+      <span style="text-align: center"><h3>Attack Calculator</h3></span>
       <div style="padding-top: 10%"><button nbButton (click)="nextScreen()">Start</button></div>
     </div>
     <div class="welcome" [hidden]="!introScreen">
-      Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
-
-      A hacker gains power when they assume control of a machine. The more machines the hacker controls, the greater
-      the power they wield. So to execute a successful attack, a hacker must build an army of devices to work in a
-      coordinated manner. But where does this army come from?
+      <div style="margin-left: 25%; margin-right: 25%;">
+        Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
+        <br>
+        A hacker gains power when they assume control of a machine. The more machines the hacker controls, the greater
+        the power they wield. So to execute a successful attack, a hacker must build an army of devices to work in a
+        coordinated manner.
+        <br>
+        But where does this army come from?
+      </div>
       <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
     <div class="welcome" [hidden]="!intro2">
