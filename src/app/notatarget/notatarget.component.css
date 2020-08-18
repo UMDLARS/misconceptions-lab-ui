@@ -30,6 +30,9 @@ div.item {
   border-style: solid;
   border-color: black;
 }
+div.button-div {
+  padding-top: 10%;
+}
 
 div.shodanMsgBox {
   fill: #3366ff;

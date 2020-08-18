@@ -31,11 +31,28 @@
     </p>
   </div>
   <figure headerImage>
-    <img src="assets/images/not-a-target/sodinokibi.png">
+    <img src="assets/images/not-a-target/sodinokibi.png" id="overviewImg" (click)="showModal('assets/images/not-a-target/sodinokibi.png')">
     <figcaption>
       If you ever see this screen, you're in big trouble.
     </figcaption>
   </figure>
+  <!-- Creates the bootstrap modal where the image will appear -->
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+        </div>
+        <div class="modal-body">
+          <img src="" id="imagepreview" style="width: 400px; height: 264px;" >
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-lab-overview>
 
 <app-lab-industry>
@@ -114,7 +131,6 @@
       In this activity, you will learn how much power a hacker wields with a botnet.  Select the type of internet
       device, the number of devices connected, and see what your botnet will be capable of doing.
     </p>
-    Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
     <div class="welcome" [hidden]="!welcomeScreen">
       <h3>Attack Calculator</h3>
       <div style="padding-top: 10%"><button nbButton (click)="nextScreen()">Start</button></div>
@@ -125,7 +141,7 @@
       A hacker gains power when they assume control of a machine. The more machines the hacker controls, the greater
       the power they wield. So to execute a successful attack, a hacker must build an army of devices to work in a
       coordinated manner. But where does this army come from?
-      <div style="padding-top: 10%"><button (click)="nextScreen()" nbButton>Next</button></div>
+      <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
     <div class="welcome" [hidden]="!intro2">
       To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
@@ -134,7 +150,7 @@
 
       In this activity, you will see the power of a botnet, and you will see how many vulnerable devices are connected
       to the internet right now.
-      <div style="padding-top: 10%"><button (click)="nextScreen()" nbButton>Next</button></div>
+      <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
     <div class="scene" [hidden]="!mainScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
@@ -157,11 +173,11 @@
           </nb-select>
 <!--          All values are in Mbps -->
           <nb-select *ngIf="operation === 'ddos'" placeholder="Bandwidth" id="bwSelector" [(selected)]="bandwidth">
+            <nb-option value=-1>Your bandwidth</nb-option>
             <nb-option value=0.05>Dial-up</nb-option>
             <nb-option value=10>DSL</nb-option>
             <nb-option value=100>5G</nb-option>
             <nb-option value=10000>Fiber Optic</nb-option> <!-- assumes 10 Gbps -->
-            <nb-option value=-1>Your bandwidth</nb-option>
           </nb-select>
           <nb-select *ngIf="operation === 'crypto'" placeholder="Target" id="targetSelector" [(selected)]="target">
             <nb-option value="bitcoin">Bitcoin</nb-option>
@@ -184,14 +200,15 @@
             <nb-option value=600>NTP monlist</nb-option>
             <nb-option value=3>DNS</nb-option>
           </nb-select>
-          <button nbButton (click)="updateGraph()">Go!</button>
+          <button nbButton (click)="updateGraph()"
+                  [disabled]="!(operation ==='crypto' && device && target) && !(operation === 'ddos' && bandwidth)">Go!</button>
         </div>
       </div>
       <app-line-chart *ngIf="chartData" [chartData]="chartData"
                       [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
-      <div class="control-status-example">
-<!--        <nb-alert status="control" outline="info" *ngIf="shodanMsg">{{shodanMsg}}</nb-alert>-->
-      </div>
+      <p>
+        Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
+      </p>
     </div>
   </nb-card-body>
   </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
@@ -14,6 +14,7 @@ import {DeviceTestComponent} from './device-test/device-test.component';
   styleUrls: ['./notatarget.component.css']
 })
 export class NotatargetComponent implements OnInit {
+  @ViewChild('imagemodal') imagemodal;
   public questions;
   // private shodanUrl = 'https://api.shodan.io/shodan/host/count';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
@@ -288,4 +289,10 @@ export class NotatargetComponent implements OnInit {
   // public prevScreen() {
   //   this.screen = this.screen === 1 ? 1 : this.screen--;
   // }
+
+  showModal(src: string) {
+    document.getElementById('imagepreview').setAttribute('src', src);
+    // (document.getElementById('#imagemodal')).modal('show');
+    this.imagemodal.modal('show');
+  }
 }
