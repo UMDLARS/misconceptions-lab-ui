@@ -23,7 +23,8 @@ import {
   NbSpinnerModule,
   NbStepperModule,
   NbTabsetModule,
-  NbThemeModule, NbToastrModule, NbTooltipModule,
+  NbThemeModule,
+  NbToastrModule,
   NbTreeGridModule,
 } from '@nebular/theme';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -62,6 +63,7 @@ import {HmacExerciseComponent} from './encryption-auto-integrity/hmac-exercise/h
 import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
 import {DeviceTestComponent} from './notatarget/device-test/device-test.component';
 import {MarkdownModule, MarkdownService} from 'ngx-markdown';
+import {ImageEnlargeComponent} from './image-enlarge/image-enlarge.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,8 @@ import {MarkdownModule, MarkdownService} from 'ngx-markdown';
     LabRefsComponent,
     HmacExerciseComponent,
     LineChartComponent,
-    DeviceTestComponent
+    DeviceTestComponent,
+    ImageEnlargeComponent
   ],
     imports: [
         AppRoutingModule,

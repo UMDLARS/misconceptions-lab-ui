@@ -1,0 +1,28 @@
+<a (click)="show(dialog)">
+  <img src="{{source}}" alt="Image loading..." style="max-width: 100%; height: auto;">
+</a>
+<ng-template #dialog let-ref="dialogRef">
+  <nb-card>
+    <nb-card-body>
+      <button type="button" class="close" (click)="ref.close()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <img src="{{source}}" style="max-height: 95vh; width: auto;">
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+<!--<div class="modal fade" id="imagemodal" [style.display]="showModal ? 'block' : 'none'" tabindex="-1" role="dialog"-->
+<!--     aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+<!--        <h4 class="modal-title" id="myModalLabel">Image preview</h4>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <img src="{{source}}">-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Close</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

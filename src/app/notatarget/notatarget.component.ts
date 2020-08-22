@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
@@ -15,8 +15,6 @@ import {environment} from '../../environments/environment';
   styleUrls: ['./notatarget.component.css']
 })
 export class NotatargetComponent implements OnInit {
-  @ViewChild('imagemodal') imagemodal;
-  @ViewChild('imagepreview') imageDest: HTMLImageElement;
   public questions;
   // private shodanUrl = 'https://api.shodan.io/shodan/host/count';
   /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
@@ -35,7 +33,6 @@ export class NotatargetComponent implements OnInit {
   public amplified = 1;
   public chartData: number;
   public realDevices = environment.realDevices;
-  // accessed 8/10/2020
   // public deviceCounts = {
   //   defaultPass: 50525,
   //   webcam: 5904
@@ -113,20 +110,6 @@ export class NotatargetComponent implements OnInit {
     // console.log(fib(41));
   }
 
-  /**
-   * Get number of devices associated with a query.
-   * This function will not consume credits with Shodan. Please avoid
-   * modifying it.  Carson doesn't want to be charged.
-   *
-   * @param query A string that is a meaningful query through shodan.io
-   */
-  getHostsCount(query: string) {
-    // const tmpUrl = this.shodanUrl + '?key=' + this.apiKey + '&query=' + query;
-    // await this.http.get(tmpUrl, {}).subscribe((res: {matches: any[], total: number}) => {
-    //   // console.log(res);
-    //   this.realDevices = res.total;
-    // });
-  }
   /**
    * Calculates yearly profit in USD
    * @param currency The cryptocurrency to be mined
@@ -222,7 +205,6 @@ export class NotatargetComponent implements OnInit {
   }
 
   public updateGraph() {
-    // this.getHostsCount('"default+password"');
     // in lieu of a real shodan query:
     // this.realDevices = this.deviceCounts.defaultPass;
     if (this.operation === 'crypto') {
@@ -244,7 +226,7 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
-  // Controls message that shows up below line chart
+  // Controls message that shows up above line chart
   public displayMsg() {
     if (this.realDevices > 0) {
       this.shodanMsg = `Shodan found ${this.realDevices} potentially vulnerable devices on ${environment.realDeviceDate}. `;
@@ -291,10 +273,4 @@ export class NotatargetComponent implements OnInit {
   // public prevScreen() {
   //   this.screen = this.screen === 1 ? 1 : this.screen--;
   // }
-
-  showModal(src: string) {
-    this.imageDest.setAttribute('src', src);
-    // (document.getElementById('#imagemodal')).modal('show');
-    this.imagemodal.modal('show');
-  }
 }

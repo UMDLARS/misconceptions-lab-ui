@@ -31,28 +31,11 @@
     </p>
   </div>
   <figure headerImage>
-    <img src="assets/images/not-a-target/sodinokibi.png" id="overviewImg" (click)="showModal('assets/images/not-a-target/sodinokibi.png')">
+    <app-image-enlarge [source]="'assets/images/not-a-target/sodinokibi.png'"></app-image-enlarge>
     <figcaption>
-      If you ever see this screen, you're in big trouble.
+      If you ever see this screen, you're in big trouble
     </figcaption>
   </figure>
-  <!-- Creates the bootstrap modal where the image will appear -->
-  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title" id="myModalLabel">Image preview</h4>
-        </div>
-        <div class="modal-body">
-          <img src="" id="imagepreview" style="width: 400px; height: 264px;" >
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </app-lab-overview>
 
 <app-lab-industry>
@@ -230,7 +213,8 @@
     </p>
   </div>
   <figure headerImage>
-    <img alt="WannaCry screenshot" src="assets/images/not-a-target/wannacry.png">
+    <app-image-enlarge [source]="'assets/images/not-a-target/wannacry.png'"></app-image-enlarge>
+<!--    <img alt="WannaCry screenshot" src="assets/images/not-a-target/wannacry.png">-->
     <figcaption>
       The infamous WannaCry screen of death.
     </figcaption>
@@ -242,7 +226,8 @@
   <div check customize=SecurityproductQuestion[]>
   </div>
   <figure headerImage>
-    <img alt="Target" src="assets/images/13945792813168.png">
+    <app-image-enlarge [source]="'assets/images/13945792813168.png'"></app-image-enlarge>
+<!--    <img alt="Target" src="assets/images/13945792813168.png">-->
     <figcaption>
       <a href="http://www.publicdomainfiles.com/show_file.php?id=13945792813168">via publicdomainfiles.com (copyright
         free)</a>
