@@ -39,13 +39,13 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   }];
   public ddosYAxis = [{
     scaleLabel: {
-      labelString: 'Attack traffic (Mbps)',
+      labelString: 'Attack traffic (Gbps)',
       display: true
     },
     display: true
   }];
   public volumeMarks = ['2015 ProtonMail', '2014 NTP', 'Mirai 2016', 'Github 2018', 'Amazon 2020'];
-  public amounts = [80000, 400000, 623000, 1350000, 2300000];
+  public amounts = [80, 400, 623, 1350, 2300];
   public urls = ['https://protonmail.com/blog/protonmail-ddos-attacks/',
   'https://blog.cloudflare.com/technical-details-behind-a-400gbps-ntp-amplification-ddos-attack/',
   'https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/',
@@ -121,7 +121,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
         scales: {
           xAxes: [{
             scaleLabel: {
-              labelString: '# of devices',
+              labelString: 'Number of devices',
               display: true
             },
             display: true,

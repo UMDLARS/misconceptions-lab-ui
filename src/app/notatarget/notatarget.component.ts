@@ -68,7 +68,7 @@ export class NotatargetComponent implements OnInit {
     intro: 'Start by selecting an operation, then select the operation\'s parameters',
     afterCrypto: 'The graph below shows how much money you could make with the given parameters.',
     afterDDoS: 'The graph below shows the attack volume you could generate with the given parameters. '
-    + 'The red lines indicate the size of historical attacks. Click on them to learn more about a particular attack.'
+    + 'The red lines indicate the magnitude of historical attacks. Click on them to learn more about a particular attack.'
   };
   private moneyFormatter; // used to make currency numbers look normal
 
@@ -197,7 +197,7 @@ export class NotatargetComponent implements OnInit {
         this.promptDeviceTest();
         if (this.yourBandwidth <= 0) { return; }
       }
-      this.bandwidth = this.yourBandwidth;
+      this.bandwidth = this.yourBandwidth / 1000; // graph looks better when in Gbps
     }
     console.log('This bandwidth is: ' + this.bandwidth);
     this.chartData = this.amplified * this.bandwidth;
