@@ -115,11 +115,11 @@ export class NotatargetComponent implements OnInit {
    * @param currency The cryptocurrency to be mined
    * @param hashrate The number of hashes per sec of all combined devices
    */
-  public getProfitCalc(currency: string, hashrate: string) {
+  async getProfitCalc(currency: string, hashrate: string) {
 
     if (hashrate === 'yourDevice' && this.hashrates.yourDevice === 0) {
-      this.promptDeviceTest();
-      if (this.hashrates.yourDevice === 0) { return; }
+      const success = await this.promptDeviceTest();
+      if (!success || this.hashrates.yourDevice === 0) { return; }
     }
     let yearlyGenerated: number;
     switch (currency.toLowerCase()) {
@@ -191,11 +191,13 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
-  public getAttackMagnitude() {
+  async getAttackMagnitude() {
     if (this.bandwidth <= 0) { // then yourDevice is selected
       if (this.yourBandwidth <= 0) {
-        this.promptDeviceTest();
-        if (this.yourBandwidth <= 0) { return; }
+        const success = await this.promptDeviceTest();
+        if (!success || this.yourBandwidth <= 0) {
+          return;
+        }
       }
       this.bandwidth = this.yourBandwidth / 1000; // graph looks better when in Gbps
     }
@@ -204,14 +206,14 @@ export class NotatargetComponent implements OnInit {
     this.showAmplify = true;
   }
 
-  public updateGraph() {
+  async updateGraph() {
     // in lieu of a real shodan query:
     // this.realDevices = this.deviceCounts.defaultPass;
     if (this.operation === 'crypto') {
-      this.getProfitCalc(this.target, this.device);
+      await this.getProfitCalc(this.target, this.device);
       this.guidance = this.activityGuidance.afterCrypto;
     } else {
-      this.getAttackMagnitude();
+      await this.getAttackMagnitude();
       this.guidance = this.activityGuidance.afterDDoS;
     }
     this.displayMsg();
@@ -220,9 +222,15 @@ export class NotatargetComponent implements OnInit {
 
   // opens a dialog that runs yourDevice tests
   promptDeviceTest() {
-    this.dialogService.open(DeviceTestComponent).onClose.subscribe(res => {
-      this.hashrates.yourDevice = res[0];
-      this.yourBandwidth = res[1];
+    return new Promise((resolve, reject) => {
+      this.dialogService.open(DeviceTestComponent).onClose.subscribe(
+        res => {
+          this.hashrates.yourDevice = res[0];
+          this.yourBandwidth = res[1];
+          resolve(true);
+          }, err => { // unnecessary, but better safe than sorry
+          reject(false);
+        });
     });
   }
 

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import * as sha256 from 'crypto-js/sha256';
 import {NbDialogRef} from '@nebular/theme';
 import {HttpClient, HttpEventType, HttpHeaderResponse, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-device-test',
@@ -23,19 +24,19 @@ export class DeviceTestComponent {
   bytesReceived = 0;
   oldbytes = 0;
   unit = 'Mbps';
+  halt = false; // used for canceling
+  request: Subscription;
 
   constructor(private http: HttpClient,
               protected ref: NbDialogRef<DeviceTestComponent>) {}
 
   async test(doTest: boolean) {
     if (doTest) {
-      const hashPromise = this.hashTest();
-      const bwPromise = this.bandwidthTest();
-      const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(this.speed), 11000));
-      const timedBw = Promise.race([bwPromise, timeoutPromise]);
-      const thisPromise = await Promise.all([hashPromise, timedBw]); // .then((results) => this.ref.close(results));
-      console.log('thisPromise: ' + thisPromise);
-      this.ref.close(thisPromise);
+      Promise.all([this.hashTest(), this.bandwidthTest()])
+        .then((results) => this.ref.close(results))
+        .catch(() => { this.ref.close([0, 0]); });
+      // console.log('thisPromise: ' + thisPromise);
+      // this.ref.close(thisPromise);
       // const hashObs = from(this.hashTest());
       // hashObs.subscribe((next) => {
       //   this.hashrate = next;
@@ -65,13 +66,19 @@ export class DeviceTestComponent {
     }
   }
 
-  bandwidthTest() {
-    return new Promise<number>((resolve, reject) => {
+  async bandwidthTest() {
+    const timeoutPromise = new Promise(resolve => setTimeout(() => {
+      if (this.request) {
+        this.request.unsubscribe();
+      }
+      resolve(this.speed);
+    }, 10000));
+    const bwPromise = new Promise<number>((resolve, reject) => {
       const req = new HttpRequest('GET', this.url, {
         responseType: 'blob',
         reportProgress: true
       });
-      this.http.request(req).subscribe(event => {
+      this.request = this.http.request(req).subscribe(event => {
         if (event.type === HttpEventType.DownloadProgress) {
           this.percentDone = Math.round((100 * event.loaded) / event.total);
           // console.log(`File is ${this.percentDone}% downloaded.`);
@@ -87,12 +94,6 @@ export class DeviceTestComponent {
           this.speed =
             (this.bytesReceived - this.oldbytes) /
             ((this.currTime - this.prevTime) / 1000);
-          if (this.speed < 1) {
-            this.unit = 'Kbps';
-            this.speed *= 1000;
-          } else {
-            this.unit = 'Mbps';
-          }
           this.prevTime = this.currTime;
 
           this.oldbytes = this.bytesReceived;
@@ -100,14 +101,8 @@ export class DeviceTestComponent {
           if (this.percentDone === 100) {
             this.endTime = new Date().getTime();
             const duration = (this.endTime - this.startTime) / 1000;
-            const mbps = event.total / duration / 1000000;
-            if (mbps < 1) {
-              this.speed = event.total / duration / 1000;
-              this.unit = 'Kbps';
-            } else {
-              this.speed = mbps;
-              this.unit = 'Mbps';
-            }
+            this.speed = event.total / duration / 1000000;
+            this.unit = 'Mbps';
           }
         } else if (event instanceof HttpResponse) {
           if (event.ok) {
@@ -120,10 +115,11 @@ export class DeviceTestComponent {
         }
       });
     });
+    return await Promise.race([timeoutPromise, bwPromise]);
   }
 
   hashTest() {
-    return new Promise<number>((resolve, reject) => {
+    return new Promise<number>(resolve => {
       if (typeof Worker !== 'undefined') {
         // Create a new
         const worker = new Worker('./device-test.worker', {type: 'module'});
