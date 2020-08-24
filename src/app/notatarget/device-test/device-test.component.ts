@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 import * as sha256 from 'crypto-js/sha256';
 import {NbDialogRef} from '@nebular/theme';
 import {HttpClient, HttpEventType, HttpHeaderResponse, HttpRequest, HttpResponse} from '@angular/common/http';
-import {combineLatest, from, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-device-test',
@@ -29,32 +27,39 @@ export class DeviceTestComponent {
   constructor(private http: HttpClient,
               protected ref: NbDialogRef<DeviceTestComponent>) {}
 
-  test(doTest: boolean) {
+  async test(doTest: boolean) {
     if (doTest) {
-      const hashObs = from(this.hashTest());
-      hashObs.subscribe((next) => {
-        this.hashrate = next;
-        this.hashTesting = false;
-      });
-      this.hashTesting = true;
-
-      const bwObs = from(this.bandwidthTest()).pipe(catchError(err => {
-        console.log('Error testing bandwidth', err);
-        // If the bandwidth promise rejected, replace the error with the value '0'
-        return of(0);
-      }));
-      bwObs.subscribe((next) => {
-        this.bandwidth = next;
-        this.bwTesting = false;
-      });
-      this.bwTesting = true;
+      const hashPromise = this.hashTest();
+      const bwPromise = this.bandwidthTest();
+      const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(this.speed), 11000));
+      const timedBw = Promise.race([bwPromise, timeoutPromise]);
+      const thisPromise = await Promise.all([hashPromise, timedBw]); // .then((results) => this.ref.close(results));
+      console.log('thisPromise: ' + thisPromise);
+      this.ref.close(thisPromise);
+      // const hashObs = from(this.hashTest());
+      // hashObs.subscribe((next) => {
+      //   this.hashrate = next;
+      //   this.hashTesting = false;
+      // });
+      // this.hashTesting = true;
+      //
+      // const bwObs = from(this.bandwidthTest()).pipe(catchError(err => {
+      //   console.log('Error testing bandwidth', err);
+      //   // If the bandwidth promise rejected, replace the error with the value '0'
+      //   return of(0);
+      // }));
+      // bwObs.subscribe((next) => {
+      //   this.bandwidth = next;
+      //   this.bwTesting = false;
+      // });
+      // this.bwTesting = true;
 
       // I would use Promise.allSettled, but that's not in TS yet. Converting to Observables instead.
       // According to https://rxjs-dev.firebaseapp.com/api/index/function/combineLatest this isn't deprecated
       // noinspection JSDeprecatedSymbols
-      combineLatest(hashObs, bwObs).subscribe((res) => {
-        this.ref.close(res);
-      });
+      // combineLatest(hashObs, bwObs).subscribe((res) => {
+      //   this.ref.close(res);
+      // });
     } else {
       this.ref.close([0, 0]);
     }
