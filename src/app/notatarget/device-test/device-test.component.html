@@ -14,9 +14,9 @@
   </nb-card-body>
   <nb-card-footer>
     <div style="padding: 1em">
-      <button nbButton status="success" style="margin: 1em" (click)="test(true)">Run the tests!</button>
-      <button nbButton status="danger" style="margin: 1em" (click)="test(false)">Maybe later</button>
+      <button nbButton status="success" style="margin: 1em"
+              (click)="test()" *ngIf="!bwTesting && !hashTesting">Run the tests!</button>
+      <button nbButton status="danger" style="margin: 1em" (click)="cancel()">{{cancelMsg}}</button>
     </div>
   </nb-card-footer>
 </nb-card>
-<!--  maybe include a cancel button in footer? -->

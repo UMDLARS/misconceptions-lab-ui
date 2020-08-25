@@ -21,21 +21,29 @@ export class DeviceTestComponent {
   speed = 0;
   bytesReceived = 0;
   oldbytes = 0;
-  unit = 'Mbps';
-  halt = false; // used for canceling
+  cancelMsg = 'Maybe later'; // turns into 'Cancel' if tests initiated
   request: Subscription;
+  worker: Worker;
 
   constructor(private http: HttpClient,
               protected ref: NbDialogRef<DeviceTestComponent>) {}
 
-  async test(doTest: boolean) {
-    if (doTest) {
-      Promise.all([this.hashTest(), this.bandwidthTest()])
-        .then((results) => this.ref.close(results))
-        .catch(() => { this.ref.close([0, 0]); });
-    } else {
-      this.ref.close([0, 0]);
+  async test() {
+    this.cancelMsg = 'Cancel';
+    Promise.all([this.hashTest(), this.bandwidthTest()])
+      .then((results) => this.ref.close(results))
+      .catch(() => { this.ref.close([0, 0]); });
+  }
+
+  cancel() {
+    if (this.request) {
+      this.request.unsubscribe();
     }
+    if (this.worker) {
+      this.worker.terminate();
+    }
+    this.hashTesting = false; // ends mainThreadHashTest
+    this.ref.close([0, 0]);
   }
 
   async bandwidthTest() {
@@ -44,8 +52,10 @@ export class DeviceTestComponent {
       if (this.request) {
         this.request.unsubscribe();
       }
+      console.log('bandwidthTest has timed out!');
+      this.bwTesting = false;
       resolve(this.speed);
-    }, 10000));
+    }, 12000));
     const bwPromise = new Promise<number>((resolve, reject) => {
       const req = new HttpRequest('GET', this.url, {
         responseType: 'blob',
@@ -75,10 +85,10 @@ export class DeviceTestComponent {
             this.endTime = new Date().getTime();
             const duration = (this.endTime - this.startTime) / 1000;
             this.speed = event.total / duration / 1000000;
-            this.unit = 'Mbps';
           }
         } else if (event instanceof HttpResponse) {
           if (event.ok) {
+            this.bwTesting = false;
             resolve(this.speed);
           }
         } else if (event instanceof HttpHeaderResponse) {
@@ -96,13 +106,13 @@ export class DeviceTestComponent {
     return new Promise<number>(resolve => {
       if (typeof Worker !== 'undefined') {
         // Create a new
-        const worker = new Worker('./device-test.worker', {type: 'module'});
-        worker.onmessage = ({data}) => {
+        this.worker = new Worker('./device-test.worker', {type: 'module'});
+        this.worker.onmessage = ({data}) => {
           console.log(`page got message: ${data}`);
           this.hashTesting = false;
           resolve(data);
         };
-        worker.postMessage({});
+        this.worker.postMessage({});
       } else {
         // Web workers are not supported in this environment.
         resolve(this.mainThreadHashTest(10000));
@@ -116,13 +126,13 @@ export class DeviceTestComponent {
     const start = new Date().getTime();
     let hashes = 0;
     let curTime = new Date().getTime();
-    while (curTime < start + timeLimit) {
+    while (curTime < start + timeLimit && this.hashTesting) {
       digest = sha256(digest);
       hashes++;
       curTime = new Date().getTime();
     }
-    console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
+    console.log('Total hashes performed in ' + (curTime - start) + ' millisecs: ' + hashes);
     this.hashTesting = false;
-    return hashes / timeLimit * 1000; // yields hashes per second
+    return hashes / (curTime - start) * 1000; // yields hashes per second
   }
 }

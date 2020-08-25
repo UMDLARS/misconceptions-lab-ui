@@ -13,6 +13,6 @@ addEventListener('message', ({ data }) => {
       curTime = new Date().getTime();
     }
     console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
-    const response = hashes / timeLimit * 1000; // yields hashes per second
+    const response = hashes / (curTime - start) * 1000; // yields hashes per second
     postMessage(response);
 });
