@@ -1,4 +1,4 @@
-<nb-card style="width: 50%">
+<nb-card class="d-flex col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 justify-content-center">
   <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
   <nb-card-body>
     <p>
@@ -13,8 +13,10 @@
     <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting"></nb-progress-bar>
   </nb-card-body>
   <nb-card-footer>
-    <button nbButton status="success" (click)="test(true)">Run the tests!</button>
-    <button nbButton status="danger" (click)="test(false)">Maybe later</button>
+    <div style="padding: 1em">
+      <button nbButton status="success" style="margin: 1em" (click)="test(true)">Run the tests!</button>
+      <button nbButton status="danger" style="margin: 1em" (click)="test(false)">Maybe later</button>
+    </div>
   </nb-card-footer>
 </nb-card>
 <!--  maybe include a cancel button in footer? -->

@@ -1,4 +1,4 @@
-div.welcome {
+div.intro {
   /*background-color: red;*/
   width: 100%;
   height: 80%;
@@ -8,41 +8,22 @@ div.welcome {
   padding-bottom: 10%;
 }
 
+.intro-text {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
 div.scene {
   /*background-color: cornflowerblue;*/
   width: 100%;
   height: 80%;
 }
 
-div.list {
-  width: 30%;
-  height: 100%;
-}
-
-div.category {
-  width: 100%;
-  margin: 1px;
-}
-
-div.item {
-  width: 100%;
-  margin: 1px;
-  border-style: solid;
-  border-color: black;
-}
 div.button-div {
   padding-top: 10%;
   text-align: center;
   width: 100%;
 }
-
-div.shodanMsgBox {
-  fill: #3366ff;
-  border-radius: 0.25rem;
-  padding: 1rem;
-  align-content: center;
-}
-
 :target {
   border: 2px cornflowerblue;
 }

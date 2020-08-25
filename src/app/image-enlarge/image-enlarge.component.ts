@@ -8,20 +8,16 @@ import {NbDialogService} from '@nebular/theme';
 })
 export class ImageEnlargeComponent implements OnInit {
   @Input() source: string;
-  // public showModal = false;
 
   constructor(private dialogService: NbDialogService) {}
 
   ngOnInit() {
-    console.log(this.source);
+    // console.log(this.source);
   }
 
   show(dialog: TemplateRef<any>) {
     // this.showModal = true;
     this.dialogService.open(dialog, { hasScroll: true });
   }
-  // hide() {
-  //   this.showModal = false;
-  // }
 
 }

@@ -12,8 +12,6 @@ import {Subscription} from 'rxjs';
 export class DeviceTestComponent {
   public hashTesting = false;
   public bwTesting = false;
-  private hashrate = 0;
-  private bandwidth = 0;
   private url = 'assets/10mb.bin';
   public percentDone: number;
   startTime: any;
@@ -35,38 +33,13 @@ export class DeviceTestComponent {
       Promise.all([this.hashTest(), this.bandwidthTest()])
         .then((results) => this.ref.close(results))
         .catch(() => { this.ref.close([0, 0]); });
-      // console.log('thisPromise: ' + thisPromise);
-      // this.ref.close(thisPromise);
-      // const hashObs = from(this.hashTest());
-      // hashObs.subscribe((next) => {
-      //   this.hashrate = next;
-      //   this.hashTesting = false;
-      // });
-      // this.hashTesting = true;
-      //
-      // const bwObs = from(this.bandwidthTest()).pipe(catchError(err => {
-      //   console.log('Error testing bandwidth', err);
-      //   // If the bandwidth promise rejected, replace the error with the value '0'
-      //   return of(0);
-      // }));
-      // bwObs.subscribe((next) => {
-      //   this.bandwidth = next;
-      //   this.bwTesting = false;
-      // });
-      // this.bwTesting = true;
-
-      // I would use Promise.allSettled, but that's not in TS yet. Converting to Observables instead.
-      // According to https://rxjs-dev.firebaseapp.com/api/index/function/combineLatest this isn't deprecated
-      // noinspection JSDeprecatedSymbols
-      // combineLatest(hashObs, bwObs).subscribe((res) => {
-      //   this.ref.close(res);
-      // });
     } else {
       this.ref.close([0, 0]);
     }
   }
 
   async bandwidthTest() {
+    this.bwTesting = true;
     const timeoutPromise = new Promise(resolve => setTimeout(() => {
       if (this.request) {
         this.request.unsubscribe();
@@ -119,18 +92,19 @@ export class DeviceTestComponent {
   }
 
   hashTest() {
+    this.hashTesting = true;
     return new Promise<number>(resolve => {
       if (typeof Worker !== 'undefined') {
         // Create a new
         const worker = new Worker('./device-test.worker', {type: 'module'});
         worker.onmessage = ({data}) => {
           console.log(`page got message: ${data}`);
+          this.hashTesting = false;
           resolve(data);
         };
         worker.postMessage({});
       } else {
         // Web workers are not supported in this environment.
-        // You should add a fallback so that your program still executes correctly.
         resolve(this.mainThreadHashTest(10000));
       }
     });
@@ -138,7 +112,7 @@ export class DeviceTestComponent {
 
   // this will only be used when worker fails for some reason
   public mainThreadHashTest(timeLimit) {
-    let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
+    let digest = sha256('OluIlR66cSkX2Ee0qjeCia0NzIDFHxIt');
     const start = new Date().getTime();
     let hashes = 0;
     let curTime = new Date().getTime();
@@ -148,6 +122,7 @@ export class DeviceTestComponent {
       curTime = new Date().getTime();
     }
     console.log('Total hashes performed in ' + timeLimit + ' millisecs: ' + hashes);
+    this.hashTesting = false;
     return hashes / timeLimit * 1000; // yields hashes per second
   }
 }

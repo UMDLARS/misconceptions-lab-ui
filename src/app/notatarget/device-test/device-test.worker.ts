@@ -3,7 +3,7 @@ import * as sha256 from 'crypto-js/sha256';
 
 addEventListener('message', ({ data }) => {
     const timeLimit = 10000;
-    let digest = sha256('pohejcwyL1yLuY6wunOkbEaEjhLZM5fw');
+    let digest = sha256('OluIlR66cSkX2Ee0qjeCia0NzIDFHxIu');
     const start = new Date().getTime();
     let hashes = 0;
     let curTime = new Date().getTime();
