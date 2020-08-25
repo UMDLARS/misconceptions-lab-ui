@@ -32,7 +32,8 @@ div.item {
 }
 div.button-div {
   padding-top: 10%;
-  align-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 div.shodanMsgBox {
@@ -42,6 +43,6 @@ div.shodanMsgBox {
   align-content: center;
 }
 
-div:target {
+:target {
   border: 2px cornflowerblue;
 }
