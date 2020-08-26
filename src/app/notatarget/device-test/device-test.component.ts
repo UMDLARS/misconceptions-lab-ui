@@ -12,7 +12,7 @@ import {Subscription} from 'rxjs';
 export class DeviceTestComponent {
   public hashTesting = false;
   public bwTesting = false;
-  private url = 'assets/10mb.bin';
+  private url = 'assets/100mb.bin';
   public percentDone: number;
   startTime: any;
   endTime: any;
@@ -48,6 +48,7 @@ export class DeviceTestComponent {
 
   async bandwidthTest() {
     this.bwTesting = true;
+
     const timeoutPromise = new Promise(resolve => setTimeout(() => {
       if (this.request) {
         this.request.unsubscribe();
@@ -56,6 +57,7 @@ export class DeviceTestComponent {
       this.bwTesting = false;
       resolve(this.speed);
     }, 12000));
+
     const bwPromise = new Promise<number>((resolve, reject) => {
       const req = new HttpRequest('GET', this.url, {
         responseType: 'blob',
@@ -128,7 +130,8 @@ export class DeviceTestComponent {
     let curTime = new Date().getTime();
     while (curTime < start + timeLimit && this.hashTesting) {
       digest = sha256(digest);
-      hashes++;
+      digest = sha256(digest);
+      hashes += 2;
       curTime = new Date().getTime();
     }
     console.log('Total hashes performed in ' + (curTime - start) + ' millisecs: ' + hashes);
