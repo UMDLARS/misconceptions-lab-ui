@@ -33,3 +33,14 @@ img.selectorIcon {
   width: auto;
   margin-right: 1em;
 }
+
+.trans {
+  animation: introtrans 1s;
+  opacity: 1;
+}
+@keyframes introtrans {
+  from {top: -10vh;}
+  to {top: 0vh;}
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
