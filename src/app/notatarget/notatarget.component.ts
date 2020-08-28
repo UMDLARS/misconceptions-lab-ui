@@ -102,12 +102,12 @@ export class NotatargetComponent implements OnInit {
   }
 
   ngOnInit() {
-    // get real exchange rates
-    this.getExchangeRates();
-    this.getMiningStats();
+    // get real exchange rates & crypto network stats
+    // any trouble retrieving real-time stats is fine; there are preset values
+    // catch blocks are almost certainly unnecessary
+    this.getExchangeRates().catch();
+    this.getMiningStats().catch();
     this.guidance = this.activityGuidance.intro;
-    // console.log('41st Fibonacci number: ');
-    // console.log(fib(41));
   }
 
   /**
@@ -170,7 +170,6 @@ export class NotatargetComponent implements OnInit {
 
   /**
    * Retrieves info about cryptos to be used in mining calculations.
-   * For now, we only need to keep the network difficulty.
    */
   async getMiningStats() {
     this.http.get('https://eth.2miners.com/api/stats', {}).subscribe((res: MiningStats) => {
@@ -201,14 +200,13 @@ export class NotatargetComponent implements OnInit {
       }
       this.bandwidth = this.yourBandwidth / 1000; // graph looks better when in Gbps
     }
-    console.log('This bandwidth is: ' + this.bandwidth);
+    // console.log('This bandwidth is: ' + this.bandwidth);
     this.chartData = this.amplified * this.bandwidth;
     this.showAmplify = true;
   }
 
   async updateGraph() {
-    // in lieu of a real shodan query:
-    // this.realDevices = this.deviceCounts.defaultPass;
+    // must await or else graph will attempt to draw before values are initialized
     if (this.operation === 'crypto') {
       await this.getProfitCalc(this.target, this.device);
       this.guidance = this.activityGuidance.afterCrypto;
@@ -237,7 +235,8 @@ export class NotatargetComponent implements OnInit {
   // Controls message that shows up above line chart
   public displayMsg() {
     if (this.realDevices > 0) {
-      this.shodanMsg = `Shodan found ${this.realDevices} potentially vulnerable devices on ${environment.realDeviceDate}. `;
+      this.shodanMsg = 'Shodan found ' + this.realDevices.toLocaleString()
+        + ` potentially vulnerable devices on ${environment.realDeviceDate}. `;
       if (this.chartData) {
         if (this.operation === 'ddos') {
           // 'An attack with these devices would be larger than '
@@ -273,6 +272,9 @@ export class NotatargetComponent implements OnInit {
       this.introScreen = false;
       this.intro2 = true;
     } else {
+      if (this.hashrates.yourDevice === 0) {
+        const dummyVar = this.promptDeviceTest();
+      }
       this.intro2 = false;
       this.mainScreen = true;
     }

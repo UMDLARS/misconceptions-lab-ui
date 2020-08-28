@@ -1,5 +1,5 @@
 <nb-card class="d-flex col-sm-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3 justify-content-center">
-  <nb-card-header>Can we run a couple tests on your device?</nb-card-header>
+  <nb-card-header><h5>Can we run a couple tests on your device?</h5></nb-card-header>
   <nb-card-body>
     <p>
       Testing your system will take 1-2 minutes. By making some timed small data transfers and testing your CPU (which
@@ -13,10 +13,10 @@
     <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting"></nb-progress-bar>
   </nb-card-body>
   <nb-card-footer>
-    <div style="padding: 1em">
-      <button nbButton status="success" style="margin: 1em"
+    <div class="justify-content-center">
+      <button nbButton status="success" style="margin-right: 1em"
               (click)="test()" *ngIf="!bwTesting && !hashTesting">Run the tests!</button>
-      <button nbButton status="danger" style="margin: 1em" (click)="cancel()">{{cancelMsg}}</button>
+      <button nbButton status="danger" (click)="cancel()">{{cancelMsg}}</button>
     </div>
   </nb-card-footer>
 </nb-card>
