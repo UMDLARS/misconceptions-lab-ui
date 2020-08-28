@@ -20,10 +20,16 @@ div.scene {
 }
 
 div.button-div {
-  padding-top: 10%;
+  padding-top: 10vh;
   text-align: center;
   width: 100%;
 }
 :target {
   border: 2px cornflowerblue;
+}
+
+img.selectorIcon {
+  height: 35px;
+  width: auto;
+  margin-right: 1em;
 }

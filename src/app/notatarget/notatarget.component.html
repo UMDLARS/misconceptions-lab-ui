@@ -119,25 +119,31 @@
       <div class="button-div"><button nbButton (click)="nextScreen()">Start</button></div>
     </div>
     <div class="intro" [hidden]="!introScreen">
-      <div class="intro-text">
+      <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="20%" width="auto">
+        <div>
         Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
-        <br>
+        <br><br>
         A hacker gains power when they assume control of a machine. The more machines the hacker controls, the greater
         the power they wield. So to execute a successful attack, a hacker must build an army of devices to work in a
         coordinated manner.
-        <br>
+        <br><br>
         But where does this army come from?
+        </div>
       </div>
       <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
     <div class="intro" [hidden]="!intro2">
-      <div class="intro-text">
-      To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
-      attempt to assume control of those devices. This program is called a <i>bot</i>, and the army it controls is called
-      its <i>botnet</i>.
-
-      In this activity, you will see the power of a botnet, and you will see how many vulnerable devices are connected
-      to the internet right now.</div>
+      <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="20%" width="auto">
+        <div>
+        To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
+        attempt to assume control of those devices. This program is called a <i>bot</i>, and the army it controls is
+        called its <i>botnet</i>.
+        <br><br>
+        In this activity, you will see the power of a botnet, and you will see how many vulnerable devices are currently
+        connected to the internet.</div>
+      </div>
       <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
     <div class="scene" [hidden]="!mainScreen">
@@ -145,13 +151,14 @@
       <div class="control-status-example">
         <nb-alert status="control" outline="info">{{guidance}}<br>{{shodanMsg}}</nb-alert>
       </div>
-      <div class="column">
         <div class="column justify-content-center">
           <nb-select placeholder="Operation" id="operationSelector" [(selected)]="operation">
 <!--                     nbPopover="Start by selecting an operation, then select the operation's parameters"-->
 <!--                     nbPopoverTrigger="hover">-->
-            <nb-option value="crypto">Cryptojacking</nb-option>
-            <nb-option value="ddos">DDoS</nb-option>
+            <nb-option value="crypto">
+              <img src="assets/images/not-a-target/bitcoin.svg" class="selectorIcon">Cryptojacking</nb-option>
+            <nb-option value="ddos">
+              <img src="assets/images/not-a-target/ddos.svg" class="selectorIcon">DDoS</nb-option>
           </nb-select>
           <nb-select *ngIf="operation === 'crypto'" placeholder="Device" id="deviceSelector" [(selected)]="device">
             <nb-option value="yourDevice">Your device</nb-option>
@@ -191,11 +198,14 @@
           <button nbButton (click)="updateGraph()"
                   [disabled]="!(operation ==='crypto' && device && target) && !(operation === 'ddos' && bandwidth)">Go!</button>
         </div>
-      </div>
       <app-line-chart *ngIf="chartData" [chartData]="chartData"
                       [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
       <p>
         Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
+        <br>
+        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from
+        <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
       </p>
     </div>
   </nb-card-body>
@@ -204,7 +214,6 @@
 
 <app-lab-relevance>
   <div relevance>
-
     <p>
       <a href="http://cve.mitre.org" target="_blank"> Common Vulnerabilities and Exposures CVE </a>
       <br>
