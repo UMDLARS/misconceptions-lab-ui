@@ -16,11 +16,6 @@ import {environment} from '../../environments/environment';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
-  // private shodanUrl = 'https://api.shodan.io/shodan/host/count';
-  /* THIS IS CARSON'S API KEY. PLEASE DON'T ABUSE IT BECAUSE
-   * I DON'T WANT TO LOSE ACCESS.
-   */
-  // private apiKey = '';
   public welcomeScreen = true;
   public introScreen = false;
   public intro2 = false;
@@ -40,7 +35,7 @@ export class NotatargetComponent implements OnInit {
   public shodanMsg: string;
   public guidance: string;
   public hashrates = {
-    laptop: 1250000,
+    laptop: 220000,
     smartphone: 30000,
     iot: 15000,
     yourDevice: 0
@@ -102,7 +97,6 @@ export class NotatargetComponent implements OnInit {
   }
 
   ngOnInit() {
-    // get real exchange rates & crypto network stats
     // any trouble retrieving real-time stats is fine; there are preset values
     // catch blocks are almost certainly unnecessary
     this.getExchangeRates().catch();
@@ -134,7 +128,7 @@ export class NotatargetComponent implements OnInit {
       case 'xmr':
         yearlyGenerated = this.hashrates[hashrate] * 31536000 / this.cryptos.XMR.difficulty;
         yearlyGenerated *= this.cryptos.XMR.exchangeRate;
-        console.log(this.cryptos.XMR);
+        // console.log(this.cryptos.XMR);
         break;
       case 'ethereum':
       case 'eth':
@@ -279,8 +273,4 @@ export class NotatargetComponent implements OnInit {
       this.mainScreen = true;
     }
   }
-  // a previous screen function might come in handy...
-  // public prevScreen() {
-  //   this.screen = this.screen === 1 ? 1 : this.screen--;
-  // }
 }
