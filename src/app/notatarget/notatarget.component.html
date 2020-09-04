@@ -119,8 +119,8 @@
       <div class="button-div"><button nbButton (click)="nextScreen()">Start</button></div>
     </div>
     <div class="intro" [hidden]="!introScreen">
-      <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="20%" width="auto">
+      <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
+        <img src="assets/images/not-a-target/malware.svg" style="padding-right: 1em" height="20%" width="auto">
         <div>
         Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
         <br><br>
@@ -134,7 +134,7 @@
       <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
     </div>
     <div class="intro" [hidden]="!intro2">
-      <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
         <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="20%" width="auto">
         <div>
         To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
@@ -201,6 +201,7 @@
       <app-line-chart *ngIf="chartData" [chartData]="chartData"
                       [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
       <p>
+        <br>
         Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
         <br>
         Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from
