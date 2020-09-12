@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   timeStamp: '',
-  realDevices: 38756,
-  realDeviceDate: 'Sep 04, 2020'
+  realDevices: 44405,
+  realDeviceDate: 'Sep 12, 2020'
 };
