@@ -20,6 +20,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
   @Input() realDevices: number;
   @Input() chartType: string;
   chart: any;
+  moneyFormatter: any;
 
   dataPoints: any[] = [];
   chartContext: any;
@@ -32,7 +33,7 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
     display: true,
     ticks: {
       callback: (value, index, values) => {
-        return '$' + value;
+        return this.moneyFormatter.format(value);
       },
       display: true
     }
@@ -73,7 +74,13 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
     };
   });
 
-  constructor() {}
+  constructor() {
+    this.moneyFormatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0
+    });
+  }
 
   ngAfterViewInit() {
     for (let i = 0; i < 10000; i++) {
@@ -134,12 +141,12 @@ export class LineChartComponent implements AfterViewInit, OnChanges {
           }],
           yAxes: (this.chartType === 'crypto' ? this.cryptoYAxis : this.ddosYAxis),
         },
-        tooltip: {
-          enabled: true,
-          position: 'nearest',
-          mode: 'label',
-          intersect: false
-        },
+        // tooltip: {
+        //   enabled: true,
+        //   position: 'nearest',
+        //   mode: 'label',
+        //   intersect: false
+        // },
         hover: {
           mode: 'label'
         },

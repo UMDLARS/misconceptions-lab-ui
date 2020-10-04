@@ -249,8 +249,8 @@ export class NotatargetComponent implements OnInit {
               + 'launch an attack larger than the 2015 ProtonMail attack!';
           }
         } else {
-          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of a quarter of these devices, you could '
-            + `theoretically generate ${this.moneyFormatter.format(this.chartData * this.realDevices * 0.25)} per year!`;
+          this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
+            + `theoretically generate ${this.moneyFormatter.format(this.chartData * this.realDevices / 2)} per year!`;
         }
       } else {
         this.shodanMsg = null;
