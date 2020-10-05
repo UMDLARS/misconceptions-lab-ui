@@ -149,7 +149,8 @@
     <div class="scene" [hidden]="!mainScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
       <div class="control-status-example">
-        <nb-alert status="control" outline="info">{{guidance}}<br>{{shodanMsg}}</nb-alert>
+        <nb-alert status="control" outline="info" ngPreserveWhitespaces>
+          {{guidance}}<br>{{shodanMsg}}<br>{{cryptoDirective}}</nb-alert>
       </div>
         <div class="column justify-content-center">
           <nb-select placeholder="Operation" id="operationSelector" [(selected)]="operation">

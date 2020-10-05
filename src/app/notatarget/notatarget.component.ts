@@ -33,6 +33,7 @@ export class NotatargetComponent implements OnInit {
   //   webcam: 5904
   // };
   public shodanMsg: string;
+  public cryptoDirective: string;
   public guidance: string;
   public hashrates = {
     laptop: 220000,
@@ -233,8 +234,7 @@ export class NotatargetComponent implements OnInit {
         + ` potentially vulnerable devices on ${environment.realDeviceDate}. `;
       if (this.chartData) {
         if (this.operation === 'ddos') {
-          // 'An attack with these devices would be larger than '
-          // + attackName + '!
+          this.cryptoDirective = null;
           if (this.chartData * this.realDevices / 2 > 2300000) {
             this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
               + 'launch an attack larger than the 2020 Amazon attack!';
@@ -251,9 +251,12 @@ export class NotatargetComponent implements OnInit {
         } else {
           this.shodanMsg = this.shodanMsg + 'Assuming you could gain control of half of these devices, you could '
             + `theoretically generate ${this.moneyFormatter.format(this.chartData * this.realDevices / 2)} per year!`;
+          this.cryptoDirective = 'Try mining other cryptocurrencies! Their values fluctuate regularly, so a different '
+          + 'mining operation might make more money!';
         }
       } else {
         this.shodanMsg = null;
+        this.cryptoDirective = null;
       }
     }
   }
