@@ -54,10 +54,10 @@
         {{successMsg}}
       </nb-alert>
       <div class="row justify-content-around">
-        <button nbButton (click)="insertCakeRecipe()">Cake Recipe</button>
-        <button nbButton (click)="insertBreadRecipe()">Bread Recipe</button>
-        <button nbButton (click)="insertBiscuitRecipe()">Biscuit Recipe</button>
-        <button status="success" nbButton (click)="parseInput()">Bake it!</button>
+        <button nbButton (click)="insertCakeRecipe()" status="primary">Cake Recipe</button>
+        <button nbButton (click)="insertBreadRecipe()" status="primary">Bread Recipe</button>
+        <button nbButton (click)="insertBiscuitRecipe()" status="primary">Biscuit Recipe</button>
+        <button nbButton (click)="parseInput()" status="success">Bake it!</button>
       </div><!-- end recipe button div -->
       <!-- Recipe algorithm will be added in this spot -->
 
@@ -108,7 +108,7 @@
       </div>
       <div [hidden]="hideProgressMeter">
         <p>Bakebot constraint progress:</p>
-        <nb-progress-bar [value]="constraintProgress">{{constraintsFixed}}/{{constraintsToWin}}</nb-progress-bar>
+        <nb-progress-bar [value]="constraintProgress" status="primary">{{constraintsFixed}}/{{constraintsToWin}}</nb-progress-bar>
       </div>
       <div class="dialog" [hidden]="!YouWon">
         {{winner}}

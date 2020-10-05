@@ -116,7 +116,7 @@
     </p>
     <div class="intro" [hidden]="!welcomeScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
-      <div class="button-div"><button nbButton (click)="nextScreen()">Start</button></div>
+      <div class="button-div"><button nbButton (click)="nextScreen()" status="primary">Start</button></div>
     </div>
     <div class="intro" [hidden]="!introScreen">
       <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
@@ -131,7 +131,7 @@
         But where does this army come from?
         </div>
       </div>
-      <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
+      <div class="button-div"><button (click)="nextScreen()" status="primary" nbButton>Next</button></div>
     </div>
     <div class="intro" [hidden]="!intro2">
       <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
@@ -144,7 +144,7 @@
         In this activity, you will see the power of a botnet, and you will see how many vulnerable devices are currently
         connected to the internet.</div>
       </div>
-      <div class="button-div"><button (click)="nextScreen()" nbButton>Next</button></div>
+      <div class="button-div"><button (click)="nextScreen()" status="primary" nbButton>Next</button></div>
     </div>
     <div class="scene" [hidden]="!mainScreen">
       <span style="text-align: center"><h3>Attack Calculator</h3></span>
@@ -195,7 +195,7 @@
             <nb-option value=600>NTP monlist</nb-option>
             <nb-option value=3>DNS</nb-option>
           </nb-select>
-          <button nbButton (click)="updateGraph()"
+          <button nbButton status="primary" (click)="updateGraph()"
                   [disabled]="!(operation ==='crypto' && device && target) && !(operation === 'ddos' && bandwidth)">Go!</button>
         </div>
       <app-line-chart *ngIf="chartData" [chartData]="chartData"

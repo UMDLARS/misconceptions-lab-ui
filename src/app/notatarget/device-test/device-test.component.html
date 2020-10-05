@@ -12,7 +12,7 @@
     <br>
     <span id="bwspan" *ngIf="bwTesting">Performing bandwidth test...<div class="spinner-border spinner-border-sm"></div></span>
     </div>
-    <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting"></nb-progress-bar>
+    <nb-progress-bar [value]="percentDone" *ngIf="hashTesting || bwTesting" status="primary"></nb-progress-bar>
   </nb-card-body>
   <nb-card-footer>
     <div class="justify-content-center">
