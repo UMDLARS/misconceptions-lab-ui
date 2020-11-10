@@ -64,6 +64,7 @@ import {LineChartComponent} from './notatarget/line-chart/line-chart.component';
 import {DeviceTestComponent} from './notatarget/device-test/device-test.component';
 import {MarkdownModule, MarkdownService} from 'ngx-markdown';
 import {ImageEnlargeComponent} from './image-enlarge/image-enlarge.component';
+import { LabDebriefComponent } from './layout/lab-debrief/lab-debrief.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import {ImageEnlargeComponent} from './image-enlarge/image-enlarge.component';
     HmacExerciseComponent,
     LineChartComponent,
     DeviceTestComponent,
-    ImageEnlargeComponent
+    ImageEnlargeComponent,
+    LabDebriefComponent
   ],
     imports: [
         AppRoutingModule,

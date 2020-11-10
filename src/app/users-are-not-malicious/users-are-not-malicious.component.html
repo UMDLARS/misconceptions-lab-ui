@@ -100,6 +100,17 @@
   </figure>
 </app-lab-relevance>
 
+<app-lab-debrief>
+  <div debrief>
+    Users sometimes act very differently from how you would expect.  Some will make careless mistakes when using your
+    software, and others are malevolent actors trying to break it.  Malicious or not, you should always assume user input
+    is dangerous in its "raw" form.  The solution is to validate input -- check that it is the correct type  -- and
+    sanitize input -- make sure valid input cannot harm the system.  The good news is that many common software libraries
+    contain pre-tested tools to santize input, so you only need to know how to use them and how to recognize where they
+    should be applied.  Remember: good software is predictable software!
+  </div>
+</app-lab-debrief>
+
 
 <app-lab-check [questions]="questions">
   <div check customize=SecurityproductQuestion[]>
