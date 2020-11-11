@@ -102,12 +102,14 @@
 
 <app-lab-debrief>
   <div debrief>
-    Users sometimes act very differently from how you would expect.  Some will make careless mistakes when using your
-    software, and others are malevolent actors trying to break it.  Malicious or not, you should always assume user input
-    is dangerous in its "raw" form.  The solution is to validate input -- check that it is the correct type  -- and
-    sanitize input -- make sure valid input cannot harm the system.  The good news is that many common software libraries
-    contain pre-tested tools to santize input, so you only need to know how to use them and how to recognize where they
-    should be applied.  Remember: good software is predictable software!
+    Users sometimes act very differently from how you would expect.  Many will make careless mistakes when using your
+    software, or misunderstand how to use it. Some will be malicious insiders acting in bad faith. Some “users” will
+    actually be attackers using stolen accounts, looking for ways to compromise your system. Malicious or not, you
+    should always assume user input is dangerous in its "raw" form.  The solution to this universal problem is to
+    validate input — check that it is the correct type and is of the expected size  — and to sanitize input — make sure
+    that valid input cannot harm the system.  The good news is that many common software libraries contain robust and
+    time-tested tools to validate and sanitize input, so you only need to know how to use them and how to recognize
+    where they should be applied.  Remember: user input is malicious until proven innocent!
   </div>
 </app-lab-debrief>
 
