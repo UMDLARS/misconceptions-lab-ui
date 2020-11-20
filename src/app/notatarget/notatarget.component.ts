@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
-import {NbDialogService} from '@nebular/theme';
+import {NbDialogService, NbIconConfig} from '@nebular/theme';
 import {DeviceTestComponent} from './device-test/device-test.component';
 import {environment} from '../../environments/environment';
 
@@ -67,6 +67,8 @@ export class NotatargetComponent implements OnInit {
     + 'The red lines indicate the magnitude of historical attacks. Click on them to learn more about a particular attack.'
   };
   private moneyFormatter; // used to make currency numbers look normal
+  graphIcon: NbIconConfig = { icon: 'trending-up-outline', pack: 'eva' };
+  gridIcon: NbIconConfig = { icon: 'grid-outline', pack: 'eva' };
 
   constructor(private http: HttpClient, private dialogService: NbDialogService) {
       this.questions = [

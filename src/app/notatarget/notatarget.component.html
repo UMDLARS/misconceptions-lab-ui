@@ -120,7 +120,7 @@
     </div>
     <div class="intro" [hidden]="!introScreen">
       <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
-        <img src="assets/images/not-a-target/malware.svg" style="padding-right: 1em" height="20%" width="auto">
+        <img src="assets/images/not-a-target/malware.svg" style="padding-right: 1em" height="128px" width="auto">
         <div>
         Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
         <br><br>
@@ -135,7 +135,8 @@
     </div>
     <div class="intro" [hidden]="!intro2">
       <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
-        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="20%" width="auto">
+        <!-- Below used to have width="20%" but somewhere that stopped working and it was ridiculously huge  -->
+        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="128px" width="auto">
         <div>
         To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
         attempt to assume control of those devices. This program is called a <i>bot</i>, and the army it controls is
@@ -198,8 +199,16 @@
           <button nbButton status="primary" (click)="updateGraph()"
                   [disabled]="!(operation ==='crypto' && device && target) && !(operation === 'ddos' && bandwidth)">Go!</button>
         </div>
-      <app-line-chart *ngIf="chartData" [chartData]="chartData"
-                      [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
+      <nb-tabset>
+        <nb-tab tabTitle="Table" [tabIcon]="gridIcon" responsive>
+          <img src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto">
+        </nb-tab>
+        <nb-tab tabTitle="Graph" [tabIcon]="graphIcon" responsive>
+          <app-line-chart *ngIf="chartData" [chartData]="chartData"
+                          [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
+        </nb-tab>
+      </nb-tabset>
+
       <p>
         <br>
         Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
