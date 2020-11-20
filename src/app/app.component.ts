@@ -51,21 +51,25 @@ export class AppComponent implements OnInit {
       title: 'Security in Mind',
       link: '/securityinmind',
       icon: 'brain',
+      group: true
     },
     {
       title: 'Security Product',
       link: '/securityproduct',
       icon: 'magic',
+      group: true
     },
     {
       title: 'Humans are Rational',
       link: '/humansarerational',
       icon: 'meh-rolling-eyes',
+      group: true
     },
     {
       title: 'Trust Users',
       link: '/trustusers',
       icon: 'user-lock',
+      group: true
     },
     {
       title: 'Anonymized Data',
@@ -81,6 +85,7 @@ export class AppComponent implements OnInit {
       title: 'Defense in Depth',
       link: '/defenseindepth',
       icon: 'chess-rook',
+      group: true
     },
     {
       title: 'Users are not Malicious',
@@ -91,6 +96,7 @@ export class AppComponent implements OnInit {
       title: 'Privacy isn\'t Important',
       link: '/privacynotimportant',
       icon: 'id-card',
+      group: true
     },
     {
       title: 'Encryption Integrity',
@@ -101,6 +107,7 @@ export class AppComponent implements OnInit {
       title: '2FA',
       link: '/twofactor',
       icon: 'mobile-alt',
+      group: true
     },
   ];
 
