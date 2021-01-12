@@ -16,22 +16,25 @@ import {environment} from '../../environments/environment';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
+  // toggles activity screens
   public welcomeScreen = true;
   public introScreen = false;
   public intro2 = false;
   public mainScreen = false;
+
+  // contains user-selected parameters
   public device: string;
   public operation: string;
-  public bandwidth = 0;
   public target: string;
   public showAmplify = false;
   public amplified = 1;
+  public bandwidth = 0;
+
+  // contains user's bandwidth if they ran test
+  public yourBandwidth = 0;
+
   public chartData: number;
   public realDevices = environment.realDevices;
-  // public deviceCounts = {
-  //   defaultPass: 50525,
-  //   webcam: 5904
-  // };
   public shodanMsg: string;
   public cryptoDirective: string;
   public guidance: string;
@@ -41,7 +44,6 @@ export class NotatargetComponent implements OnInit {
     iot: 15000,
     yourDevice: 0
   };
-  public yourBandwidth = 0;
   public cryptos = {
     BTC: {
       exchangeRate: 9000,
@@ -144,6 +146,19 @@ export class NotatargetComponent implements OnInit {
         return;
     }
     this.chartData = yearlyGenerated;
+
+    // select the appropriate SVG
+    const i = new Image();
+    if (this.chartData * this.realDevices / 2 >= 5000) {
+      i.src = 'assets/images/not-a-target/highMoney.svg';
+    } else if (this.chartData >= 2000) {
+      i.src = 'assets/images/not-a-target/medMoney.svg';
+    } else {
+      i.src = 'assets/images/not-a-target/lowMoney.svg';
+    }
+    i.onload = () => {
+      (document.getElementById('meter') as HTMLImageElement).src = i.src;
+    };
   }
 
   /**
@@ -187,6 +202,10 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
+  /**
+   * Uses selected bandwidth and amplification to calculate an attack magnitude.
+   * Selects low, med, or highBand SVG to display.
+   */
   async getAttackMagnitude() {
     if (this.bandwidth <= 0) { // then yourDevice is selected
       if (this.yourBandwidth <= 0) {
@@ -200,6 +219,20 @@ export class NotatargetComponent implements OnInit {
     // console.log('This bandwidth is: ' + this.bandwidth);
     this.chartData = this.amplified * this.bandwidth;
     this.showAmplify = true;
+    console.log('chartData: ' + this.chartData);
+
+    // select the appropriate SVG
+    const i = new Image();
+    if (this.chartData >= 400) {
+      i.src = 'assets/images/not-a-target/highBand.svg';
+    } else if (this.chartData >= 80) {
+      i.src = 'assets/images/not-a-target/medBand.svg';
+    } else {
+      i.src = 'assets/images/not-a-target/lowBand.svg';
+    }
+    i.onload = () => {
+      (document.getElementById('meter') as HTMLImageElement).src = i.src;
+    };
   }
 
   async updateGraph() {
@@ -272,6 +305,7 @@ export class NotatargetComponent implements OnInit {
       this.intro2 = true;
     } else {
       if (this.hashrates.yourDevice === 0) {
+        // just trust me that we need dummyVar
         const dummyVar = this.promptDeviceTest();
       }
       this.intro2 = false;

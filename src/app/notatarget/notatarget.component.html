@@ -201,7 +201,8 @@
         </div>
       <nb-tabset>
         <nb-tab tabTitle="Table" [tabIcon]="gridIcon" responsive>
-          <img src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto">
+          <!-- need to verify that chartData is an acceptable condition for ngIf -->
+          <img *ngIf="chartData" src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto" id="meter">
         </nb-tab>
         <nb-tab tabTitle="Graph" [tabIcon]="graphIcon" responsive>
           <app-line-chart *ngIf="chartData" [chartData]="chartData"
