@@ -37,32 +37,52 @@
 
     <h5> Code Injection </h5>
     <p>
-      In an old-school attack known as Code Injection, users purposefully paste a block of code into a web form input
-      field where a developer would never expect code to exist.  This <a href="https://xkcd.com/327/" target="_blank">
+      Code Injection is a broad category of attacks that involve an attacker entering executable code in an input field
+      where code should never exist.
+    </p>
+    <p>
+      In an old-school attack known as <b>SQL Injection</b>, users purposefully paste a block of SQL code into an input
+      field where a developer would never expect code to exist.  The result might leak some secret data from an SQL
+      database, illegally insert data, or delete data.  This <a href="https://xkcd.com/327/" target="_blank">
       XKCD comic </a> explores how user input can destroy a database.
       For further reading here is an <a
       href="https://www.explainxkcd.com/wiki/index.php/Little_Bobby_Tables" target="_blank"> explanation</a> of the
       XKCD comic.
     </p>
-    <h5> Buffer Overflow </h5>
     <p>
-      A buffer overflow attack closely mimics a code injection attack.  In this scenario, a user exploits the limited
-      size of memory given to a function.  The very last line of code in a function is the return address, which tells
-      the computer where the next executable code exists.  If a user writes a large piece of executable code in a
-      buffer, then keeps writing beyond the end of that buffer, they can possibly overwrite the return address.  If
-      they rewrite the return address to point to the beginning of their injected code, the computer will execute
-      everything the user wrote!  Read more about buffer overflows
-      <a href="https://medium.com/@amannagpal4/buffer-overflow-attack-and-its-evolution-519db3c396ad"
-         target="_blank">here</a>, or check out <a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank">
-      Computerphile's video</a> on buffer overflows if you want to see a live demonstration.
+      Another classic example of code injection is a <b>Cross-Site Scripting</b> (XSS) attack.  An XSS attack could
+      permanently embed executable code within a server, which would execute whenever someone requests a page from the
+      server, or it could be a piece of code within a request that "bounces" off the server.  The former is called a <b>
+      persistent</b> attack, and the latter is called a <b>reflected</b> attack.
     </p>
-    <h5> Samy Worm </h5>
     <p>
       Back in the days of MySpace, a 20-year-old named Samy Kamkar launched a successful cross-site scripting attack
       known as the "Samy Worm," which created a pop-up saying "but most of all, Samy is my hero" and automatically sent
       Samy a friend request.  While the vulnerability lay within web browsers, MySpace took most of the heat and
       eventually found a way to patch the bug themselves.  Samy released an explanation of the exploit, which is archived <a
       href="https://web.archive.org/web/20160305044015/http://samy.pl/popular/tech.html" target="_blank">here</a>.
+    </p>
+    <h5> Buffer Overflow </h5>
+    <p>
+      In a buffer overflow attack, a user exploits the limited size of memory given to a function.  When the code within
+      a function finishes running, it tells the program where the next piece of code is using a return address.
+      If a user enters more input than the function can hold, the program will start writing over other code that it needs,
+      including the return address.  If a user places a block of executable code in an input field that is longer than
+      the input field should hold, they could write over the return address.  If they rewrite the return address to point
+      to the beginning of their executable code input, the computer will execute everything the user wrote!  Read more
+      about buffer overflows <a href="https://medium.com/@amannagpal4/buffer-overflow-attack-and-its-evolution-519db3c396ad"
+         target="_blank">here</a>, or check out <a href="https://www.youtube.com/watch?v=1S0aBV-Waeo" target="_blank">
+      Computerphile's video</a> on buffer overflows if you want to see a live demonstration.
+    </p>
+    <h5> Input Validation </h5>
+    <p>
+      In 2007, researchers found a bug in a C++ library that could cause a server to crash.  A normal HTTP request to a
+      server will specify what version of HTTP the server should use to respond to the client.  The C++ library checked
+      that the HTTP version number was valid, but it did not check that the version number <i>existed</i>.  If a client
+      sent a request without an HTTP version number, the server would crash!  Input validation should not only check
+      that the input is of the correct type.  It should also check that input exists.  You can read about this
+      vulnerability on the <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-5893" target="_blank">
+      National Vulnerability Database</a>.
     </p>
   </div>
 </app-lab-industry>
