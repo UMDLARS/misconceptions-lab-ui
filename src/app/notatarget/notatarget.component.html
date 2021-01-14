@@ -196,13 +196,38 @@
             <nb-option value=600>NTP monlist</nb-option>
             <nb-option value=3>DNS</nb-option>
           </nb-select>
-          <button nbButton status="primary" (click)="updateGraph()"
+          <button nbButton status="primary" (click)="updateChart()"
                   [disabled]="!(operation ==='crypto' && device && target) && !(operation === 'ddos' && bandwidth)">Go!</button>
         </div>
       <nb-tabset>
         <nb-tab tabTitle="Table" [tabIcon]="gridIcon" responsive>
-          <!-- need to verify that chartData is an acceptable condition for ngIf -->
-          <img *ngIf="chartData" src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto" id="meter">
+          <!-- gas gauge -->
+          <div class="d-flex col-md-6 col-lg-10" style="flex-direction: row">
+            <div style="padding: 2px; justify-content: center">
+              <img *ngIf="chartData" src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto" id="meter">
+            </div>
+
+            <nb-card *ngIf="chartData" size="small">
+              <nb-card-header>
+                Number of devices
+              </nb-card-header>
+              <nb-list>
+                <nb-list-item *ngFor="let n of tableNumbers">
+                  {{ n }}
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+            <nb-card *ngIf="chartData" size="small">
+              <nb-card-header>
+                {{tableAmountLabel}}
+              </nb-card-header>
+              <nb-list>
+                <nb-list-item *ngFor="let n of tableAmounts">
+                  {{ n }}
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
         </nb-tab>
         <nb-tab tabTitle="Graph" [tabIcon]="graphIcon" responsive>
           <app-line-chart *ngIf="chartData" [chartData]="chartData"

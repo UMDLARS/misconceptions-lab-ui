@@ -72,6 +72,11 @@ export class NotatargetComponent implements OnInit {
   graphIcon: NbIconConfig = { icon: 'trending-up-outline', pack: 'eva' };
   gridIcon: NbIconConfig = { icon: 'grid-outline', pack: 'eva' };
 
+  // vars for table
+  tableNumbers: string[] = ['1000', '2000', '5000', '10,000', this.realDevices.toLocaleString()];
+  tableAmounts: any[];
+  tableAmountLabel: string;
+
   constructor(private http: HttpClient, private dialogService: NbDialogService) {
       this.questions = [
 
@@ -159,6 +164,7 @@ export class NotatargetComponent implements OnInit {
     i.onload = () => {
       (document.getElementById('meter') as HTMLImageElement).src = i.src;
     };
+    this.updateTable();
   }
 
   /**
@@ -233,9 +239,29 @@ export class NotatargetComponent implements OnInit {
     i.onload = () => {
       (document.getElementById('meter') as HTMLImageElement).src = i.src;
     };
+    this.updateTable();
   }
 
-  async updateGraph() {
+  updateTable() {
+    if (this.operation === 'crypto') {
+      this.tableAmountLabel = 'Money';
+      this.tableAmounts = [
+        this.moneyFormatter.format(this.chartData * 1000),
+        this.moneyFormatter.format(this.chartData * 2000),
+        this.moneyFormatter.format(this.chartData * 5000),
+        this.moneyFormatter.format(this.chartData * 10000),
+        this.moneyFormatter.format(this.chartData * this.realDevices)];
+    } else {
+      this.tableAmountLabel = 'Bandwidth (Gbps)';
+      this.tableAmounts = [this.chartData * 1000,
+        this.chartData * 2000,
+        this.chartData * 5000,
+        this.chartData * 10000,
+        this.chartData * this.realDevices];
+    }
+  }
+
+  async updateChart() {
     // must await or else graph will attempt to draw before values are initialized
     if (this.operation === 'crypto') {
       await this.getProfitCalc(this.target, this.device);
