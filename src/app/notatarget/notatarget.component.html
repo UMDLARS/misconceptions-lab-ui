@@ -203,7 +203,7 @@
         <nb-tab tabTitle="Table" [tabIcon]="gridIcon" responsive>
           <!-- gas gauge -->
           <div class="d-flex col-md-6 col-lg-10" style="flex-direction: row">
-            <div style="padding: 2px; justify-content: center">
+            <div class="align-middle" style="padding: 2px; justify-content: center; top: 50%">
               <img *ngIf="chartData" src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto" id="meter">
             </div>
 
@@ -227,6 +227,36 @@
                 </nb-list-item>
               </nb-list>
             </nb-card>
+<!--            <table class="table">-->
+<!--              <thead>-->
+<!--              <tr>-->
+<!--                <th scope="col">Number of Devices</th>-->
+<!--                <th scope="col">{{tableAmountLabel}}</th>-->
+<!--              </tr>-->
+<!--              </thead>-->
+<!--              <tbody>-->
+<!--              <tr>-->
+<!--                <th scope="row">1000</th>-->
+<!--                <td>{{tableAmounts[0]}}</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <th scope="row">2000</th>-->
+<!--                <td>{{tableAmounts[1]}}</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <th scope="row">5000</th>-->
+<!--                <td>{{tableAmounts[2]}}</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <th scope="row">10,000</th>-->
+<!--                <td>{{realDevices}}</td>-->
+<!--              </tr>-->
+<!--              <tr>-->
+<!--                <th scope="row">10,000</th>-->
+<!--                <td>{{tableAmounts[4]}}</td>-->
+<!--              </tr>-->
+<!--              </tbody>-->
+<!--            </table>-->
           </div>
         </nb-tab>
         <nb-tab tabTitle="Graph" [tabIcon]="graphIcon" responsive>

@@ -253,11 +253,11 @@ export class NotatargetComponent implements OnInit {
         this.moneyFormatter.format(this.chartData * this.realDevices)];
     } else {
       this.tableAmountLabel = 'Bandwidth (Gbps)';
-      this.tableAmounts = [this.chartData * 1000,
-        this.chartData * 2000,
-        this.chartData * 5000,
-        this.chartData * 10000,
-        this.chartData * this.realDevices];
+      this.tableAmounts = [(this.chartData * 1000).toLocaleString(),
+        (this.chartData * 2000).toLocaleString(),
+        (this.chartData * 5000).toLocaleString(),
+        (this.chartData * 10000).toLocaleString(),
+        (this.chartData * this.realDevices).toLocaleString()];
     }
   }
 
