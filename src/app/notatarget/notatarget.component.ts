@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Exchange} from './exchanges';
 import {MiningStats} from './miningstats';
-import {NbDialogService} from '@nebular/theme';
+import {NbDialogService, NbIconConfig} from '@nebular/theme';
 import {DeviceTestComponent} from './device-test/device-test.component';
 import {environment} from '../../environments/environment';
 
@@ -16,22 +16,25 @@ import {environment} from '../../environments/environment';
 })
 export class NotatargetComponent implements OnInit {
   public questions;
+  // toggles activity screens
   public welcomeScreen = true;
   public introScreen = false;
   public intro2 = false;
   public mainScreen = false;
+
+  // contains user-selected parameters
   public device: string;
   public operation: string;
-  public bandwidth = 0;
   public target: string;
   public showAmplify = false;
   public amplified = 1;
+  public bandwidth = 0;
+
+  // contains user's bandwidth if they ran test
+  public yourBandwidth = 0;
+
   public chartData: number;
   public realDevices = environment.realDevices;
-  // public deviceCounts = {
-  //   defaultPass: 50525,
-  //   webcam: 5904
-  // };
   public shodanMsg: string;
   public cryptoDirective: string;
   public guidance: string;
@@ -41,7 +44,6 @@ export class NotatargetComponent implements OnInit {
     iot: 15000,
     yourDevice: 0
   };
-  public yourBandwidth = 0;
   public cryptos = {
     BTC: {
       exchangeRate: 9000,
@@ -67,6 +69,13 @@ export class NotatargetComponent implements OnInit {
     + 'The red lines indicate the magnitude of historical attacks. Click on them to learn more about a particular attack.'
   };
   private moneyFormatter; // used to make currency numbers look normal
+  graphIcon: NbIconConfig = { icon: 'trending-up-outline', pack: 'eva' };
+  gridIcon: NbIconConfig = { icon: 'grid-outline', pack: 'eva' };
+
+  // vars for table
+  tableNumbers: string[] = ['1000', '2000', '5000', '10,000', this.realDevices.toLocaleString()];
+  tableAmounts: any[];
+  tableAmountLabel: string;
 
   constructor(private http: HttpClient, private dialogService: NbDialogService) {
       this.questions = [
@@ -142,6 +151,20 @@ export class NotatargetComponent implements OnInit {
         return;
     }
     this.chartData = yearlyGenerated;
+
+    // select the appropriate SVG
+    const i = new Image();
+    if (this.chartData * this.realDevices / 2 >= 5000) {
+      i.src = 'assets/images/not-a-target/highMoney.svg';
+    } else if (this.chartData >= 2000) {
+      i.src = 'assets/images/not-a-target/medMoney.svg';
+    } else {
+      i.src = 'assets/images/not-a-target/lowMoney.svg';
+    }
+    i.onload = () => {
+      (document.getElementById('meter') as HTMLImageElement).src = i.src;
+    };
+    this.updateTable();
   }
 
   /**
@@ -185,6 +208,10 @@ export class NotatargetComponent implements OnInit {
     });
   }
 
+  /**
+   * Uses selected bandwidth and amplification to calculate an attack magnitude.
+   * Selects low, med, or highBand SVG to display.
+   */
   async getAttackMagnitude() {
     if (this.bandwidth <= 0) { // then yourDevice is selected
       if (this.yourBandwidth <= 0) {
@@ -198,9 +225,43 @@ export class NotatargetComponent implements OnInit {
     // console.log('This bandwidth is: ' + this.bandwidth);
     this.chartData = this.amplified * this.bandwidth;
     this.showAmplify = true;
+    console.log('chartData: ' + this.chartData);
+
+    // select the appropriate SVG
+    const i = new Image();
+    if (this.chartData >= 4) {
+      i.src = 'assets/images/not-a-target/highBand.svg';
+    } else if (this.chartData > 0.01) {
+      i.src = 'assets/images/not-a-target/medBand.svg';
+    } else {
+      i.src = 'assets/images/not-a-target/lowBand.svg';
+    }
+    i.onload = () => {
+      (document.getElementById('meter') as HTMLImageElement).src = i.src;
+    };
+    this.updateTable();
   }
 
-  async updateGraph() {
+  updateTable() {
+    if (this.operation === 'crypto') {
+      this.tableAmountLabel = 'USD per year';
+      this.tableAmounts = [
+        this.moneyFormatter.format(this.chartData * 1000),
+        this.moneyFormatter.format(this.chartData * 2000),
+        this.moneyFormatter.format(this.chartData * 5000),
+        this.moneyFormatter.format(this.chartData * 10000),
+        this.moneyFormatter.format(this.chartData * this.realDevices)];
+    } else {
+      this.tableAmountLabel = 'Bandwidth (Gbps)';
+      this.tableAmounts = [(this.chartData * 1000).toLocaleString(),
+        (this.chartData * 2000).toLocaleString(),
+        (this.chartData * 5000).toLocaleString(),
+        (this.chartData * 10000).toLocaleString(),
+        (this.chartData * this.realDevices).toLocaleString()];
+    }
+  }
+
+  async updateChart() {
     // must await or else graph will attempt to draw before values are initialized
     if (this.operation === 'crypto') {
       await this.getProfitCalc(this.target, this.device);
@@ -270,6 +331,7 @@ export class NotatargetComponent implements OnInit {
       this.intro2 = true;
     } else {
       if (this.hashrates.yourDevice === 0) {
+        // just trust me that we need dummyVar
         const dummyVar = this.promptDeviceTest();
       }
       this.intro2 = false;

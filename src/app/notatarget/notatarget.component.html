@@ -65,16 +65,16 @@
       Coinhive.  Eventually, the value of Monero plummeted, and in 2019, Coinhive officially shut down
       <a href="notatarget#ref5">[5]</a>.
     </p>
-    <h5>IdleBuddy</h5>
-    <p>
-      Cryptojacking can also occur as a local process, not just a web browser problem.  A mysterious example of
-      cryptojacking malware is IdleBuddy <a href="notatarget#ref6">[6]</a>, listed as a product of “Ingenering Group
-      Inc.” This Windows trojan masqueraded as a benevolent process by claiming it “securely allows you to donate the
-      time your computer is not in use to calculate complex equations and solve problems”
-      <a href="notatarget#ref7">[7]</a>.  It appears unknown as to which cryptocurrency it was mining, but it is
-      definitely a dangerous piece of malware.  It will resist any normal attempts to uninstall it, but it can be
-      removed with any reputable, up-to-date antivirus software.
-    </p>
+<!--    <h5>IdleBuddy</h5>-->
+<!--    <p>-->
+<!--      Cryptojacking can also occur as a local process, not just a web browser problem.  A mysterious example of-->
+<!--      cryptojacking malware is IdleBuddy <a href="notatarget#ref6">[6]</a>, listed as a product of “Ingenering Group-->
+<!--      Inc.” This Windows trojan masqueraded as a benevolent process by claiming it “securely allows you to donate the-->
+<!--      time your computer is not in use to calculate complex equations and solve problems”-->
+<!--      <a href="notatarget#ref7">[7]</a>.  It appears unknown as to which cryptocurrency it was mining, but it is-->
+<!--      definitely a dangerous piece of malware.  It will resist any normal attempts to uninstall it, but it can be-->
+<!--      removed with any reputable, up-to-date antivirus software.-->
+<!--    </p>-->
     <h5>WannaCry</h5>
     <p>
       A ransomware also known as Wanna Crypt or Decrypt0r 2.0, WannaCry began attacking Windows machines worldwide in May 2017.  This
@@ -120,7 +120,7 @@
     </div>
     <div class="intro" [hidden]="!introScreen">
       <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
-        <img src="assets/images/not-a-target/malware.svg" style="padding-right: 1em" height="20%" width="auto">
+        <img src="assets/images/not-a-target/malware.svg" style="padding-right: 1em" height="128px" width="auto">
         <div>
         Your devices, no matter how small and unimportant they may seem, can provide valuable resources to a hacker.
         <br><br>
@@ -135,7 +135,8 @@
     </div>
     <div class="intro" [hidden]="!intro2">
       <div class="d-flex col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 trans">
-        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="20%" width="auto">
+        <!-- Below used to have width="20%" but somewhere that stopped working and it was ridiculously huge  -->
+        <img src="assets/images/not-a-target/hacker.svg" style="padding-right: 1em" height="128px" width="auto">
         <div>
         To build an army of machines, a hacker will write a program to crawl the web, detect vulnerable devices, and
         attempt to assume control of those devices. This program is called a <i>bot</i>, and the army it controls is
@@ -195,11 +196,45 @@
             <nb-option value=600>NTP monlist</nb-option>
             <nb-option value=3>DNS</nb-option>
           </nb-select>
-          <button nbButton status="primary" (click)="updateGraph()"
+          <button nbButton status="primary" (click)="updateChart()"
                   [disabled]="!(operation ==='crypto' && device && target) && !(operation === 'ddos' && bandwidth)">Go!</button>
         </div>
-      <app-line-chart *ngIf="chartData" [chartData]="chartData"
-                      [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
+      <nb-tabset>
+        <nb-tab tabTitle="Table" [tabIcon]="gridIcon" responsive>
+          <!-- gas gauge -->
+          <div class="d-flex col-md-6 col-lg-10" style="flex-direction: row">
+            <div class="align-middle" style="padding: 2px; justify-content: center; top: 50%">
+              <img *ngIf="chartData" src="assets/images/not-a-target/attackMeter.svg" height="40%" width="auto" id="meter">
+            </div>
+
+            <nb-card *ngIf="chartData" size="small">
+              <nb-card-header>
+                Number of devices
+              </nb-card-header>
+              <nb-list>
+                <nb-list-item *ngFor="let n of tableNumbers">
+                  {{ n }}
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+            <nb-card *ngIf="chartData" size="small">
+              <nb-card-header>
+                {{tableAmountLabel}}
+              </nb-card-header>
+              <nb-list>
+                <nb-list-item *ngFor="let n of tableAmounts">
+                  {{ n }}
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Graph" [tabIcon]="graphIcon" responsive>
+          <app-line-chart *ngIf="chartData" [chartData]="chartData"
+                          [realDevices]="realDevices" [chartType]="operation"></app-line-chart>
+        </nb-tab>
+      </nb-tabset>
+
       <p>
         <br>
         Real-world device numbers are provided by <a href="https://shodan.io" target="_blank">Shodan</a>.
