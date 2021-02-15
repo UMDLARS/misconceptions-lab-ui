@@ -1,3 +1,4 @@
+// MultiExchanges was used for an API that we probably won't end up using
 export interface MultiExchanges {
   'data': {
     'currency': 'BTC',

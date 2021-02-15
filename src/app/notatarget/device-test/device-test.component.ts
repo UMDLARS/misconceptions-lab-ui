@@ -14,6 +14,7 @@ export class DeviceTestComponent {
   public bwTesting = false;
   private url = 'assets/100mb.bin';
   public percentDone: number;
+  public progress = 0;
   startTime: any;
   endTime: any;
   currTime: any;
@@ -103,8 +104,17 @@ export class DeviceTestComponent {
     return await Promise.race([timeoutPromise, bwPromise]);
   }
 
+  /**
+   * hashTest also controls the progress bar's value.
+   * Since hash testing is timed out at 10 sec, this function updates the progress bar's value with the percent of
+   * bandwidth file downloaded plus number of seconds since hash testing began.
+   */
   hashTest() {
     this.hashTesting = true;
+    let counter = 5;
+    setInterval(() => {
+      counter += 5;
+      this.progress = this.percentDone / 2 + counter; }, 1000);
     return new Promise<number>(resolve => {
       if (typeof Worker !== 'undefined') {
         // Create a new
