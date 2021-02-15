@@ -229,9 +229,9 @@ export class NotatargetComponent implements OnInit {
 
     // select the appropriate SVG
     const i = new Image();
-    if (this.chartData >= 400) {
+    if (this.chartData >= 4) {
       i.src = 'assets/images/not-a-target/highBand.svg';
-    } else if (this.chartData >= 80) {
+    } else if (this.chartData > 0.01) {
       i.src = 'assets/images/not-a-target/medBand.svg';
     } else {
       i.src = 'assets/images/not-a-target/lowBand.svg';
@@ -244,7 +244,7 @@ export class NotatargetComponent implements OnInit {
 
   updateTable() {
     if (this.operation === 'crypto') {
-      this.tableAmountLabel = 'Money';
+      this.tableAmountLabel = 'USD per year';
       this.tableAmounts = [
         this.moneyFormatter.format(this.chartData * 1000),
         this.moneyFormatter.format(this.chartData * 2000),
