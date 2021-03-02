@@ -15,7 +15,7 @@ const circuits = false;
 
 // Class definition for a Node. In Javascript, this is how we define blueprints of objects (class), as functions!
 function Node(node_id) {
-  const node = document.createElement("BUTTON");
+  const node = document.createElement("button");
 
   node.setAttribute("id", node_id);
 
