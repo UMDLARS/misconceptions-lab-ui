@@ -101,7 +101,7 @@ export class BakebotComponent implements OnInit {
   flood = this.tooMuchIngredient;
   winner = 'You set all the constraints to valid values! Now BakeBot is safe from harmful input!';
 
-  bake_syntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!';
+  bakeSyntax = 'The last line must be a BAKE instruction of the form: BAKE AT [TEMP] FOR [MINUTES] MINUTES!';
 
   poison = 'Oh no! You used something in your recipe that is dangerous for humans! ' +
     'Define a comma-separated list of accepted ingredients! ' +
@@ -302,13 +302,14 @@ export class BakebotComponent implements OnInit {
     if (hasBakeLine) {
       // short circuit when incorrect bake line
       if (! getBake.test(lines[lines.length - 1])) {
-        this.displayAlert(this.bake_syntax);
+        this.displayAlert(this.bakeSyntax);
         this.nopeBackground();
         return;
       }
       temp = (lines[lines.length - 1].match(/bake[ at]* (-?\d+)/))[1];
       // console.log(temp);
       time = this.parseTime(lines[lines.length - 1]);
+      // deepcode ignore UseNumberIsNan: Number.isNaN is appropriate only if we are GUARANTEED a number (which we aren't)
       if (isNaN(time)) {
         this.displayAlert('You want me to bake this for how long?');
         this.nopeBackground();
@@ -317,7 +318,7 @@ export class BakebotComponent implements OnInit {
       // console.log('time is: ' + time);
     }  else { // (!hasBakeLine) {
       // person didn't enter BAKE line
-      this.displayAlert(this.bake_syntax);
+      this.displayAlert(this.bakeSyntax);
       this.nopeBackground();
       return;
     }
