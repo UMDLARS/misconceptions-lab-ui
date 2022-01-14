@@ -45,7 +45,7 @@
     "ng2-completer": "^3.0.3",
     "ng2-smart-table": "^1.6.0",
     "ngx-markdown": "^10.1.1",
-    "node-forge": "^0.10.0",
+    "node-forge": "^1.0.0",
     "popper.js": "^1.16.1",
     "replace-in-file": "^6.1.0",
     "rxjs": "^6.6.3",
